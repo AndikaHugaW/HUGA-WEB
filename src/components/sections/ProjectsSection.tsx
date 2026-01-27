@@ -11,7 +11,7 @@ const projects = [
   {
     id: 1,
     title: "Revive Website",
-    description: "A modern healthcare platform that simplifies online consultations, appointment bookings, and access to trusted medical information.",
+    description: "Healthcare made simple. Book appointments, consult doctors online, and access trusted medical info — all in one seamless platform.",
     tags: ["Next.js", "Supabase", "Scikit-learn", "TensorFlow", "Figma"],
     image: "/images/projects/revive-web-min.webp",
     link: "#",
@@ -20,7 +20,7 @@ const projects = [
   {
     id: 2,
     title: "Revive AI",
-    description: "Collaborated on a Webflow site with reusable components. With allowing to expand it over time to represent their brand.",
+    description: "Smart health insights powered by AI. Get personalized recommendations and early detection alerts that help you stay ahead of your health.",
     tags: ["API Integration", "Next.js", "Scikit-learn"],
     image: "/images/projects/revive-dasboard-min.webp",
     link: "#",
@@ -29,7 +29,7 @@ const projects = [
   {
     id: 3,
     title: "Honda Pekalongan Website",
-    description: "Revamping outdated layouts into modern, responsive websites that improve usability and engagement.",
+    description: "Sleek automotive showcase. Modern design meets fast performance — helping customers explore vehicles and book test drives effortlessly.",
     tags: ["Next.js", "Supabase", "Figma"],
     image: "/images/projects/honda-pekalongan.webp",
     link: "#",
@@ -38,7 +38,7 @@ const projects = [
   {
     id: 4,
     title: "HYPEBEAST Design App",
-    description: "Crafting unique brand identities that reflect values, connect with audiences, and stand out.",
+    description: "Streetwear discovery, reimagined. Swipe, save, and shop the latest drops with a buttery-smooth mobile experience.",
     tags: ["UX/UI Design", "Mobile Optimization", "Usability Testing"],
     image: "/images/projects/hypebeast-app.webp",
     link: "#",
@@ -47,7 +47,7 @@ const projects = [
   {
     id: 5,
     title: "HYPEBEAST Website",
-    description: "Building a modern e-commerce platform with seamless shopping experience and secure payment integration.",
+    description: "Premium e-commerce for hypebeasts. Lightning-fast checkout, secure payments, and a browsing experience that feels like the future.",
     tags: ["Full Stack", "Payment Gateway", "Database Design"],
     image: "/images/projects/hypebeast-web.webp",
     link: "#",
@@ -56,7 +56,7 @@ const projects = [
   {
     id: 6,
     title: "Luxe Cafe App",
-    description: "Designing intuitive mobile interfaces with focus on user experience and modern design principles.",
+    description: "Your coffee, your way. Order ahead, skip the line, and earn rewards — all from a beautifully crafted mobile app.",
     tags: ["Mobile App" , "Payment Gateway", "Flutter", "Supabase" , "Figma" ],
     image: "/images/projects/luxe-cafe-app.webp",
     link: "#",
