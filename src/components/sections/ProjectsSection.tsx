@@ -100,22 +100,16 @@ export default function ProjectsSection() {
               </div>
               <div className="space-y-1">
                 <TextReveal
-                  text="Transforming ideas"
+                  text="Built to perform."
                   variant="word"
                   className="text-4xl md:text-5xl lg:text-6xl xl:text-5xl font-bold text-white leading-tight block"
                   delay={0.4}
                 />
                 <TextReveal
-                  text="into memorable brand"
+                  text="Designed to impress."
                   variant="word"
                   className="text-4xl md:text-5xl lg:text-5xl xl:text-5xl font-bold text-white leading-tight block"
                   delay={0.5}
-                />
-                <TextReveal
-                  text="journeys."
-                  variant="word"
-                  className="text-4xl md:text-5xl lg:text-6xl xl:text-5xl font-bold text-white leading-tight block"
-                  delay={0.6}
                 />
               </div>
             </div>
@@ -123,7 +117,7 @@ export default function ProjectsSection() {
             {/* Right: Description and Button */}
             <div className="flex flex-col justify-start h-full">
               <TextReveal
-                text="We turn ideas into memorable brand journeys, crafting unique brand identities that reflect values, connect with audiences, and stand out."
+                text="Real projects, real results. Each crafted with clean code and pixel-perfect design."
                 variant="word"
                 className="text-base md:text-lg text-white/80 leading-relaxed mb-8"
                 delay={0.5}
