@@ -1,30 +1,73 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useCallback } from "react";
 
 export default function CustomCursor() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isHovering, setIsHovering] = useState(false);
-  const [isDesktop, setIsDesktop] = useState(false);
+  const cursorRef = useRef<HTMLDivElement>(null);
+  const dotRef = useRef<HTMLDivElement>(null);
+  const isDesktopRef = useRef(false);
+  const rafRef = useRef<number>();
 
   useEffect(() => {
     // Only show custom cursor on desktop
     const checkDesktop = () => {
-      setIsDesktop(window.matchMedia("(pointer: fine)").matches);
+      isDesktopRef.current = window.matchMedia("(pointer: fine)").matches;
+      if (cursorRef.current && dotRef.current) {
+        cursorRef.current.style.display = isDesktopRef.current ? 'block' : 'none';
+        dotRef.current.style.display = isDesktopRef.current ? 'block' : 'none';
+      }
     };
     checkDesktop();
     window.addEventListener("resize", checkDesktop);
 
-    if (!isDesktop) return;
+    // OPTIMASI: Gunakan refs + RAF bukan state untuk performa
+    let mouseX = 0;
+    let mouseY = 0;
+    let currentX = 0;
+    let currentY = 0;
 
     const updateMousePosition = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
+      mouseX = e.clientX;
+      mouseY = e.clientY;
     };
 
-    const handleMouseEnter = () => setIsHovering(true);
-    const handleMouseLeave = () => setIsHovering(false);
+    // OPTIMASI: Smooth animation dengan RAF
+    const animate = () => {
+      if (!isDesktopRef.current) {
+        rafRef.current = requestAnimationFrame(animate);
+        return;
+      }
 
-    window.addEventListener("mousemove", updateMousePosition);
+      // Lerp untuk smooth movement
+      currentX += (mouseX - currentX) * 0.15;
+      currentY += (mouseY - currentY) * 0.15;
+
+      if (cursorRef.current) {
+        cursorRef.current.style.transform = `translate(${currentX - 10}px, ${currentY - 10}px)`;
+      }
+      if (dotRef.current) {
+        dotRef.current.style.transform = `translate(${mouseX - 2}px, ${mouseY - 2}px)`;
+      }
+
+      rafRef.current = requestAnimationFrame(animate);
+    };
+
+    const handleMouseEnter = () => {
+      if (cursorRef.current) {
+        cursorRef.current.style.width = '40px';
+        cursorRef.current.style.height = '40px';
+      }
+    };
+
+    const handleMouseLeave = () => {
+      if (cursorRef.current) {
+        cursorRef.current.style.width = '20px';
+        cursorRef.current.style.height = '20px';
+      }
+    };
+
+    window.addEventListener("mousemove", updateMousePosition, { passive: true });
+    rafRef.current = requestAnimationFrame(animate);
 
     const interactiveElements = document.querySelectorAll(
       "a, button, [role='button'], input, textarea, select"
@@ -37,32 +80,26 @@ export default function CustomCursor() {
     return () => {
       window.removeEventListener("mousemove", updateMousePosition);
       window.removeEventListener("resize", checkDesktop);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
       interactiveElements.forEach((el) => {
         el.removeEventListener("mouseenter", handleMouseEnter);
         el.removeEventListener("mouseleave", handleMouseLeave);
       });
     };
-  }, [isDesktop]);
-
-  if (!isDesktop) return null;
+  }, []);
 
   return (
     <>
       <div
+        ref={cursorRef}
         className="custom-cursor"
-        style={{
-          transform: `translate(${mousePosition.x - 10}px, ${mousePosition.y - 10}px)`,
-          width: isHovering ? "40px" : "20px",
-          height: isHovering ? "40px" : "20px",
-        }}
+        style={{ display: 'none' }}
       />
       <div
+        ref={dotRef}
         className="custom-cursor-dot"
-        style={{
-          transform: `translate(${mousePosition.x - 2}px, ${mousePosition.y - 2}px)`,
-        }}
+        style={{ display: 'none' }}
       />
     </>
   );
 }
-

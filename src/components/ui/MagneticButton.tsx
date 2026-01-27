@@ -2,10 +2,12 @@
 
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
+import React from "react";
 
 interface MagneticButtonProps {
   children: React.ReactNode;
   className?: string;
+  style?: React.CSSProperties;
   onClick?: () => void;
   magneticStrength?: number;
   type?: "button" | "submit" | "reset";
@@ -15,6 +17,7 @@ interface MagneticButtonProps {
 export default function MagneticButton({
   children,
   className = "",
+  style,
   onClick,
   magneticStrength = 0.3,
   type = "button",
@@ -43,6 +46,7 @@ export default function MagneticButton({
       type={type}
       disabled={disabled}
       className={`relative overflow-hidden ${className}`}
+      style={style}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onClick={onClick}
@@ -60,4 +64,5 @@ export default function MagneticButton({
     </motion.button>
   );
 }
+
 

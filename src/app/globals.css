@@ -13,47 +13,46 @@
   box-sizing: border-box;
 }
 
+/* OPTIMASI: Hint browser untuk performance */
 html {
   scroll-behavior: smooth;
+  /* Reduce motion untuk accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    scroll-behavior: auto;
+  }
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: var(--font-inter), 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   overflow-x: hidden;
+  /* OPTIMASI: Improve text rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
-@media (pointer: fine) {
-  body {
-    cursor: none;
+/* OPTIMASI: Disable heavy effects untuk reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
-/* Custom Cursor */
-.custom-cursor {
-  position: fixed;
-  width: 20px;
-  height: 20px;
-  border: 2px solid rgba(255, 255, 255, 0.5);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transition: transform 0.1s ease;
-  mix-blend-mode: difference;
+/* OPTIMASI: GPU acceleration untuk elemen yang sering bergerak */
+.gpu-accelerate {
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
-.custom-cursor-dot {
-  position: fixed;
-  width: 4px;
-  height: 4px;
-  background: white;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transition: transform 0.15s ease;
-}
+/* Custom cursor removed - using native browser cursor */
 
 @layer utilities {
   .text-balance {

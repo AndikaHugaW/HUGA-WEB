@@ -2,8 +2,29 @@
 
 import { cn } from "@/lib/utils";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import React, { useMemo, useRef } from "react";
+import React, { useMemo, useRef, useEffect, useState } from "react";
 import * as THREE from "three";
+
+// OPTIMASI: Deteksi device untuk performa
+const useDevicePerformance = () => {
+  const [performance, setPerformance] = useState<'high' | 'medium' | 'low'>('high');
+  
+  useEffect(() => {
+    // Deteksi mobile atau low-end device
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    const cores = navigator.hardwareConcurrency || 4;
+    
+    if (isMobile || cores <= 2) {
+      setPerformance('low');
+    } else if (cores <= 4) {
+      setPerformance('medium');
+    } else {
+      setPerformance('high');
+    }
+  }, []);
+  
+  return performance;
+};
 
 export const CanvasRevealEffect = ({
   animationSpeed = 0.4,
@@ -13,10 +34,6 @@ export const CanvasRevealEffect = ({
   dotSize,
   showGradient = true,
 }: {
-  /**
-   * 0.1 - slower
-   * 1.0 - faster
-   */
   animationSpeed?: number;
   opacities?: number[];
   colors?: number[][];
@@ -24,12 +41,27 @@ export const CanvasRevealEffect = ({
   dotSize?: number;
   showGradient?: boolean;
 }) => {
+  const performance = useDevicePerformance();
+  
+  // OPTIMASI: Sesuaikan settings berdasarkan performa device
+  const optimizedDotSize = useMemo(() => {
+    if (performance === 'low') return (dotSize ?? 3) * 1.5; // Larger dots = fewer dots
+    if (performance === 'medium') return (dotSize ?? 3) * 1.2;
+    return dotSize ?? 3;
+  }, [dotSize, performance]);
+  
+  const optimizedFps = useMemo(() => {
+    if (performance === 'low') return 20;
+    if (performance === 'medium') return 30;
+    return 45; // Reduced from 60 for better battery life
+  }, [performance]);
+
   return (
     <div className={cn("h-full relative bg-white w-full", containerClassName)}>
       <div className="h-full w-full">
         <DotMatrix
           colors={colors ?? [[0, 255, 255]]}
-          dotSize={dotSize ?? 3}
+          dotSize={optimizedDotSize}
           opacities={
             opacities ?? [0.3, 0.3, 0.3, 0.5, 0.5, 0.5, 0.8, 0.8, 0.8, 1]
           }
@@ -40,6 +72,7 @@ export const CanvasRevealEffect = ({
               opacity *= clamp((1.0 - step(intro_offset + 0.1, u_time * animation_speed_factor)) * 1.25, 1.0, 1.25);
             `}
           center={["x", "y"]}
+          maxFps={optimizedFps}
         />
       </div>
       {showGradient && (
@@ -56,6 +89,7 @@ interface DotMatrixProps {
   dotSize?: number;
   shader?: string;
   center?: ("x" | "y")[];
+  maxFps?: number;
 }
 
 const DotMatrix: React.FC<DotMatrixProps> = ({
@@ -65,6 +99,7 @@ const DotMatrix: React.FC<DotMatrixProps> = ({
   dotSize = 2,
   shader = "",
   center = ["x", "y"],
+  maxFps = 45,
 }) => {
   const uniforms = React.useMemo(() => {
     let colorsArray = [
@@ -169,9 +204,9 @@ const DotMatrix: React.FC<DotMatrixProps> = ({
 
       fragColor = vec4(color, opacity);
       fragColor.rgb *= fragColor.a;
-        }`}
+        `}
       uniforms={uniforms}
-      maxFps={60}
+      maxFps={maxFps}
     />
   );
 };

@@ -1,159 +1,181 @@
-# Huga Website - Portofolio Web
+# Andika Huga - Portfolio Website
 
-Website portofolio bertema AI dengan desain futuristik, cutting-edge, imersif, dan profesional.
+Website portfolio profesional dengan desain modern, animasi smooth, dan performa optimal.
 
 ## 🚀 Teknologi
 
-- **Next.js 14** - React framework dengan App Router
-- **Tailwind CSS** - Utility-first CSS framework
-- **TypeScript** - Type safety
-- **Framer Motion** - Animasi 2D yang smooth dan premium
-- **Three.js / React-Three-Fiber** - Elemen 3D interaktif
-- **Lenis** - Smooth scroll dengan momentum scrolling
+| Teknologi | Versi | Fungsi |
+|-----------|-------|--------|
+| **Next.js** | 14.2.x | React framework dengan App Router |
+| **React** | 18.x | UI Library |
+| **Tailwind CSS** | 3.x | Utility-first CSS framework |
+| **TypeScript** | 5.x | Type safety |
+| **Framer Motion** | 11.x | Animasi 2D smooth dan premium |
+| **Three.js / R3F** | 8.x | Elemen 3D & particle effects |
+| **Lenis** | - | Smooth scroll dengan momentum |
+| **Nodemailer** | - | Email sending untuk contact form |
 
 ## ✨ Fitur Utama
 
-### Visual & Animasi
-- ✅ **Hero Section dengan 3D AI Orb** - Orb interaktif yang mengikuti kursor mouse
+### 🎨 Visual & Animasi
+- ✅ **Hero Section Dinamis** - Dengan foto profil, overlay text, dan statistik
 - ✅ **Smooth Scroll (Lenis)** - Scrolling premium dengan momentum
 - ✅ **Magnetic Buttons** - Tombol yang 'menempel' saat kursor mendekat
-- ✅ **Text Reveal** - Animasi text per-huruf/per-kata dengan efek glitch atau fade-in
-- ✅ **Mesh Gradient Background** - Background gelap dengan efek mesh gradient yang bergerak
-- ✅ **Custom Cursor** - Cursor custom dengan blend mode
-- ✅ **Particle System** - 2000+ partikel untuk efek neural network
+- ✅ **Text Reveal** - Animasi text per-huruf/per-kata
+- ✅ **Vortex Particle System** - Background animasi partikel yang ringan
+- ✅ **Canvas Reveal Effect** - Efek dot matrix dengan shader
+- ✅ **Testimonials Section** - Kolom testimonial dengan infinite scroll animation
+
+### ⚡ Performa & Optimasi
+- ✅ **Device Performance Detection** - Auto-adapt FPS berdasarkan device
+- ✅ **Lazy Loading** - Dynamic imports untuk komponen berat
+- ✅ **Image Optimization** - WebP/AVIF dengan proper sizing
+- ✅ **Visibility API** - Pause animasi saat tab tidak aktif
+- ✅ **Intersection Observer** - Pause animasi saat tidak terlihat
+- ✅ **FPS Throttling** - 30fps untuk efisiensi baterai
+
+### 📱 Responsif
+- ✅ **Mobile-First Design** - Layout optimal untuk semua ukuran layar
+- ✅ **Adaptive Components** - Ukuran dan posisi menyesuaikan screen size
+- ✅ **Touch-Friendly** - Navigasi mudah di perangkat mobile
+
+### 📧 Fungsionalitas
+- ✅ **Contact Form** - Form kontak yang berfungsi dengan email notification
+- ✅ **FAQ Section** - Pertanyaan umum tentang layanan
+- ✅ **Projects Gallery** - Showcase proyek dengan gambar optimized
 
 ## 📦 Instalasi
 
-1. Install dependencies:
+1. Clone repository:
+```bash
+git clone https://github.com/AndikaHugaW/HUGA---WEB.git
+cd HUGA---WEB
+```
+
+2. Install dependencies:
 ```bash
 npm install
 ```
 
-2. Jalankan development server:
+3. Setup environment variables:
+```bash
+cp .env.example .env.local
+# Edit .env.local dengan Gmail App Password
+```
+
+4. Jalankan development server:
 ```bash
 npm run dev
 ```
 
-3. Buka [http://localhost:3000](http://localhost:3000) di browser
+5. Buka [http://localhost:3000](http://localhost:3000) di browser
 
 ## 📜 Scripts
 
-- `npm run dev` - Menjalankan development server
-- `npm run build` - Build untuk production
-- `npm run start` - Menjalankan production server
-- `npm run lint` - Menjalankan ESLint
+| Script | Fungsi |
+|--------|--------|
+| `npm run dev` | Development server |
+| `npm run build` | Build production |
+| `npm run start` | Production server |
+| `npm run lint` | ESLint check |
 
 ## 📁 Struktur Project
 
 ```
 ├── src/
 │   ├── app/
-│   │   ├── layout.tsx              # Root layout dengan providers
-│   │   ├── page.tsx                # Home page
-│   │   └── globals.css             # Global styles dengan Tailwind
+│   │   ├── api/
+│   │   │   └── send-email/       # API endpoint untuk contact form
+│   │   ├── layout.tsx            # Root layout dengan providers
+│   │   ├── page.tsx              # Home page dengan semua sections
+│   │   └── globals.css           # Global styles
 │   ├── components/
 │   │   ├── hero/
-│   │   │   ├── HeroSection.tsx     # Hero section utama
-│   │   │   └── AIOrb.tsx           # 3D orb component
-│   │   ├── providers/
-│   │   │   └── SmoothScrollProvider.tsx  # Lenis smooth scroll
-│   │   └── ui/
-│   │       ├── MagneticButton.tsx  # Button dengan efek magnetic
-│   │       ├── TextReveal.tsx      # Text reveal animations
-│   │       ├── MeshGradient.tsx    # Animated mesh gradient
-│   │       └── CustomCursor.tsx    # Custom cursor
-├── next.config.js                   # Next.js configuration
-├── tailwind.config.ts              # Tailwind CSS configuration
-├── postcss.config.js               # PostCSS configuration
-├── tsconfig.json                   # TypeScript configuration
-└── STRUCTURE.md                    # Dokumentasi struktur lengkap
+│   │   │   └── HeroSection.tsx   # Hero section dengan foto & stats
+│   │   ├── sections/
+│   │   │   ├── AboutSection.tsx
+│   │   │   ├── ContactSection.tsx
+│   │   │   ├── FAQSection.tsx
+│   │   │   ├── ProjectsSection.tsx
+│   │   │   ├── RecentProjectsSection.tsx
+│   │   │   ├── TestimonialsSection.tsx  # NEW: Testimonial columns
+│   │   │   └── WhatIDoSection.tsx
+│   │   ├── ui/
+│   │   │   ├── MagneticButton.tsx
+│   │   │   ├── TextReveal.tsx
+│   │   │   ├── vortex.tsx        # Optimized particle system
+│   │   │   ├── canvas-reveal-effect.tsx  # Optimized shader effect
+│   │   │   └── TestimonialsColumn.tsx    # NEW: Animated column
+│   │   ├── layout/
+│   │   │   ├── Navbar.tsx
+│   │   │   └── Footer.tsx
+│   │   └── providers/
+│   │       └── SmoothScrollProvider.tsx
+├── public/
+│   └── images/
+│       ├── hero/                 # Foto profil
+│       └── projects/             # Gambar proyek (optimized)
+├── docs/
+│   └── THREE_JS_OPTIMIZATION.md  # Dokumentasi optimasi 3D
+├── next.config.js                # Next.js config dengan optimizations
+├── tailwind.config.ts            # Tailwind configuration
+└── .env.local                    # Environment variables (tidak di-commit)
 ```
 
-## 🎨 Komponen yang Tersedia
+## 🎯 Sections
 
-### 1. HeroSection
-Hero section dengan 3D orb, text reveal, dan magnetic buttons.
+| Section | Deskripsi |
+|---------|-----------|
+| **Hero** | Foto profil, nama, role, dan statistik (50+ Projects, 50+ Clients) |
+| **Companies** | Logo perusahaan/teknologi yang digunakan |
+| **Welcome** | Intro singkat tentang developer |
+| **Recent Projects** | 6 proyek terbaru dengan gambar |
+| **About** | Tentang developer dan keahlian |
+| **What I Do** | Layanan yang ditawarkan |
+| **Projects** | Gallery lengkap semua proyek |
+| **Testimonials** | Testimoni dari klien (animated columns) |
+| **Experience** | Pengalaman kerja dan timeline |
+| **FAQ** | Pertanyaan umum tentang layanan |
+| **Contact** | Form kontak + info kontak |
 
-### 2. MagneticButton
-Button dengan efek magnetic yang menarik kursor saat hover.
+## 🔧 Environment Variables
 
-**Props:**
-- `children`: React node
-- `className`: String (optional)
-- `onClick`: Function (optional)
-- `magneticStrength`: Number (default: 0.3)
-
-**Contoh:**
-```tsx
-<MagneticButton
-  className="px-8 py-4 bg-purple-600 text-white rounded-full"
-  magneticStrength={0.4}
->
-  Click Me
-</MagneticButton>
+```env
+# Gmail App Password untuk Contact Form
+GMAIL_APP_PASSWORD=your_gmail_app_password
 ```
 
-### 3. TextReveal
-Komponen untuk animasi text reveal dengan berbagai variant.
+**Cara mendapatkan Gmail App Password:**
+1. Buka Google Account Settings
+2. Security → 2-Step Verification (aktifkan jika belum)
+3. App passwords → Generate new password
+4. Copy password ke `.env.local`
 
-**Props:**
-- `text`: String
-- `className`: String (optional)
-- `delay`: Number (default: 0)
-- `variant`: "fade" | "glitch" | "letter" | "word" (default: "fade")
-- `duration`: Number (default: 0.5)
+## 📊 Optimasi Performa
 
-**Contoh:**
-```tsx
-<TextReveal
-  text="Hello World"
-  variant="glitch"
-  className="text-4xl font-bold"
-  delay={0.5}
-/>
-```
+Website ini sudah dioptimasi dengan:
 
-### 4. AIOrb
-3D orb interaktif yang mengikuti mouse movement.
+| Optimasi | Deskripsi |
+|----------|-----------|
+| **Image Compression** | Semua gambar dikompresi ke < 500KB |
+| **Lazy Loading** | Komponen 3D di-load secara dynamic |
+| **FPS Throttle** | Animasi dibatasi 30fps untuk hemat baterai |
+| **Visibility API** | Pause animasi saat tab tidak aktif |
+| **Package Optimization** | Tree-shaking untuk three.js & framer-motion |
+| **Caching** | 1 tahun cache untuk static assets |
 
-**Props:**
-- `mousePosition`: { x: number, y: number }
+## 📝 Changelog (Latest)
 
-### 5. MeshGradient
-Background dengan animated mesh gradient.
-
-## 📖 Dokumentasi Lengkap
-
-Lihat [STRUCTURE.md](./STRUCTURE.md) untuk dokumentasi lengkap tentang:
-- Sitemap & struktur halaman
-- Deskripsi detail per section
-- Interaksi dan animasi
-- Design system
-
-## 🎯 Roadmap
-
-- [ ] Halaman Solutions
-- [ ] Halaman Case Studies
-- [ ] Halaman Lab/Playground
-- [ ] Halaman Contact
-- [ ] Responsive optimizations
-- [ ] Performance optimizations
-
-## 📝 Notes
-
-- Custom cursor hanya muncul di desktop (pointer: fine)
-- Smooth scroll menggunakan Lenis untuk momentum scrolling
-- 3D elements menggunakan React-Three-Fiber untuk performa optimal
-- Semua animasi menggunakan Framer Motion untuk smooth transitions
-
-## 🤝 Contributing
-
-Project ini dibuat sebagai portfolio showcase dengan fokus pada:
-- User Experience yang premium
-- Visual yang cutting-edge
-- Performance yang optimal
-- Code yang maintainable
+### v2.0.0 (January 2026)
+- ✨ Added Testimonials Section with animated columns
+- ⚡ Optimized Three.js/Canvas components for better performance
+- 🎨 Improved Hero Section mobile responsiveness
+- 📧 Implemented working Contact Form with Gmail
+- 🔧 Updated Next.js config with performance optimizations
+- 📱 Fixed spacing issues in Hero stats section
 
 ---
 
-**Dibuat dengan ❤️ menggunakan Next.js, Tailwind CSS, dan Three.js**
+**Dibuat dengan ❤️ oleh Andika Huga Widyatama**
+
+**Tech Stack: Next.js • React • TypeScript • Tailwind CSS • Three.js • Framer Motion**

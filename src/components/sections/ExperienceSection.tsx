@@ -12,10 +12,10 @@ const experiences = [
     company: "Freelance",
     period: "2023 - Present",
     description: [
-      "Membangun aplikasi web full-stack menggunakan Next.js dan TypeScript",
-      "Mengembangkan RESTful APIs dengan Node.js dan Express",
-      "Mendesain dan mengimplementasikan database schema dengan PostgreSQL",
-      "Berkolaborasi dengan client untuk memahami requirements dan deliver solutions",
+      "Building full-stack web applications using Next.js and TypeScript",
+      "Developing RESTful APIs with Node.js and Express",
+      "Designing and implementing database schemas with PostgreSQL",
+      "Collaborating with clients to understand requirements and deliver solutions",
     ],
     tech: ["Next.js", "TypeScript", "Node.js", "PostgreSQL", "Tailwind CSS"],
   },
@@ -25,10 +25,10 @@ const experiences = [
     company: "Freelance",
     period: "2023 - Present",
     description: [
-      "Mendesain user interface dan user experience untuk web dan mobile applications",
-      "Membuat design system yang comprehensive menggunakan Figma",
-      "Mengembangkan interactive prototypes untuk user testing",
-      "Berkolaborasi dengan developers untuk memastikan design implementation yang akurat",
+      "Designing user interfaces and user experiences for web and mobile applications",
+      "Creating comprehensive design systems using Figma",
+      "Developing interactive prototypes for user testing",
+      "Collaborating with developers to ensure accurate design implementation",
     ],
     tech: ["Figma", "Prototyping", "Design System", "User Research"],
   },
@@ -38,7 +38,7 @@ const achievements = [
   {
     title: "Projects Completed",
     value: "15+",
-    description: "Berbagai project dari small business hingga enterprise",
+    description: "Various projects from small business to enterprise",
     icon: (
       <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
@@ -50,7 +50,7 @@ const achievements = [
   {
     title: "Happy Clients",
     value: "12+",
-    description: "Client yang puas dengan hasil kerja",
+    description: "Clients satisfied with the results",
     icon: (
       <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
@@ -63,7 +63,7 @@ const achievements = [
   {
     title: "Years Experience",
     value: "1+",
-    description: "Pengalaman di bidang development dan design",
+    description: "Experience in development and design fields",
     icon: (
       <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="12" cy="12" r="10" />
@@ -173,7 +173,7 @@ export default function ExperienceSection() {
         {/* Section Title */}
         <div className="mb-20">
           <TextReveal
-            text="Pengalaman"
+            text="Experience"
             variant="glitch"
             className="text-5xl md:text-7xl font-bold text-black mb-4"
             delay={0.2}
@@ -252,4 +252,3 @@ export default function ExperienceSection() {
     </section>
   );
 }
-

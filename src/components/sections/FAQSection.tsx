@@ -9,33 +9,33 @@ import { GridBackground } from "@/components/ui/GridBackground";
 const faqs = [
   {
     id: 1,
-    question: "What services do you offer?",
-    answer: "Blending creativity and functionality, I design user-focused digital products and responsive websites that not only look stunning but also deliver exceptional user experiences.",
+    question: "What services do you specialize in?",
+    answer: "I specialize in Full Stack Development, UI/UX Design, and Mobile App Development. Whether you need a high-converting Landing Page, a complex SaaS Platform, or a functional Mobile Application, I deliver solutions tailored to your goals.",
   },
   {
     id: 2,
-    question: "How fast will I receive my work?",
-    answer: "Project timelines vary based on complexity. Typically, small projects take 1-2 weeks, while larger projects may take 4-8 weeks. I&apos;ll provide a detailed timeline during our initial consultation.",
+    question: "Can you build SaaS platforms?",
+    answer: "Yes, I have extensive experience building scalable SaaS applications. From database architecture (Supabase/PostgreSQL) and authentication to secure payment integration (Stripe) and interactive dashboards, I handle the full development lifecycle.",
   },
   {
     id: 3,
-    question: "What&apos;s your refund policy?",
-    answer: "I offer a satisfaction guarantee. If you&apos;re not happy with the initial design, we&apos;ll work together to make revisions. Full refunds are available within 48 hours of project start.",
+    question: "Do you offer UI/UX Design services only?",
+    answer: "Absolutely. If you already have a development team but need a world-class design, I can provide high-fidelity Figma designs, wireframes, interactive prototypes, and a complete design system.",
   },
   {
     id: 4,
-    question: "What if I have a single project?",
-    answer: "Absolutely! I work with clients on both single projects and ongoing partnerships. Each project receives the same level of attention and quality, regardless of scope.",
+    question: "How long does a project typically take?",
+    answer: "Timelines depend on the scope. A standard portfolio or landing page typically takes 1-3 weeks, while more complex projects like SaaS platforms or Mobile Apps may take 4-10 weeks. I prioritize quality while ensuring timely delivery.",
   },
   {
     id: 5,
-    question: "Do you offer complete website design?",
-    answer: "Yes, I offer complete website design services including UI/UX design, frontend development, and full-stack solutions. I can handle everything from concept to deployment.",
+    question: "Do you provide post-launch support?",
+    answer: "Yes, I believe in long-term partnerships. I provide post-launch support to ensure everything runs smoothly, as well as optional maintenance packages for updates, security patches, and feature enhancements.",
   },
   {
     id: 6,
-    question: "Do you offer ongoing support?",
-    answer: "Yes, I provide ongoing support and maintenance packages. This includes updates, bug fixes, feature additions, and technical support to keep your project running smoothly.",
+    question: "How do I start a project with you?",
+    answer: "It's simple. Fill out the contact form below or send me an email. We'll discuss your specific needs, technical requirements, and business goals to determine the best approach for your project.",
   },
 ];
 
