@@ -162,7 +162,7 @@ export default function HeroSection() {
 
       {/* Content - dengan GPU acceleration hints */}
       <div 
-        className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-24 py-8 md:py-12 lg:py-20"
+        className="relative z-10 w-full max-w-[1800px] mx-auto px-6 md:px-12 lg:px-24 py-8 md:py-12 lg:py-20"
         style={{ transform: 'translateZ(0)' }}
       >
         {/* Mobile Layout (default) / Desktop Layout (lg:) */}
@@ -340,17 +340,14 @@ export default function HeroSection() {
 
             <div className="pt-2 lg:pt-4">
               <MagneticButton
-                className="px-6 sm:px-8 py-3 sm:py-4 bg-[#00ff88] text-black font-bold text-sm sm:text-base rounded-lg transition-all duration-300 flex items-center gap-2 sm:gap-3 w-full justify-center"
+                className="px-6 sm:px-8 py-3 sm:py-4 bg-[rgba(255,255,255,0.05)] hover:bg-[rgba(255,255,255,0.1)] text-white border border-[rgba(255,255,255,0.1)] rounded-xl transition-all duration-300 flex items-center gap-2 sm:gap-3 w-full justify-center backdrop-blur-md"
                 magneticStrength={0.3}
                 onClick={() => {
                   document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
                 }}
-                style={{
-                  boxShadow: '0 4px 20px rgba(0,255,136,0.4)',
-                }}
               >
-                <span>Get Started</span>
-                <span className="text-lg sm:text-xl">→</span>
+                <span className="font-semibold tracking-wide">Get Started</span>
+                <span className="text-lg sm:text-xl text-[#00ff88] group-hover:translate-x-1 transition-transform">→</span>
               </MagneticButton>
             </div>
           </div>

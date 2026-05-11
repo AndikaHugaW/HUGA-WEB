@@ -80,7 +80,8 @@ export default function Footer() {
       {/* Background Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-[#00ff88]/10 rounded-full blur-3xl -translate-y-1/2 z-0"></div>
       
-      <div className="relative z-10 max-w-\[1440px\] mx-auto px-6 md:px-12 lg:px-24 py-16 md:py-20">
+      <div className="relative z-10 w-full px-6 md:px-12 lg:px-24 py-16 md:py-20">
+        <div className="max-w-[1800px] mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Brand Section */}
           <motion.div
@@ -90,9 +91,15 @@ export default function Footer() {
             transition={{ duration: 0.6 }}
             className="lg:col-span-1"
           >
-            <h3 className="text-2xl font-bold text-white mb-4">
-              Andika Huga
-            </h3>
+            <div className="mb-6 -ml-4">
+              <Image
+                src="/images/logo/logo-huga.png"
+                alt="Huga Logo"
+                width={300}
+                height={100}
+                className="h-20 w-auto object-contain"
+              />
+            </div>
             <p className="text-gray-400 text-sm mb-6 leading-relaxed">
               Full Stack Developer dengan passion untuk menciptakan solusi digital yang inovatif dan user-friendly.
             </p>
@@ -213,6 +220,7 @@ export default function Footer() {
             </Link>
           </div>
         </motion.div>
+        </div>
       </div>
     </footer>
   );

@@ -61,7 +61,7 @@ export default function FAQSection() {
       <div className="absolute top-0 right-0 w-96 h-96 bg-[#00ff88]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 z-0"></div>
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#00ff88]/5 rounded-full blur-3xl translate-y-1/2 translate-x-1/2 z-0"></div>
 
-      <div className="relative z-10 max-w-\[1440px\] mx-auto">
+      <div className="relative z-10 max-w-[1800px] mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
           <div className="flex items-center justify-center gap-3 mb-4">

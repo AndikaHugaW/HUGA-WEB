@@ -97,7 +97,7 @@ export default function RecentProjectsSection() {
         size={20}
       />
 
-      <div className="relative z-10 max-w-[1440px] mx-auto pb-32 px-6 md:px-12 lg:px-24">
+      <div className="relative z-10 max-w-[1800px] mx-auto pb-32 px-6 md:px-12 lg:px-24">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

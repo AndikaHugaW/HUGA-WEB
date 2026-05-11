@@ -17,7 +17,7 @@ const categories = [
   "Website",
   "Logo Design",
   "Machine Learning",
-  "Artificial Intelligence"
+  "AI"
 ];
 
 // Generate 20 projects by repeating original projects
@@ -47,37 +47,43 @@ export default function ProjectsPage() {
   // Filter logic
   const filteredProjects = allProjectsData.filter(project => {
     const matchesSearch = project.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                         project.category.toLowerCase().includes(searchQuery.toLowerCase());
+                          project.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase())) ||
+                          project.category.toLowerCase().includes(searchQuery.toLowerCase());
     
     const matchesCategory = selectedCategory === "All Projects" || 
-                           project.category.toLowerCase().includes(selectedCategory.toLowerCase()) ||
-                           // Handle mapping between project categories and filter categories
-                           (selectedCategory === "Mobile App" && (project.category.includes("Mobile") || project.category.includes("App"))) ||
-                           (selectedCategory === "Website" && (project.category.includes("Web") || project.category.includes("Website"))) ||
+                           (selectedCategory === "Website" && project.category.toLowerCase().includes("web")) ||
+                           (selectedCategory === "Mobile App" && (project.category.toLowerCase().includes("mobile") || project.category.toLowerCase().includes("app"))) ||
+                           (selectedCategory === "Machine Learning" && project.tags.some(t => t.toLowerCase().includes("scikit-learn"))) ||
+                           (selectedCategory === "AI" && (project.title.includes("AI") || project.description.includes("AI"))) ||
                            (selectedCategory === "Logo Design" && project.category.toLowerCase().includes("logo")) ||
-                           (selectedCategory === "UI / UX Design" && project.category.includes("Design"));
+                           (selectedCategory === "UI / UX Design" && (project.category.includes("Design") || project.tags.some(t => t.toLowerCase().includes("ui"))));
     
     return matchesSearch && matchesCategory;
   });
+
+  const featuredProject = filteredProjects.length > 0 ? filteredProjects[0] : null;
+  const gridProjects = filteredProjects.length > 1 ? filteredProjects.slice(1) : [];
 
   return (
     <main className="bg-black min-h-screen flex flex-col">
       <Navbar />
       
-      <section className="relative pt-32 pb-20 px-6 md:px-12 lg:px-24 overflow-hidden flex-grow">
+      <section className="relative pt-32 pb-20 px-[40px] overflow-hidden flex-grow">
         {/* Grid Background */}
         <GridBackground 
-          className="opacity-40" 
+          className="opacity-[0.08]" 
           dotColor="rgba(0, 255, 136, 0.2)"
-          size={20}
+          size={16}
         />
 
-        <div className="max-w-[1800px] mx-auto relative z-10">
+        <div className="max-w-[1440px] mx-auto relative z-10">
           {/* Header */}
-          <div className="mb-16">
+          <div className="mb-12 relative z-50">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] md:w-[800px] md:h-[800px] bg-[radial-gradient(circle,rgba(74,222,128,0.12),transparent_70%)] blur-[80px] -z-10 rounded-full pointer-events-none" />
+
             <Link 
               href="/"
-              className="inline-flex items-center gap-2 text-[#00ff88] mb-8 hover:underline group"
+              className="inline-flex items-center gap-2 text-[#00ff88] mb-8 hover:underline group font-medium"
             >
               <svg 
                 width="20" 
@@ -96,23 +102,43 @@ export default function ProjectsPage() {
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-5xl md:text-7xl font-bold text-white mb-6"
+              className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-[-0.04em] leading-[0.92]"
             >
-              All <span className="text-[#00ff88]">Projects</span>
+              Selected <span className="text-[#00ff88]">Work</span>
             </motion.h1>
+            
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="text-gray-400 text-xl max-w-3xl mb-12"
+              className="text-white text-[18px] opacity-[0.72] max-w-[620px] mb-8 leading-[1.8]"
             >
-              A comprehensive showcase of my work in web development, UI/UX design, and digital experiences.
+              A curated showcase of my digital experiences, blending modern development with AI-driven innovation.
             </motion.p>
 
-            {/* Search and Filter Controls */}
-            <div className="flex flex-col md:flex-row gap-6 mb-12 items-center justify-between">
+            {/* Stats Bar */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="flex flex-wrap items-center gap-4 text-xs md:text-sm font-medium text-white/50 mb-12 uppercase tracking-[0.2em]"
+            >
+              <span className="text-white/80">12+ Projects</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#00ff88]"></span>
+              <span className="text-white/80">5 Core Techs</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#00ff88]"></span>
+              <span className="text-white/80">3 Yrs Exp</span>
+            </motion.div>
+
+            {/* Integrated Search and Filter Toolbar */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="flex flex-col md:flex-row gap-4 items-center p-2 bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.05)] rounded-2xl backdrop-blur-[12px]"
+            >
               {/* Search Bar */}
-              <div className="relative w-full md:max-w-md group">
+              <div className="relative w-full group flex-grow">
                 <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
                   <svg className="w-5 h-5 text-gray-500 group-focus-within:text-[#00ff88] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -120,18 +146,21 @@ export default function ProjectsPage() {
                 </div>
                 <input
                   type="text"
-                  placeholder="Search projects by name or technology..."
+                  placeholder="Search by name or category..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-12 pr-4 py-4 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:border-[#00ff88]/50 focus:bg-white/10 transition-all placeholder:text-gray-600"
+                  className="w-full pl-12 pr-4 py-3.5 bg-transparent text-white focus:outline-none transition-all placeholder:text-gray-600 rounded-xl"
                 />
               </div>
 
+              {/* Vertical Divider */}
+              <div className="hidden md:block w-px h-8 bg-white/10"></div>
+
               {/* Category Filter Dropdown */}
-              <div className="relative w-full md:w-64">
+              <div className="relative w-full md:w-72">
                 <button
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                  className="w-full flex items-center justify-between px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white hover:bg-white/10 transition-all"
+                  className="w-full flex items-center justify-between px-6 py-3.5 bg-transparent rounded-xl text-white hover:bg-white/5 transition-all"
                 >
                   <span className={selectedCategory === "All Projects" ? "text-gray-400" : "text-[#00ff88] font-bold"}>
                     {selectedCategory}
@@ -151,80 +180,165 @@ export default function ProjectsPage() {
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="absolute z-50 w-full mt-2 bg-[#1a1a1a] border border-white/10 rounded-xl overflow-hidden shadow-2xl"
+                    className="absolute z-50 right-0 w-full md:w-[300px] mt-4 bg-[#111111] border border-[rgba(255,255,255,0.1)] rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.45)] backdrop-blur-xl"
                   >
-                    {categories.map((cat) => (
-                      <button
-                        key={cat}
-                        onClick={() => {
-                          setSelectedCategory(cat);
-                          setIsDropdownOpen(false);
-                        }}
-                        className={`w-full text-left px-6 py-3 hover:bg-white/5 transition-colors ${
-                          selectedCategory === cat ? "text-[#00ff88] bg-white/5" : "text-gray-400"
-                        }`}
-                      >
-                        {cat}
-                      </button>
-                    ))}
+                    <div className="p-[14px_16px]">
+                      {categories.map((cat) => (
+                        <button
+                          key={cat}
+                          onClick={() => {
+                            setSelectedCategory(cat);
+                            setIsDropdownOpen(false);
+                          }}
+                          className={`w-full text-left px-6 py-3 hover:bg-white/5 transition-colors text-sm tracking-wide ${
+                            selectedCategory === cat ? "text-[#00ff88] bg-[rgba(0,255,136,0.05)] font-medium" : "text-gray-400"
+                          }`}
+                        >
+                          {cat}
+                        </button>
+                      ))}
+                    </div>
                   </motion.div>
                 )}
               </div>
-            </div>
+            </motion.div>
           </div>
 
-          {/* Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
-            {filteredProjects.length > 0 ? (
-              filteredProjects.map((project, index) => (
+          {filteredProjects.length > 0 ? (
+            <>
+              {/* Featured Project */}
+              {featuredProject && (
                 <motion.div
-                  key={project.id}
-                  layout
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.4, delay: Math.min(index * 0.05, 0.5) }}
-                  className="group relative cursor-pointer"
-                  onClick={() => setSelectedProject(project)}
+                  initial={{ opacity: 0, y: 40 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                  className="group relative cursor-pointer mb-16 md:mb-24 bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.04)] rounded-[2rem] overflow-hidden hover:border-[rgba(74,222,128,0.2)] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:shadow-[0_30px_80px_rgba(0,0,0,0.45)] hover:scale-[1.03] flex flex-col lg:flex-row"
+                  onClick={() => setSelectedProject(featuredProject)}
                 >
-                  {/* Image Area */}
-                  <div className="relative aspect-[16/10] overflow-hidden rounded-2xl mb-4">
+                  <div className="lg:w-3/5 relative aspect-[16/10] lg:aspect-auto lg:h-[540px] overflow-hidden">
                     <Image
-                      src={project.image}
-                      alt={project.title}
+                      src={featuredProject.image}
+                      alt={featuredProject.title}
                       fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-500"
-                      quality={80}
+                      className="object-cover group-hover:scale-[1.03] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
+                      quality={90}
+                      priority
                     />
-                    <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="2.5">
-                        <path d="M7 17L17 7M17 7H7M17 7V17" />
-                      </svg>
+                    <div className="absolute top-6 left-6 px-5 py-2.5 bg-black/60 backdrop-blur-md rounded-full text-white text-[10px] font-bold tracking-[0.2em] uppercase border border-white/10">
+                      EDITOR'S PICK
                     </div>
                   </div>
                   
-                  {/* Info Area */}
-                  <div>
-                    <div className="text-[#00ff88] text-sm font-bold uppercase tracking-wider mb-2">
-                      {project.category}
+                  <div className="lg:w-2/5 p-8 md:p-12 flex flex-col justify-center bg-gradient-to-r from-black/0 to-black/40">
+                    <div className="max-w-[420px] w-full">
+                      <div className="text-[#00ff88] text-xs font-bold uppercase tracking-[0.2em] mb-4">
+                        {featuredProject.category}
+                      </div>
+                      <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 group-hover:text-[#00ff88] transition-colors duration-500">
+                        {featuredProject.title}
+                      </h2>
+                      <p className="text-white opacity-[0.72] text-[18px] leading-[1.8] mb-8">
+                        {featuredProject.description}
+                      </p>
+                      
+                      <div className="flex flex-wrap gap-2 mb-8">
+                        {featuredProject.tags.map((tag, i) => (
+                          <span key={i} className="px-3 py-1.5 bg-white/5 rounded-md text-[10px] font-semibold tracking-wider text-white/70 uppercase">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* Mini Metrics / Results */}
+                      <div className="flex items-center gap-6 mb-8 pb-8 border-b border-white/10">
+                        <div>
+                          <div className="text-2xl font-bold text-white mb-1">98%</div>
+                          <div className="text-[10px] text-gray-500 uppercase tracking-widest">Faster Booking</div>
+                        </div>
+                        <div className="w-px h-10 bg-white/10"></div>
+                        <div>
+                          <div className="text-2xl font-bold text-white mb-1">+12K</div>
+                          <div className="text-[10px] text-gray-500 uppercase tracking-widest">Monthly Users</div>
+                        </div>
+                      </div>
+
+                      <div className="mt-auto flex flex-col sm:flex-row gap-4">
+                        <button className="px-6 py-3 bg-[#00ff88] text-black font-semibold rounded-full shadow-[0_0_20px_rgba(0,255,136,0.2)] hover:shadow-[0_0_30px_rgba(0,255,136,0.4)] transition-all duration-300 text-sm w-full sm:w-auto text-center">
+                          Live Preview
+                        </button>
+                        <button className="px-6 py-3 bg-[rgba(255,255,255,0.05)] hover:bg-[rgba(255,255,255,0.1)] text-white border border-[rgba(255,255,255,0.1)] rounded-full transition-all duration-300 text-sm font-medium w-full sm:w-auto text-center inline-flex justify-center items-center gap-2">
+                          Case Study
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="group-hover:translate-x-1 transition-transform duration-300">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M12 5l7 7-7 7" />
+                          </svg>
+                        </button>
+                      </div>
                     </div>
-                    <h3 className="text-xl font-bold text-white group-hover:text-[#00ff88] transition-colors">
-                      {project.title}
-                    </h3>
                   </div>
                 </motion.div>
-              ))
-            ) : (
-              <div className="col-span-full py-20 text-center">
-                <p className="text-gray-500 text-xl">No projects found matching your search.</p>
-                <button 
-                  onClick={() => {setSearchQuery(""); setSelectedCategory("All Projects");}}
-                  className="mt-4 text-[#00ff88] hover:underline"
-                >
-                  Clear all filters
-                </button>
-              </div>
-            )}
-          </div>
+              )}
+
+              {/* Grid Projects */}
+              {gridProjects.length > 0 && (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+                  {gridProjects.map((project, index) => (
+                      <motion.div
+                      key={project.id}
+                      layout
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: Math.min(index * 0.1, 0.5) }}
+                      className="group relative cursor-pointer bg-[rgba(255,255,255,0.015)] border border-[rgba(255,255,255,0.04)] rounded-3xl p-4 hover:border-[rgba(74,222,128,0.2)] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-2 hover:shadow-[0_30px_80px_rgba(0,0,0,0.45)] flex flex-col h-full"
+                      onClick={() => setSelectedProject(project)}
+                    >
+                      {/* Image Area */}
+                      <div className="relative aspect-[16/10] overflow-hidden rounded-2xl mb-6 bg-[#0a0a0a]">
+                        <Image
+                          src={project.image}
+                          alt={project.title}
+                          fill
+                          className="object-cover group-hover:scale-[1.03] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-90 group-hover:opacity-100"
+                          quality={80}
+                        />
+                        {/* Hover Overlay */}
+                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center backdrop-blur-[2px]">
+                          <span className="px-6 py-3 bg-white text-black font-bold text-sm tracking-wide rounded-full transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 shadow-xl">
+                            View Case Study
+                          </span>
+                        </div>
+                      </div>
+                      
+                      {/* Info Area */}
+                      <div className="px-2 pb-2 flex-grow flex flex-col">
+                        <div className="text-[#00ff88] text-[11px] font-bold uppercase tracking-[0.2em] mb-3">
+                          {project.category}
+                        </div>
+                        <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-[#00ff88] transition-colors duration-300">
+                          {project.title}
+                        </h3>
+                        <p className="text-gray-400 text-sm leading-relaxed line-clamp-2 mb-6 flex-grow">
+                          {project.description}
+                        </p>
+                        <div className="text-[10px] font-medium text-white/40 uppercase tracking-widest mt-auto">
+                          {project.tags.slice(0, 3).join(' • ')}
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              )}
+            </>
+          ) : (
+            <div className="py-32 text-center bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.05)] rounded-3xl">
+              <p className="text-gray-400 text-xl mb-4">No projects found matching your criteria.</p>
+              <button 
+                onClick={() => {setSearchQuery(""); setSelectedCategory("All Projects");}}
+                className="text-[#00ff88] font-medium hover:underline tracking-wide"
+              >
+                Clear all filters
+              </button>
+            </div>
+          )}
         </div>
       </section>
 

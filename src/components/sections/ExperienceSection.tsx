@@ -95,19 +95,19 @@ const AchievementCard = ({
       onMouseLeave={() => setHovered(false)}
     >
       {/* Card Content */}
-      <div className="relative text-center p-10 md:p-12 bg-white border border-[#00ff88] transition-all duration-300 h-full min-h-[200px] flex flex-col justify-center">
+      <div className="relative text-center p-10 md:p-12 bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.05)] transition-all duration-300 h-full min-h-[200px] flex flex-col justify-center">
         {/* Corner Plus Icons */}
         <div className="absolute top-0 left-0 w-4 h-4 flex items-center justify-center">
-          <span className="text-black text-xs font-light">+</span>
+          <span className="text-gray-500 text-xs font-light">+</span>
         </div>
         <div className="absolute top-0 right-0 w-4 h-4 flex items-center justify-center">
-          <span className="text-black text-xs font-light">+</span>
+          <span className="text-gray-500 text-xs font-light">+</span>
         </div>
         <div className="absolute bottom-0 left-0 w-4 h-4 flex items-center justify-center">
-          <span className="text-black text-xs font-light">+</span>
+          <span className="text-gray-500 text-xs font-light">+</span>
         </div>
         <div className="absolute bottom-0 right-0 w-4 h-4 flex items-center justify-center">
-          <span className="text-black text-xs font-light">+</span>
+          <span className="text-gray-500 text-xs font-light">+</span>
         </div>
 
         {/* Canvas Reveal Effect - Only mount after first hover, then keep alive */}
@@ -119,7 +119,7 @@ const AchievementCard = ({
           >
             <CanvasRevealEffect
               animationSpeed={3}
-              containerClassName="bg-white"
+              containerClassName="bg-[#0a0a0a]"
               colors={[
                 [0, 255, 136], // Neon green
                 [0, 204, 106], // Darker green
@@ -148,10 +148,10 @@ const AchievementCard = ({
             <div className="text-4xl font-bold text-[#00ff88] mb-3">
               {achievement.value}
             </div>
-            <h3 className="text-lg font-semibold text-black mb-2 group-hover/canvas-card:text-[#00ff88] transition-colors duration-200">
+            <h3 className="text-lg font-semibold text-white mb-2 group-hover/canvas-card:text-[#00ff88] transition-colors duration-200">
               {achievement.title}
             </h3>
-            <p className="text-gray-700 text-xs">
+            <p className="text-gray-400 text-xs">
               {achievement.description}
             </p>
           </div>
@@ -166,14 +166,14 @@ export default function ExperienceSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="experience" ref={ref} className="relative py-32 px-6 md:px-12 lg:px-24 bg-white">
-      <div className="max-w-\[1440px\] mx-auto">
+    <section id="experience" ref={ref} className="relative py-32 px-6 md:px-12 lg:px-24 bg-black">
+      <div className="max-w-[1800px] mx-auto">
         {/* Section Title */}
         <div className="mb-20">
           <TextReveal
             text="Experience"
             variant="glitch"
-            className="text-5xl md:text-7xl font-bold text-black mb-4"
+            className="text-5xl md:text-7xl font-bold text-white mb-4"
             delay={0.2}
           />
           <motion.div
@@ -212,20 +212,20 @@ export default function ExperienceSection() {
                 
                 {/* Content */}
                 <div className="flex-1 ml-0 md:ml-16">
-                  <div className="group relative bg-white border border-[#00ff88]/30 rounded-2xl p-8 hover:border-[#00ff88]/60 transition-all duration-300 shadow-lg hover:shadow-[#00ff88]/20 hover:shadow-2xl">
+                  <div className="group relative bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.05)] rounded-2xl p-8 hover:border-[rgba(74,222,128,0.2)] transition-all duration-300 shadow-lg hover:shadow-[0_20px_40px_rgba(74,222,128,0.05)]">
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                       <div>
-                        <h3 className="text-2xl font-bold text-black mb-2 group-hover:text-[#00ff88] transition-colors duration-300">{exp.title}</h3>
+                        <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-[#00ff88] transition-colors duration-300">{exp.title}</h3>
                         <p className="text-[#00ff88] font-medium">{exp.company}</p>
                       </div>
-                      <span className="text-gray-700 text-sm mt-2 md:mt-0">{exp.period}</span>
+                      <span className="text-gray-400 text-sm mt-2 md:mt-0">{exp.period}</span>
                     </div>
                     
                     <ul className="space-y-3 mb-6">
                       {exp.description.map((item, itemIndex) => (
                         <li key={itemIndex} className="flex items-start gap-3">
                           <span className="text-[#00ff88] mt-1 group-hover:scale-110 transition-transform duration-300">▹</span>
-                          <span className="text-black">{item}</span>
+                          <span className="text-gray-300">{item}</span>
                         </li>
                       ))}
                     </ul>
@@ -234,7 +234,7 @@ export default function ExperienceSection() {
                       {exp.tech.map((tech, techIndex) => (
                         <span
                           key={techIndex}
-                          className="px-3 py-1 text-sm bg-[#00ff88]/20 text-black rounded-full hover:bg-[#00ff88]/30 hover:shadow-[#00ff88]/50 hover:shadow-lg transition-all duration-300"
+                          className="px-3 py-1 text-sm bg-[#00ff88]/10 text-[#00ff88] rounded-full hover:bg-[#00ff88]/20 hover:text-white transition-all duration-300"
                         >
                           {tech}
                         </span>

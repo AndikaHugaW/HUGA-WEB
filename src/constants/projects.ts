@@ -12,19 +12,19 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: 1,
-    title: "Revive Website",
+    title: "Revive Health Platform",
     category: "Web Development",
     image: "/images/projects/revive-web-min.webp",
-    description: "A professional business landing page with modern aesthetics and smooth animations.",
+    description: "A modern healthcare platform focused on real-time patient monitoring and seamless appointment booking.",
     tags: ["NEXT.JS", "SUPABASE", "SCIKIT-LEARN"],
     featured: true
   },
   {
     id: 2,
-    title: "Revive AI",
+    title: "Revive AI Healthcare",
     category: "Mobile App Design",
     image: "/images/projects/revive-dasboard-min-v2.webp",
-    description: "AI-powered dashboard design for modern SaaS platforms.",
+    description: "AI-powered dashboard design for predictive analytics and modern health insights.",
     tags: ["API INTEGRATION", "NEXT.JS", "SCIKIT-LEARN"],
     featured: false
   },
@@ -33,7 +33,7 @@ export const projects: Project[] = [
     title: "Honda Pekalongan",
     category: "Web Development",
     image: "/images/projects/honda-pekalongan.webp",
-    description: "Official dealer website for Honda Pekalongan with catalog and service booking features.",
+    description: "Official dealer platform with an integrated digital showroom and test-drive booking system.",
     tags: ["NEXT.JS", "SUPABASE", "FIGMA"],
     featured: false
   },
@@ -42,7 +42,7 @@ export const projects: Project[] = [
     title: "HYPEBEAST Design App",
     category: "Mobile Design",
     image: "/images/projects/hypebeast-app-v2.webp",
-    description: "Fashion e-commerce app concept for high-end streetwear enthusiasts.",
+    description: "High-end streetwear discovery app designed for seamless drops and mobile-first shopping.",
     tags: ["UX/UI DESIGN", "MOBILE OPTIMIZATION", "USABILITY TESTING"],
     featured: false
   },
@@ -51,7 +51,7 @@ export const projects: Project[] = [
     title: "HYPEBEAST Website",
     category: "Web Design",
     image: "/images/projects/hypebeast-web-v2.webp",
-    description: "Modern landing page concept for streetwear and culture news.",
+    description: "Premium e-commerce architecture and branding for hype culture enthusiasts.",
     tags: ["WEB DESIGN", "RESPONSIVE", "UI/UX"],
     featured: false
   },
@@ -60,7 +60,7 @@ export const projects: Project[] = [
     title: "Luxe Cafe",
     category: "App Development",
     image: "/images/projects/luxe-cafe-app.webp",
-    description: "Premium coffee shop application with ordering and loyalty system.",
+    description: "Elevated cafe experience application featuring mobile ordering and a modern loyalty system.",
     tags: ["FLUTTER", "FIREBASE", "DART"],
     featured: false
   }

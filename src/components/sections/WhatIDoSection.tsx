@@ -57,7 +57,7 @@ export default function WhatIDoSection() {
         size={20}
       />
 
-      <div className="relative z-10 max-w-[1440px] mx-auto py-32 px-6 md:px-12 lg:px-24">
+      <div className="relative z-10 max-w-[1800px] mx-auto py-32 px-6 md:px-12 lg:px-24">
         <div className="grid md:grid-cols-2 gap-12 lg:gap-16">
           {/* Left: Services List */}
           <motion.div
