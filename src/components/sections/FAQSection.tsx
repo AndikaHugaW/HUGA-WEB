@@ -202,6 +202,7 @@ export default function FAQSection() {
                   <div className="absolute -inset-0.5 bg-gradient-to-r from-[#00ff88] via-[#00cc6a] to-[#00ff88] rounded-full opacity-0 group-hover:opacity-40 transition duration-500 group-hover:duration-200"></div>
                   
                   <div className="relative w-12 h-12 rounded-full border-2 border-gray-900 overflow-hidden bg-gray-700 group-hover:border-[#00ff88]/60 transition-all duration-300">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={member.image}
                       alt={member.name}

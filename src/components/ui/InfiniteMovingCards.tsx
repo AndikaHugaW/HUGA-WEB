@@ -98,6 +98,7 @@ export const InfiniteMovingCards = ({
             >
               {item.logo && (
                 <div className="group bg-white hover:bg-[#00ff88] rounded-lg px-10 md:px-12 lg:px-16 py-10 md:py-12 lg:py-16 shadow-sm hover:shadow-md hover:shadow-[#00ff88]/20 transition-all duration-300 flex items-center justify-center w-[240px] md:w-[280px] lg:w-[320px] h-[140px] md:h-[160px] lg:h-[180px]">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={`/images/companies/${item.logo}.svg`}
                     alt={item.name}
@@ -115,6 +116,7 @@ export const InfiniteMovingCards = ({
             >
               {item.logo && (
                 <div className="group bg-white hover:bg-[#00ff88] rounded-lg px-10 md:px-12 lg:px-16 py-10 md:py-12 lg:py-16 shadow-sm hover:shadow-md hover:shadow-[#00ff88]/20 transition-all duration-300 flex items-center justify-center w-[240px] md:w-[280px] lg:w-[320px] h-[140px] md:h-[160px] lg:h-[180px]">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={`/images/companies/${item.logo}.svg`}
                     alt={item.name}

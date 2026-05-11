@@ -38,6 +38,7 @@ export const TestimonialsColumn = (props: {
                 >
                   <div className="text-gray-300 leading-relaxed">{text}</div>
                   <div className="flex items-center justify-center gap-3 mt-6">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       width={44}
                       height={44}

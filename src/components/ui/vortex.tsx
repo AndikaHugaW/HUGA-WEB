@@ -16,6 +16,35 @@ interface VortexProps {
   rangeRadius?: number;
   backgroundColor?: string;
 }
+const rand = (n: number): number => n * Math.random();
+const randRange = (n: number): number => n - rand(2 * n);
+const fadeInOut = (t: number, m: number): number => {
+  let hm = 0.5 * m;
+  return Math.abs(((t + hm) % m) - hm) / hm;
+};
+const lerp = (n1: number, n2: number, speed: number): number =>
+  (1 - speed) * n1 + speed * n2;
+
+const drawParticle = (
+  x: number, y: number, x2: number, y2: number,
+  life: number, ttl: number, radius: number, hue: number,
+  ctx: CanvasRenderingContext2D
+) => {
+  ctx.save();
+  ctx.lineCap = "round";
+  ctx.lineWidth = radius;
+  ctx.strokeStyle = `hsla(${hue},100%,60%,${fadeInOut(life, ttl)})`;
+  ctx.beginPath();
+  ctx.moveTo(x, y);
+  ctx.lineTo(x2, y2);
+  ctx.stroke();
+  ctx.closePath();
+  ctx.restore();
+};
+
+const checkBounds = (x: number, y: number, canvas: HTMLCanvasElement) => {
+  return x > canvas.width || x < 0 || y > canvas.height || y < 0;
+};
 
 export const Vortex = (props: VortexProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -52,14 +81,7 @@ export const Vortex = (props: VortexProps) => {
   const particlePropsRef = useRef(new Float32Array(particlePropsLength));
   const centerRef = useRef<[number, number]>([0, 0]);
 
-  const rand = (n: number): number => n * Math.random();
-  const randRange = (n: number): number => n - rand(2 * n);
-  const fadeInOut = (t: number, m: number): number => {
-    let hm = 0.5 * m;
-    return Math.abs(((t + hm) % m) - hm) / hm;
-  };
-  const lerp = (n1: number, n2: number, speed: number): number =>
-    (1 - speed) * n1 + speed * n2;
+
 
   const initParticle = useCallback((i: number) => {
     const canvas = canvasRef.current;
@@ -87,26 +109,7 @@ export const Vortex = (props: VortexProps) => {
     }
   }, [particlePropsLength, particlePropCount, initParticle]);
 
-  const drawParticle = (
-    x: number, y: number, x2: number, y2: number,
-    life: number, ttl: number, radius: number, hue: number,
-    ctx: CanvasRenderingContext2D
-  ) => {
-    ctx.save();
-    ctx.lineCap = "round";
-    ctx.lineWidth = radius;
-    ctx.strokeStyle = `hsla(${hue},100%,60%,${fadeInOut(life, ttl)})`;
-    ctx.beginPath();
-    ctx.moveTo(x, y);
-    ctx.lineTo(x2, y2);
-    ctx.stroke();
-    ctx.closePath();
-    ctx.restore();
-  };
 
-  const checkBounds = (x: number, y: number, canvas: HTMLCanvasElement) => {
-    return x > canvas.width || x < 0 || y > canvas.height || y < 0;
-  };
 
   const updateParticle = useCallback((i: number, ctx: CanvasRenderingContext2D) => {
     const canvas = canvasRef.current;

@@ -225,7 +225,7 @@ export default function ProjectsPage() {
                       priority
                     />
                     <div className="absolute top-6 left-6 px-5 py-2.5 bg-black/60 backdrop-blur-md rounded-full text-white text-[10px] font-bold tracking-[0.2em] uppercase border border-white/10">
-                      EDITOR'S PICK
+                      EDITOR&apos;S PICK
                     </div>
                   </div>
                   

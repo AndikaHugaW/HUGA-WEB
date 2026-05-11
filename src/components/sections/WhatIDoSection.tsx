@@ -99,6 +99,7 @@ export default function WhatIDoSection() {
                 transition={{ duration: 0.6 }}
                 className="relative rounded-lg overflow-hidden"
               >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={activeService.image}
                   alt={activeService.title}
