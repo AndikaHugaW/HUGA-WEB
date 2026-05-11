@@ -99,8 +99,8 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
             >
               {/* ── STICKY TOP BAR ── */}
               <div className="sticky top-0 z-50 w-full bg-[#0a0a0a]/80 backdrop-blur-md border-b border-white/[0.06] px-6 md:px-10 py-4 flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full overflow-hidden bg-gradient-to-br from-[#00ff88] to-[#00cc6a] p-0.5">
+                <div className="flex items-center gap-2 md:gap-3">
+                  <div className="w-9 h-9 md:w-10 md:h-10 rounded-full overflow-hidden bg-gradient-to-br from-[#00ff88] to-[#00cc6a] p-0.5">
                     <div className="w-full h-full rounded-full overflow-hidden bg-black flex items-center justify-center">
                       <Image 
                         src="/images/hero/foto-huga.jpg" 
@@ -112,16 +112,16 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                     </div>
                   </div>
                   <div>
-                    <h4 className="text-white font-bold text-sm leading-tight">Andika Huga W.</h4>
-                    <p className="text-[#00ff88] text-[11px] font-bold uppercase tracking-widest">Available for work</p>
+                    <h4 className="text-white font-bold text-[13px] md:text-sm leading-tight">Andika Huga W.</h4>
+                    <p className="hidden md:block text-[#00ff88] text-[10px] font-bold uppercase tracking-widest">Available for work</p>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-2 md:gap-4">
+                <div className="flex items-center gap-1.5 md:gap-4">
                   <motion.button
                     whileTap={{ scale: 0.9 }}
                     onClick={() => setIsSaved(!isSaved)}
-                    className={`h-10 px-5 rounded-xl text-sm font-bold transition-all duration-200 border ${
+                    className={`h-9 md:h-10 px-3 md:px-5 rounded-xl text-[13px] md:text-sm font-bold transition-all duration-200 border ${
                       isSaved 
                         ? "bg-white text-black border-white" 
                         : "bg-white/5 text-white border-white/10 hover:bg-white/10"
@@ -133,7 +133,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                   <motion.button
                     whileTap={{ scale: 0.8 }}
                     onClick={() => setIsLiked(!isLiked)}
-                    className={`h-10 px-5 rounded-xl text-sm font-bold flex items-center gap-2 transition-all duration-300 ${
+                    className={`h-9 md:h-10 px-3 md:px-5 rounded-xl text-[13px] md:text-sm font-bold flex items-center gap-2 transition-all duration-300 ${
                       isLiked 
                         ? "bg-[#ea4c89] text-white shadow-[0_0_20px_rgba(234,76,137,0.4)]" 
                         : "bg-white/5 text-white hover:bg-white/10 border border-white/10"
@@ -152,9 +152,9 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
 
                   <button
                     onClick={onClose}
-                    className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-white/40 hover:text-white hover:bg-white/10 transition-all ml-2"
+                    className="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-white/5 flex items-center justify-center text-white/40 hover:text-white hover:bg-white/10 transition-all md:ml-2"
                   >
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12" /></svg>
+                    <svg className="w-[18px] h-[18px] md:w-5 md:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12" /></svg>
                   </button>
                 </div>
               </div>

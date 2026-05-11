@@ -6,8 +6,8 @@ import Image from "next/image";
 import TextReveal from "@/components/ui/TextReveal";
 import MagneticButton from "@/components/ui/MagneticButton";
 import { GridBackground } from "@/components/ui/GridBackground";
-import ProjectModal from "@/components/ui/ProjectModal";
 
+import ProjectModal from "@/components/ui/ProjectModal";
 import { projects, type Project } from "@/constants/projects";
 
 export default function ProjectsSection() {
@@ -16,15 +16,14 @@ export default function ProjectsSection() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   return (
-    <section id="projects" ref={ref} className="relative pt-0 pb-32 px-0 bg-black">
+    <section id="projects" ref={ref} className="relative pt-0 pb-32 px-0 bg-black overflow-hidden">
       {/* Grid Background */}
-      <GridBackground
-        className="opacity-40"
+      <GridBackground 
+        className="opacity-40" 
         dotColor="rgba(0, 255, 136, 0.2)"
         size={20}
       />
-
-      <div className="relative z-10 w-full max-w-\[1440px\] mx-auto px-6 md:px-12 lg:px-24 pt-16 pb-32">
+      <div className="max-w-7xl mx-auto pt-16 pb-32 px-6 md:px-12 lg:px-24">
         {/* Header Section */}
         <div className="mb-20">
           <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
@@ -94,60 +93,82 @@ export default function ProjectsSection() {
           </div>
         </div>
 
-        {/* Projects Grid */}
-        <div className="grid md:grid-cols-2 gap-10 lg:gap-12">
+        {/* Projects Grid - 2x2 */}
+        <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
           {projects.map((project, index) => (
             <motion.div
               key={project.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="group cursor-pointer"
+              initial={{ opacity: 0, y: 50 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
+              className="group relative cursor-pointer"
               onClick={() => setSelectedProject(project)}
             >
-              {/* Image Container with Fixed Aspect Ratio */}
-              {/* Image Container with Fixed Aspect Ratio */}
-              <div className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-[#111] mb-6 border border-white/5 ring-1 ring-white/10 group-hover:ring-[#00ff88]/30 transition-all duration-500">
+              {/* Image Area */}
+              <div className="relative h-64 md:h-80 lg:h-96 overflow-hidden rounded-2xl">
                 <Image
                   src={project.image}
                   alt={project.title}
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="object-cover group-hover:scale-110 transition-transform duration-500"
+                  loading={index < 2 ? "eager" : "lazy"}
+                  quality={85}
                 />
-                
-                {/* Arrow Button Overlay */}
-                <div className="absolute top-4 right-4 z-20">
-                  <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-black opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 shadow-xl">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M7 17L17 7M17 7H7M17 7V17" />
-                    </svg>
-                  </div>
-                </div>
-
-                {/* Subtle Overlay on Hover */}
-                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                {/* Navigation Button - Top Right */}
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  className={`absolute top-4 right-4 w-12 h-12 rounded-full flex items-center justify-center shadow-lg z-10 transition-all ${
+                    project.featured
+                      ? "bg-[#00ff88] hover:bg-[#00cc6a]"
+                      : "bg-white hover:bg-gray-100"
+                  }`}
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M7 17L17 7M17 7H7M17 7V17"
+                      stroke={project.featured ? "black" : "black"}
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </motion.button>
               </div>
 
-              {/* Project Info */}
-              <div className="space-y-3 px-1">
-                <div className="flex flex-wrap gap-2 items-center">
-                  {project.tags.slice(0, 3).map((tag, i) => (
-                    <span key={i} className="text-[10px] font-black uppercase tracking-widest text-[#00ff88]/80">
+              {/* Content - No Background */}
+              <div className="mt-4">
+                {/* Tags - Above Title */}
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {project.tags.map((tag, tagIndex) => (
+                    <span
+                      key={tagIndex}
+                      className="px-3 py-1.5 bg-[#00ff88]/20 backdrop-blur-sm text-[#00ff88] text-sm rounded-full font-medium"
+                    >
                       {tag}
                     </span>
                   ))}
-                  {project.featured && (
-                    <span className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[9px] font-black uppercase tracking-tighter text-white/40">
-                      <span className="w-1 h-1 rounded-full bg-[#00ff88]" />
-                      Featured
-                    </span>
-                  )}
                 </div>
-                
-                <h3 className="text-2xl md:text-3xl font-bold text-white group-hover:text-[#00ff88] transition-colors duration-300 leading-tight">
+
+                {/* Title */}
+                <h3
+                  className={`text-2xl md:text-3xl lg:text-4xl font-bold mb-4 ${
+                    project.featured ? "text-[#00ff88]" : "text-white"
+                  }`}
+                >
                   {project.title}
                 </h3>
+
+                {/* Description */}
+                <p className="text-white/80 text-base md:text-lg leading-relaxed">
+                  {project.description}
+                </p>
               </div>
             </motion.div>
           ))}
