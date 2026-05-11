@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { motion, useInView, AnimatePresence } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import TextReveal from "@/components/ui/TextReveal";
 import { CanvasRevealEffect } from "@/components/ui/canvas-reveal-effect";
 
@@ -83,6 +83,7 @@ const AchievementCard = ({
   isInView: boolean;
 }) => {
   const [hovered, setHovered] = useState(false);
+  const [hasBeenHovered, setHasBeenHovered] = useState(false);
 
   return (
     <motion.div
@@ -90,7 +91,7 @@ const AchievementCard = ({
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
       className="group/canvas-card relative h-full"
-      onMouseEnter={() => setHovered(true)}
+      onMouseEnter={() => { setHovered(true); setHasBeenHovered(true); }}
       onMouseLeave={() => setHovered(false)}
     >
       {/* Card Content */}
@@ -109,28 +110,25 @@ const AchievementCard = ({
           <span className="text-black text-xs font-light">+</span>
         </div>
 
-        {/* Canvas Reveal Effect */}
-        <AnimatePresence>
-          {hovered && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="h-full w-full absolute inset-0"
-            >
-                        <CanvasRevealEffect
-                          animationSpeed={3}
-                          containerClassName="bg-white"
-                          colors={[
-                            [0, 255, 136], // Neon green
-                            [0, 204, 106], // Darker green
-                          ]}
-                          dotSize={2}
-                          showGradient={false}
-                        />
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {/* Canvas Reveal Effect - Only mount after first hover, then keep alive */}
+        {hasBeenHovered && (
+          <div 
+            className={`h-full w-full absolute inset-0 transition-opacity duration-300 ${
+              hovered ? "opacity-100" : "opacity-0 pointer-events-none"
+            }`}
+          >
+            <CanvasRevealEffect
+              animationSpeed={3}
+              containerClassName="bg-white"
+              colors={[
+                [0, 255, 136], // Neon green
+                [0, 204, 106], // Darker green
+              ]}
+              dotSize={2}
+              showGradient={false}
+            />
+          </div>
+        )}
 
         {/* Center Icon - Visible before hover */}
         <div className="relative z-20 h-full flex items-center justify-center">
@@ -169,7 +167,7 @@ export default function ExperienceSection() {
 
   return (
     <section id="experience" ref={ref} className="relative py-32 px-6 md:px-12 lg:px-24 bg-white">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-\[1440px\] mx-auto">
         {/* Section Title */}
         <div className="mb-20">
           <TextReveal

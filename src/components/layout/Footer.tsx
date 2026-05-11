@@ -80,7 +80,7 @@ export default function Footer() {
       {/* Background Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-[#00ff88]/10 rounded-full blur-3xl -translate-y-1/2 z-0"></div>
       
-      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-16 md:py-20">
+      <div className="relative z-10 max-w-\[1440px\] mx-auto px-6 md:px-12 lg:px-24 py-16 md:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Brand Section */}
           <motion.div

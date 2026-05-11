@@ -91,7 +91,7 @@ export default function ContactSection() {
 
   return (
     <section id="contact" ref={ref} className="relative py-32 px-6 md:px-12 lg:px-24 bg-white">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-\[1440px\] mx-auto">
         {/* Section Title */}
         <div className="mb-20 text-center">
           <TextReveal

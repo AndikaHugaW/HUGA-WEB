@@ -333,11 +333,84 @@ const ShaderMaterial = ({
   );
 };
 
+// Error Boundary for WebGL failures
+class WebGLErrorBoundary extends React.Component<
+  { children: React.ReactNode; fallback?: React.ReactNode },
+  { hasError: boolean }
+> {
+  constructor(props: { children: React.ReactNode; fallback?: React.ReactNode }) {
+    super(props);
+    this.state = { hasError: false };
+  }
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+  render() {
+    if (this.state.hasError) {
+      return this.props.fallback ?? null;
+    }
+    return this.props.children;
+  }
+}
+
+// Check if WebGL is available before attempting to create a context
+const isWebGLAvailable = (): boolean => {
+  if (typeof window === "undefined") return false;
+  try {
+    const canvas = document.createElement("canvas");
+    const gl = canvas.getContext("webgl2") || canvas.getContext("webgl");
+    canvas.remove();
+    return !!gl;
+  } catch {
+    return false;
+  }
+};
+
+// Cleanup component to dispose WebGL renderer on unmount
+const RendererCleanup: React.FC = () => {
+  const { gl } = useThree();
+  useEffect(() => {
+    return () => {
+      gl.dispose();
+    };
+  }, [gl]);
+  return null;
+};
+
 const Shader: React.FC<ShaderProps> = ({ source, uniforms, maxFps = 60 }) => {
+  const [webglOk, setWebglOk] = useState(true);
+
+  useEffect(() => {
+    setWebglOk(isWebGLAvailable());
+  }, []);
+
+  if (!webglOk) {
+    // CSS-only fallback when WebGL is not available
+    return (
+      <div className="absolute inset-0 bg-gradient-to-br from-[#00ff88]/20 via-transparent to-[#00ff88]/10 animate-pulse" />
+    );
+  }
+
   return (
-    <Canvas className="absolute inset-0 h-full w-full">
-      <ShaderMaterial source={source} uniforms={uniforms} maxFps={maxFps} />
-    </Canvas>
+    <WebGLErrorBoundary
+      fallback={
+        <div className="absolute inset-0 bg-gradient-to-br from-[#00ff88]/20 via-transparent to-[#00ff88]/10 animate-pulse" />
+      }
+    >
+      <Canvas 
+        className="absolute inset-0 h-full w-full"
+        dpr={[1, 1.5]}
+        gl={{
+          antialias: true,
+          alpha: true,
+          powerPreference: "default",
+          preserveDrawingBuffer: false,
+        }}
+      >
+        <RendererCleanup />
+        <ShaderMaterial source={source} uniforms={uniforms} maxFps={maxFps} />
+      </Canvas>
+    </WebGLErrorBoundary>
   );
 };
 

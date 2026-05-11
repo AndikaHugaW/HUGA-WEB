@@ -1,7 +1,14 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, createContext, useContext } from "react";
 import Lenis from "lenis";
+
+// Context to expose lenis instance for modal scroll control
+const LenisContext = createContext<{ stop: () => void; start: () => void } | null>(null);
+
+export function useLenis() {
+  return useContext(LenisContext);
+}
 
 export default function SmoothScrollProvider({
   children,
@@ -9,6 +16,7 @@ export default function SmoothScrollProvider({
   children: React.ReactNode;
 }) {
   const lenisRef = useRef<Lenis | null>(null);
+  const controlsRef = useRef({ stop: () => {}, start: () => {} });
 
   useEffect(() => {
     // OPTIMASI: Cek apakah user prefer reduced motion
@@ -37,6 +45,10 @@ export default function SmoothScrollProvider({
     });
 
     lenisRef.current = lenis;
+    controlsRef.current = {
+      stop: () => lenis.stop(),
+      start: () => lenis.start(),
+    };
 
     function raf(time: number) {
       lenis.raf(time);
@@ -61,5 +73,9 @@ export default function SmoothScrollProvider({
     };
   }, []);
 
-  return <>{children}</>;
+  return (
+    <LenisContext.Provider value={controlsRef.current}>
+      {children}
+    </LenisContext.Provider>
+  );
 }

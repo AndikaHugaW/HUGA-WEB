@@ -2,7 +2,6 @@
 
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
-import Image from "next/image";
 import TextReveal from "@/components/ui/TextReveal";
 import MagneticButton from "@/components/ui/MagneticButton";
 import { GridBackground } from "@/components/ui/GridBackground";
@@ -98,7 +97,7 @@ export default function RecentProjectsSection() {
         size={20}
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto pb-32 px-6 md:px-12 lg:px-24">
+      <div className="relative z-10 max-w-\[1440px\] mx-auto pb-32 px-6 md:px-12 lg:px-24">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -159,18 +158,11 @@ export default function RecentProjectsSection() {
               className="absolute inset-0 min-h-[800px]"
             >
               {/* Background Image */}
-              <Image
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src={currentProject.image}
                 alt={currentProject.title}
-                fill
-                sizes="100vw"
-                className="object-cover"
-                loading="eager"
-                priority={currentIndex === 0}
-                quality={90}
-                onError={() => {
-                  // Fallback handled by Next.js Image
-                }}
+                className="absolute inset-0 w-full h-full object-cover"
               />
               {/* Overlay */}
               <div className="absolute inset-0 bg-black/20"></div>

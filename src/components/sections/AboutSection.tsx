@@ -108,7 +108,7 @@ export default function AboutSection() {
       {/* Background Glow */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-[#00ff88]/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 z-0"></div>
       
-      <div className="relative z-10 max-w-7xl mx-auto pt-32 pb-16 px-6 md:px-12 lg:px-24">
+      <div className="relative z-10 max-w-\[1440px\] mx-auto pt-32 pb-16 px-6 md:px-12 lg:px-24">
         {/* Label */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
