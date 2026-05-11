@@ -45,7 +45,7 @@ export default function Navbar() {
           : "bg-transparent"
       }`}
     >
-      <div className="max-w-\[1440px\] mx-auto px-6 md:px-12 lg:px-24">
+      <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24">
         <div className="relative flex items-center justify-between h-20">
           {/* Logo */}
           <motion.div
