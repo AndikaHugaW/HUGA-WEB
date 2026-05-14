@@ -128,7 +128,7 @@ export default function RecentProjectsSection() {
             className="flex items-center gap-2 text-[#00ff88] hover:text-[#00cc6a] font-medium text-lg transition-colors"
             magneticStrength={0.3}
           >
-            <span>Explore Work</span>
+            <span className="font-normal font-sf-pro">Explore Work</span>
             <motion.svg
               width="20"
               height="20"
@@ -179,17 +179,17 @@ export default function RecentProjectsSection() {
                   {/* Left: Tags */}
                   <div className="flex flex-wrap items-center gap-4">
                     {currentProject.tags && currentProject.tags.map((tag, index) => (
-                      <div key={index} className="px-4 py-2 bg-[#00ff88]/20 rounded-full text-[#00ff88] text-sm font-medium border border-[#00ff88]/30">
+                      <div key={index} className="px-4 py-2 bg-[#00ff88]/20 rounded-full text-[#00ff88] text-sm font-normal border border-[#00ff88]/30 font-sf-pro">
                         {tag}
                       </div>
                     ))}
-                    <div className="px-4 py-2 bg-[#00ff88]/20 rounded-full text-[#00ff88] text-sm font-medium border border-[#00ff88]/30">
+                    <div className="px-4 py-2 bg-[#00ff88]/20 rounded-full text-[#00ff88] text-sm font-normal border border-[#00ff88]/30 font-sf-pro">
                       {currentProject.date}
                     </div>
                   </div>
 
                   {/* Right: Brand */}
-                  <div className="text-[#00ff88] text-xl md:text-2xl font-bold">
+                  <div className="text-[#00ff88] text-xl md:text-2xl font-normal font-sf-pro">
                     {currentProject.brand}
                   </div>
                 </motion.div>

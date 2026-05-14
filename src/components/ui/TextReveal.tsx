@@ -43,22 +43,27 @@ export default function TextReveal({
         animate={controls}
       >
         {letters.map((letter, index) => (
-          <motion.span
+          <span
             key={index}
-            variants={{
-              hidden: { opacity: 0, y: 20 },
-              visible: {
-                opacity: 1,
-                y: 0,
-                transition: {
-                  delay: delay + index * 0.03,
-                  duration: duration,
-                },
-              },
-            }}
+            style={{ overflow: "hidden", paddingBottom: "0.15em", lineHeight: "1.2" }}
           >
-            {letter === " " ? "\u00A0" : letter}
-          </motion.span>
+            <motion.span
+              style={{ display: "inline-block" }}
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  transition: {
+                    delay: delay + index * 0.03,
+                    duration: duration,
+                  },
+                },
+              }}
+            >
+              {letter === " " ? "\u00A0" : letter}
+            </motion.span>
+          </span>
         ))}
       </motion.div>
     );
@@ -105,7 +110,11 @@ export default function TextReveal({
         ref={ref}
         className={`glitch ${className}`}
         data-text={text}
-        style={style}
+        style={{
+          ...style,
+          display: "block",
+          paddingBottom: "0.2em",
+        }}
         initial="hidden"
         animate={controls}
         variants={{

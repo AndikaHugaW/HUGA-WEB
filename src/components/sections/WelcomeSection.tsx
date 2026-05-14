@@ -71,7 +71,7 @@ export default function WelcomeSection() {
               <TextReveal
                 text="WELCOME TO MY PORTFOLIO! I&apos;M"
                 variant="word"
-                className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white uppercase leading-tight flex justify-center flex-wrap"
+                className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-nippo font-bold text-white uppercase leading-tight flex justify-center flex-wrap"
                 delay={0.3}
               />
             </div>
@@ -80,13 +80,13 @@ export default function WelcomeSection() {
                 <TextReveal
                   text="A FULL STACK DEVELOPER &"
                   variant="word"
-                  className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white uppercase leading-tight flex justify-center flex-wrap"
+                  className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-nippo font-bold text-white uppercase leading-tight flex justify-center flex-wrap"
                   delay={0.4}
                 />
                 <TextReveal
                   text=" UI/UX DESIGNER,"
                   variant="word"
-                  className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-[#00ff88] uppercase leading-tight flex justify-center flex-wrap"
+                  className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-nippo font-bold text-[#00ff88] uppercase leading-tight flex justify-center flex-wrap"
                   delay={0.5}
                 />
               </div>
@@ -95,7 +95,7 @@ export default function WelcomeSection() {
               <TextReveal
                 text="CREATING MODERN,"
                 variant="word"
-                className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-[#00ff88] uppercase leading-tight flex justify-center flex-wrap"
+                className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-nippo font-bold text-[#00ff88] uppercase leading-tight flex justify-center flex-wrap"
                 delay={0.6}
               />
             </div>
@@ -103,7 +103,7 @@ export default function WelcomeSection() {
               <TextReveal
                 text="RESPONSIVE WEBSITES THAT"
                 variant="word"
-                className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-[#00ff88] uppercase leading-tight flex justify-center flex-wrap"
+                className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-nippo font-bold text-[#00ff88] uppercase leading-tight flex justify-center flex-wrap"
                 delay={0.7}
               />
             </div>
@@ -111,7 +111,7 @@ export default function WelcomeSection() {
               <TextReveal
                 text="DELIVER SEAMLESS EXPERIENCES."
                 variant="word"
-                className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white uppercase leading-tight flex justify-center flex-wrap"
+                className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-nippo font-bold text-white uppercase leading-tight flex justify-center flex-wrap"
                 delay={0.8}
               />
             </div>
@@ -125,7 +125,7 @@ export default function WelcomeSection() {
           transition={{ duration: 0.8, delay: 0.9 }}
           className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8"
         >
-          <div className="text-lg md:text-xl text-white font-medium">
+          <div className="text-lg md:text-xl text-white font-normal font-sf-pro">
             Available for Work |
           </div>
           

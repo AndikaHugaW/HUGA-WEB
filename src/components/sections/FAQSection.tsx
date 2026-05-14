@@ -76,7 +76,7 @@ export default function FAQSection() {
             <TextReveal
               text="FAQS"
               variant="word"
-              className="text-sm md:text-base font-bold text-white uppercase tracking-wider"
+              className="text-sm md:text-base font-normal text-white uppercase tracking-wider font-sf-pro"
               delay={0.3}
             />
           </div>
@@ -139,7 +139,7 @@ export default function FAQSection() {
                       className="overflow-hidden"
                     >
                       <div className="px-6 pb-5">
-                        <p className="text-gray-200 leading-relaxed">{faq.answer}</p>
+                        <p className="text-gray-200 leading-relaxed font-normal font-sf-pro">{faq.answer}</p>
                       </div>
                     </motion.div>
                   )}
@@ -216,8 +216,8 @@ export default function FAQSection() {
                   {/* Tooltip */}
                   <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-50">
                     <div className="bg-gray-800 text-white text-xs rounded-lg py-2 px-3 whitespace-nowrap border border-[#00ff88]/30 shadow-lg">
-                      <div className="font-semibold text-[#00ff88]">{member.name}</div>
-                      <div className="text-gray-400 text-[10px]">{member.role}</div>
+                      <div className="font-normal text-[#00ff88] font-sf-pro">{member.name}</div>
+                      <div className="text-gray-400 text-[10px] font-normal font-sf-pro">{member.role}</div>
                       {/* Tooltip Arrow */}
                       <div className="absolute top-full left-1/2 transform -translate-x-1/2 -mt-px">
                         <div className="border-4 border-transparent border-t-gray-800"></div>
@@ -234,7 +234,7 @@ export default function FAQSection() {
             </h3>
 
             {/* Description */}
-            <p className="text-gray-400 mb-8 leading-relaxed text-center text-sm">
+            <p className="text-gray-400 mb-8 leading-relaxed text-center text-sm font-normal font-sf-pro">
               Can&apos;t find the answer you&apos;re looking for? Please chat to our friendly team. We specialize in creating digital experiences that drive results.
             </p>
 
@@ -246,7 +246,7 @@ export default function FAQSection() {
               className="w-full px-6 py-4 bg-[#00ff88] hover:bg-[#00cc6a] text-black font-semibold rounded-lg flex items-center justify-center gap-2 transition-all duration-300"
               magneticStrength={0.3}
             >
-              <span>Get in Touch</span>
+              <span className="font-normal font-sf-pro">Get in Touch</span>
               <svg
                 width="20"
                 height="20"

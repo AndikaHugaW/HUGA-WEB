@@ -151,7 +151,7 @@ const AchievementCard = ({
             <h3 className="text-lg font-semibold text-white mb-2 group-hover/canvas-card:text-[#00ff88] transition-colors duration-200">
               {achievement.title}
             </h3>
-            <p className="text-gray-400 text-xs">
+            <p className="text-gray-400 text-xs font-normal font-sf-pro">
               {achievement.description}
             </p>
           </div>
@@ -218,14 +218,14 @@ export default function ExperienceSection() {
                         <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-[#00ff88] transition-colors duration-300">{exp.title}</h3>
                         <p className="text-[#00ff88] font-medium">{exp.company}</p>
                       </div>
-                      <span className="text-gray-400 text-sm mt-2 md:mt-0">{exp.period}</span>
+                      <span className="text-gray-400 text-sm mt-2 md:mt-0 font-normal font-sf-pro">{exp.period}</span>
                     </div>
                     
                     <ul className="space-y-3 mb-6">
                       {exp.description.map((item, itemIndex) => (
                         <li key={itemIndex} className="flex items-start gap-3">
-                          <span className="text-[#00ff88] mt-1 group-hover:scale-110 transition-transform duration-300">▹</span>
-                          <span className="text-gray-300">{item}</span>
+                          <span className="text-[#00ff88] mt-1 group-hover:scale-110 transition-transform duration-300 font-sf-pro">▹</span>
+                          <span className="text-gray-300 font-normal font-sf-pro">{item}</span>
                         </li>
                       ))}
                     </ul>
@@ -234,7 +234,7 @@ export default function ExperienceSection() {
                       {exp.tech.map((tech, techIndex) => (
                         <span
                           key={techIndex}
-                          className="px-3 py-1 text-sm bg-[#00ff88]/10 text-[#00ff88] rounded-full hover:bg-[#00ff88]/20 hover:text-white transition-all duration-300"
+                          className="px-3 py-1 text-sm bg-[#00ff88]/10 text-[#00ff88] rounded-full hover:bg-[#00ff88]/20 hover:text-white transition-all duration-300 font-normal font-sf-pro"
                         >
                           {tech}
                         </span>

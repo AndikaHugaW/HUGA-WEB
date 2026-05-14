@@ -140,7 +140,7 @@ export default function ProjectsPage() {
 
             <Link 
               href="/"
-              className="inline-flex items-center gap-2 text-[#00ff88] mb-8 hover:underline group font-medium"
+              className="inline-flex items-center gap-2 text-[#00ff88] mb-8 hover:underline group font-normal font-sf-pro"
             >
               <svg 
                 width="20" 
@@ -168,7 +168,7 @@ export default function ProjectsPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="text-white text-[18px] opacity-[0.72] max-w-[620px] mb-8 leading-[1.8]"
+              className="text-white text-[18px] opacity-[0.72] max-w-[620px] mb-8 leading-[1.8] font-normal font-sf-pro"
             >
               A curated showcase of my digital experiences, blending modern development with AI-driven innovation.
             </motion.p>
@@ -178,7 +178,7 @@ export default function ProjectsPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="flex flex-wrap items-center gap-4 text-xs md:text-sm font-medium text-white/50 mb-12 uppercase tracking-[0.2em]"
+              className="flex flex-wrap items-center gap-4 text-xs md:text-sm font-normal text-white/50 mb-12 uppercase tracking-[0.2em] font-sf-pro"
             >
               <span className="text-white/80">12+ Projects</span>
               <span className="w-1.5 h-1.5 rounded-full bg-[#00ff88]"></span>
@@ -206,7 +206,7 @@ export default function ProjectsPage() {
                   placeholder="Search by name or category..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-12 pr-4 py-3.5 bg-transparent text-white focus:outline-none transition-all placeholder:text-gray-600 rounded-xl"
+                  className="w-full pl-12 pr-4 py-3.5 bg-transparent text-white focus:outline-none transition-all placeholder:text-gray-600 rounded-xl font-normal font-sf-pro"
                 />
               </div>
 
@@ -217,9 +217,9 @@ export default function ProjectsPage() {
               <div className="relative w-full md:w-72">
                 <button
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                  className="w-full flex items-center justify-between px-6 py-3.5 bg-transparent rounded-xl text-white hover:bg-white/5 transition-all"
+                  className="w-full flex items-center justify-between px-6 py-3.5 bg-transparent rounded-xl text-white hover:bg-white/5 transition-all font-normal font-sf-pro"
                 >
-                  <span className={selectedCategory === "All Projects" ? "text-gray-400" : "text-[#00ff88] font-bold"}>
+                  <span className={selectedCategory === "All Projects" ? "text-gray-400" : "text-[#00ff88] font-normal"}>
                     {selectedCategory}
                   </span>
                   <svg 
@@ -247,8 +247,8 @@ export default function ProjectsPage() {
                             setSelectedCategory(cat);
                             setIsDropdownOpen(false);
                           }}
-                          className={`w-full text-left px-6 py-3 hover:bg-white/5 transition-colors text-sm tracking-wide ${
-                            selectedCategory === cat ? "text-[#00ff88] bg-[rgba(0,255,136,0.05)] font-medium" : "text-gray-400"
+                          className={`w-full text-left px-6 py-3 hover:bg-white/5 transition-colors text-sm tracking-wide font-sf-pro ${
+                            selectedCategory === cat ? "text-[#00ff88] bg-[rgba(0,255,136,0.05)] font-normal" : "text-gray-400 font-normal"
                           }`}
                         >
                           {cat}
@@ -281,26 +281,26 @@ export default function ProjectsPage() {
                       quality={90}
                       priority
                     />
-                    <div className="absolute top-6 left-6 px-5 py-2.5 bg-black/60 backdrop-blur-md rounded-full text-white text-[10px] font-bold tracking-[0.2em] uppercase border border-white/10">
+                    <div className="absolute top-6 left-6 px-5 py-2.5 bg-black/60 backdrop-blur-md rounded-full text-white text-[10px] font-normal tracking-[0.2em] uppercase border border-white/10 font-sf-pro">
                       EDITOR&apos;S PICK
                     </div>
                   </div>
                   
                   <div className="lg:w-2/5 p-8 md:p-12 flex flex-col justify-center bg-gradient-to-r from-black/0 to-black/40">
                     <div className="max-w-[420px] w-full">
-                      <div className="text-[#00ff88] text-xs font-bold uppercase tracking-[0.2em] mb-4">
+                      <div className="text-[#00ff88] text-xs font-normal uppercase tracking-[0.2em] mb-4 font-sf-pro">
                         {featuredProject.category}
                       </div>
                       <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 group-hover:text-[#00ff88] transition-colors duration-500">
                         {featuredProject.title}
                       </h2>
-                      <p className="text-white opacity-[0.72] text-[18px] leading-[1.8] mb-8">
+                      <p className="text-white opacity-[0.72] text-[18px] leading-[1.8] mb-8 font-normal font-sf-pro">
                         {featuredProject.description}
                       </p>
                       
                       <div className="flex flex-wrap gap-2 mb-8">
                         {featuredProject.tags.map((tag, i) => (
-                          <span key={i} className="px-3 py-1.5 bg-white/5 rounded-md text-[10px] font-semibold tracking-wider text-white/70 uppercase">
+                          <span key={i} className="px-3 py-1.5 bg-white/5 rounded-md text-[10px] font-normal tracking-wider text-white/70 uppercase font-sf-pro">
                             {tag}
                           </span>
                         ))}
@@ -310,20 +310,20 @@ export default function ProjectsPage() {
                       <div className="flex items-center gap-6 mb-8 pb-8 border-b border-white/10">
                         <div>
                           <div className="text-2xl font-bold text-white mb-1">98%</div>
-                          <div className="text-[10px] text-gray-500 uppercase tracking-widest">Faster Booking</div>
+                          <div className="text-[10px] text-gray-500 uppercase tracking-widest font-normal font-sf-pro">Faster Booking</div>
                         </div>
                         <div className="w-px h-10 bg-white/10"></div>
                         <div>
                           <div className="text-2xl font-bold text-white mb-1">+12K</div>
-                          <div className="text-[10px] text-gray-500 uppercase tracking-widest">Monthly Users</div>
+                          <div className="text-[10px] text-gray-500 uppercase tracking-widest font-normal font-sf-pro">Monthly Users</div>
                         </div>
                       </div>
 
                       <div className="mt-auto flex flex-col sm:flex-row gap-4">
-                        <button className="px-6 py-3 bg-[#00ff88] text-black font-semibold rounded-full shadow-[0_0_20px_rgba(0,255,136,0.2)] hover:shadow-[0_0_30px_rgba(0,255,136,0.4)] transition-all duration-300 text-sm w-full sm:w-auto text-center">
+                        <button className="px-6 py-3 bg-[#00ff88] text-black font-normal font-sf-pro rounded-full shadow-[0_0_20px_rgba(0,255,136,0.2)] hover:shadow-[0_0_30px_rgba(0,255,136,0.4)] transition-all duration-300 text-sm w-full sm:w-auto text-center">
                           Live Preview
                         </button>
-                        <button className="px-6 py-3 bg-[rgba(255,255,255,0.05)] hover:bg-[rgba(255,255,255,0.1)] text-white border border-[rgba(255,255,255,0.1)] rounded-full transition-all duration-300 text-sm font-medium w-full sm:w-auto text-center inline-flex justify-center items-center gap-2">
+                        <button className="px-6 py-3 bg-[rgba(255,255,255,0.05)] hover:bg-[rgba(255,255,255,0.1)] text-white border border-[rgba(255,255,255,0.1)] rounded-full transition-all duration-300 text-sm font-normal font-sf-pro w-full sm:w-auto text-center inline-flex justify-center items-center gap-2">
                           Case Study
                           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="group-hover:translate-x-1 transition-transform duration-300">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M12 5l7 7-7 7" />
@@ -359,7 +359,7 @@ export default function ProjectsPage() {
                         />
                         {/* Hover Overlay */}
                         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center backdrop-blur-[2px]">
-                          <span className="px-6 py-3 bg-white text-black font-bold text-sm tracking-wide rounded-full transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 shadow-xl">
+                          <span className="px-6 py-3 bg-white text-black font-normal font-sf-pro text-sm tracking-wide rounded-full transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 shadow-xl">
                             View Case Study
                           </span>
                         </div>
@@ -367,16 +367,16 @@ export default function ProjectsPage() {
                       
                       {/* Info Area */}
                       <div className="px-2 pb-2 flex-grow flex flex-col">
-                        <div className="text-[#00ff88] text-[11px] font-bold uppercase tracking-[0.2em] mb-3">
+                        <div className="text-[#00ff88] text-[11px] font-normal uppercase tracking-[0.2em] mb-3 font-sf-pro">
                           {project.category}
                         </div>
                         <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-[#00ff88] transition-colors duration-300">
                           {project.title}
                         </h3>
-                        <p className="text-gray-400 text-sm leading-relaxed line-clamp-2 mb-6 flex-grow">
+                        <p className="text-gray-400 text-sm leading-relaxed line-clamp-2 mb-6 flex-grow font-normal font-sf-pro">
                           {project.description}
                         </p>
-                        <div className="text-[10px] font-medium text-white/40 uppercase tracking-widest mt-auto">
+                        <div className="text-[10px] font-normal text-white/40 uppercase tracking-widest mt-auto font-sf-pro">
                           {project.tags.slice(0, 3).join(' • ')}
                         </div>
                       </div>
@@ -387,10 +387,10 @@ export default function ProjectsPage() {
             </>
           ) : (
             <div className="py-32 text-center bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.05)] rounded-3xl">
-              <p className="text-gray-400 text-xl mb-4">No projects found matching your criteria.</p>
+              <p className="text-gray-400 text-xl mb-4 font-normal font-sf-pro">No projects found matching your criteria.</p>
               <button 
                 onClick={() => {setSearchQuery(""); setSelectedCategory("All Projects");}}
-                className="text-[#00ff88] font-medium hover:underline tracking-wide"
+                className="text-[#00ff88] font-normal font-sf-pro hover:underline tracking-wide"
               >
                 Clear all filters
               </button>

@@ -8,6 +8,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        nippo: ["var(--font-nippo)"],
+        "sf-pro": ["var(--font-sf-pro)"],
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",

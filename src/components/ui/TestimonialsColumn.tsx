@@ -36,7 +36,7 @@ export const TestimonialsColumn = (props: {
                   className="p-8 rounded-2xl border border-[#00ff88]/20 bg-black/50 backdrop-blur-sm shadow-lg shadow-[#00ff88]/5 max-w-xs w-full hover:border-[#00ff88]/40 transition-colors duration-300 text-center" 
                   key={i}
                 >
-                  <div className="text-gray-300 leading-relaxed">{text}</div>
+                  <div className="text-gray-300 leading-relaxed font-normal font-sf-pro">{text}</div>
                   <div className="flex items-center justify-center gap-3 mt-6">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
@@ -47,8 +47,8 @@ export const TestimonialsColumn = (props: {
                       className="h-11 w-11 rounded-full border-2 border-[#00ff88]/30 object-cover"
                     />
                     <div className="flex flex-col text-left">
-                      <div className="font-semibold text-white tracking-tight leading-5">{name}</div>
-                      <div className="text-sm leading-5 text-[#00ff88] tracking-tight">{role}</div>
+                      <div className="font-normal text-white tracking-tight leading-5 font-sf-pro">{name}</div>
+                      <div className="text-sm leading-5 text-[#00ff88] tracking-tight font-normal font-sf-pro">{role}</div>
                     </div>
                   </div>
                 </div>

@@ -110,7 +110,7 @@ export default function ContactSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.5 }}
-            className="text-gray-400 text-lg mt-6 max-w-2xl mx-auto"
+            className="text-gray-400 text-lg mt-6 max-w-2xl mx-auto font-normal font-sf-pro"
           >
             Interested in collaborating? Let&apos;s discuss your project!
           </motion.p>
@@ -126,7 +126,7 @@ export default function ContactSection() {
           >
             <div>
               <h3 className="text-2xl font-bold text-white mb-6">Let&apos;s Collaborate</h3>
-              <p className="text-gray-400 leading-relaxed mb-8">
+              <p className="text-gray-400 leading-relaxed mb-8 font-normal font-sf-pro">
                 I&apos;m always open to discussing new projects, collaborations, or just
                 chatting about tech and design. Don&apos;t hesitate to contact me!
               </p>
@@ -144,8 +144,8 @@ export default function ContactSection() {
                   />
                 </div>
                 <div>
-                  <p className="text-gray-400 text-sm">Email</p>
-                  <a href="mailto:andikahuga34@gmail.com" className="text-white hover:text-[#00ff88] transition-colors font-semibold">
+                  <p className="text-gray-400 text-sm font-normal font-sf-pro">Email</p>
+                  <a href="mailto:andikahuga34@gmail.com" className="text-white hover:text-[#00ff88] transition-colors font-normal font-sf-pro">
                     andikahuga34@gmail.com
                   </a>
                 </div>
@@ -205,7 +205,7 @@ export default function ContactSection() {
           >
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label htmlFor="name" className="block text-gray-300 mb-2">
+                <label htmlFor="name" className="block text-gray-300 mb-2 font-normal font-sf-pro">
                   Name
                 </label>
                 <input
@@ -220,7 +220,7 @@ export default function ContactSection() {
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-gray-300 mb-2">
+                <label htmlFor="email" className="block text-gray-300 mb-2 font-normal font-sf-pro">
                   Email
                 </label>
                 <input
@@ -235,7 +235,7 @@ export default function ContactSection() {
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-gray-300 mb-2">
+                <label htmlFor="message" className="block text-gray-300 mb-2 font-normal font-sf-pro">
                   Message
                 </label>
                 <textarea
@@ -252,7 +252,7 @@ export default function ContactSection() {
               <MagneticButton
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full px-8 py-4 bg-[#00ff88] text-black font-semibold rounded-lg shadow-lg shadow-[#00ff88]/50 hover:shadow-[#00ff88]/70 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full px-8 py-4 bg-[#00ff88] text-black font-normal font-sf-pro rounded-lg shadow-lg shadow-[#00ff88]/50 hover:shadow-[#00ff88]/70 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 magneticStrength={0.3}
               >
                 {isSubmitting ? "Sending..." : "Send Message"}

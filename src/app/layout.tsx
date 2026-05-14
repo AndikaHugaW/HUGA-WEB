@@ -5,12 +5,26 @@ import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
+import localFont from "next/font/local";
+
 // OPTIMASI: Font dengan display swap dan preload
 const inter = Inter({ 
   subsets: ["latin"],
   display: 'swap',
   variable: '--font-inter',
   preload: true,
+});
+
+const nippo = localFont({
+  src: "../fonts/NIPPO/Nippo-Regular.otf",
+  variable: "--font-nippo",
+  display: "swap",
+});
+
+const sfPro = localFont({
+  src: "../fonts/SF-PRO-DISPLAY/sf-regular.otf",
+  variable: "--font-sf-pro",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -48,7 +62,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://randomuser.me" />
         <link rel="dns-prefetch" href="https://randomuser.me" />
       </head>
-      <body className={`${inter.className} ${inter.variable} antialiased`}>
+      <body className={`${nippo.className} ${nippo.variable} ${sfPro.variable} antialiased`}>
         <SmoothScrollProvider>
           {children}
         </SmoothScrollProvider>

@@ -100,7 +100,7 @@ export default function Footer() {
                 className="h-20 w-auto object-contain"
               />
             </div>
-            <p className="text-gray-400 text-sm mb-6 leading-relaxed">
+            <p className="text-gray-400 text-sm mb-6 leading-relaxed font-normal font-sf-pro">
               Full Stack Developer dengan passion untuk menciptakan solusi digital yang inovatif dan user-friendly.
             </p>
             {/* Social Links */}
@@ -128,7 +128,7 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <h4 className="text-white font-semibold mb-6 text-sm uppercase tracking-wider">
+            <h4 className="text-white font-normal mb-6 text-sm uppercase tracking-wider font-sf-pro">
               Services
             </h4>
             <ul className="space-y-3">
@@ -136,7 +136,7 @@ export default function Footer() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-gray-400 hover:text-[#00ff88] transition-colors duration-300 text-sm"
+                    className="text-gray-400 hover:text-[#00ff88] transition-colors duration-300 text-sm font-normal font-sf-pro"
                   >
                     {link.name}
                   </Link>
@@ -152,7 +152,7 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <h4 className="text-white font-semibold mb-6 text-sm uppercase tracking-wider">
+            <h4 className="text-white font-normal mb-6 text-sm uppercase tracking-wider font-sf-pro">
               Company
             </h4>
             <ul className="space-y-3">
@@ -160,7 +160,7 @@ export default function Footer() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-gray-400 hover:text-[#00ff88] transition-colors duration-300 text-sm"
+                    className="text-gray-400 hover:text-[#00ff88] transition-colors duration-300 text-sm font-normal font-sf-pro"
                   >
                     {link.name}
                   </Link>
@@ -176,7 +176,7 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <h4 className="text-white font-semibold mb-6 text-sm uppercase tracking-wider">
+            <h4 className="text-white font-normal mb-6 text-sm uppercase tracking-wider font-sf-pro">
               Resources
             </h4>
             <ul className="space-y-3">
@@ -184,7 +184,7 @@ export default function Footer() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-gray-400 hover:text-[#00ff88] transition-colors duration-300 text-sm"
+                    className="text-gray-400 hover:text-[#00ff88] transition-colors duration-300 text-sm font-normal font-sf-pro"
                   >
                     {link.name}
                   </Link>
@@ -202,19 +202,19 @@ export default function Footer() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4"
         >
-          <p className="text-gray-400 text-sm">
+          <p className="text-gray-400 text-sm font-normal font-sf-pro">
             © {currentYear} Andika Huga Widyatama. All rights reserved.
           </p>
           <div className="flex gap-6 text-sm">
             <Link
               href="#"
-              className="text-gray-400 hover:text-[#00ff88] transition-colors duration-300"
+              className="text-gray-400 hover:text-[#00ff88] transition-colors duration-300 font-normal font-sf-pro"
             >
               Privacy Policy
             </Link>
             <Link
               href="#"
-              className="text-gray-400 hover:text-[#00ff88] transition-colors duration-300"
+              className="text-gray-400 hover:text-[#00ff88] transition-colors duration-300 font-normal font-sf-pro"
             >
               Terms of Service
             </Link>

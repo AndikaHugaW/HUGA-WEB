@@ -113,7 +113,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                   </div>
                   <div>
                     <h4 className="text-white font-bold text-[13px] md:text-sm leading-tight">Andika Huga W.</h4>
-                    <p className="hidden md:block text-[#00ff88] text-[10px] font-bold uppercase tracking-widest">Available for work</p>
+                    <p className="hidden md:block text-[#00ff88] text-[10px] font-normal uppercase tracking-widest font-sf-pro">Available for work</p>
                   </div>
                 </div>
 
@@ -180,7 +180,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                 </h1>
                 <div className="flex flex-wrap gap-2">
                   {project.tags.map((tag, i) => (
-                    <span key={i} className="px-4 py-2 bg-white/5 border border-white/10 text-white/60 text-[11px] font-bold uppercase tracking-widest rounded-lg">
+                    <span key={i} className="px-4 py-2 bg-white/5 border border-white/10 text-white/60 text-[11px] font-normal uppercase tracking-widest rounded-lg font-sf-pro">
                       {tag}
                     </span>
                   ))}
@@ -190,10 +190,10 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
               {/* ── TWO COLUMN BODY ── */}
               <div className="px-6 md:px-10 pb-20 grid lg:grid-cols-12 gap-12 lg:gap-20 border-t border-white/[0.06] pt-12">
                 <div className="lg:col-span-8 space-y-6">
-                  <p className="text-xl text-white/80 leading-relaxed font-medium">
+                  <p className="text-xl text-white/80 leading-relaxed font-normal font-sf-pro">
                     {project.description}
                   </p>
-                  <div className="pt-8 space-y-8 text-white/60 leading-relaxed">
+                  <div className="pt-8 space-y-8 text-white/60 leading-relaxed font-normal font-sf-pro">
                     <p>
                       This project represents a deep dive into modern user experience patterns, 
                       blending high-performance technology with an uncompromising aesthetic. 
@@ -211,22 +211,22 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                 <div className="lg:col-span-4 space-y-10">
                   <div className="space-y-6">
                     <div className="space-y-1">
-                      <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white/30">Client</span>
-                      <p className="text-white font-bold">Huga Studio Inc.</p>
+                      <span className="text-[10px] font-normal uppercase tracking-[0.2em] text-white/30 font-sf-pro">Client</span>
+                      <p className="text-white font-normal font-sf-pro">Huga Studio Inc.</p>
                     </div>
                     <div className="space-y-1">
-                      <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white/30">Role</span>
-                      <p className="text-white font-bold">Full Stack Developer & UI Designer</p>
+                      <span className="text-[10px] font-normal uppercase tracking-[0.2em] text-white/30 font-sf-pro">Role</span>
+                      <p className="text-white font-normal font-sf-pro">Full Stack Developer & UI Designer</p>
                     </div>
                     <div className="space-y-1">
-                      <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white/30">Year</span>
-                      <p className="text-white font-bold">2024</p>
+                      <span className="text-[10px] font-normal uppercase tracking-[0.2em] text-white/30 font-sf-pro">Year</span>
+                      <p className="text-white font-normal font-sf-pro">2024</p>
                     </div>
                     <div className="space-y-1">
-                      <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white/30">Tools</span>
+                      <span className="text-[10px] font-normal uppercase tracking-[0.2em] text-white/30 font-sf-pro">Tools</span>
                       <div className="flex flex-wrap gap-2 pt-2">
                         {["React", "Next.js", "Framer", "Tailwind"].map(tool => (
-                          <span key={tool} className="text-[11px] font-bold text-white/60 bg-white/5 px-2.5 py-1 rounded-md border border-white/5">
+                          <span key={tool} className="text-[11px] font-normal text-white/60 bg-white/5 px-2.5 py-1 rounded-md border border-white/5 font-sf-pro">
                             {tool}
                           </span>
                         ))}
@@ -268,7 +268,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                           {(title || description) && (
                             <div className="w-full text-left space-y-3 md:space-y-5 px-1 md:px-2 mt-2">
                               {title && <h4 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white tracking-tight">{title}</h4>}
-                              {description && <p className="text-white/70 text-base md:text-lg lg:text-xl leading-[1.8] font-medium w-full">{description}</p>}
+                              {description && <p className="text-white/70 text-base md:text-lg lg:text-xl leading-[1.8] font-normal w-full font-sf-pro">{description}</p>}
                             </div>
                           )}
                         </div>
@@ -283,7 +283,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                 <div className="flex items-center justify-between mb-10">
                   <h3 className="text-2xl md:text-3xl font-black text-white">More Projects</h3>
                   <div className="h-px flex-1 mx-8 bg-white/[0.06] hidden md:block" />
-                  <p className="text-[#00ff88] text-[11px] font-bold uppercase tracking-widest">Recommended for you</p>
+                  <p className="text-[#00ff88] text-[11px] font-normal uppercase tracking-widest font-sf-pro">Recommended for you</p>
                 </div>
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
@@ -309,7 +309,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                         </div>
                       </div>
                       <h4 className="text-lg font-bold text-white group-hover:text-[#00ff88] transition-colors">{rec.title}</h4>
-                      <p className="text-white/40 text-sm mt-1">{rec.tags[0]} • {rec.tags[1]}</p>
+                      <p className="text-white/40 text-sm mt-1 font-normal font-sf-pro">{rec.tags[0]} • {rec.tags[1]}</p>
                     </div>
                   ))}
                 </div>

@@ -126,7 +126,7 @@ export default function HeroSection() {
 
   return (
     <section 
-      className="relative min-h-screen flex items-center overflow-hidden bg-black"
+      className="relative min-h-screen flex items-center overflow-hidden bg-black font-nippo"
       style={{ 
         willChange: 'auto',
         contain: 'layout style paint',
@@ -180,7 +180,7 @@ export default function HeroSection() {
               <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-[#00ff88] mb-1 lg:mb-4 leading-none">
                 50+
               </div>
-              <div className="text-[10px] sm:text-xs md:text-sm lg:text-base text-white font-bold uppercase tracking-wider whitespace-nowrap">
+              <div className="text-[10px] sm:text-xs md:text-sm lg:text-base text-white font-normal font-sf-pro uppercase tracking-wider whitespace-nowrap">
                 Project Done
               </div>
             </div>
@@ -192,7 +192,7 @@ export default function HeroSection() {
               <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-[#00ff88] mb-1 lg:mb-4 leading-none">
                 50+
               </div>
-              <div className="text-[10px] sm:text-xs md:text-sm lg:text-base text-white font-bold uppercase tracking-wider whitespace-nowrap">
+              <div className="text-[10px] sm:text-xs md:text-sm lg:text-base text-white font-normal font-sf-pro uppercase tracking-wider whitespace-nowrap">
                 Happy Clients
               </div>
             </div>
@@ -255,14 +255,13 @@ export default function HeroSection() {
                   onMouseLeave={() => setHoveredText(null)}
                 >
                   <div 
-                    className={`text-3xl sm:text-4xl md:text-5xl lg:text-8xl xl:text-9xl leading-[0.85] whitespace-nowrap transition-all duration-300 ${
-                      hoveredText === "hi" ? "font-black" : "font-medium"
-                    }`}
+                    className={`text-3xl sm:text-4xl md:text-5xl lg:text-8xl xl:text-9xl whitespace-nowrap transition-all duration-300 font-normal`}
                     style={{
-                      WebkitTextStroke: "1px #00ff88",
-                      WebkitTextFillColor: hoveredText === "hi" ? "#00ff88" : "transparent",
-                      color: hoveredText === "hi" ? "#00ff88" : "transparent",
+                      WebkitTextStroke: hoveredText === "hi" ? "1px transparent" : "1px #00ff88",
                       willChange: 'color',
+                      lineHeight: 1.3,
+                      paddingBottom: "0.25em",
+                      overflow: "visible",
                     }}
                   >
                     <TextReveal
@@ -270,6 +269,16 @@ export default function HeroSection() {
                       variant="glitch"
                       className=""
                       delay={0.4}
+                      style={{
+                        WebkitTextFillColor: hoveredText === "hi" ? "transparent" : "transparent",
+                        color: hoveredText === "hi" ? "#00ff88" : "transparent",
+                        backgroundImage: hoveredText === "hi" ? "linear-gradient(to right, #00ff88, #008844, #00ff88)" : "none",
+                        backgroundSize: "200% auto",
+                        backgroundClip: "text",
+                        WebkitBackgroundClip: "text",
+                        animation: hoveredText === "hi" ? "textGradientPan 2s linear infinite" : "none",
+                        willChange: 'background-position',
+                      }}
                     />
                   </div>
                 </div>
@@ -285,14 +294,13 @@ export default function HeroSection() {
                   onMouseLeave={() => setHoveredText(null)}
                 >
                   <div 
-                    className={`text-3xl sm:text-4xl md:text-5xl lg:text-8xl xl:text-9xl leading-[0.85] whitespace-nowrap transition-all duration-300 ${
-                      hoveredText === "dev" ? "font-black" : "font-medium"
-                    }`}
+                    className={`text-3xl sm:text-4xl md:text-5xl lg:text-8xl xl:text-9xl whitespace-nowrap transition-all duration-300 font-normal`}
                     style={{
-                      WebkitTextStroke: "1px #00ff88",
-                      WebkitTextFillColor: hoveredText === "dev" ? "#00ff88" : "transparent",
-                      color: hoveredText === "dev" ? "#00ff88" : "transparent",
+                      WebkitTextStroke: hoveredText === "dev" ? "1px transparent" : "1px #00ff88",
                       willChange: 'color',
+                      lineHeight: 1.3,
+                      paddingBottom: "0.25em",
+                      overflow: "visible",
                     }}
                   >
                     <TextReveal
@@ -300,6 +308,16 @@ export default function HeroSection() {
                       variant="glitch"
                       className=""
                       delay={0.6}
+                      style={{
+                        WebkitTextFillColor: hoveredText === "dev" ? "transparent" : "transparent",
+                        color: hoveredText === "dev" ? "#00ff88" : "transparent",
+                        backgroundImage: hoveredText === "dev" ? "linear-gradient(to right, #00ff88, #008844, #00ff88)" : "none",
+                        backgroundSize: "200% auto",
+                        backgroundClip: "text",
+                        WebkitBackgroundClip: "text",
+                        animation: hoveredText === "dev" ? "textGradientPan 2s linear infinite" : "none",
+                        willChange: 'background-position',
+                      }}
                     />
                   </div>
                 </div>
@@ -319,21 +337,21 @@ export default function HeroSection() {
               <TextReveal
                 text="I'M A FULL STACK DEVELOPER"
                 variant="word"
-                className="text-xs sm:text-sm md:text-base font-bold text-white uppercase tracking-wide leading-tight"
+                className="text-xs sm:text-sm md:text-base font-normal text-white uppercase tracking-wide leading-tight font-sf-pro"
                 delay={0.6}
               />
               
               <TextReveal
                 text="WITH 1+ YEARS OF EXPERIENCE."
                 variant="word"
-                className="text-xs sm:text-sm md:text-base font-bold text-white uppercase tracking-wide leading-tight"
+                className="text-xs sm:text-sm md:text-base font-normal text-white uppercase tracking-wide leading-tight font-sf-pro"
                 delay={0.7}
               />
               
               <TextReveal
                 text="FOCUSED ON WEB DEVELOPMENT AND UI/UX DESIGN."
                 variant="word"
-                className="text-[10px] sm:text-xs md:text-sm text-white font-medium leading-relaxed"
+                className="text-[10px] sm:text-xs md:text-sm text-white font-normal leading-relaxed font-sf-pro"
                 delay={0.8}
               />
             </div>
@@ -346,7 +364,7 @@ export default function HeroSection() {
                   document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
                 }}
               >
-                <span className="font-semibold tracking-wide">Get Started</span>
+                <span className="font-normal font-sf-pro tracking-wide">Get Started</span>
                 <span className="text-lg sm:text-xl text-[#00ff88] group-hover:translate-x-1 transition-transform">→</span>
               </MagneticButton>
             </div>
@@ -357,6 +375,10 @@ export default function HeroSection() {
 
       {/* CSS Keyframes untuk animasi ringan */}
       <style jsx global>{`
+        @keyframes textGradientPan {
+          0% { background-position: 0% center; }
+          100% { background-position: -200% center; }
+        }
         @keyframes fadeInLeft {
           from { opacity: 0; transform: translateX(-30px); }
           to { opacity: 1; transform: translateX(0); }

@@ -65,7 +65,7 @@ export default function AboutSection() {
           className="text-emerald-400 text-sm font-mono mb-4 flex items-center gap-2"
         >
           <span className="w-8 h-[1px] bg-emerald-400"></span>
-          EXPERTISE
+          <span className="font-sf-pro font-normal">EXPERTISE</span>
         </motion.div>
 
         {/* Main Heading */}
@@ -115,7 +115,7 @@ export default function AboutSection() {
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={isInView ? { opacity: 1, scale: 1 } : {}}
                     transition={{ duration: 0.4, delay: 0.6 + (index * 0.1) + (sIndex * 0.05) }}
-                    className="px-4 py-2 rounded-full bg-black/50 border border-gray-800 text-gray-300 text-sm font-medium hover:border-emerald-500/50 hover:text-emerald-400 transition-all duration-300 cursor-default"
+                    className="px-4 py-2 rounded-full bg-black/50 border border-gray-800 text-gray-300 text-sm font-normal font-sf-pro hover:border-emerald-500/50 hover:text-emerald-400 transition-all duration-300 cursor-default"
                   >
                     {skill}
                   </motion.span>

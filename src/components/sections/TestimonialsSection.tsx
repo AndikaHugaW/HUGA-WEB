@@ -104,7 +104,7 @@ export default function TestimonialsSection() {
             <TextReveal
               text="TESTIMONIALS"
               variant="word"
-              className="text-sm md:text-base font-bold text-white uppercase tracking-wider"
+              className="text-sm md:text-base font-normal text-white uppercase tracking-wider font-sf-pro"
               delay={0.3}
             />
           </div>
@@ -120,7 +120,7 @@ export default function TestimonialsSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.5 }}
-            className="text-gray-400 mt-6 text-base md:text-lg leading-relaxed"
+            className="text-gray-400 mt-6 text-base md:text-lg leading-relaxed font-normal font-sf-pro"
           >
             Trusted by businesses worldwide to deliver exceptional digital experiences.
           </motion.p>

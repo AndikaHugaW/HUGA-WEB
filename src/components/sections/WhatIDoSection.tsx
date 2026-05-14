@@ -65,7 +65,7 @@ export default function WhatIDoSection() {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <div className="text-gray-400 text-sm mb-8">{'//WHAT I DO?'}</div>
+            <div className="text-gray-400 text-sm mb-8 font-normal font-sf-pro">{'//WHAT I DO?'}</div>
             <div className="space-y-4">
               {services.map((service) => (
                 <button
@@ -119,8 +119,8 @@ export default function WhatIDoSection() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                <div className="text-gray-400 text-sm mb-4">ABOUT</div>
-                <p className="text-gray-300 leading-relaxed">{activeService.about}</p>
+                <div className="text-gray-400 text-sm mb-4 font-normal font-sf-pro">ABOUT</div>
+                <p className="text-gray-300 leading-relaxed font-normal font-sf-pro">{activeService.about}</p>
               </motion.div>
             )}
 
@@ -132,7 +132,7 @@ export default function WhatIDoSection() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
               >
-                <div className="text-gray-400 text-sm mb-4">TAGS</div>
+                <div className="text-gray-400 text-sm mb-4 font-normal font-sf-pro">TAGS</div>
                 <div className="flex flex-wrap gap-3">
                   {activeService.tags.map((tag, index) => {
                     // Highlight the tag that matches the active service title
@@ -142,7 +142,7 @@ export default function WhatIDoSection() {
                     return (
                       <span
                         key={index}
-                        className={`px-4 py-2 rounded-full text-sm font-medium border transition-all duration-300 ${
+                        className={`px-4 py-2 rounded-full text-sm font-normal font-sf-pro border transition-all duration-300 ${
                           isHighlighted
                             ? "border-[#00ff88] text-[#00ff88]"
                             : "border-gray-600 text-gray-400"

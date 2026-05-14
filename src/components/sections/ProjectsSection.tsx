@@ -120,7 +120,7 @@ export default function ProjectsSection() {
                 initial={{ opacity: 0, x: -20 }}
                 animate={isInView ? { opacity: 0.7, x: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-emerald-400 text-xs font-bold tracking-[0.4em] uppercase flex items-center gap-4"
+                className="text-emerald-400 text-xs font-normal font-sf-pro tracking-[0.4em] uppercase flex items-center gap-4"
               >
                 <span className="w-12 h-[1px] bg-emerald-400/50"></span>
                 ✦ Featured Projects
@@ -145,7 +145,7 @@ export default function ProjectsSection() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 0.7, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: 0.5 }}
-                className="text-gray-300 text-lg md:text-xl leading-[1.8] max-w-[40ch]"
+                className="text-gray-300 text-lg md:text-xl leading-[1.8] max-w-[40ch] font-normal font-sf-pro"
               >
                 We create scalable digital products through modern development, branding, and AI-driven innovation.
               </motion.p>
@@ -160,7 +160,7 @@ export default function ProjectsSection() {
                     className="group relative flex items-center gap-4 pl-6 pr-1.5 py-1.5 bg-[rgba(255,255,255,0.04)] hover:bg-[rgba(255,255,255,0.08)] text-white border border-[rgba(255,255,255,0.08)] rounded-full transition-all duration-500 backdrop-blur-[12px] overflow-hidden"
                     magneticStrength={0.2}
                   >
-                    <span className="text-xs font-semibold tracking-wider uppercase ml-2">Explore Projects</span>
+                    <span className="text-xs font-normal font-sf-pro tracking-wider uppercase ml-2">Explore Projects</span>
                     <div className="w-10 h-10 rounded-full bg-emerald-400 flex items-center justify-center text-black group-hover:scale-110 group-hover:rotate-[-45deg] transition-all duration-500 shadow-[0_0_30px_rgba(52,211,153,0.6)]">
                       <svg
                         width="18"
@@ -234,7 +234,7 @@ export default function ProjectsSection() {
                   {project.tags.map((tag, tagIndex) => (
                     <span
                       key={tagIndex}
-                      className="px-3 py-1.5 bg-[#00ff88]/20 backdrop-blur-sm text-[#00ff88] text-sm rounded-full font-medium"
+                      className="px-3 py-1.5 bg-[#00ff88]/20 backdrop-blur-sm text-[#00ff88] text-sm rounded-full font-normal font-sf-pro"
                     >
                       {tag}
                     </span>
@@ -249,7 +249,7 @@ export default function ProjectsSection() {
                 </h3>
 
                 {/* Description */}
-                <p className="text-white/80 text-base md:text-lg leading-relaxed">
+                <p className="text-white/80 text-base md:text-lg leading-relaxed font-normal font-sf-pro">
                   {project.description}
                 </p>
               </div>
