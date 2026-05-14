@@ -8,12 +8,12 @@ import { GridBackground } from "@/components/ui/GridBackground";
 
 const featuredProjects = [
   {
-    title: "Revive Website",
-    category: "Next.js",
-    date: "18 Aug. 2025",
-    brand: "Revive",
-    image: "/images/projects/revive-web-min.webp",
-    tags: ["Next.js", "Supabase", "Figma"],
+    title: "Vivet Streetwear",
+    category: "Branding",
+    date: "14 May 2026",
+    brand: "Vivet",
+    image: "/images/projects/vivet-v2.webp",
+    tags: ["Branding", "Streetwear", "Logo Design"],
   },
   {
     title: "Revive AI",
@@ -24,12 +24,12 @@ const featuredProjects = [
     tags: ["Next.js", "Scikit-learn", "Figma"],
   },
   {
-    title: "Honda Pekalongan Website",
-    category: "Website",
-    date: "12 Aug. 2025",
-    brand: "Honda",
-    image: "/images/projects/honda-pekalongan.webp",
-    tags: ["Next.js", "supabase", "Figma"],
+    title: "Oxen Ai Platform",
+    category: "AI SaaS",
+    date: "14 May 2026",
+    brand: "Oxen Ai",
+    image: "/images/projects/oxen-ai.webp",
+    tags: ["AI SaaS", "Machine Learning", "UX/UI Design"],
   },
   {
     title: "HYPEBEAST Website",

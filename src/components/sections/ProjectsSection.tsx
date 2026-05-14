@@ -13,12 +13,29 @@ import { type Project } from "@/constants/projects";
 const projects = [
   {
     id: 1,
-    title: "Revive Website",
-    description: "Healthcare made simple. Book appointments, consult doctors online, and access trusted medical info — all in one seamless platform.",
-    tags: ["Next.js", "Supabase", "Scikit-learn", "TensorFlow", "Figma"],
-    image: "/images/projects/revive-web-min.webp",
+    title: "Vivet",
+    description: "Vivet is an unapologetic, high-octane streetwear brand born in Indonesia. Fusing urban grit with premium aesthetics, Vivet redefines modern street culture.",
+    tags: ["Branding", "Streetwear", "Logo Design"],
+    image: "/images/projects/vivet-v2.webp",
     link: "#",
     featured: true,
+    previewImages: [
+      {
+        src: "/images/projects/vivet-preview-1.webp",
+        title: "Digital Ecosystem",
+        description: "A seamless and premium shopping experience built across both web and mobile platforms. We engineered the digital ecosystem with frictionless navigation, ultra-fast load times, and a buttery-smooth checkout process. The platform also integrates an exclusive 'drop' notification system and an interactive lookbook, ensuring that users deeply engage with the Vivet lifestyle from anywhere in the world."
+      },
+      {
+        src: "/images/projects/apparel.webp",
+        title: "Signature Apparel",
+        description: "Every piece is engineered for the streets, combining raw utilitarian aesthetics with premium heavyweight fabrics. We focused on delivering uncompromising quality through custom garment washes, distressed detailing, and striking typography that speaks without saying a word. The collection serves as an unapologetic uniform for modern youth culture, blurring the line between high fashion and everyday streetwear."
+      },
+      {
+        src: "/images/projects/label.webp",
+        title: "The Flagship Experience",
+        description: "A brutalist yet refined space designed to disrupt the traditional retail experience. The Vivet flagship store is more than just a place to shop—it's an immersive architectural manifestation of our brand ethos. Featuring cold concrete textures, dramatic ambient lighting, and minimalist metallic fixtures, the interior creates a gallery-like atmosphere where every garment is presented as a work of modern art."
+      }
+    ],
   },
   {
     id: 2,
@@ -31,12 +48,24 @@ const projects = [
   },
   {
     id: 3,
-    title: "Honda Pekalongan Website",
-    description: "Sleek automotive showcase. Modern design meets fast performance — helping customers explore vehicles and book test drives effortlessly.",
-    tags: ["Next.js", "Supabase", "Figma"],
-    image: "/images/projects/honda-pekalongan.webp",
+    title: "Oxen Ai Platform",
+    description: "Oxen Ai is a next-generation SaaS platform engineered to democratize artificial intelligence. Built for scale and speed, it transforms complex data pipelines into intuitive, visual workflows.",
+    tags: ["AI SaaS", "Machine Learning", "UX/UI Design"],
+    image: "/images/projects/oxen-ai.webp",
     link: "#",
     featured: false,
+    previewImages: [
+      {
+        src: "/images/projects/oxen-preview-1.webp",
+        title: "Visual Identity & Branding",
+        description: "Forging trust through design. The Oxen Ai visual identity strips away the complexity of artificial intelligence, opting instead for striking geometric precision and a minimalist color palette. It's a brand mark engineered to communicate unyielding reliability, forward momentum, and the absolute clarity of modern enterprise software."
+      },
+      {
+        src: "/images/projects/oxen-preview-2.webp",
+        title: "Intelligent Interface",
+        description: "A command center built for clarity. We designed the Oxen Ai platform interface to empower teams by turning overwhelming datasets into actionable intelligence. With ultra-fast navigation, dynamic dark-mode aesthetics, and zero-clutter architecture, managing complex ML models has never felt this effortless—or looked this premium."
+      }
+    ],
   },
   {
     id: 4,
@@ -179,7 +208,7 @@ export default function ProjectsSection() {
                 <motion.button
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
-                  className="absolute top-4 right-4 w-12 h-12 rounded-full flex items-center justify-center shadow-lg z-10 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 bg-white hover:bg-[#00ff88]"
+                  className="absolute top-4 right-4 w-12 h-12 rounded-full flex items-center justify-center shadow-lg z-10 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 bg-white group-hover:bg-[#00ff88]"
                 >
                   <svg
                     width="20"
@@ -189,7 +218,7 @@ export default function ProjectsSection() {
                   >
                     <path
                       d="M7 17L17 7M17 7H7M17 7V17"
-                      stroke={project.featured ? "black" : "black"}
+                      stroke="black"
                       strokeWidth="2.5"
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -214,9 +243,7 @@ export default function ProjectsSection() {
 
                 {/* Title */}
                 <h3
-                  className={`text-2xl md:text-3xl lg:text-4xl font-bold mb-4 ${
-                    project.featured ? "text-[#00ff88]" : "text-white"
-                  }`}
+                  className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-white transition-colors duration-300 group-hover:text-[#00ff88]"
                 >
                   {project.title}
                 </h3>
