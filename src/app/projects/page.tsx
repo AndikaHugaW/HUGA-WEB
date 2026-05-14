@@ -27,14 +27,71 @@ const allProjectsData: Project[] = Array.from({ length: 20 }, (_, i) => {
   let title = isOriginal ? original.title : (i + 1).toString().padStart(2, '0');
   
   // Custom names for specific projects
-  if (i === 6) title = "Oxen Ai"; // Project 7
-  if (i === 7) title = "Vivet";   // Project 8
+  let category = original.category;
+  let description = original.description;
+  let tags = original.tags;
+  let previewImages = original.previewImages;
+
+  if (i === 6) {
+    title = "Oxen Ai";
+    category = "AI";
+    description = "Oxen Ai is a next-generation SaaS platform engineered to democratize artificial intelligence. Built for scale and speed, it transforms complex data pipelines into intuitive, visual workflows. Stop wrestling with infrastructure and start deploying enterprise-grade AI solutions in minutes, all within a beautifully crafted, friction-free ecosystem.";
+    tags = ["AI SAAS", "MACHINE LEARNING", "UX/UI DESIGN"];
+    previewImages = [
+      {
+        src: "/images/projects/oxen-preview-1.webp",
+        title: "Visual Identity & Branding",
+        description: "Forging trust through design. The Oxen Ai visual identity strips away the complexity of artificial intelligence, opting instead for striking geometric precision and a minimalist color palette. It's a brand mark engineered to communicate unyielding reliability, forward momentum, and the absolute clarity of modern enterprise software."
+      },
+      {
+        src: "/images/projects/oxen-preview-2.webp",
+        title: "Intelligent Interface",
+        description: "A command center built for clarity. We designed the Oxen Ai platform interface to empower teams by turning overwhelming datasets into actionable intelligence. With ultra-fast navigation, dynamic dark-mode aesthetics, and zero-clutter architecture, managing complex ML models has never felt this effortless—or looked this premium."
+      }
+    ];
+  }
+  if (i === 7) {
+    title = "Vivet";   // Project 8
+    category = "Logo Design";
+    description = "Vivet is an unapologetic, high-octane streetwear brand born in Indonesia, crafted with vision by Huga Studio. Fusing urban grit with premium aesthetics, Vivet redefines modern street culture through bold graphics, authentic identity, and a relentless attitude. It's more than fashion; it's a movement.";
+    tags = ["BRANDING", "STREETWEAR", "LOGO DESIGN"];
+    previewImages = [
+      {
+        src: "/images/projects/vivet-preview-1.webp",
+        title: "Digital Ecosystem",
+        description: "A seamless and premium shopping experience built across both web and mobile platforms. We engineered the digital ecosystem with frictionless navigation, ultra-fast load times, and a buttery-smooth checkout process. The platform also integrates an exclusive 'drop' notification system and an interactive lookbook, ensuring that users deeply engage with the Vivet lifestyle from anywhere in the world."
+      },
+      {
+        src: "/images/projects/apparel.webp",
+        title: "Signature Apparel",
+        description: "Every piece is engineered for the streets, combining raw utilitarian aesthetics with premium heavyweight fabrics. We focused on delivering uncompromising quality through custom garment washes, distressed detailing, and striking typography that speaks without saying a word. The collection serves as an unapologetic uniform for modern youth culture, blurring the line between high fashion and everyday streetwear."
+      },
+      {
+        src: "/images/projects/label.webp",
+        title: "The Flagship Experience",
+        description: "A brutalist yet refined space designed to disrupt the traditional retail experience. The Vivet flagship store is more than just a place to shop—it's an immersive architectural manifestation of our brand ethos. Featuring cold concrete textures, dramatic ambient lighting, and minimalist metallic fixtures, the interior creates a gallery-like atmosphere where every garment is presented as a work of modern art."
+      }
+    ];
+  }
   
+  let image = original.image;
+  if (i === 6) {
+    image = "/images/projects/oxen-ai.webp";
+  } else if (i === 7) {
+    image = "/images/projects/vivet-v2.webp";
+  } else if (i >= 8) {
+    image = "https://placehold.co/800x500/1a1a1a/1a1a1a/png";
+  }
+
   return {
     ...original,
     id: i + 1,
     title,
-    image: i >= 8 ? "https://placehold.co/800x500/1a1a1a/1a1a1a/png" : original.image,
+    category,
+    description,
+    tags,
+    image,
+    previewImages,
   };
 });
 

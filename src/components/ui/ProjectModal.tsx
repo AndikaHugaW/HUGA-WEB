@@ -245,6 +245,39 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                 </div>
               </div>
 
+              {/* ── PREVIEW IMAGES ── */}
+              {project.previewImages && project.previewImages.length > 0 && (
+                <div className="px-6 md:px-10 py-16 border-t border-white/[0.06]">
+                  <div className="flex flex-col gap-10 md:gap-16">
+                    {project.previewImages.map((img: any, idx) => {
+                      const src = typeof img === 'string' ? img : img.src;
+                      const title = typeof img === 'string' ? null : img.title;
+                      const description = typeof img === 'string' ? null : img.description;
+                      
+                      return (
+                        <div key={idx} className="flex flex-col gap-6">
+                          <div className="w-full overflow-hidden rounded-2xl bg-[#111] ring-1 ring-white/[0.06] group">
+                            <Image
+                              src={src}
+                              alt={title || `${project.title} Preview ${idx + 1}`}
+                              width={1440}
+                              height={810}
+                              className="w-full h-auto object-contain group-hover:scale-[1.02] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
+                            />
+                          </div>
+                          {(title || description) && (
+                            <div className="w-full text-left space-y-3 md:space-y-5 px-1 md:px-2 mt-2">
+                              {title && <h4 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white tracking-tight">{title}</h4>}
+                              {description && <p className="text-white/70 text-base md:text-lg lg:text-xl leading-[1.8] font-medium w-full">{description}</p>}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
               {/* ── RECOMMENDATIONS SECTION ── */}
               <div className="px-6 md:px-10 py-20 bg-white/[0.02] border-t border-white/[0.06]">
                 <div className="flex items-center justify-between mb-10">
