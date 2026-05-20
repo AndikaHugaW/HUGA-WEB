@@ -16,11 +16,11 @@ const featuredProjects = [
     tags: ["Branding", "Streetwear", "Logo Design"],
   },
   {
-    title: "Revive AI",
+    title: "Islamy Academy AI",
     category: "Artificial Intelligence",
     date: "15 Aug. 2025",
-    brand: "Revive AI",
-    image: "/images/projects/revive-dasboard-min.webp",
+    brand: "Islamy Academy AI",
+    image: "/images/projects/revive-dasboard-min-v2.webp",
     tags: ["Next.js", "Scikit-learn", "Figma"],
   },
   {
@@ -36,7 +36,7 @@ const featuredProjects = [
     category: "Website",
     date: "10 Aug. 2025",
     brand: "HYPEBEAST",
-    image: "/images/projects/hypebeast-web.webp",
+    image: "/images/projects/hypebeast-web-v2.webp",
     tags: ["Website", "E-commerce", "Figma"],
   },
   {
@@ -44,7 +44,7 @@ const featuredProjects = [
     category: "UI/UX Design",
     date: "8 Aug. 2025",
     brand: "HYPEBEAST",
-    image: "/images/projects/hypebeast-app.webp",
+    image: "/images/projects/hypebeast-app-v2.webp",
     tags: ["UI/UX", "Figma", "Mobile App"],
   },
   {
@@ -128,7 +128,7 @@ export default function RecentProjectsSection() {
             className="flex items-center gap-2 text-[#00ff88] hover:text-[#00cc6a] font-medium text-lg transition-colors"
             magneticStrength={0.3}
           >
-            <span className="font-normal font-sf-pro">Explore Work</span>
+            <span className="font-normal font-nippo">Explore Work</span>
             <motion.svg
               width="20"
               height="20"
@@ -179,17 +179,17 @@ export default function RecentProjectsSection() {
                   {/* Left: Tags */}
                   <div className="flex flex-wrap items-center gap-4">
                     {currentProject.tags && currentProject.tags.map((tag, index) => (
-                      <div key={index} className="px-4 py-2 bg-[#00ff88]/20 rounded-full text-[#00ff88] text-sm font-normal border border-[#00ff88]/30 font-sf-pro">
+                      <div key={index} className="px-4 py-2 bg-[#00ff88]/20 rounded-full text-[#00ff88] text-sm font-normal border border-[#00ff88]/30 font-nippo">
                         {tag}
                       </div>
                     ))}
-                    <div className="px-4 py-2 bg-[#00ff88]/20 rounded-full text-[#00ff88] text-sm font-normal border border-[#00ff88]/30 font-sf-pro">
+                    <div className="px-4 py-2 bg-[#00ff88]/20 rounded-full text-[#00ff88] text-sm font-normal border border-[#00ff88]/30 font-nippo">
                       {currentProject.date}
                     </div>
                   </div>
 
                   {/* Right: Brand */}
-                  <div className="text-[#00ff88] text-xl md:text-2xl font-normal font-sf-pro">
+                  <div className="text-[#00ff88] text-xl md:text-2xl font-normal font-nippo">
                     {currentProject.brand}
                   </div>
                 </motion.div>

@@ -9,6 +9,7 @@ import { GridBackground } from "@/components/ui/GridBackground";
 import ProjectModal from "@/components/ui/ProjectModal";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import SearchComponent from "@/components/ui/animated-glowing-search-bar";
 
 const categories = [
   "All Projects",
@@ -74,6 +75,23 @@ const allProjectsData: Project[] = Array.from({ length: 20 }, (_, i) => {
     ];
   }
   
+  if (i === 8) {
+    title = "Islamy Academy AI";
+    category = "AI";
+    description = "Islamy Academy AI is an intelligent e-learning ecosystem designed to modernize Islamic education. Engineered with personalized AI pathing and smart interactive tools, it transforms traditional curricula into dynamic, highly immersive digital courses. Delve into Quranic insights, Islamic history, and jurisprudence through a premium, distraction-free environment that adapts to your learning pace.";
+    tags = ["EdTech", "AI", "Website"];
+  }
+  if (i === 9) {
+    title = "Veraflora";
+    category = "Logo Design";
+    tags = ["Branding", "Logo Design", "UI/UX"];
+  }
+  if (i === 10) {
+    title = "Nexa";
+    category = "Logo Design";
+    tags = ["Branding", "Logo Design", "UI/UX"];
+  }
+  
   let image = original.image;
   if (i === 6) {
     image = "/images/projects/oxen-ai.webp";
@@ -94,6 +112,40 @@ const allProjectsData: Project[] = Array.from({ length: 20 }, (_, i) => {
     previewImages,
   };
 });
+
+const formatTag = (tag: string) => {
+  const tagMap: Record<string, string> = {
+    "NEXT.JS": "Next.js",
+    "SUPABASE": "Supabase",
+    "SCIKIT-LEARN": "Scikit-learn",
+    "API INTEGRATION": "API Integration",
+    "FIGMA": "Figma",
+    "UX/UI DESIGN": "UI/UX Design",
+    "UI/UX DESIGN": "UI/UX Design",
+    "MOBILE OPTIMIZATION": "Mobile Optimization",
+    "USABILITY TESTING": "Usability Testing",
+    "WEB DESIGN": "Web Design",
+    "RESPONSIVE": "Responsive",
+    "UI/UX": "UI/UX",
+    "FLUTTER": "Flutter",
+    "FIREBASE": "Firebase",
+    "DART": "Dart",
+    "AI SAAS": "AI SaaS",
+    "MACHINE LEARNING": "Machine Learning",
+    "BRANDING": "Branding",
+    "STREETWEAR": "Streetwear",
+    "LOGO DESIGN": "Logo Design"
+  };
+  
+  const upperTag = tag.toUpperCase();
+  if (tagMap[upperTag]) return tagMap[upperTag];
+  
+  return tag
+    .toLowerCase()
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+};
 
 export default function ProjectsPage() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -159,16 +211,16 @@ export default function ProjectsPage() {
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-[-0.04em] leading-[0.92]"
+              className="text-5xl md:text-7xl font-bold mb-6 tracking-[-0.04em] leading-[0.92] text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-emerald-400/80"
             >
-              Selected <span className="text-[#00ff88]">Work</span>
+              Selected Work
             </motion.h1>
             
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="text-white text-[18px] opacity-[0.72] max-w-[620px] mb-8 leading-[1.8] font-normal font-sf-pro"
+              className="text-white/50 text-base max-w-[540px] mb-8 leading-[1.7] font-normal font-sf-pro"
             >
               A curated showcase of my digital experiences, blending modern development with AI-driven innovation.
             </motion.p>
@@ -192,54 +244,30 @@ export default function ProjectsPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="flex flex-col md:flex-row gap-4 items-center p-2 bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.05)] rounded-2xl backdrop-blur-[12px]"
+              className="flex flex-col items-center justify-center w-full mb-16 relative z-50"
             >
-              {/* Search Bar */}
-              <div className="relative w-full group flex-grow">
-                <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-                  <svg className="w-5 h-5 text-gray-500 group-focus-within:text-[#00ff88] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                  </svg>
-                </div>
-                <input
-                  type="text"
-                  placeholder="Search by name or category..."
+              <div className="relative w-full">
+                <SearchComponent 
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-12 pr-4 py-3.5 bg-transparent text-white focus:outline-none transition-all placeholder:text-gray-600 rounded-xl font-normal font-sf-pro"
+                  onChange={setSearchQuery}
+                  placeholder="Search projects..."
+                  onFilterClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                  selectedCategory={selectedCategory}
                 />
-              </div>
-
-              {/* Vertical Divider */}
-              <div className="hidden md:block w-px h-8 bg-white/10"></div>
-
-              {/* Category Filter Dropdown */}
-              <div className="relative w-full md:w-72">
-                <button
-                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                  className="w-full flex items-center justify-between px-6 py-3.5 bg-transparent rounded-xl text-white hover:bg-white/5 transition-all font-normal font-sf-pro"
-                >
-                  <span className={selectedCategory === "All Projects" ? "text-gray-400" : "text-[#00ff88] font-normal"}>
-                    {selectedCategory}
-                  </span>
-                  <svg 
-                    className={`w-5 h-5 text-gray-500 transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''}`} 
-                    fill="none" 
-                    stroke="currentColor" 
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
 
                 {/* Dropdown Menu */}
                 {isDropdownOpen && (
                   <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="absolute z-50 right-0 w-full md:w-[300px] mt-4 bg-[#111111] border border-[rgba(255,255,255,0.1)] rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.45)] backdrop-blur-xl"
+                    initial={{ opacity: 0, y: 10, scale: 0.97 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    transition={{ duration: 0.2, ease: "easeOut" }}
+                    className="absolute z-50 left-1/2 -translate-x-1/2 md:translate-x-0 md:left-auto md:right-0 w-[320px] mt-4 bg-[#111111] border border-white/10 rounded-2xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.6)] backdrop-blur-xl"
                   >
-                    <div className="p-[14px_16px]">
+                    {/* Dropdown Header */}
+                    <div className="px-4 pt-4 pb-2 border-b border-white/5">
+                      <p className="text-white/30 text-[11px] uppercase tracking-widest font-sf-pro">Filter by Category</p>
+                    </div>
+                    <div className="p-3 flex flex-col gap-1">
                       {categories.map((cat) => (
                         <button
                           key={cat}
@@ -247,17 +275,49 @@ export default function ProjectsPage() {
                             setSelectedCategory(cat);
                             setIsDropdownOpen(false);
                           }}
-                          className={`w-full text-left px-6 py-3 hover:bg-white/5 transition-colors text-sm tracking-wide font-sf-pro ${
-                            selectedCategory === cat ? "text-[#00ff88] bg-[rgba(0,255,136,0.05)] font-normal" : "text-gray-400 font-normal"
+                          className={`group w-full text-left px-4 py-3 rounded-xl transition-all duration-200 font-sf-pro flex items-center justify-between ${
+                            selectedCategory === cat
+                              ? "text-[#00ff88] bg-[rgba(0,255,136,0.07)] border border-[rgba(0,255,136,0.12)]"
+                              : "text-white/50 border border-transparent hover:text-white hover:bg-white/[0.04] hover:border-white/[0.06]"
                           }`}
                         >
-                          {cat}
+                          <span className="flex items-center gap-3">
+                            <span className={`w-1.5 h-1.5 rounded-full transition-all duration-200 ${
+                              selectedCategory === cat ? "bg-[#00ff88] shadow-[0_0_6px_rgba(0,255,136,0.8)]" : "bg-white/20 group-hover:bg-white/40"
+                            }`} />
+                            <span className="text-sm">{cat}</span>
+                          </span>
+                          {selectedCategory === cat && (
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-[#00ff88]">
+                              <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                          )}
                         </button>
                       ))}
                     </div>
                   </motion.div>
                 )}
               </div>
+
+              {/* Active Category Indicator */}
+              {selectedCategory !== "All Projects" && (
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="mt-6 inline-flex items-center gap-2 px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 text-[#00ff88] text-xs rounded-full font-sf-pro shadow-[0_0_15px_rgba(0,255,136,0.05)]"
+                >
+                  <span>Category: {selectedCategory}</span>
+                  <button 
+                    onClick={() => setSelectedCategory("All Projects")}
+                    className="hover:text-white transition-colors ml-1 p-0.5 rounded-full hover:bg-white/10"
+                    title="Clear filter"
+                  >
+                    <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </motion.div>
+              )}
             </motion.div>
           </div>
 
@@ -294,14 +354,14 @@ export default function ProjectsPage() {
                       <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 group-hover:text-[#00ff88] transition-colors duration-500">
                         {featuredProject.title}
                       </h2>
-                      <p className="text-white opacity-[0.72] text-[18px] leading-[1.8] mb-8 font-normal font-sf-pro">
+                      <p className="text-white/60 text-base leading-relaxed mb-8 font-normal font-sf-pro">
                         {featuredProject.description}
                       </p>
                       
                       <div className="flex flex-wrap gap-2 mb-8">
                         {featuredProject.tags.map((tag, i) => (
-                          <span key={i} className="px-3 py-1.5 bg-white/5 rounded-md text-[10px] font-normal tracking-wider text-white/70 uppercase font-sf-pro">
-                            {tag}
+                          <span key={i} className="px-3 py-1 bg-white/[0.03] border border-white/[0.06] rounded-md text-xs font-normal text-white/70 font-sf-pro transition-colors duration-300 hover:bg-white/[0.06]">
+                            {formatTag(tag)}
                           </span>
                         ))}
                       </div>
@@ -319,13 +379,33 @@ export default function ProjectsPage() {
                         </div>
                       </div>
 
-                      <div className="mt-auto flex flex-col sm:flex-row gap-4">
-                        <button className="px-6 py-3 bg-[#00ff88] text-black font-normal font-sf-pro rounded-full shadow-[0_0_20px_rgba(0,255,136,0.2)] hover:shadow-[0_0_30px_rgba(0,255,136,0.4)] transition-all duration-300 text-sm w-full sm:w-auto text-center">
+                      <div className="mt-auto flex items-center gap-6">
+                        <button 
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            if (featuredProject.link) window.open(featuredProject.link, "_blank");
+                          }}
+                          className="px-6 py-2.5 bg-[#00ff88] text-black font-medium font-sf-pro rounded-full shadow-[0_0_20px_rgba(0,255,136,0.15)] hover:shadow-[0_0_30px_rgba(0,255,136,0.3)] transition-all duration-300 text-sm hover:scale-[1.02] active:scale-[0.98]"
+                        >
                           Live Preview
                         </button>
-                        <button className="px-6 py-3 bg-[rgba(255,255,255,0.05)] hover:bg-[rgba(255,255,255,0.1)] text-white border border-[rgba(255,255,255,0.1)] rounded-full transition-all duration-300 text-sm font-normal font-sf-pro w-full sm:w-auto text-center inline-flex justify-center items-center gap-2">
+                        <button 
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setSelectedProject(featuredProject);
+                          }}
+                          className="px-2 py-2.5 text-white/50 hover:text-white transition-all duration-300 text-sm font-normal font-sf-pro inline-flex items-center gap-1.5 group/btn"
+                        >
                           Case Study
-                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="group-hover:translate-x-1 transition-transform duration-300">
+                          <svg 
+                            width="14" 
+                            height="14" 
+                            viewBox="0 0 24 24" 
+                            fill="none" 
+                            stroke="currentColor" 
+                            strokeWidth="2.5" 
+                            className="transform group-hover/btn:translate-x-1 transition-transform duration-300"
+                          >
                             <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M12 5l7 7-7 7" />
                           </svg>
                         </button>
@@ -376,8 +456,8 @@ export default function ProjectsPage() {
                         <p className="text-gray-400 text-sm leading-relaxed line-clamp-2 mb-6 flex-grow font-normal font-sf-pro">
                           {project.description}
                         </p>
-                        <div className="text-[10px] font-normal text-white/40 uppercase tracking-widest mt-auto font-sf-pro">
-                          {project.tags.slice(0, 3).join(' • ')}
+                        <div className="text-xs font-normal text-white/40 mt-auto font-sf-pro">
+                          {project.tags.slice(0, 3).map(formatTag).join(' • ')}
                         </div>
                       </div>
                     </motion.div>

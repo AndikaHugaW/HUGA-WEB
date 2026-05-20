@@ -31,6 +31,7 @@ const config: Config = {
       animation: {
         "glitch": "glitch-anim 5s infinite linear alternate-reverse",
         "glitch-2": "glitch-anim-2 1s infinite linear alternate-reverse",
+        "spin-slow": "spin 20s linear infinite",
       },
     },
   },

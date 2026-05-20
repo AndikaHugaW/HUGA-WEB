@@ -23,18 +23,21 @@ const projects = [
       {
         src: "/images/projects/vivet-preview-1.webp",
         title: "Digital Ecosystem",
-        description: "A seamless and premium shopping experience built across both web and mobile platforms. We engineered the digital ecosystem with frictionless navigation, ultra-fast load times, and a buttery-smooth checkout process. The platform also integrates an exclusive 'drop' notification system and an interactive lookbook, ensuring that users deeply engage with the Vivet lifestyle from anywhere in the world."
+        description:
+          "A seamless and premium shopping experience built across both web and mobile platforms. We engineered the digital ecosystem with frictionless navigation, ultra-fast load times, and a buttery-smooth checkout process. The platform also integrates an exclusive 'drop' notification system and an interactive lookbook, ensuring that users deeply engage with the Vivet lifestyle from anywhere in the world.",
       },
       {
         src: "/images/projects/apparel.webp",
         title: "Signature Apparel",
-        description: "Every piece is engineered for the streets, combining raw utilitarian aesthetics with premium heavyweight fabrics. We focused on delivering uncompromising quality through custom garment washes, distressed detailing, and striking typography that speaks without saying a word. The collection serves as an unapologetic uniform for modern youth culture, blurring the line between high fashion and everyday streetwear."
+        description:
+          "Every piece is engineered for the streets, combining raw utilitarian aesthetics with premium heavyweight fabrics. We focused on delivering uncompromising quality through custom garment washes, distressed detailing, and striking typography that speaks without saying a word. The collection serves as an unapologetic uniform for modern youth culture, blurring the line between high fashion and everyday streetwear.",
       },
       {
         src: "/images/projects/label.webp",
         title: "The Flagship Experience",
-        description: "A brutalist yet refined space designed to disrupt the traditional retail experience. The Vivet flagship store is more than just a place to shop—it's an immersive architectural manifestation of our brand ethos. Featuring cold concrete textures, dramatic ambient lighting, and minimalist metallic fixtures, the interior creates a gallery-like atmosphere where every garment is presented as a work of modern art."
-      }
+        description:
+          "A brutalist yet refined space designed to disrupt the traditional retail experience. The Vivet flagship store is more than just a place to shop—it's an immersive architectural manifestation of our brand ethos. Featuring cold concrete textures, dramatic ambient lighting, and minimalist metallic fixtures, the interior creates a gallery-like atmosphere where every garment is presented as a work of modern art.",
+      },
     ],
   },
   {
@@ -58,13 +61,15 @@ const projects = [
       {
         src: "/images/projects/oxen-preview-1.webp",
         title: "Visual Identity & Branding",
-        description: "Forging trust through design. The Oxen Ai visual identity strips away the complexity of artificial intelligence, opting instead for striking geometric precision and a minimalist color palette. It's a brand mark engineered to communicate unyielding reliability, forward momentum, and the absolute clarity of modern enterprise software."
+        description:
+          "Forging trust through design. The Oxen Ai visual identity strips away the complexity of artificial intelligence, opting instead for striking geometric precision and a minimalist color palette. It's a brand mark engineered to communicate unyielding reliability, forward momentum, and the absolute clarity of modern enterprise software.",
       },
       {
         src: "/images/projects/oxen-preview-2.webp",
         title: "Intelligent Interface",
-        description: "A command center built for clarity. We designed the Oxen Ai platform interface to empower teams by turning overwhelming datasets into actionable intelligence. With ultra-fast navigation, dynamic dark-mode aesthetics, and zero-clutter architecture, managing complex ML models has never felt this effortless—or looked this premium."
-      }
+        description:
+          "A command center built for clarity. We designed the Oxen Ai platform interface to empower teams by turning overwhelming datasets into actionable intelligence. With ultra-fast navigation, dynamic dark-mode aesthetics, and zero-clutter architecture, managing complex ML models has never felt this effortless—or looked this premium.",
+      },
     ],
   },
   {
@@ -89,7 +94,7 @@ const projects = [
     id: 6,
     title: "Luxe Cafe App",
     description: "Your coffee, your way. Order ahead, skip the line, and earn rewards — all from a beautifully crafted mobile app.",
-    tags: ["Mobile App" , "Payment Gateway", "Flutter", "Supabase" , "Figma" ],
+    tags: ["Mobile App", "Payment Gateway", "Flutter", "Supabase", "Figma"],
     image: "/images/projects/luxe-cafe-app.webp",
     link: "#",
     featured: false,
@@ -104,12 +109,8 @@ export default function ProjectsSection() {
   return (
     <section id="projects" ref={ref} className="relative py-40 px-0 bg-black overflow-hidden">
       {/* Grid Background */}
-      <GridBackground 
-        className="opacity-[0.10]" 
-        dotColor="rgba(255, 255, 255, 0.4)"
-        size={24}
-      />
-      
+      <GridBackground className="opacity-[0.10]" dotColor="rgba(255, 255, 255, 0.4)" size={24} />
+
       <div className="max-w-[1800px] mx-auto px-6 md:px-12 lg:px-24">
         {/* Header Section - Premium Editorial Layout */}
         <div className="mb-40 lg:mb-48">
@@ -120,22 +121,17 @@ export default function ProjectsSection() {
                 initial={{ opacity: 0, x: -20 }}
                 animate={isInView ? { opacity: 0.7, x: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-emerald-400 text-xs font-normal font-sf-pro tracking-[0.4em] uppercase flex items-center gap-4"
-              >
-                <span className="w-12 h-[1px] bg-emerald-400/50"></span>
-                ✦ Featured Projects
+                className="text-emerald-400 text-xs font-normal font-sf-pro tracking-[0.4em] uppercase flex items-center gap-4">
+                <span className="w-12 h-[1px] bg-emerald-400/50"></span>✦ Featured Projects
               </motion.div>
-              
+
               <motion.h2
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: 0.3 }}
-                className="text-5xl md:text-7xl lg:text-[5.5rem] font-bold text-white leading-[1.05] tracking-tight"
-              >
+                className="text-5xl md:text-7xl lg:text-[5.5rem] font-bold text-white leading-[1.05] tracking-tight">
                 Building Digital <br className="hidden md:block" />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-emerald-400/80 whitespace-nowrap">
-                  Products That Matter.
-                </span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-emerald-400/80 whitespace-nowrap">Products That Matter.</span>
               </motion.h2>
             </div>
 
@@ -145,33 +141,18 @@ export default function ProjectsSection() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 0.7, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: 0.5 }}
-                className="text-gray-300 text-lg md:text-xl leading-[1.8] max-w-[40ch] font-normal font-sf-pro"
-              >
+                className="text-gray-300 text-lg md:text-xl leading-[1.8] max-w-[40ch] font-normal font-sf-pro">
                 We create scalable digital products through modern development, branding, and AI-driven innovation.
               </motion.p>
-              
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.8, delay: 0.6 }}
-              >
+
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.6 }}>
                 <Link href="/projects">
                   <MagneticButton
                     className="group relative flex items-center gap-4 pl-6 pr-1.5 py-1.5 bg-[rgba(255,255,255,0.04)] hover:bg-[rgba(255,255,255,0.08)] text-white border border-[rgba(255,255,255,0.08)] rounded-full transition-all duration-500 backdrop-blur-[12px] overflow-hidden"
-                    magneticStrength={0.2}
-                  >
+                    magneticStrength={0.2}>
                     <span className="text-xs font-normal font-sf-pro tracking-wider uppercase ml-2">Explore Projects</span>
                     <div className="w-10 h-10 rounded-full bg-emerald-400 flex items-center justify-center text-black group-hover:scale-110 group-hover:rotate-[-45deg] transition-all duration-500 shadow-[0_0_30px_rgba(52,211,153,0.6)]">
-                      <svg
-                        width="18"
-                        height="18"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M5 12h14M12 5l7 7-7 7" />
                       </svg>
                     </div>
@@ -191,8 +172,7 @@ export default function ProjectsSection() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
               className="group relative cursor-pointer"
-              onClick={() => setSelectedProject(project as Project)}
-            >
+              onClick={() => setSelectedProject(project as Project)}>
               {/* Image Area */}
               <div className="relative aspect-[16/10] overflow-hidden rounded-2xl">
                 <Image
@@ -208,21 +188,9 @@ export default function ProjectsSection() {
                 <motion.button
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
-                  className="absolute top-4 right-4 w-12 h-12 rounded-full flex items-center justify-center shadow-lg z-10 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 bg-white group-hover:bg-[#00ff88]"
-                >
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                  >
-                    <path
-                      d="M7 17L17 7M17 7H7M17 7V17"
-                      stroke="black"
-                      strokeWidth="2.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
+                  className="absolute top-4 right-4 w-12 h-12 rounded-full flex items-center justify-center shadow-lg z-10 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 bg-white group-hover:bg-[#00ff88]">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M7 17L17 7M17 7H7M17 7V17" stroke="black" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </motion.button>
               </div>
@@ -232,26 +200,17 @@ export default function ProjectsSection() {
                 {/* Tags - Above Title */}
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.tags.map((tag, tagIndex) => (
-                    <span
-                      key={tagIndex}
-                      className="px-3 py-1.5 bg-[#00ff88]/20 backdrop-blur-sm text-[#00ff88] text-sm rounded-full font-normal font-sf-pro"
-                    >
+                    <span key={tagIndex} className="px-3 py-1.5 bg-[#00ff88]/20 backdrop-blur-sm text-[#00ff88] text-sm rounded-full font-normal font-sf-pro">
                       {tag}
                     </span>
                   ))}
                 </div>
 
                 {/* Title */}
-                <h3
-                  className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-white transition-colors duration-300 group-hover:text-[#00ff88]"
-                >
-                  {project.title}
-                </h3>
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-white transition-colors duration-300 group-hover:text-[#00ff88]">{project.title}</h3>
 
                 {/* Description */}
-                <p className="text-white/80 text-base md:text-lg leading-relaxed font-normal font-sf-pro">
-                  {project.description}
-                </p>
+                <p className="text-white/80 text-base md:text-lg leading-relaxed font-normal font-sf-pro">{project.description}</p>
               </div>
             </motion.div>
           ))}
@@ -259,11 +218,7 @@ export default function ProjectsSection() {
       </div>
 
       {/* Modal */}
-      <ProjectModal
-        project={selectedProject}
-        isOpen={selectedProject !== null}
-        onClose={() => setSelectedProject(null)}
-      />
+      <ProjectModal project={selectedProject} isOpen={selectedProject !== null} onClose={() => setSelectedProject(null)} />
     </section>
   );
 }

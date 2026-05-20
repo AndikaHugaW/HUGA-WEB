@@ -7,6 +7,40 @@ import { useLenis } from "@/components/providers/SmoothScrollProvider";
 import Image from "next/image";
 import { projects, type Project } from "@/constants/projects";
 
+const formatTag = (tag: string) => {
+  const tagMap: Record<string, string> = {
+    "NEXT.JS": "Next.js",
+    "SUPABASE": "Supabase",
+    "SCIKIT-LEARN": "Scikit-learn",
+    "API INTEGRATION": "API Integration",
+    "FIGMA": "Figma",
+    "UX/UI DESIGN": "UI/UX Design",
+    "UI/UX DESIGN": "UI/UX Design",
+    "MOBILE OPTIMIZATION": "Mobile Optimization",
+    "USABILITY TESTING": "Usability Testing",
+    "WEB DESIGN": "Web Design",
+    "RESPONSIVE": "Responsive",
+    "UI/UX": "UI/UX",
+    "FLUTTER": "Flutter",
+    "FIREBASE": "Firebase",
+    "DART": "Dart",
+    "AI SAAS": "AI SaaS",
+    "MACHINE LEARNING": "Machine Learning",
+    "BRANDING": "Branding",
+    "STREETWEAR": "Streetwear",
+    "LOGO DESIGN": "Logo Design"
+  };
+  
+  const upperTag = tag.toUpperCase();
+  if (tagMap[upperTag]) return tagMap[upperTag];
+  
+  return tag
+    .toLowerCase()
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+};
+
 interface ProjectModalProps {
   project: Project | null;
   isOpen: boolean;
@@ -180,8 +214,8 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                 </h1>
                 <div className="flex flex-wrap gap-2">
                   {project.tags.map((tag, i) => (
-                    <span key={i} className="px-4 py-2 bg-white/5 border border-white/10 text-white/60 text-[11px] font-normal uppercase tracking-widest rounded-lg font-sf-pro">
-                      {tag}
+                    <span key={i} className="px-3.5 py-1.5 bg-white/[0.03] border border-white/[0.06] rounded-md text-xs font-normal text-white/70 font-sf-pro transition-colors duration-300 hover:bg-white/[0.06]">
+                      {formatTag(tag)}
                     </span>
                   ))}
                 </div>
