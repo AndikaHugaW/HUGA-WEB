@@ -33,14 +33,10 @@ const certificates = [
   { id: 25, image: "/images/certificates/web-development-fundamentals.webp",                                                    title: "Web Development Fundamentals",      issuer: "IBM SkillsBuild" },
 ];
 
-// ─── Carousel constants ────────────────────────────────────────────────────
-const CARD_W   = 600;
-const CARD_H   = 600;
-const CARD_GAP = 28;
-const STEP     = CARD_W + CARD_GAP;
-const COPIES   = 3;
-const ITEMS    = Array.from({ length: COPIES }, () => certificates).flat();
-const MID      = certificates.length; // index of the middle copy start
+// ─── Carousel constants (dimension-independent only) ───────────────────────
+const COPIES = 3;
+const ITEMS  = Array.from({ length: COPIES }, () => certificates).flat();
+const MID    = certificates.length;
 
 // ─── Cinematic Carousel ────────────────────────────────────────────────────
 function CinematicCarousel() {
@@ -54,12 +50,22 @@ function CinematicCarousel() {
   const dragging                      = useRef(false);
   const resumeTimer                   = useRef<NodeJS.Timeout | null>(null);
 
+  // ── Responsive card dimensions ──────────────────────────────────────────
+  const cardW = cw === 0 ? 560
+    : cw < 480  ? Math.floor(cw * 0.84)
+    : cw < 768  ? Math.floor(Math.min(380, cw * 0.62))
+    : cw < 1200 ? Math.floor(Math.min(480, cw * 0.50))
+    : 560;
+  const cardH   = cardW;            // always square
+  const cardGap = cw < 480 ? 14 : cw < 768 ? 18 : 24;
+  const step    = cardW + cardGap;
+
   const mx      = useMotionValue(0);
   const springX = useSpring(mx, { stiffness: 200, damping: 30, mass: 0.7 });
 
   const targetX = useCallback(
-    (abs: number) => -(abs * STEP) + (cw / 2 - CARD_W / 2),
-    [cw]
+    (abs: number) => -(abs * step) + (cw / 2 - cardW / 2),
+    [cw, step, cardW]
   );
 
   // Measure
@@ -70,9 +76,13 @@ function CinematicCarousel() {
     return () => window.removeEventListener("resize", measure);
   }, []);
 
-  // Snap on mount / resize
+  // Snap on mount / resize — instant, bypasses spring animation
   useEffect(() => {
-    if (cw > 0) mx.set(targetX(absRef.current));
+    if (cw > 0) {
+      const tx = targetX(absRef.current);
+      mx.set(tx);
+      springX.set(tx); // bypass spring so card is already centered on render
+    }
   }, [cw]); // eslint-disable-line
 
   // Auto-slide every 2 s — pauses on hover/drag, resumes after idle
@@ -128,8 +138,8 @@ function CinematicCarousel() {
     dragging.current = false;
     const delta = e.clientX - dragStartX.current;
     let next = absRef.current;
-    if (delta < -(CARD_W * 0.2))  next++;
-    else if (delta > CARD_W * 0.2) next--;
+    if (delta < -(cardW * 0.2))  next++;
+    else if (delta > cardW * 0.2) next--;
     next = Math.max(0, Math.min(ITEMS.length - 1, next));
     absRef.current = next;
     setActiveIdx(next % certificates.length);
@@ -143,14 +153,14 @@ function CinematicCarousel() {
     <div
       ref={containerRef}
       className="relative w-full select-none overflow-hidden rounded-2xl"
-      style={{ height: CARD_H + 40, perspective: 1600, perspectiveOrigin: "50% 50%" }}
+      style={{ height: cardH + 40, perspective: 1600, perspectiveOrigin: "50% 50%" }}
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
       {/* Scrolling track */}
       <motion.div
         className="absolute top-0 left-0 flex items-center cursor-grab active:cursor-grabbing"
-        style={{ x: springX, gap: CARD_GAP, height: CARD_H + 40, paddingBlock: 20 }}
+        style={{ x: springX, gap: cardGap, height: cardH + 40, paddingBlock: 20 }}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}
@@ -162,7 +172,7 @@ function CinematicCarousel() {
           const visible = absDiff <= 3;
 
           if (!visible) {
-            return <div key={`ph-${abs}`} style={{ width: CARD_W, height: CARD_H, flexShrink: 0 }} />;
+            return <div key={`ph-${abs}`} style={{ width: cardW, height: cardH, flexShrink: 0 }} />;
           }
 
           const isActive  = absDiff === 0;
@@ -176,7 +186,7 @@ function CinematicCarousel() {
             <motion.div
               key={`${cert.id}-${abs}`}
               className="relative flex-shrink-0"
-              style={{ width: CARD_W, height: CARD_H, zIndex: 50 - absDiff }}
+              style={{ width: cardW, height: cardH, zIndex: 50 - absDiff }}
               animate={{ scale, rotateY: rotY, opacity }}
               transition={{ type: "spring", stiffness: 180, damping: 26, mass: 0.9 }}
             >
@@ -204,7 +214,7 @@ function CinematicCarousel() {
                   alt={cert.title}
                   fill
                   className="object-cover"
-                  sizes={`${CARD_W}px`}
+                  sizes={`(max-width:480px) 85vw, (max-width:768px) 62vw, (max-width:1200px) 50vw, 560px`}
                   draggable={false}
                   priority={absDiff <= 1}
                 />
@@ -268,7 +278,7 @@ export default function CertificatesSection() {
       <div className="absolute -top-40 -left-40  w-[480px] h-[480px] bg-[#00ff88]/[0.04] rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute -bottom-40 -right-40 w-[520px] h-[520px] bg-[#00ff88]/[0.03] rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="relative z-10 max-w-[1800px] mx-auto px-6 md:px-12 lg:px-24 pt-24 pb-28">
+      <div className="relative z-10 max-w-[1800px] mx-auto px-4 sm:px-6 md:px-12 lg:px-24 pt-16 sm:pt-20 md:pt-24 pb-20 sm:pb-24 md:pb-28">
 
         {/* ── Header ── */}
         <div className="mb-14">
@@ -285,8 +295,8 @@ export default function CertificatesSection() {
 
           {/* Title */}
           <motion.h2
-            className="font-nippo font-bold leading-[1.08] mb-5"
-            style={{ fontSize: "clamp(2.4rem, 4.5vw, 3.75rem)" }}
+            className="font-nippo font-bold leading-[1.08] mb-4 sm:mb-5"
+            style={{ fontSize: "clamp(1.9rem, 5vw, 3.75rem)" }}
             {...fadeUp(0.12)}
           >
             <span className="text-white">Professional </span>
