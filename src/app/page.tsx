@@ -3,7 +3,7 @@ import CompaniesSection from "@/components/sections/CompaniesSection";
 import WelcomeSection from "@/components/sections/WelcomeSection";
 import RecentProjectsSection from "@/components/sections/RecentProjectsSection";
 import AboutSection from "@/components/sections/AboutSection";
-import WhatIDoSection from "@/components/sections/WhatIDoSection";
+import CertificatesSection from "@/components/sections/CertificatesSection";
 import ProjectsSection from "@/components/sections/ProjectsSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import ExperienceSection from "@/components/sections/ExperienceSection";
@@ -23,7 +23,7 @@ export default function Home() {
       <WelcomeSection />
       <RecentProjectsSection />
       <AboutSection />
-      <WhatIDoSection />
+      <CertificatesSection />
       <ProjectsSection />
       <TestimonialsSection />
       <ExperienceSection />
