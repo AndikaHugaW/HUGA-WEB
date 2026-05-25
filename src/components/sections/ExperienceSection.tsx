@@ -1,252 +1,276 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
-import TextReveal from "@/components/ui/TextReveal";
-import { CanvasRevealEffect } from "@/components/ui/canvas-reveal-effect";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 
-const experiences = [
+// ─── Types ────────────────────────────────────────────────────────────────────
+
+interface Experience {
+  id: string;
+  role: string;
+  company: string;
+  period: string;
+  type: string;
+  description: string;
+  stack: string[];
+}
+
+
+
+// ─── Data ─────────────────────────────────────────────────────────────────────
+
+const EXPERIENCES: Experience[] = [
   {
-    id: 1,
-    title: "Full Stack Developer",
-    company: "Freelance",
-    period: "2023 - Present",
-    description: [
-      "Building full-stack web applications using Next.js and TypeScript",
-      "Developing RESTful APIs with Node.js and Express",
-      "Designing and implementing database schemas with PostgreSQL",
-      "Collaborating with clients to understand requirements and deliver solutions",
-    ],
-    tech: ["Next.js", "TypeScript", "Node.js", "PostgreSQL", "Tailwind CSS"],
+    id: "01",
+    role: "Full Stack Developer",
+    company: "E-Softplay Agency",
+    period: "6 Months",
+    type: "Internship",
+    description:
+      "Internship at E-Softplay Agency building internal web tools and client-facing applications. Collaborated closely with senior engineers on full-stack features — from REST API design to front-end implementation in a real production environment.",
+    stack: ["Next.js", "TypeScript", "Node.js", "PostgreSQL", "Tailwind CSS", "REST API"],
   },
   {
-    id: 2,
-    title: "UI/UX Designer",
+    id: "02",
+    role: "UI / UX Designer",
+    company: "Agency",
+    period: "3 Months",
+    type: "UI/UX Design",
+    description:
+      "Joined a design agency to craft user interfaces and experience flows for client projects. Responsible for wireframing, high-fidelity Figma designs, component libraries, and handing off specs to developers.",
+    stack: ["Figma", "Wireframing", "Prototyping", "Component Library", "User Research"],
+  },
+  {
+    id: "03",
+    role: "Logo & Brand Designer",
     company: "Freelance",
-    period: "2023 - Present",
-    description: [
-      "Designing user interfaces and user experiences for web and mobile applications",
-      "Creating comprehensive design systems using Figma",
-      "Developing interactive prototypes for user testing",
-      "Collaborating with developers to ensure accurate design implementation",
-    ],
-    tech: ["Figma", "Prototyping", "Design System", "User Research"],
+    period: "Present",
+    type: "Branding",
+    description:
+      "Working independently with clients to craft brand identities from the ground up — logo design, typography systems, color palettes, brand guidelines, and visual collateral that communicate clearly and last.",
+    stack: ["Illustrator", "Figma", "Brand Guidelines", "Logo Design", "Typography"],
   },
 ];
 
-const achievements = [
-  {
-    title: "Projects Completed",
-    value: "15+",
-    description: "Various projects from small business to enterprise",
-    icon: (
-      <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-        <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
-        <line x1="12" y1="22.08" x2="12" y2="12" />
-      </svg>
-    ),
-  },
-  {
-    title: "Happy Clients",
-    value: "12+",
-    description: "Clients satisfied with the results",
-    icon: (
-      <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-        <circle cx="9" cy="7" r="4" />
-        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-      </svg>
-    ),
-  },
-  {
-    title: "Years Experience",
-    value: "1+",
-    description: "Experience in development and design fields",
-    icon: (
-      <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="10" />
-        <polyline points="12 6 12 12 16 14" />
-      </svg>
-    ),
-  },
-];
 
-const AchievementCard = ({
-  achievement,
+
+// ─── Experience Row ────────────────────────────────────────────────────────────
+
+function ExperienceRow({
+  exp,
   index,
   isInView,
+  isOpen,
+  onToggle,
 }: {
-  achievement: (typeof achievements)[0];
+  exp: Experience;
   index: number;
   isInView: boolean;
-}) => {
-  const [hovered, setHovered] = useState(false);
-  const [hasBeenHovered, setHasBeenHovered] = useState(false);
-
+  isOpen: boolean;
+  onToggle: () => void;
+}) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 24 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-      className="group/canvas-card relative h-full"
-      onMouseEnter={() => { setHovered(true); setHasBeenHovered(true); }}
-      onMouseLeave={() => setHovered(false)}
+      transition={{ duration: 0.7, delay: 0.1 + index * 0.12, ease: [0.25, 0.46, 0.45, 0.94] }}
     >
-      {/* Card Content */}
-      <div className="relative text-center p-10 md:p-12 bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.05)] transition-all duration-300 h-full min-h-[200px] flex flex-col justify-center">
-        {/* Corner Plus Icons */}
-        <div className="absolute top-0 left-0 w-4 h-4 flex items-center justify-center">
-          <span className="text-gray-500 text-xs font-light">+</span>
-        </div>
-        <div className="absolute top-0 right-0 w-4 h-4 flex items-center justify-center">
-          <span className="text-gray-500 text-xs font-light">+</span>
-        </div>
-        <div className="absolute bottom-0 left-0 w-4 h-4 flex items-center justify-center">
-          <span className="text-gray-500 text-xs font-light">+</span>
-        </div>
-        <div className="absolute bottom-0 right-0 w-4 h-4 flex items-center justify-center">
-          <span className="text-gray-500 text-xs font-light">+</span>
-        </div>
+      {/* ── Top border ── */}
+      <div className="h-px w-full bg-white/[0.06]" />
 
-        {/* Canvas Reveal Effect - Only mount after first hover, then keep alive */}
-        {hasBeenHovered && (
-          <div 
-            className={`h-full w-full absolute inset-0 transition-opacity duration-300 ${
-              hovered ? "opacity-100" : "opacity-0 pointer-events-none"
-            }`}
-          >
-            <CanvasRevealEffect
-              animationSpeed={3}
-              containerClassName="bg-[#0a0a0a]"
-              colors={[
-                [0, 255, 136], // Neon green
-                [0, 204, 106], // Darker green
-              ]}
-              dotSize={2}
-              showGradient={false}
-            />
+      {/* ── Clickable header row ── */}
+      <button
+        onClick={onToggle}
+        className="relative w-full text-left group flex items-center justify-between gap-6 py-7 md:py-8 cursor-pointer focus:outline-none"
+        aria-expanded={isOpen}
+      >
+        {/* Index — absolute, outside flow so role title stays flush left */}
+        <span className="hidden md:block absolute -left-8 top-1/2 -translate-y-1/2 text-[10px] font-mono text-white/15 tracking-widest select-none">
+          {exp.id}
+        </span>
+
+        {/* Left: role title — flush left, aligns with heading */}
+        <h3 className="text-xl md:text-2xl lg:text-3xl font-medium font-nippo text-white/75 group-hover:text-white transition-colors duration-300 tracking-tight truncate min-w-0">
+          {exp.role}
+        </h3>
+
+        {/* Right: type tag + company + period + toggle */}
+        <div className="flex items-center gap-4 md:gap-8 shrink-0">
+          <span className="hidden lg:block text-[11px] font-sf-pro uppercase tracking-[0.2em] text-white/25">
+            {exp.type}
+          </span>
+          <span className="hidden sm:block text-sm font-sf-pro text-white/35 font-light">
+            {exp.company}
+          </span>
+          <span className="hidden md:block text-sm font-mono text-white/50 tabular-nums">
+            {exp.period}
+          </span>
+
+          {/* Toggle icon */}
+          <div className="relative w-7 h-7 shrink-0">
+            <motion.span
+              animate={{ rotate: isOpen ? 45 : 0, opacity: isOpen ? 0.7 : 0.3 }}
+              transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+              className="absolute inset-0 flex items-center justify-center text-white text-xl font-light leading-none select-none"
+            >
+              +
+            </motion.span>
           </div>
-        )}
+        </div>
+      </button>
 
-        {/* Center Icon - Visible before hover */}
-        <div className="relative z-20 h-full flex items-center justify-center">
+      {/* ── Expandable body ── */}
+      <AnimatePresence initial={false}>
+        {isOpen && (
           <motion.div
-            initial={{ scale: 0 }}
-            animate={isInView ? { scale: 1 } : {}}
-            transition={{ duration: 0.5, delay: 0.5 + index * 0.1, type: "spring" }}
-            className="absolute inset-0 flex items-center justify-center group-hover/canvas-card:opacity-0 group-hover/canvas-card:scale-0 transition-all duration-200"
+            key="body"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="overflow-hidden"
           >
-            <div className="text-[#00ff88] flex items-center justify-center">
-              {achievement.icon}
+            <div className="pb-10 md:pb-12 flex flex-col gap-6 max-w-2xl">
+              {/* Description */}
+              <p className="text-white/50 font-sf-pro text-[15px] leading-[1.9] font-light">
+                {exp.description}
+              </p>
+
+              {/* Stack pills — below description */}
+              <div className="flex flex-wrap gap-2">
+                {exp.stack.map((s) => (
+                  <span
+                    key={s}
+                    className="px-3.5 py-1.5 text-[11px] font-sf-pro tracking-wide text-white/55 border border-white/[0.08] rounded-full bg-white/[0.02] hover:text-white/80 hover:border-white/[0.15] transition-all duration-200"
+                  >
+                    {s}
+                  </span>
+                ))}
+              </div>
             </div>
           </motion.div>
-
-          {/* Card Content - Visible after hover */}
-          <div className="opacity-0 group-hover/canvas-card:opacity-100 transition-all duration-200 text-center w-full">
-            <div className="text-4xl font-bold text-[#00ff88] mb-3">
-              {achievement.value}
-            </div>
-            <h3 className="text-lg font-semibold text-white mb-2 group-hover/canvas-card:text-[#00ff88] transition-colors duration-200">
-              {achievement.title}
-            </h3>
-            <p className="text-gray-400 text-xs font-normal font-sf-pro">
-              {achievement.description}
-            </p>
-          </div>
-        </div>
-      </div>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
-};
+}
+
+// ─── Main Section ──────────────────────────────────────────────────────────────
 
 export default function ExperienceSection() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+
+  // First row open by default
+  const [openId, setOpenId] = useState<string | null>("01");
+
+  const toggle = (id: string) => setOpenId((prev) => (prev === id ? null : id));
 
   return (
-    <section id="experience" ref={ref} className="relative py-32 px-6 md:px-12 lg:px-24 bg-black">
-      <div className="max-w-[1800px] mx-auto">
-        {/* Section Title */}
-        <div className="mb-20">
-          <TextReveal
-            text="Experience"
-            variant="glitch"
-            className="text-5xl md:text-7xl font-bold text-white mb-4"
-            delay={0.2}
-          />
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="h-1 w-32 bg-[#00ff88] rounded-full"
-          />
+    <section
+      id="experience"
+      ref={sectionRef}
+      className="relative bg-[#080809] py-32 md:py-40"
+    >
+      {/* Subtle top edge */}
+      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/[0.07] to-transparent" />
+
+      {/* One single, restrained ambient glow — not distracting */}
+      <div
+        className="absolute top-0 left-0 w-[480px] h-[480px] -translate-x-1/3 -translate-y-1/3 rounded-full pointer-events-none"
+        style={{
+          background: "radial-gradient(circle, rgba(0,255,136,0.04) 0%, transparent 70%)",
+          filter: "blur(60px)",
+        }}
+      />
+
+      <div className="relative z-10 max-w-[1800px] mx-auto px-6 md:px-12 lg:px-24">
+
+        {/* ── Header ─────────────────────────────────────────────────────────── */}
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10 mb-20">
+          {/* Left: label + title */}
+          <div className="flex flex-col gap-6">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.6 }}
+              className="flex items-center gap-3"
+            >
+              <span className="w-5 h-px bg-white/20" />
+              <span className="text-[10px] font-sf-pro uppercase tracking-[0.3em] text-white/30">
+                Work History
+              </span>
+            </motion.div>
+
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.08, ease: [0.25, 0.46, 0.45, 0.94] }}
+              className="font-nippo text-5xl md:text-6xl lg:text-[4.5rem] font-medium leading-[1.05] tracking-tight text-white"
+            >
+              My Experience
+            </motion.h2>
+          </div>
+
+          {/* Right: intro copy */}
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.18, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="text-white/40 font-sf-pro text-base md:text-[17px] leading-[1.85] font-light max-w-sm lg:pb-2"
+          >
+            A solo practitioner combining{" "}
+            <span className="text-white/70">engineering depth</span> and{" "}
+            <span className="text-white/70">design sensibility</span> — delivering
+            complete digital products, end to end.
+          </motion.p>
         </div>
 
-        {/* Achievements */}
-        <div className="grid md:grid-cols-3 gap-8 mb-20">
-          {achievements.map((achievement, index) => (
-            <AchievementCard
-              key={index}
-              achievement={achievement}
-              index={index}
+
+
+        {/* ── Experience accordion ────────────────────────────────────────────── */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="mb-4"
+        >
+          <div className="flex items-center gap-3 mb-10">
+            <span className="text-[10px] font-sf-pro uppercase tracking-[0.3em] text-white/20">
+              Roles
+            </span>
+            <div className="h-px flex-1 bg-white/[0.04]" />
+            <span className="text-[10px] font-sf-pro text-white/15 font-mono">
+              {EXPERIENCES.length.toString().padStart(2, "0")}
+            </span>
+          </div>
+        </motion.div>
+
+        <div>
+          {EXPERIENCES.map((exp, i) => (
+            <ExperienceRow
+              key={exp.id}
+              exp={exp}
+              index={i}
               isInView={isInView}
+              isOpen={openId === exp.id}
+              onToggle={() => toggle(exp.id)}
             />
           ))}
+          {/* Final bottom border */}
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={isInView ? { scaleX: 1 } : {}}
+            transition={{ duration: 0.6, delay: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+            style={{ originX: 0 }}
+            className="h-px w-full bg-white/[0.06]"
+          />
         </div>
 
-        {/* Experience Timeline */}
-        <div className="space-y-12">
-          {experiences.map((exp, index) => (
-            <motion.div
-              key={exp.id}
-              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.4 + index * 0.2 }}
-              className="relative"
-            >
-              <div className="flex flex-col md:flex-row gap-8">
-                {/* Timeline Line */}
-                <div className="hidden md:block absolute left-8 top-0 bottom-0 w-0.5 bg-[#00ff88]" />
-                
-                {/* Content */}
-                <div className="flex-1 ml-0 md:ml-16">
-                  <div className="group relative bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.05)] rounded-2xl p-8 hover:border-[rgba(74,222,128,0.2)] transition-all duration-300 shadow-lg hover:shadow-[0_20px_40px_rgba(74,222,128,0.05)]">
-                    <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                      <div>
-                        <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-[#00ff88] transition-colors duration-300">{exp.title}</h3>
-                        <p className="text-[#00ff88] font-medium">{exp.company}</p>
-                      </div>
-                      <span className="text-gray-400 text-sm mt-2 md:mt-0 font-normal font-sf-pro">{exp.period}</span>
-                    </div>
-                    
-                    <ul className="space-y-3 mb-6">
-                      {exp.description.map((item, itemIndex) => (
-                        <li key={itemIndex} className="flex items-start gap-3">
-                          <span className="text-[#00ff88] mt-1 group-hover:scale-110 transition-transform duration-300 font-sf-pro">▹</span>
-                          <span className="text-gray-300 font-normal font-sf-pro">{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-
-                    <div className="flex flex-wrap gap-2">
-                      {exp.tech.map((tech, techIndex) => (
-                        <span
-                          key={techIndex}
-                          className="px-3 py-1 text-sm bg-[#00ff88]/10 text-[#00ff88] rounded-full hover:bg-[#00ff88]/20 hover:text-white transition-all duration-300 font-normal font-sf-pro"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
       </div>
+
+      {/* Subtle bottom edge */}
+      <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/[0.07] to-transparent" />
     </section>
   );
 }
