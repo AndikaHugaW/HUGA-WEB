@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import TextReveal from "@/components/ui/TextReveal";
@@ -94,18 +94,218 @@ const projects = [
   },
 ];
 
+interface ProjectCardProps {
+  project: (typeof projects)[number];
+  index: number;
+  isInView: boolean;
+  onSelect: () => void;
+}
+
+function ProjectCard({ project, index, isInView, onSelect }: ProjectCardProps) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const rotateX = useSpring(mouseY, { stiffness: 150, damping: 20 });
+  const rotateY = useSpring(mouseX, { stiffness: 150, damping: 20 });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    mouseX.set((x - centerX) / 10);
+    mouseY.set((y - centerY) / -10);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    mouseX.set(0);
+    mouseY.set(0);
+  };
+
+  return (
+    <motion.div
+      ref={cardRef}
+      initial={{ opacity: 0, y: 50, scale: 0.95 }}
+      animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+      transition={{
+        duration: 0.7,
+        delay: 0.1 + index * 0.1,
+        ease: [0.25, 0.1, 0.25, 1],
+      }}
+      style={{
+        rotateX,
+        rotateY,
+        transformStyle: "preserve-3d",
+        perspective: 1000,
+      }}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={handleMouseLeave}
+      onClick={onSelect}
+      className="group relative cursor-pointer"
+    >
+      {/* Main Card */}
+      <div className="relative bg-[#0a0a0a] border border-white/[0.06] rounded-2xl overflow-hidden transition-all duration-500 group-hover:border-white/[0.12] group-hover:bg-[#0c0c0c]">
+
+        {/* Image Container with 3D transform */}
+        <div
+          className="relative aspect-[4/3] overflow-hidden"
+          style={{ transform: "translateZ(30px)" }}
+        >
+          <motion.div
+            className="absolute inset-0"
+            animate={{ scale: isHovered ? 1.08 : 1 }}
+            transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+          >
+            <Image
+              src={project.image}
+              alt={project.title}
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover"
+              loading="lazy"
+              quality={90}
+            />
+          </motion.div>
+
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+
+          {/* Featured Badge */}
+          <AnimatePresence>
+            {project.featured && (
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ delay: 0.3, duration: 0.4 }}
+                className="absolute top-4 left-4"
+                style={{ transform: "translateZ(40px)" }}
+              >
+                <div className="flex items-center gap-1.5 px-3 py-1.5 bg-black/50 backdrop-blur-md border border-white/10 rounded-full">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#00ff88]" />
+                  <span className="text-[10px] font-medium text-white/80 tracking-wider uppercase">Featured</span>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+
+        {/* Content with 3D transform */}
+        <div className="relative p-6 lg:p-8" style={{ transform: "translateZ(20px)" }}>
+          {/* Header Row */}
+          <div className="flex items-start justify-between gap-4 mb-4">
+            <div className="flex items-center gap-3">
+              <span className="text-xs font-light text-white/20 font-mono">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <h3 className="text-xl lg:text-2xl font-medium text-white tracking-tight transition-colors duration-300">
+                {project.title}
+              </h3>
+            </div>
+
+            {/* Arrow Icon */}
+            <motion.div
+              animate={{ rotate: isHovered ? 45 : 0, x: isHovered ? 2 : 0 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              className="w-9 h-9 rounded-full bg-white/[0.05] border border-white/[0.08] flex items-center justify-center group-hover:bg-white/[0.08] group-hover:border-white/[0.15] transition-all duration-300"
+            >
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="text-white/50 group-hover:text-white transition-colors duration-300"
+              >
+                <path d="M7 17L17 7M17 7H7M17 7V17" />
+              </svg>
+            </motion.div>
+          </div>
+
+          {/* Description */}
+          <p className="text-sm text-white/40 leading-relaxed mb-5 line-clamp-2 group-hover:text-white/50 transition-colors duration-300">
+            {project.description}
+          </p>
+
+          {/* Tags */}
+          <div className="flex flex-wrap gap-2">
+            {project.tags.slice(0, 3).map((tag, i) => (
+              <motion.span
+                key={i}
+                className="px-3 py-1.5 text-[11px] font-medium text-white/40 tracking-wide border border-white/[0.06] rounded-full bg-white/[0.02] group-hover:border-white/[0.1] group-hover:bg-white/[0.03] group-hover:text-white/50 transition-all duration-300"
+                animate={isHovered ? { y: -2 } : { y: 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                {tag}
+              </motion.span>
+            ))}
+          </div>
+        </div>
+
+        {/* Bottom Accent Line */}
+        <motion.div
+          className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#00ff88]/0 to-transparent"
+          animate={{ backgroundPosition: ["200% center", "-200% center"] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+          style={{
+            background: "linear-gradient(90deg, transparent 0%, #00ff88 50%, transparent 100%)",
+            backgroundSize: "200% 100%",
+            opacity: isHovered ? 1 : 0,
+          }}
+        />
+      </div>
+
+      {/* 3D Glow Effect */}
+      <motion.div
+        className="absolute inset-0 rounded-2xl pointer-events-none"
+        style={{
+          background: "radial-gradient(circle at 50% 50%, rgba(0, 255, 136, 0.08) 0%, transparent 70%)",
+          transform: "translateZ(-50px)",
+          opacity: isHovered ? 1 : 0,
+        }}
+        animate={{ scale: isHovered ? 1.02 : 1 }}
+        transition={{ duration: 0.4 }}
+      />
+    </motion.div>
+  );
+}
+
 export default function ProjectsSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   return (
-    <section id="projects" ref={ref} className="relative py-24 lg:py-32 bg-black overflow-hidden">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-16">
+    <section id="projects" ref={ref} className="relative py-24 lg:py-32 overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 bg-black" />
 
+      <div className="relative max-w-[1400px] mx-auto px-6 lg:px-16">
         {/* Header */}
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-16 lg:mb-24">
           <div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6 }}
+              className="flex items-center gap-3 mb-4"
+            >
+              <div className="w-8 h-[1px] bg-gradient-to-r from-[#00ff88] to-transparent" />
+              <span className="text-[11px] font-medium text-[#00ff88]/70 tracking-[0.3em] uppercase">
+                Portfolio
+              </span>
+            </motion.div>
+
             <TextReveal
               text="Selected Projects"
               variant="word"
@@ -113,19 +313,32 @@ export default function ProjectsSection() {
               delay={0.1}
             />
           </div>
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex items-center gap-6">
+            className="flex items-center gap-6"
+          >
             <p className="text-sm text-white/40 max-w-[240px] leading-relaxed">
               End-to-end product development from concept to launch.
             </p>
+
             <Link
               href="/projects"
-              className="group flex items-center gap-2 text-sm text-white/70 hover:text-white font-medium transition-colors duration-300">
+              className="group flex items-center gap-2 text-sm text-white/70 hover:text-white font-medium transition-colors duration-300"
+            >
               See all
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
             </Link>
@@ -135,74 +348,23 @@ export default function ProjectsSection() {
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6">
           {projects.map((project, index) => (
-            <motion.div
+            <ProjectCard
               key={project.id}
-              initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 + index * 0.08, ease: [0.25, 0.1, 0.25, 1] }}
-              className="group cursor-pointer"
-              onClick={() => setSelectedProject(project as Project)}>
-
-              {/* Card */}
-              <div className="relative bg-white/[0.03] border border-white/[0.06] rounded-2xl overflow-hidden transition-all duration-500 group-hover:border-white/[0.1] group-hover:bg-white/[0.04]">
-
-                {/* Image */}
-                <div className="relative aspect-[4/3] overflow-hidden">
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-                    loading={index < 4 ? "eager" : "lazy"}
-                    quality={85}
-                  />
-                  {/* Subtle Bottom Gradient */}
-                  <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60" />
-                </div>
-
-                {/* Content */}
-                <div className="relative p-6 lg:p-8">
-                  {/* Header Row */}
-                  <div className="flex items-start justify-between gap-4 mb-4">
-                    <h3 className="text-xl lg:text-2xl font-medium text-white group-hover:text-[#00ff88]/90 transition-colors duration-300">
-                      {project.title}
-                    </h3>
-                    {/* Arrow Icon */}
-                    <div className="w-8 h-8 rounded-full bg-white/[0.05] border border-white/[0.08] flex items-center justify-center flex-shrink-0 opacity-0 group-hover:opacity-100 translate-x-[-4px] group-hover:translate-x-0 transition-all duration-300">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white/60">
-                        <path d="M7 17L17 7M17 7H7M17 7V17" />
-                      </svg>
-                    </div>
-                  </div>
-
-                  {/* Description */}
-                  <p className="text-sm text-white/40 leading-relaxed mb-5 line-clamp-2">
-                    {project.description}
-                  </p>
-
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.slice(0, 3).map((tag, i) => (
-                      <span
-                        key={i}
-                        className="px-2.5 py-1 text-[11px] font-medium text-white/50 tracking-wide">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Bottom Accent Line */}
-                <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#00ff88]/0 to-transparent group-hover:via-[#00ff88]/40 transition-all duration-500" />
-              </div>
-            </motion.div>
+              project={project}
+              index={index}
+              isInView={isInView}
+              onSelect={() => setSelectedProject(project as Project)}
+            />
           ))}
         </div>
       </div>
 
       {/* Modal */}
-      <ProjectModal project={selectedProject} isOpen={selectedProject !== null} onClose={() => setSelectedProject(null)} />
+      <ProjectModal
+        project={selectedProject}
+        isOpen={selectedProject !== null}
+        onClose={() => setSelectedProject(null)}
+      />
     </section>
   );
 }

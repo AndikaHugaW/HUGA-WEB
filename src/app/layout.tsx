@@ -54,7 +54,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id" className="dark">
+    <html lang="id" className="dark" suppressHydrationWarning style={{ backgroundColor: '#0a0a0a' }}>
       <head>
         {/* Preconnect untuk load gambar lebih cepat */}
         <link rel="preconnect" href="https://images.unsplash.com" />

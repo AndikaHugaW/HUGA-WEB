@@ -34,6 +34,22 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+/* Mencegah white flash saat loading */
+html.dark {
+  background: #0a0a0a;
+}
+
+/* Fallback background saat styles belum load */
+html, body {
+  background-color: #0a0a0a !important;
+}
+
+/* Tailwind dark mode compatibility */
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+}
+
 /* OPTIMASI: Disable heavy effects untuk reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
   *,
