@@ -58,7 +58,7 @@ const SearchComponent = ({ value, onChange, placeholder = "Search...", onFilterC
             name="text" 
             value={value}
             onChange={(e) => onChange && onChange(e.target.value)}
-            className="bg-[#010201] border border-white/[0.04] group-focus-within:border-white/[0.1] w-full h-[64px] rounded-full text-white pl-8 pr-[140px] text-lg focus:outline-none placeholder-white/30 transition-all duration-300 font-sf-pro" 
+            className="bg-[#010201] border border-white/[0.04] group-focus-within:border-white/[0.1] w-full h-[64px] rounded-full text-white pl-6 pr-[115px] sm:pr-[135px] md:pr-[185px] text-sm md:text-lg focus:outline-none placeholder-white/30 transition-all duration-300 font-sf-pro" 
           />
 
           <div className="absolute right-2 flex items-center gap-1">
@@ -66,10 +66,11 @@ const SearchComponent = ({ value, onChange, placeholder = "Search...", onFilterC
             <button 
               type="button"
               onClick={onFilterClick}
-              className="flex items-center gap-1.5 px-4 h-12 rounded-full text-white/50 hover:text-white hover:bg-white/[0.03] transition-all duration-300 text-[15px] font-medium"
+              className="flex items-center gap-1 px-2.5 sm:px-4 h-12 rounded-full text-white/50 hover:text-white hover:bg-white/[0.03] transition-all duration-300 text-xs sm:text-[15px] font-medium"
             >
-              {selectedCategory}
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <span className="hidden sm:inline">{selectedCategory}</span>
+              <span className="inline sm:hidden">Filter</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-70">
                 <polyline points="6 9 12 15 18 9"></polyline>
               </svg>
             </button>
@@ -77,9 +78,9 @@ const SearchComponent = ({ value, onChange, placeholder = "Search...", onFilterC
             {/* Search Icon Button (Big round neon button on far right) */}
             <button
               type="button"
-              className="h-12 w-12 flex items-center justify-center rounded-full bg-[#00ff88] text-[#010201] shadow-[0_0_15px_rgba(0,255,136,0.4)] hover:shadow-[0_0_25px_rgba(0,255,136,0.7)] hover:bg-[#33ff99] active:scale-95 transition-all duration-300"
+              className="h-11 w-11 sm:h-12 sm:w-12 flex items-center justify-center rounded-full bg-[#00ff88] text-[#010201] shadow-[0_0_15px_rgba(0,255,136,0.4)] hover:shadow-[0_0_25px_rgba(0,255,136,0.7)] hover:bg-[#33ff99] active:scale-95 transition-all duration-300"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-300 group-hover:scale-110">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-300 group-hover:scale-110">
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
               </svg>

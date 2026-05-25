@@ -49,8 +49,11 @@ const nextConfig = {
     ],
   },
 
-  // OPTIMASI: Headers for better caching
+  // OPTIMASI: Headers for better caching (only in production)
   async headers() {
+    if (process.env.NODE_ENV !== 'production') {
+      return [];
+    }
     return [
       {
         source: '/:all*(svg|jpg|jpeg|png|webp|avif|gif|ico)',

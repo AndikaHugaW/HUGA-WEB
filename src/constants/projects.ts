@@ -7,6 +7,7 @@ export interface Project {
   tags: string[];
   link?: string;
   featured?: boolean;
+  date?: string;
   previewImages?: { src: string; title?: string; description?: string }[];
 }
 
