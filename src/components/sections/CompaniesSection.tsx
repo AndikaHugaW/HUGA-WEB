@@ -3,16 +3,12 @@
 import { InfiniteMovingCards } from "@/components/ui/InfiniteMovingCards";
 
 const companies = [
-  { name: "AWS", logo: "aws" },
-  { name: "Claude", logo: "claude" },
-  { name: "Gemini", logo: "gemini" },
-  { name: "Microsoft", logo: "microsoft" },
-  { name: "NVIDIA", logo: "nvidia" },
-  { name: "OKX", logo: "okx" },
-  { name: "OpenAI", logo: "openai" },
-  { name: "Oracle", logo: "oracle" },
-  { name: "Spotify", logo: "spotify" },
-  { name: "Tesla", logo: "tesla" },
+  { name: "Islamy", logo: "islamy" },
+  { name: "Luxe Cafe", logo: "Luxe Cafe" },
+  { name: "Hypebeast", logo: "hypebeast logo" },
+  { name: "Vivet", logo: "logo vivet" },
+  { name: "Nusava", logo: "nusava" },
+  { name: "OXEN", logo: "OXEN" },
 ];
 
 export default function CompaniesSection() {

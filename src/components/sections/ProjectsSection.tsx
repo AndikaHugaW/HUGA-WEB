@@ -5,8 +5,6 @@ import { motion, useInView } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import TextReveal from "@/components/ui/TextReveal";
-import MagneticButton from "@/components/ui/MagneticButton";
-import { GridBackground } from "@/components/ui/GridBackground";
 import ProjectModal from "@/components/ui/ProjectModal";
 import { type Project } from "@/constants/projects";
 
@@ -14,7 +12,7 @@ const projects = [
   {
     id: 1,
     title: "Vivet",
-    description: "Vivet is an unapologetic, high-octane streetwear brand born in Indonesia. Fusing urban grit with premium aesthetics, Vivet redefines modern street culture.",
+    description: "Unapologetic streetwear brand that fuses urban grit with premium aesthetics.",
     tags: ["Branding", "Streetwear", "Logo Design"],
     image: "/images/projects/vivet-v2.webp",
     link: "#",
@@ -23,27 +21,24 @@ const projects = [
       {
         src: "/images/projects/vivet-preview-1.webp",
         title: "Digital Ecosystem",
-        description:
-          "A seamless and premium shopping experience built across both web and mobile platforms. We engineered the digital ecosystem with frictionless navigation, ultra-fast load times, and a buttery-smooth checkout process. The platform also integrates an exclusive 'drop' notification system and an interactive lookbook, ensuring that users deeply engage with the Vivet lifestyle from anywhere in the world.",
+        description: "A seamless and premium shopping experience built across both web and mobile platforms.",
       },
       {
         src: "/images/projects/apparel.webp",
         title: "Signature Apparel",
-        description:
-          "Every piece is engineered for the streets, combining raw utilitarian aesthetics with premium heavyweight fabrics. We focused on delivering uncompromising quality through custom garment washes, distressed detailing, and striking typography that speaks without saying a word. The collection serves as an unapologetic uniform for modern youth culture, blurring the line between high fashion and everyday streetwear.",
+        description: "Every piece is engineered for the streets, combining raw utilitarian aesthetics.",
       },
       {
         src: "/images/projects/label.webp",
         title: "The Flagship Experience",
-        description:
-          "A brutalist yet refined space designed to disrupt the traditional retail experience. The Vivet flagship store is more than just a place to shop—it's an immersive architectural manifestation of our brand ethos. Featuring cold concrete textures, dramatic ambient lighting, and minimalist metallic fixtures, the interior creates a gallery-like atmosphere where every garment is presented as a work of modern art.",
+        description: "A brutalist yet refined space designed to disrupt the traditional retail experience.",
       },
     ],
   },
   {
     id: 2,
     title: "Revive AI",
-    description: "Smart health insights powered by AI. Get personalized recommendations and early detection alerts that help you stay ahead of your health.",
+    description: "Smart health insights powered by AI. Personalized recommendations and early detection.",
     tags: ["API Integration", "Next.js", "Scikit-learn"],
     image: "/images/projects/revive-dasboard-min-v2.webp",
     link: "#",
@@ -51,8 +46,8 @@ const projects = [
   },
   {
     id: 3,
-    title: "Oxen Ai Platform",
-    description: "Oxen Ai is a next-generation SaaS platform engineered to democratize artificial intelligence. Built for scale and speed, it transforms complex data pipelines into intuitive, visual workflows.",
+    title: "Oxen AI Platform",
+    description: "Next-gen SaaS platform engineered to democratize artificial intelligence.",
     tags: ["AI SaaS", "Machine Learning", "UX/UI Design"],
     image: "/images/projects/oxen-ai.webp",
     link: "#",
@@ -61,21 +56,19 @@ const projects = [
       {
         src: "/images/projects/oxen-preview-1.webp",
         title: "Visual Identity & Branding",
-        description:
-          "Forging trust through design. The Oxen Ai visual identity strips away the complexity of artificial intelligence, opting instead for striking geometric precision and a minimalist color palette. It's a brand mark engineered to communicate unyielding reliability, forward momentum, and the absolute clarity of modern enterprise software.",
+        description: "Forging trust through design with striking geometric precision.",
       },
       {
         src: "/images/projects/oxen-preview-2.webp",
         title: "Intelligent Interface",
-        description:
-          "A command center built for clarity. We designed the Oxen Ai platform interface to empower teams by turning overwhelming datasets into actionable intelligence. With ultra-fast navigation, dynamic dark-mode aesthetics, and zero-clutter architecture, managing complex ML models has never felt this effortless—or looked this premium.",
+        description: "A command center built for clarity. Managing complex ML models effortlessly.",
       },
     ],
   },
   {
     id: 4,
-    title: "HYPEBEAST Design App",
-    description: "Streetwear discovery, reimagined. Swipe, save, and shop the latest drops with a buttery-smooth mobile experience.",
+    title: "HYPEBEAST App",
+    description: "Streetwear discovery, reimagined. Swipe, save, and shop the latest drops.",
     tags: ["UX/UI Design", "Mobile Optimization", "Usability Testing"],
     image: "/images/projects/hypebeast-app-v2.webp",
     link: "#",
@@ -84,7 +77,7 @@ const projects = [
   {
     id: 5,
     title: "HYPEBEAST Website",
-    description: "Premium e-commerce for hypebeasts. Lightning-fast checkout, secure payments, and a browsing experience that feels like the future.",
+    description: "Premium e-commerce for hypebeasts with lightning-fast checkout experience.",
     tags: ["Full Stack", "Payment Gateway", "Database Design"],
     image: "/images/projects/hypebeast-web-v2.webp",
     link: "#",
@@ -93,7 +86,7 @@ const projects = [
   {
     id: 6,
     title: "Luxe Cafe App",
-    description: "Your coffee, your way. Order ahead, skip the line, and earn rewards — all from a beautifully crafted mobile app.",
+    description: "Your coffee, your way. Order ahead, skip the line, and earn rewards.",
     tags: ["Mobile App", "Payment Gateway", "Flutter", "Supabase", "Figma"],
     image: "/images/projects/luxe-cafe-app.webp",
     link: "#",
@@ -107,110 +100,101 @@ export default function ProjectsSection() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   return (
-    <section id="projects" ref={ref} className="relative py-40 px-0 bg-black overflow-hidden">
-      {/* Grid Background */}
-      <GridBackground className="opacity-[0.10]" dotColor="rgba(255, 255, 255, 0.4)" size={24} />
+    <section id="projects" ref={ref} className="relative py-24 lg:py-32 bg-black overflow-hidden">
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-16">
 
-      <div className="max-w-[1800px] mx-auto px-6 md:px-12 lg:px-24">
-        {/* Header Section - Premium Editorial Layout */}
-        <div className="mb-40 lg:mb-48">
-          <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-24 items-center">
-            {/* Left Side: Eyebrow + Main Headline */}
-            <div className="space-y-8">
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={isInView ? { opacity: 0.7, x: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-emerald-400 text-xs font-normal font-sf-pro tracking-[0.4em] uppercase flex items-center gap-4">
-                <span className="w-12 h-[1px] bg-emerald-400/50"></span>✦ Featured Projects
-              </motion.div>
-
-              <motion.h2
-                initial={{ opacity: 0, y: 30 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.8, delay: 0.3 }}
-                className="text-5xl md:text-7xl lg:text-[5.5rem] font-bold text-white leading-[1.05] tracking-tight">
-                Building Digital <br className="hidden md:block" />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-emerald-400/80 whitespace-nowrap">Products That Matter.</span>
-              </motion.h2>
-            </div>
-
-            {/* Right Side: Description + CTA */}
-            <div className="space-y-8 lg:space-y-10">
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 0.7, y: 0 } : {}}
-                transition={{ duration: 0.8, delay: 0.5 }}
-                className="text-gray-300 text-lg md:text-xl leading-[1.8] max-w-[40ch] font-normal font-sf-pro">
-                We create scalable digital products through modern development, branding, and AI-driven innovation.
-              </motion.p>
-
-              <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.6 }}>
-                <Link href="/projects">
-                  <MagneticButton
-                    className="group relative flex items-center gap-4 pl-6 pr-1.5 py-1.5 bg-[rgba(255,255,255,0.04)] hover:bg-[rgba(255,255,255,0.08)] text-white border border-[rgba(255,255,255,0.08)] rounded-full transition-all duration-500 backdrop-blur-[12px] overflow-hidden"
-                    magneticStrength={0.2}>
-                    <span className="text-xs font-normal font-sf-pro tracking-wider uppercase ml-2">Explore Projects</span>
-                    <div className="w-10 h-10 rounded-full bg-emerald-400 flex items-center justify-center text-black group-hover:scale-110 group-hover:rotate-[-45deg] transition-all duration-500 shadow-[0_0_30px_rgba(52,211,153,0.6)]">
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                      </svg>
-                    </div>
-                  </MagneticButton>
-                </Link>
-              </motion.div>
-            </div>
+        {/* Header */}
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-16 lg:mb-24">
+          <div>
+            <TextReveal
+              text="Selected Projects"
+              variant="word"
+              className="text-4xl md:text-5xl lg:text-6xl font-medium text-white leading-[1.1] tracking-tight"
+              delay={0.1}
+            />
           </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="flex items-center gap-6">
+            <p className="text-sm text-white/40 max-w-[240px] leading-relaxed">
+              End-to-end product development from concept to launch.
+            </p>
+            <Link
+              href="/projects"
+              className="group flex items-center gap-2 text-sm text-white/70 hover:text-white font-medium transition-colors duration-300">
+              See all
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </Link>
+          </motion.div>
         </div>
 
-        {/* Projects Grid - 2x2 */}
-        <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+        {/* Projects Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6">
           {projects.map((project, index) => (
             <motion.div
               key={project.id}
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
-              className="group relative cursor-pointer"
+              transition={{ duration: 0.6, delay: 0.2 + index * 0.08, ease: [0.25, 0.1, 0.25, 1] }}
+              className="group cursor-pointer"
               onClick={() => setSelectedProject(project as Project)}>
-              {/* Image Area */}
-              <div className="relative aspect-[16/10] overflow-hidden rounded-2xl">
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover group-hover:scale-110 transition-transform duration-500"
-                  loading={index < 2 ? "eager" : "lazy"}
-                  quality={85}
-                />
-                {/* Navigation Button - Top Right */}
-                <motion.button
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  className="absolute top-4 right-4 w-12 h-12 rounded-full flex items-center justify-center shadow-lg z-10 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 bg-white group-hover:bg-[#00ff88]">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                    <path d="M7 17L17 7M17 7H7M17 7V17" stroke="black" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </motion.button>
-              </div>
 
-              {/* Content - No Background */}
-              <div className="mt-4">
-                {/* Tags - Above Title */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tags.map((tag, tagIndex) => (
-                    <span key={tagIndex} className="px-3 py-1.5 bg-[#00ff88]/20 backdrop-blur-sm text-[#00ff88] text-sm rounded-full font-normal font-sf-pro">
-                      {tag}
-                    </span>
-                  ))}
+              {/* Card */}
+              <div className="relative bg-white/[0.03] border border-white/[0.06] rounded-2xl overflow-hidden transition-all duration-500 group-hover:border-white/[0.1] group-hover:bg-white/[0.04]">
+
+                {/* Image */}
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                    loading={index < 4 ? "eager" : "lazy"}
+                    quality={85}
+                  />
+                  {/* Subtle Bottom Gradient */}
+                  <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60" />
                 </div>
 
-                {/* Title */}
-                <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-white transition-colors duration-300 group-hover:text-[#00ff88]">{project.title}</h3>
+                {/* Content */}
+                <div className="relative p-6 lg:p-8">
+                  {/* Header Row */}
+                  <div className="flex items-start justify-between gap-4 mb-4">
+                    <h3 className="text-xl lg:text-2xl font-medium text-white group-hover:text-[#00ff88]/90 transition-colors duration-300">
+                      {project.title}
+                    </h3>
+                    {/* Arrow Icon */}
+                    <div className="w-8 h-8 rounded-full bg-white/[0.05] border border-white/[0.08] flex items-center justify-center flex-shrink-0 opacity-0 group-hover:opacity-100 translate-x-[-4px] group-hover:translate-x-0 transition-all duration-300">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white/60">
+                        <path d="M7 17L17 7M17 7H7M17 7V17" />
+                      </svg>
+                    </div>
+                  </div>
 
-                {/* Description */}
-                <p className="text-white/80 text-base md:text-lg leading-relaxed font-normal font-sf-pro">{project.description}</p>
+                  {/* Description */}
+                  <p className="text-sm text-white/40 leading-relaxed mb-5 line-clamp-2">
+                    {project.description}
+                  </p>
+
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.slice(0, 3).map((tag, i) => (
+                      <span
+                        key={i}
+                        className="px-2.5 py-1 text-[11px] font-medium text-white/50 tracking-wide">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Bottom Accent Line */}
+                <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#00ff88]/0 to-transparent group-hover:via-[#00ff88]/40 transition-all duration-500" />
               </div>
             </motion.div>
           ))}

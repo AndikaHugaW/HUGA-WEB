@@ -100,9 +100,9 @@ export const InfiniteMovingCards = ({
                 <div className="group bg-white hover:bg-[#00ff88] rounded-lg px-10 md:px-12 lg:px-16 py-10 md:py-12 lg:py-16 shadow-sm hover:shadow-md hover:shadow-[#00ff88]/20 transition-all duration-300 flex items-center justify-center w-[240px] md:w-[280px] lg:w-[320px] h-[140px] md:h-[160px] lg:h-[180px]">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src={`/images/companies/${item.logo}.svg`}
+                    src={`/images/companies/${item.logo}.png`}
                     alt={item.name}
-                    className="w-28 h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 object-contain transition-all duration-300 group-hover:brightness-0 group-hover:invert"
+                    className="w-32 h-32 md:w-36 md:h-36 lg:w-44 lg:h-44 object-contain transition-all duration-300 group-hover:brightness-0 group-hover:invert"
                   />
                 </div>
               )}
@@ -118,9 +118,9 @@ export const InfiniteMovingCards = ({
                 <div className="group bg-white hover:bg-[#00ff88] rounded-lg px-10 md:px-12 lg:px-16 py-10 md:py-12 lg:py-16 shadow-sm hover:shadow-md hover:shadow-[#00ff88]/20 transition-all duration-300 flex items-center justify-center w-[240px] md:w-[280px] lg:w-[320px] h-[140px] md:h-[160px] lg:h-[180px]">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src={`/images/companies/${item.logo}.svg`}
+                    src={`/images/companies/${item.logo}.png`}
                     alt={item.name}
-                    className="w-28 h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 object-contain transition-all duration-300 group-hover:brightness-0 group-hover:invert"
+                    className="w-32 h-32 md:w-36 md:h-36 lg:w-44 lg:h-44 object-contain transition-all duration-300 group-hover:brightness-0 group-hover:invert"
                   />
                 </div>
               )}
