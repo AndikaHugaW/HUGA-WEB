@@ -97,7 +97,7 @@ export default function Footer() {
                 alt="Huga Logo"
                 width={300}
                 height={100}
-                className="h-20 w-auto object-contain"
+                className="h-20 w-auto object-contain invert"
               />
             </div>
             <p className="text-black/30 text-sm mb-6 leading-relaxed font-normal font-sf-pro">
