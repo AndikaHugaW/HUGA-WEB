@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Orbitron, DM_Sans } from "next/font/google";
 import "./globals.css";
 import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 import { Analytics } from "@vercel/analytics/react";
@@ -12,6 +12,20 @@ const inter = Inter({
   subsets: ["latin"],
   display: 'swap',
   variable: '--font-inter',
+  preload: true,
+});
+
+const orbitron = Orbitron({
+  subsets: ["latin"],
+  display: 'swap',
+  variable: '--font-orbitron',
+  preload: true,
+});
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  display: 'swap',
+  variable: '--font-dm-sans',
   preload: true,
 });
 
@@ -62,7 +76,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://randomuser.me" />
         <link rel="dns-prefetch" href="https://randomuser.me" />
       </head>
-      <body className={`${nippo.className} ${nippo.variable} ${sfPro.variable} antialiased`}>
+      <body className={`${nippo.className} ${nippo.variable} ${sfPro.variable} ${orbitron.variable} ${dmSans.variable} antialiased`}>
         <SmoothScrollProvider>
           {children}
         </SmoothScrollProvider>

@@ -72,8 +72,8 @@ export default function Navbar() {
         transition={{ duration: 0.6 }}
         className={`mx-auto w-full transition-all duration-500 ${
           isScrolled
-            ? "max-w-[1200px] bg-[rgba(10,10,10,0.45)] backdrop-blur-[20px] border border-[rgba(255,255,255,0.06)] shadow-[0_20px_40px_rgba(0,0,0,0.4)] md:rounded-full px-[28px]"
-            : "max-w-[1440px] bg-transparent px-6 md:px-12 lg:px-[40px]"
+            ? "max-w-[1400px] bg-[rgba(10,10,10,0.45)] backdrop-blur-[20px] border border-[rgba(255,255,255,0.06)] shadow-[0_20px_40px_rgba(0,0,0,0.4)] md:rounded-full px-[40px]"
+            : "max-w-none bg-transparent px-10 lg:px-16"
         }`}
       >
         <div className={`relative flex items-center justify-between transition-all duration-500 ${isScrolled ? 'h-[64px]' : 'h-28'}`}>
@@ -101,8 +101,8 @@ export default function Navbar() {
                 <MagneticButton
                   key={index}
                   onClick={() => handleNavClick(item.href)}
-                  className={`relative px-5 py-2 rounded-full text-sm font-normal font-sf-pro transition-all duration-300 ${
-                    isActive ? "text-[#00ff88]" : "text-gray-400 hover:text-white"
+                  className={`relative px-5 py-2 rounded-full text-sm font-medium font-sf-pro transition-all duration-300 ${
+                    isActive ? "text-white" : "text-gray-400 hover:text-white"
                   }`}
                   magneticStrength={0.2}
                 >
@@ -110,7 +110,7 @@ export default function Navbar() {
                   {isActive && (
                     <motion.div
                       layoutId="navbar-active"
-                      className="absolute inset-0 bg-[#00ff88]/10 border border-[#00ff88]/20 rounded-full z-0"
+                      className="absolute inset-0 bg-white/[0.15] backdrop-blur-xl border border-white/25 rounded-full z-0 shadow-[0_4px_15px_rgba(255,255,255,0.05)]"
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
                   )}
@@ -123,7 +123,7 @@ export default function Navbar() {
           <div className="hidden md:block z-10">
             <MagneticButton
               onClick={() => handleNavClick("#contact")}
-              className={`px-6 bg-[#00ff88] text-black font-normal font-sf-pro rounded-full shadow-lg shadow-[#00ff88]/20 hover:shadow-[#00ff88]/50 transition-all duration-300 ${
+              className={`px-6 bg-white/[0.15] backdrop-blur-xl border border-white/25 text-white font-medium font-sf-pro rounded-full shadow-[0_4px_15px_rgba(255,255,255,0.05)] hover:bg-white/[0.25] hover:border-white/40 transition-all duration-300 ${
                 isScrolled ? "py-2 text-xs" : "py-2.5 text-sm"
               }`}
               magneticStrength={0.3}
@@ -171,9 +171,9 @@ export default function Navbar() {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: index * 0.1 }}
                       onClick={() => handleNavClick(item.href)}
-                      className={`block w-full text-left px-4 py-3 rounded-xl transition-all duration-300 font-normal font-sf-pro ${
+                      className={`block w-full text-left px-4 py-3 rounded-xl transition-all duration-300 font-medium font-sf-pro ${
                         isActive 
-                          ? "text-[#00ff88] bg-[#00ff88]/10 border border-[#00ff88]/20" 
+                          ? "text-white bg-white/[0.15] backdrop-blur-xl border border-white/25" 
                           : "text-gray-400 hover:text-white hover:bg-white/5"
                       }`}
                     >
@@ -186,7 +186,7 @@ export default function Navbar() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: navItems.length * 0.1 }}
                   onClick={() => handleNavClick("#contact")}
-                  className="w-full mt-6 px-6 py-3.5 bg-[#00ff88] text-black font-normal font-sf-pro rounded-xl shadow-lg shadow-[#00ff88]/20 transition-all duration-300"
+                  className="w-full mt-6 px-6 py-3.5 bg-white/[0.15] backdrop-blur-xl border border-white/25 text-white font-medium font-sf-pro rounded-xl shadow-[0_4px_15px_rgba(255,255,255,0.05)] hover:bg-white/[0.25] transition-all duration-300"
                 >
                   Contact Me
                 </motion.button>

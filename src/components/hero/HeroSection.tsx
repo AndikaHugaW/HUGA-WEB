@@ -1,415 +1,375 @@
 "use client";
 
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { useState, useEffect, useCallback, useRef } from "react";
-import dynamic from "next/dynamic";
+import { useRef, useState, useEffect } from "react";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import MagneticButton from "@/components/ui/MagneticButton";
-import TextReveal from "@/components/ui/TextReveal";
 
-// Dynamic import untuk komponen berat (Vortex dengan particle system)
-const Vortex = dynamic(
-  () => import("@/components/ui/vortex").then(mod => ({ default: mod.Vortex })), 
-  {
-    ssr: false,
-    loading: () => null,
-  }
-);
+const modelImages = [
+  "/images/hero/Huga.webp",
+  "/images/hero/Huga 2.webp",
+  "/images/hero/Huga 3.webp",
+];
 
-// CSS-only static gradient - TIDAK ADA ANIMASI untuk performa scroll
-const StaticBackground = () => (
-  <div className="absolute inset-0 bg-black overflow-hidden">
-    {/* Static gradient orbs - tanpa animasi untuk performa scroll */}
-    <div 
-      className="absolute w-[500px] h-[500px] rounded-full opacity-20"
-      style={{
-        background: 'radial-gradient(circle, rgba(0,255,136,0.3) 0%, transparent 60%)',
-        top: '15%',
-        left: '25%',
-        filter: 'blur(60px)',
-        willChange: 'transform',
-        transform: 'translateZ(0)',
-      }}
-    />
-    <div 
-      className="absolute w-[400px] h-[400px] rounded-full opacity-15"
-      style={{
-        background: 'radial-gradient(circle, rgba(0,255,136,0.25) 0%, transparent 60%)',
-        bottom: '15%',
-        right: '25%',
-        filter: 'blur(50px)',
-        willChange: 'transform',
-        transform: 'translateZ(0)',
-      }}
-    />
-  </div>
-);
+const services = [
+  { num: "01", label: "Branding" },
+  { num: "02", label: "UI UX" },
+  { num: "03", label: "Website Dev" },
+  { num: "04", label: "Mobile App" },
+];
+
+const stats = [
+  { num: "3+", label: "Years Experience" },
+  { num: "20+", label: "Brand Recognition" },
+  { num: "50+", label: "Happy Clients" },
+  { num: "50+", label: "Project Completed" },
+];
 
 export default function HeroSection() {
-  const [hoveredText, setHoveredText] = useState<string | null>(null);
-  const [showVortex, setShowVortex] = useState(false);
-  const [isScrolling, setIsScrolling] = useState(false);
-  const [hasAnimated, setHasAnimated] = useState(false);
-  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const prefersReducedMotion = useReducedMotion();
-
-  // Deteksi scroll untuk pause animasi berat
-  const handleScroll = useCallback(() => {
-    if (!isScrolling) {
-      setIsScrolling(true);
-    }
-    
-    // Clear timeout sebelumnya
-    if (scrollTimeoutRef.current) {
-      clearTimeout(scrollTimeoutRef.current);
-    }
-    
-    // Set tidak scrolling setelah 150ms idle
-    scrollTimeoutRef.current = setTimeout(() => {
-      setIsScrolling(false);
-    }, 150);
-  }, [isScrolling]);
+  const containerRef = useRef<HTMLElement>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
-    // Tambahkan scroll listener dengan passive untuk performa
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      if (scrollTimeoutRef.current) {
-        clearTimeout(scrollTimeoutRef.current);
-      }
-    };
-  }, [handleScroll]);
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % modelImages.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
-  useEffect(() => {
-    // Set hasAnimated setelah animasi awal selesai (2 detik)
-    const animTimer = setTimeout(() => setHasAnimated(true), 2000);
-    
-    // OPTIMASI: Cek apakah mobile device
-    const isMobile = window.innerWidth < 768 || 
-                     /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    
-    // Load Vortex setelah delay, hanya jika:
-    // 1. User tidak prefer reduced motion
-    // 2. Bukan mobile device
-    if (!prefersReducedMotion && !isMobile) {
-      const vortexTimer = setTimeout(() => {
-        if ('requestIdleCallback' in window) {
-          (window as any).requestIdleCallback(() => setShowVortex(true), { timeout: 3000 });
-        } else {
-          setShowVortex(true);
-        }
-      }, 2500); // Delay lebih lama untuk prioritaskan konten
-      
-      return () => {
-        clearTimeout(animTimer);
-        clearTimeout(vortexTimer);
-      };
-    }
-    
-    return () => clearTimeout(animTimer);
-  }, [prefersReducedMotion]);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
 
-  // Optimasi: Gunakan CSS animation setelah initial mount
-  const getAnimationProps = (delay: number) => {
-    if (hasAnimated) {
-      // Setelah animasi awal, tidak perlu Framer Motion
-      return {};
-    }
-    return {
-      initial: { opacity: 0 },
-      animate: { opacity: 1 },
-      transition: { duration: 0.6, delay }
-    };
-  };
+  const y = useTransform(scrollYProgress, [0, 1], [0, 150]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   return (
-    <section 
-      className="relative min-h-screen flex items-center overflow-hidden bg-black font-nippo"
-      style={{ 
-        willChange: 'auto',
-        contain: 'layout style paint',
-      }}
+    <section
+      ref={containerRef}
+      id="home"
+      className="relative w-full h-[100dvh] lg:h-screen lg:min-h-[900px] overflow-hidden bg-[#0a1428]"
     >
-      {/* LAYER 1: Static CSS Background - sangat ringan */}
-      <StaticBackground />
-      
-      {/* LAYER 2: Vortex - hanya tampil jika tidak scroll dan tidak reduced motion */}
-      <AnimatePresence>
-        {showVortex && !isScrolling && !prefersReducedMotion && (
-          <motion.div 
-            className="absolute inset-0 z-0 w-full h-full"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.8 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-            style={{ willChange: 'opacity' }}
-          >
-            <Vortex
-              backgroundColor="transparent"
-              baseHue={140}
-              particleCount={100}
-              rangeY={200}
-              baseSpeed={0.2}
-              rangeSpeed={0.8}
-              className="w-full h-full"
-              containerClassName="w-full h-full"
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <style dangerouslySetInnerHTML={{__html: `
+        @keyframes textShine {
+          0% { background-position: -200% center; }
+          100% { background-position: 200% center; }
+        }
+        .shiny-text {
+          background: linear-gradient(
+            120deg,
+            #ffffff 30%,
+            #cbd5e1 40%,
+            #ffffff 50%,
+            #cbd5e1 60%,
+            #ffffff 70%
+          );
+          background-size: 200% auto;
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          animation: textShine 4s linear infinite;
+          transition: all 0.3s ease;
+        }
+        
+        .hover-fill-huga {
+          transition: all 0.3s ease;
+        }
+        .hover-fill-huga:hover {
+          -webkit-text-fill-color: #ffffff !important;
+          -webkit-text-stroke-color: rgba(255, 255, 255, 1) !important;
+        }
 
-      {/* Content - dengan GPU acceleration hints */}
-      <div 
-        className="relative z-10 w-full max-w-[1800px] mx-auto px-6 md:px-12 lg:px-24 py-8 md:py-12 lg:py-20"
-        style={{ transform: 'translateZ(0)' }}
+        .hover-fill-stack {
+          transition: all 0.3s ease;
+        }
+        .hover-fill-stack:hover {
+          background: #ffffff !important;
+          -webkit-background-clip: text !important;
+          -webkit-text-fill-color: #ffffff !important;
+          -webkit-text-stroke-color: rgba(255, 255, 255, 1) !important;
+        }
+      `}} />
+
+      {/* LAYER 1: Background Image */}
+      <motion.div
+        style={{ y }}
+        className="absolute inset-0 z-0"
       >
-        {/* Mobile Layout (default) / Desktop Layout (lg:) */}
-        <div className="flex flex-col lg:grid lg:grid-cols-12 gap-6 lg:gap-16 min-h-[85vh] lg:min-h-[80vh]">
-          
-          {/* Mobile: Center content first / Desktop: Left Statistics */}
-          <div 
-            className="order-3 lg:order-1 lg:col-span-2 flex lg:flex-col justify-center lg:justify-end items-center lg:items-start gap-4 lg:gap-6 animate-fadeInLeft lg:self-end"
-            style={{ 
-              animationDelay: '0.2s',
-              animationFillMode: 'backwards',
-            }}
-          >
-            <div className="text-center lg:text-left">
-              <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-[#00ff88] mb-1 lg:mb-4 leading-none">
-                50+
-              </div>
-              <div className="text-[10px] sm:text-xs md:text-sm lg:text-base text-white font-normal font-sf-pro uppercase tracking-wider whitespace-nowrap">
-                Project Done
-              </div>
-            </div>
-            
-            <div className="hidden lg:block h-px w-24 bg-[#00ff88]/50"></div>
-            <div className="block lg:hidden w-px h-6 bg-[#00ff88]/50"></div>
-            
-            <div className="text-center lg:text-left">
-              <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-[#00ff88] mb-1 lg:mb-4 leading-none">
-                50+
-              </div>
-              <div className="text-[10px] sm:text-xs md:text-sm lg:text-base text-white font-normal font-sf-pro uppercase tracking-wider whitespace-nowrap">
-                Happy Clients
-              </div>
-            </div>
-          </div>
+        <Image
+          src="/images/hero/background hero.webp"
+          alt="Hero Background"
+          fill
+          priority
+          quality={95}
+          className="object-cover object-center"
+        />
+      </motion.div>
 
-          {/* Center: Profile Image + Overlay Text */}
-          <div className="order-1 lg:order-2 lg:col-span-7 relative flex items-center justify-center min-h-[350px] sm:min-h-[450px] md:min-h-[550px] lg:min-h-[800px] pt-16 sm:pt-20 lg:pt-0">
-            {/* Profile Image */}
-            <div 
-              className="relative z-10 mt-20 sm:mt-28 md:mt-36 lg:mt-56 animate-fadeInUp"
-              style={{ 
-                animationDelay: '0.3s',
-                animationFillMode: 'backwards',
+      {/* LAYER 2: Grain Texture Overlay */}
+      <div className="absolute inset-0 z-[1] pointer-events-none opacity-[0.04] bg-[url('/noise.png')]" />
+
+      {/* LAYER 3: Content Container */}
+      <motion.div
+        style={{ opacity }}
+        className="relative z-10 w-full h-full flex flex-col"
+      >
+        {/* ========== TOP SECTION: Typography ========== */}
+        <div className="flex-1 flex flex-col items-center justify-start pt-[10vh] sm:pt-[14vh] lg:pt-[18vh] px-3 sm:px-4 relative z-30">
+          {/* Line 1: HI I'M HUGA */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="text-center"
+          >
+            <h2
+              className="text-[clamp(18px,6vw,100px)] font-black uppercase leading-[0.9] tracking-[-0.02em] text-transparent select-none font-display hover-fill-huga cursor-pointer"
+              style={{
+                WebkitTextStroke: "2px rgba(255,255,255,0.35)",
               }}
             >
-              <div className="relative">
-                {/* Image container */}
-                <div 
-                  className="w-48 sm:w-64 md:w-80 lg:w-[500px] xl:w-[550px] aspect-square rounded-full overflow-hidden bg-gradient-to-br from-gray-200 to-gray-300 relative"
-                  style={{
-                    boxShadow: '0 0 60px rgba(0,255,136,0.3)',
-                    willChange: 'transform',
-                    transform: 'translateZ(0)',
-                  }}
-                >
-                  <Image
-                    src="/images/hero/foto-huga.jpg"
-                    alt="Andika Huga Widyatama"
-                    fill
-                    sizes="(max-width: 640px) 192px, (max-width: 768px) 256px, (max-width: 1024px) 320px, 550px"
-                    className="object-cover"
-                    priority
-                    quality={75}
-                    placeholder="blur"
-                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAUH/8QAIhAAAgIBAgcBAAAAAAAAAAAAAQIDBAAFESESITFBUWFx/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEEQA/9cx4dRpT2ork9eeN0mUOjKwIIOQQR0Oah1LV6GnxRtZndFlOEZIXfdT4yJxjH7jGMD/2Q=="
-                  />
-                </div>
-                {/* Glow effect */}
-                <div 
-                  className="absolute inset-0 rounded-full -z-10 scale-125 opacity-30"
-                  style={{
-                    background: 'radial-gradient(circle, rgba(0,255,136,0.4) 0%, transparent 60%)',
-                    filter: 'blur(40px)',
-                  }}
-                />
-              </div>
-            </div>
+              HI I&apos;M HUGA
+            </h2>
+          </motion.div>
 
-            {/* Overlay Text */}
-            <div className="absolute inset-0 flex items-center justify-center z-30 pointer-events-none">
-              <div className="relative w-full h-full flex flex-col items-center justify-center">
-                {/* Hi I'm Huga */}
-                <div
-                  className="absolute top-[8%] sm:top-[7%] md:top-[6%] lg:top-[9%] pointer-events-auto cursor-pointer animate-fadeInDown"
-                  style={{ 
-                    animationDelay: '0.4s',
-                    animationFillMode: 'backwards',
-                  }}
-                  onMouseEnter={() => setHoveredText("hi")}
-                  onMouseLeave={() => setHoveredText(null)}
-                >
-                  <div 
-                    className={`text-3xl sm:text-4xl md:text-5xl lg:text-8xl xl:text-9xl whitespace-nowrap transition-all duration-300 font-normal`}
-                    style={{
-                      WebkitTextStroke: hoveredText === "hi" ? "1px transparent" : "1px #00ff88",
-                      willChange: 'color',
-                      lineHeight: 1.3,
-                      paddingBottom: "0.25em",
-                      overflow: "visible",
-                    }}
-                  >
-                    <TextReveal
-                      text="Hi I'm Huga"
-                      variant="glitch"
-                      className=""
-                      delay={0.4}
-                      style={{
-                        WebkitTextFillColor: hoveredText === "hi" ? "transparent" : "transparent",
-                        color: hoveredText === "hi" ? "#00ff88" : "transparent",
-                        backgroundImage: hoveredText === "hi" ? "linear-gradient(to right, #00ff88, #008844, #00ff88)" : "none",
-                        backgroundSize: "200% auto",
-                        backgroundClip: "text",
-                        WebkitBackgroundClip: "text",
-                        animation: hoveredText === "hi" ? "textGradientPan 2s linear infinite" : "none",
-                        willChange: 'background-position',
-                      }}
-                    />
-                  </div>
-                </div>
+          {/* Line 2: FULL STACK DEV */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="flex mt-4 sm:mt-8 lg:mt-12 gap-x-1 sm:gap-x-2 lg:gap-x-3 relative"
+          >
+            <span className="text-[clamp(20px,7vw,115px)] font-black uppercase leading-[0.9] tracking-[-0.02em] font-display shiny-text select-none">
+              FULL
+            </span>
+            <span
+              className="text-[clamp(20px,7vw,115px)] font-black uppercase leading-[0.9] tracking-[-0.02em] font-display hover-fill-stack cursor-pointer select-none"
+              style={{
+                background: "linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.03) 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                WebkitTextStroke: "1px rgba(255, 255, 255, 0.5)",
+              }}
+            >
+              STACK
+            </span>
+            <span className="text-[clamp(20px,7vw,115px)] font-black uppercase leading-[0.9] tracking-[-0.02em] font-display shiny-text select-none">
+              DEV
+            </span>
+          </motion.div>
+        </div>
 
-                {/* Full Stack Dev */}
-                <div
-                  className="absolute top-[22%] sm:top-[24%] md:top-[25%] lg:top-[29%] pointer-events-auto cursor-pointer animate-fadeInUp"
-                  style={{ 
-                    animationDelay: '0.5s',
-                    animationFillMode: 'backwards',
-                  }}
-                  onMouseEnter={() => setHoveredText("dev")}
-                  onMouseLeave={() => setHoveredText(null)}
-                >
-                  <div 
-                    className={`text-3xl sm:text-4xl md:text-5xl lg:text-8xl xl:text-9xl whitespace-nowrap transition-all duration-300 font-normal`}
-                    style={{
-                      WebkitTextStroke: hoveredText === "dev" ? "1px transparent" : "1px #00ff88",
-                      willChange: 'color',
-                      lineHeight: 1.3,
-                      paddingBottom: "0.25em",
-                      overflow: "visible",
-                    }}
-                  >
-                    <TextReveal
-                      text="Full Stack Dev"
-                      variant="glitch"
-                      className=""
-                      delay={0.6}
-                      style={{
-                        WebkitTextFillColor: hoveredText === "dev" ? "transparent" : "transparent",
-                        color: hoveredText === "dev" ? "#00ff88" : "transparent",
-                        backgroundImage: hoveredText === "dev" ? "linear-gradient(to right, #00ff88, #008844, #00ff88)" : "none",
-                        backgroundSize: "200% auto",
-                        backgroundClip: "text",
-                        WebkitBackgroundClip: "text",
-                        animation: hoveredText === "dev" ? "textGradientPan 2s linear infinite" : "none",
-                        willChange: 'background-position',
-                      }}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
+        {/* ========== MIDDLE: MODEL IMAGE ========== */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9, y: 100 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 1.5, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          className={`absolute left-1/2 -translate-x-1/2 bottom-0
+            w-[200px] h-[38vh]
+            sm:w-[260px] sm:h-[45vh]
+            md:w-[320px] md:h-[50vh]
+            lg:left-[38%] lg:translate-x-0 lg:w-[min(520px,42vw)] lg:h-[82vh]
+            ${currentImageIndex === 0 ? "z-20" : "z-40"}`}
+        >
+          {/* Glow behind model */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none -z-10">
+            <div className="w-[180px] h-[180px] sm:w-[240px] sm:h-[240px] md:w-[300px] md:h-[300px] lg:w-[450px] lg:h-[450px] rounded-full bg-white/[0.03] blur-[60px] sm:blur-[80px] lg:blur-[150px]" />
           </div>
 
-          {/* Right: Description + CTA */}
-          <div 
-            className="order-2 lg:order-3 lg:col-span-3 space-y-4 lg:space-y-8 lg:pl-4 lg:self-end animate-fadeInRight text-center lg:text-left"
-            style={{ 
-              animationDelay: '0.4s',
-              animationFillMode: 'backwards',
-            }}
-          >
-            <div className="space-y-2 lg:space-y-4">
-              <TextReveal
-                text="I'M A FULL STACK DEVELOPER"
-                variant="word"
-                className="text-xs sm:text-sm md:text-base font-normal text-white uppercase tracking-wide leading-tight font-sf-pro"
-                delay={0.6}
-              />
-              
-              <TextReveal
-                text="WITH 1+ YEARS OF EXPERIENCE."
-                variant="word"
-                className="text-xs sm:text-sm md:text-base font-normal text-white uppercase tracking-wide leading-tight font-sf-pro"
-                delay={0.7}
-              />
-              
-              <TextReveal
-                text="FOCUSED ON WEB DEVELOPMENT AND UI/UX DESIGN."
-                variant="word"
-                className="text-[10px] sm:text-xs md:text-sm text-white font-normal leading-relaxed font-sf-pro"
-                delay={0.8}
-              />
-            </div>
-
-            <div className="pt-2 lg:pt-4">
-              <MagneticButton
-                className="px-6 sm:px-8 py-3 sm:py-4 bg-[rgba(255,255,255,0.05)] hover:bg-[rgba(255,255,255,0.1)] text-white border border-[rgba(255,255,255,0.1)] rounded-xl transition-all duration-300 flex items-center gap-2 sm:gap-3 w-full justify-center backdrop-blur-md"
-                magneticStrength={0.3}
-                onClick={() => {
-                  document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+          <AnimatePresence>
+            <motion.div
+              key={currentImageIndex}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{
+                opacity: 1,
+                scale: currentImageIndex === 0 ? 1.08 : 1.0,
+              }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.8, ease: "easeInOut" }}
+              className="absolute inset-0 w-full h-full origin-bottom"
+            >
+              <Image
+                src={modelImages[currentImageIndex]}
+                alt="Andika Huga - Full Stack Developer"
+                fill
+                priority
+                quality={95}
+                className="object-contain object-bottom"
+                style={{
+                  filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.4))",
                 }}
+              />
+            </motion.div>
+          </AnimatePresence>
+        </motion.div>
+
+        {/* ========== LEFT SIDE: Description (Desktop only) ========== */}
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 1.2 }}
+          className="absolute left-6 lg:left-16 z-10 hidden lg:block"
+          style={{ top: '52%' }}
+        >
+          <p
+            className="text-white leading-[1.8] font-body font-medium whitespace-nowrap tracking-[0.01em]"
+            style={{ fontSize: '22px', textShadow: '0 2px 10px rgba(0,0,0,0.25)' }}
+          >
+            We dont just design. We strip away the
+            <br />
+            noise leaving only what matters timeless
+            <br />
+            visuals, and brand that breathe.
+          </p>
+        </motion.div>
+
+        {/* ========== RIGHT SIDE: Services List (Desktop only) ========== */}
+        <motion.div
+          initial={{ opacity: 0, x: 30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 1.3 }}
+          className="absolute right-6 lg:right-16 z-10 hidden lg:flex flex-col items-end gap-2.5"
+          style={{ top: '48%' }}
+        >
+          {services.map((service, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 1.4 + idx * 0.1 }}
+              className="flex items-center gap-4 group cursor-pointer"
+            >
+              <span className="text-white font-medium tracking-[0.08em] font-body group-hover:text-white/80 transition-colors" style={{ fontSize: '22px', textShadow: '0 2px 10px rgba(0,0,0,0.25)' }}>
+                ({service.num})
+              </span>
+              <span className="text-white font-medium tracking-[0.06em] font-body group-hover:text-white/80 transition-colors" style={{ fontSize: '22px', textShadow: '0 2px 10px rgba(0,0,0,0.25)' }}>
+                {service.label}
+              </span>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* ========== BOTTOM SECTION ========== */}
+        <div className="relative z-20 w-full px-4 sm:px-6 lg:px-16 pb-6 sm:pb-8 lg:pb-12 mt-auto">
+
+          {/* Mobile Services Pills - visible on mobile/tablet */}
+          <div className="flex lg:hidden justify-center gap-2 sm:gap-3 mb-4 sm:mb-6 overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide">
+            {services.map((service, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 1.1 + idx * 0.08 }}
+                className="flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border border-white/20 bg-white/[0.08] backdrop-blur-sm whitespace-nowrap"
               >
-                <span className="font-normal font-sf-pro tracking-wide">Get Started</span>
-                <span className="text-lg sm:text-xl text-[#00ff88] group-hover:translate-x-1 transition-transform">→</span>
-              </MagneticButton>
-            </div>
+                <span className="text-white/60 text-[10px] sm:text-xs font-body">
+                  {service.num}
+                </span>
+                <span className="text-white text-xs sm:text-sm font-medium font-body">
+                  {service.label}
+                </span>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Desktop: Stats + CTA | Mobile: CTA only */}
+          <div className="flex items-end justify-between gap-4">
+            {/* Stats - visible on md+ */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.3 }}
+              className="hidden md:grid grid-cols-2 gap-x-12 lg:gap-x-16 gap-y-6 lg:gap-y-8"
+            >
+              {stats.map((stat, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 1.4 + idx * 0.1 }}
+                  className="flex flex-col"
+                >
+                  <span
+                    className="text-4xl sm:text-5xl lg:text-[68px] font-medium text-white font-display leading-none select-none"
+                    style={{ textShadow: '0 2px 10px rgba(0,0,0,0.25)' }}
+                  >
+                    {stat.num}
+                  </span>
+                  <span className="text-white/70 text-xs sm:text-sm lg:text-[14px] tracking-[0.06em] font-body font-medium mt-2">
+                    {stat.label}
+                  </span>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            {/* CTA: Tagline + Get Started - Desktop */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.5 }}
+              className="hidden lg:flex flex-col items-end gap-6"
+            >
+              <div className="text-start" style={{ width: '388px' }}>
+                <p className="text-white text-xl lg:text-2xl italic font-medium font-body leading-[1.4]" style={{ textShadow: '0 2px 10px rgba(0,0,0,0.25)' }}>
+                  I&apos;m A Full Stack Developer
+                </p>
+                <p className="text-white text-xl lg:text-2xl italic font-medium font-body leading-[1.4] whitespace-nowrap" style={{ textShadow: '0 2px 10px rgba(0,0,0,0.25)' }}>
+                  With 3+ Years Of Experience
+                </p>
+              </div>
+
+              {/* Get Started button + arrow */}
+              <div className="relative" style={{ width: '388px', height: '85px' }}>
+                <button className="w-full h-full rounded-full border border-white/25 bg-white/[0.15] backdrop-blur-xl text-white text-xl lg:text-2xl font-medium tracking-[0.04em] font-body hover:bg-white/[0.25] hover:border-white/40 transition-all duration-300 cursor-pointer shadow-[0_4px_30px_rgba(255,255,255,0.06)] text-left pl-10" style={{ textShadow: '0 2px 10px rgba(0,0,0,0.25)' }}>
+                  Get Started
+                </button>
+                <div
+                  className="absolute rounded-full bg-white flex items-center justify-center hover:bg-white/90 transition-all duration-300 cursor-pointer shadow-[0_4px_20px_rgba(0,0,0,0.1)]"
+                  style={{
+                    width: '70px',
+                    height: '70px',
+                    top: '50%',
+                    right: '8px',
+                    transform: 'translateY(-50%)',
+                  }}
+                >
+                  <svg width="22" height="22" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="#000000" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Mobile/Tablet: Get Started Button */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.2 }}
+              className="lg:hidden flex-shrink-0"
+            >
+              <div className="relative w-[140px] h-[52px] sm:w-[160px] sm:h-[56px]">
+                <button className="w-full h-full rounded-full border border-white/25 bg-white/[0.15] backdrop-blur-xl text-white text-sm sm:text-base font-medium tracking-[0.04em] font-body hover:bg-white/[0.25] hover:border-white/40 transition-all duration-300 cursor-pointer shadow-[0_4px_30px_rgba(255,255,255,0.06)] text-left pl-5 sm:pl-6" style={{ textShadow: '0 2px 10px rgba(0,0,0,0.25)' }}>
+                  Get Started
+                </button>
+                <div
+                  className="absolute rounded-full bg-white flex items-center justify-center hover:bg-white/90 transition-all duration-300 cursor-pointer shadow-[0_4px_20px_rgba(0,0,0,0.1)]"
+                  style={{
+                    width: '42px',
+                    height: '42px',
+                    top: '50%',
+                    right: '5px',
+                    transform: 'translateY(-50%)',
+                  }}
+                >
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="#000000" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </div>
-      </div>
-
-
-      {/* CSS Keyframes untuk animasi ringan */}
-      <style jsx global>{`
-        @keyframes textGradientPan {
-          0% { background-position: 0% center; }
-          100% { background-position: -200% center; }
-        }
-        @keyframes fadeInLeft {
-          from { opacity: 0; transform: translateX(-30px); }
-          to { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes fadeInRight {
-          from { opacity: 0; transform: translateX(30px); }
-          to { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes fadeInUp {
-          from { opacity: 0; transform: translateY(30px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeInDown {
-          from { opacity: 0; transform: translateY(-30px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-        @keyframes scrollBounce {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(8px); }
-        }
-        .animate-fadeInLeft { animation: fadeInLeft 0.6s ease-out forwards; }
-        .animate-fadeInRight { animation: fadeInRight 0.6s ease-out forwards; }
-        .animate-fadeInUp { animation: fadeInUp 0.6s ease-out forwards; }
-        .animate-fadeInDown { animation: fadeInDown 0.6s ease-out forwards; }
-        .animate-fadeIn { animation: fadeIn 0.6s ease-out forwards; }
-        .animate-scrollBounce { animation: scrollBounce 1.5s ease-in-out infinite; }
-      `}</style>
+      </motion.div>
     </section>
   );
 }
