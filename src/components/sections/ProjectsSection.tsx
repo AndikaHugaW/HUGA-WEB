@@ -151,7 +151,7 @@ function ProjectCard({ project, index, isInView, onSelect }: ProjectCardProps) {
       className="group relative cursor-pointer"
     >
       {/* Main Card */}
-      <div className="relative bg-[#0a0a0a] border border-white/[0.06] rounded-2xl overflow-hidden transition-all duration-500 group-hover:border-white/[0.12] group-hover:bg-[#0c0c0c]">
+      <div className="relative bg-[#fafafa] border border-black/[0.06] rounded-2xl overflow-hidden transition-all duration-500 group-hover:border-black/[0.12] group-hover:bg-[#f4f4f5]">
 
         {/* Image Container with 3D transform */}
         <div
@@ -189,7 +189,7 @@ function ProjectCard({ project, index, isInView, onSelect }: ProjectCardProps) {
                 style={{ transform: "translateZ(40px)" }}
               >
                 <div className="flex items-center gap-1.5 px-3 py-1.5 bg-black/50 backdrop-blur-md border border-white/10 rounded-full">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#00ff88]" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
                   <span className="text-[10px] font-medium text-white/80 tracking-wider uppercase">Featured</span>
                 </div>
               </motion.div>
@@ -202,10 +202,10 @@ function ProjectCard({ project, index, isInView, onSelect }: ProjectCardProps) {
           {/* Header Row */}
           <div className="flex items-start justify-between gap-4 mb-4">
             <div className="flex items-center gap-3">
-              <span className="text-xs font-light text-white/20 font-mono">
+              <span className="text-xs font-light text-black/30 font-mono">
                 {String(index + 1).padStart(2, "0")}
               </span>
-              <h3 className="text-xl lg:text-2xl font-medium text-white tracking-tight transition-colors duration-300">
+              <h3 className="text-xl lg:text-2xl font-medium text-black tracking-tight transition-colors duration-300 group-hover:text-emerald-700">
                 {project.title}
               </h3>
             </div>
@@ -214,7 +214,7 @@ function ProjectCard({ project, index, isInView, onSelect }: ProjectCardProps) {
             <motion.div
               animate={{ rotate: isHovered ? 45 : 0, x: isHovered ? 2 : 0 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
-              className="w-9 h-9 rounded-full bg-white/[0.05] border border-white/[0.08] flex items-center justify-center group-hover:bg-white/[0.08] group-hover:border-white/[0.15] transition-all duration-300"
+              className="w-9 h-9 rounded-full bg-black/[0.03] border border-black/[0.08] flex items-center justify-center group-hover:bg-black/[0.06] group-hover:border-black/[0.12] transition-all duration-300"
             >
               <svg
                 width="14"
@@ -225,7 +225,7 @@ function ProjectCard({ project, index, isInView, onSelect }: ProjectCardProps) {
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="text-white/50 group-hover:text-white transition-colors duration-300"
+                className="text-black/50 group-hover:text-emerald-700 transition-colors duration-300"
               >
                 <path d="M7 17L17 7M17 7H7M17 7V17" />
               </svg>
@@ -233,7 +233,7 @@ function ProjectCard({ project, index, isInView, onSelect }: ProjectCardProps) {
           </div>
 
           {/* Description */}
-          <p className="text-sm text-white/40 leading-relaxed mb-5 line-clamp-2 group-hover:text-white/50 transition-colors duration-300">
+          <p className="text-sm text-black/30 leading-relaxed mb-5 line-clamp-2 group-hover:text-black/40 transition-colors duration-300">
             {project.description}
           </p>
 
@@ -242,7 +242,7 @@ function ProjectCard({ project, index, isInView, onSelect }: ProjectCardProps) {
             {project.tags.slice(0, 3).map((tag, i) => (
               <motion.span
                 key={i}
-                className="px-3 py-1.5 text-[11px] font-medium text-white/40 tracking-wide border border-white/[0.06] rounded-full bg-white/[0.02] group-hover:border-white/[0.1] group-hover:bg-white/[0.03] group-hover:text-white/50 transition-all duration-300"
+                className="px-3 py-1.5 text-[11px] font-medium text-black/40 tracking-wide border border-black/[0.06] rounded-full bg-black/[0.02] group-hover:border-black/[0.1] group-hover:bg-black/[0.03] group-hover:text-black/50 transition-all duration-300"
                 animate={isHovered ? { y: -2 } : { y: 0 }}
                 transition={{ duration: 0.2 }}
               >
@@ -254,11 +254,11 @@ function ProjectCard({ project, index, isInView, onSelect }: ProjectCardProps) {
 
         {/* Bottom Accent Line */}
         <motion.div
-          className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#00ff88]/0 to-transparent"
+          className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-emerald-500 to-transparent"
           animate={{ backgroundPosition: ["200% center", "-200% center"] }}
           transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
           style={{
-            background: "linear-gradient(90deg, transparent 0%, #00ff88 50%, transparent 100%)",
+            background: "linear-gradient(90deg, transparent 0%, #047857 50%, transparent 100%)",
             backgroundSize: "200% 100%",
             opacity: isHovered ? 1 : 0,
           }}
@@ -269,7 +269,7 @@ function ProjectCard({ project, index, isInView, onSelect }: ProjectCardProps) {
       <motion.div
         className="absolute inset-0 rounded-2xl pointer-events-none"
         style={{
-          background: "radial-gradient(circle at 50% 50%, rgba(0, 255, 136, 0.08) 0%, transparent 70%)",
+          background: "radial-gradient(circle at 50% 50%, rgba(4, 120, 87, 0.05) 0%, transparent 70%)",
           transform: "translateZ(-50px)",
           opacity: isHovered ? 1 : 0,
         }}
@@ -286,10 +286,7 @@ export default function ProjectsSection() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   return (
-    <section id="projects" ref={ref} className="relative py-24 lg:py-32 overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-black" />
-
+    <section id="projects" ref={ref} className="relative py-24 lg:py-32 bg-white overflow-hidden">
       <div className="relative max-w-[1400px] mx-auto px-6 lg:px-16">
         {/* Header */}
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-16 lg:mb-24">
@@ -300,8 +297,8 @@ export default function ProjectsSection() {
               transition={{ duration: 0.6 }}
               className="flex items-center gap-3 mb-4"
             >
-              <div className="w-8 h-[1px] bg-gradient-to-r from-[#00ff88] to-transparent" />
-              <span className="text-[11px] font-medium text-[#00ff88]/70 tracking-[0.3em] uppercase">
+              <div className="w-8 h-[1px] bg-emerald-700" />
+              <span className="text-[11px] font-medium text-emerald-700 tracking-[0.3em] uppercase">
                 Portfolio
               </span>
             </motion.div>
@@ -309,7 +306,7 @@ export default function ProjectsSection() {
             <TextReveal
               text="Selected Projects"
               variant="word"
-              className="text-4xl md:text-5xl lg:text-6xl font-medium text-white leading-[1.1] tracking-tight"
+              className="text-4xl md:text-5xl lg:text-6xl font-medium text-black leading-[1.1] tracking-tight"
               delay={0.1}
             />
           </div>
@@ -320,13 +317,13 @@ export default function ProjectsSection() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="flex items-center gap-6"
           >
-            <p className="text-sm text-white/40 max-w-[240px] leading-relaxed">
+            <p className="text-sm text-black/30 max-w-[240px] leading-relaxed">
               End-to-end product development from concept to launch.
             </p>
 
             <Link
               href="/projects"
-              className="group flex items-center gap-2 text-sm text-white/70 hover:text-white font-medium transition-colors duration-300"
+              className="group flex items-center gap-2 text-sm text-black/70 hover:text-black font-medium transition-colors duration-300"
             >
               See all
               <svg

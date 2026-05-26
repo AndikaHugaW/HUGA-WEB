@@ -76,7 +76,7 @@ function ExperienceRow({
       transition={{ duration: 0.7, delay: 0.1 + index * 0.12, ease: [0.25, 0.46, 0.45, 0.94] }}
     >
       {/* ── Top border ── */}
-      <div className="h-px w-full bg-white/[0.06]" />
+      <div className="h-px w-full bg-black/[0.06]" />
 
       {/* ── Clickable header row ── */}
       <button
@@ -85,24 +85,24 @@ function ExperienceRow({
         aria-expanded={isOpen}
       >
         {/* Index — absolute, outside flow so role title stays flush left */}
-        <span className="hidden md:block absolute -left-8 top-1/2 -translate-y-1/2 text-[10px] font-mono text-white/15 tracking-widest select-none">
+        <span className="hidden md:block absolute -left-8 top-1/2 -translate-y-1/2 text-[10px] font-mono text-black/15 tracking-widest select-none">
           {exp.id}
         </span>
 
         {/* Left: role title — flush left, aligns with heading */}
-        <h3 className="text-xl md:text-2xl lg:text-3xl font-medium font-nippo text-white/75 group-hover:text-white transition-colors duration-300 tracking-tight truncate min-w-0">
+        <h3 className="text-xl md:text-2xl lg:text-3xl font-medium font-nippo text-black/75 group-hover:text-emerald-700 transition-colors duration-300 tracking-tight truncate min-w-0">
           {exp.role}
         </h3>
 
         {/* Right: type tag + company + period + toggle */}
         <div className="flex items-center gap-4 md:gap-8 shrink-0">
-          <span className="hidden lg:block text-[11px] font-sf-pro uppercase tracking-[0.2em] text-white/25">
+          <span className="hidden lg:block text-[11px] font-sf-pro uppercase tracking-[0.2em] text-emerald-700/60">
             {exp.type}
           </span>
-          <span className="hidden sm:block text-sm font-sf-pro text-white/35 font-light">
+          <span className="hidden sm:block text-sm font-sf-pro text-black/40 font-light">
             {exp.company}
           </span>
-          <span className="hidden md:block text-sm font-mono text-white/50 tabular-nums">
+          <span className="hidden md:block text-sm font-mono text-black/40 tabular-nums">
             {exp.period}
           </span>
 
@@ -111,7 +111,7 @@ function ExperienceRow({
             <motion.span
               animate={{ rotate: isOpen ? 45 : 0, opacity: isOpen ? 0.7 : 0.3 }}
               transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="absolute inset-0 flex items-center justify-center text-white text-xl font-light leading-none select-none"
+              className="absolute inset-0 flex items-center justify-center text-black text-xl font-light leading-none select-none"
             >
               +
             </motion.span>
@@ -132,7 +132,7 @@ function ExperienceRow({
           >
             <div className="pb-10 md:pb-12 flex flex-col gap-6 max-w-2xl">
               {/* Description */}
-              <p className="text-white/50 font-sf-pro text-[15px] leading-[1.9] font-light">
+              <p className="text-black/30 font-sf-pro text-[15px] leading-[1.9] font-light">
                 {exp.description}
               </p>
 
@@ -141,7 +141,7 @@ function ExperienceRow({
                 {exp.stack.map((s) => (
                   <span
                     key={s}
-                    className="px-3.5 py-1.5 text-[11px] font-sf-pro tracking-wide text-white/55 border border-white/[0.08] rounded-full bg-white/[0.02] hover:text-white/80 hover:border-white/[0.15] transition-all duration-200"
+                    className="px-3.5 py-1.5 text-[11px] font-sf-pro tracking-wide text-black/45 border border-black/[0.06] rounded-full bg-black/[0.02] hover:text-emerald-700 hover:border-emerald-700/30 transition-all duration-200"
                   >
                     {s}
                   </span>
@@ -170,16 +170,16 @@ export default function ExperienceSection() {
     <section
       id="experience"
       ref={sectionRef}
-      className="relative bg-[#080809] py-32 md:py-40"
+      className="relative bg-white py-32 md:py-40"
     >
       {/* Subtle top edge */}
-      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/[0.07] to-transparent" />
+      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-black/[0.07] to-transparent" />
 
       {/* One single, restrained ambient glow — not distracting */}
       <div
         className="absolute top-0 left-0 w-[480px] h-[480px] -translate-x-1/3 -translate-y-1/3 rounded-full pointer-events-none"
         style={{
-          background: "radial-gradient(circle, rgba(0,255,136,0.04) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(4,120,87,0.02) 0%, transparent 70%)",
           filter: "blur(60px)",
         }}
       />
@@ -196,8 +196,8 @@ export default function ExperienceSection() {
               transition={{ duration: 0.6 }}
               className="flex items-center gap-3"
             >
-              <span className="w-5 h-px bg-white/20" />
-              <span className="text-[10px] font-sf-pro uppercase tracking-[0.3em] text-white/30">
+              <span className="w-5 h-px bg-emerald-700/30" />
+              <span className="text-[10px] font-sf-pro uppercase tracking-[0.3em] text-emerald-700">
                 Work History
               </span>
             </motion.div>
@@ -206,7 +206,7 @@ export default function ExperienceSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.08, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="font-nippo text-5xl md:text-6xl lg:text-[4.5rem] font-medium leading-[1.05] tracking-tight text-white"
+              className="font-nippo text-5xl md:text-6xl lg:text-[4.5rem] font-medium leading-[1.05] tracking-tight text-black"
             >
               My Experience
             </motion.h2>
@@ -217,11 +217,11 @@ export default function ExperienceSection() {
             initial={{ opacity: 0, y: 16 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.18, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="text-white/40 font-sf-pro text-base md:text-[17px] leading-[1.85] font-light max-w-sm lg:pb-2"
+            className="text-black/30 font-sf-pro text-base md:text-[17px] leading-[1.85] font-light max-w-sm lg:pb-2"
           >
             A solo practitioner combining{" "}
-            <span className="text-white/70">engineering depth</span> and{" "}
-            <span className="text-white/70">design sensibility</span> — delivering
+            <span className="text-black font-semibold">engineering depth</span> and{" "}
+            <span className="text-black font-semibold">design sensibility</span> — delivering
             complete digital products, end to end.
           </motion.p>
         </div>
@@ -236,11 +236,11 @@ export default function ExperienceSection() {
           className="mb-4"
         >
           <div className="flex items-center gap-3 mb-10">
-            <span className="text-[10px] font-sf-pro uppercase tracking-[0.3em] text-white/20">
+            <span className="text-[10px] font-sf-pro uppercase tracking-[0.3em] text-black/30">
               Roles
             </span>
-            <div className="h-px flex-1 bg-white/[0.04]" />
-            <span className="text-[10px] font-sf-pro text-white/15 font-mono">
+            <div className="h-px flex-1 bg-black/[0.06]" />
+            <span className="text-[10px] font-sf-pro text-black/20 font-mono">
               {EXPERIENCES.length.toString().padStart(2, "0")}
             </span>
           </div>
@@ -263,14 +263,14 @@ export default function ExperienceSection() {
             animate={isInView ? { scaleX: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
             style={{ originX: 0 }}
-            className="h-px w-full bg-white/[0.06]"
+            className="h-px w-full bg-black/[0.06]"
           />
         </div>
 
       </div>
 
       {/* Subtle bottom edge */}
-      <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/[0.07] to-transparent" />
+      <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-black/[0.07] to-transparent" />
     </section>
   );
 }

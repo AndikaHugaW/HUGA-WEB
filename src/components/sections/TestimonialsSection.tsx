@@ -72,17 +72,17 @@ export default function TestimonialsSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section ref={ref} className="relative py-32 px-6 md:px-12 lg:px-24 bg-black overflow-hidden">
+    <section ref={ref} className="relative py-32 px-6 md:px-12 lg:px-24 bg-white overflow-hidden">
       {/* Grid Background */}
       <GridBackground 
         className="opacity-40" 
-        dotColor="rgba(0, 255, 136, 0.2)"
+        dotColor="rgba(0, 0, 0, 0.05)"
         size={20}
       />
 
       {/* Background Decorative */}
-      <div className="absolute top-1/4 left-0 w-96 h-96 bg-[#00ff88]/5 rounded-full blur-3xl -translate-x-1/2 z-0"></div>
-      <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-[#00ff88]/5 rounded-full blur-3xl translate-x-1/2 z-0"></div>
+      <div className="absolute top-1/4 left-0 w-96 h-96 bg-emerald-500/[0.01] rounded-full blur-3xl -translate-x-1/2 z-0"></div>
+      <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-emerald-500/[0.01] rounded-full blur-3xl translate-x-1/2 z-0"></div>
 
       <div className="relative z-10 max-w-[1800px] mx-auto">
         {/* Header */}
@@ -97,14 +97,14 @@ export default function TestimonialsSection() {
               initial={{ scale: 0, rotate: -180 }}
               animate={isInView ? { scale: 1, rotate: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.2, type: "spring" }}
-              className="text-[#00ff88] text-2xl font-bold"
+              className="text-emerald-700 text-2xl font-bold"
             >
               *
             </motion.div>
             <TextReveal
               text="TESTIMONIALS"
               variant="word"
-              className="text-sm md:text-base font-normal text-white uppercase tracking-wider font-sf-pro"
+              className="text-sm md:text-base font-normal text-emerald-700 uppercase tracking-wider font-sf-pro"
               delay={0.3}
             />
           </div>
@@ -112,7 +112,7 @@ export default function TestimonialsSection() {
           <TextReveal
             text="Trusted by Clients"
             variant="word"
-            className="text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold text-black tracking-tight"
             delay={0.4}
           />
           
@@ -120,7 +120,7 @@ export default function TestimonialsSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.5 }}
-            className="text-gray-400 mt-6 text-base md:text-lg leading-relaxed font-normal font-sf-pro"
+            className="text-black/30 mt-6 text-base md:text-lg leading-relaxed font-normal font-sf-pro"
           >
             Trusted by businesses worldwide to deliver exceptional digital experiences.
           </motion.p>

@@ -13,7 +13,7 @@ const companies = [
 
 export default function CompaniesSection() {
   return (
-    <section className="relative py-20 md:py-28 lg:py-32 bg-black overflow-hidden">
+    <section className="relative py-20 md:py-28 lg:py-32 bg-white overflow-hidden">
       <div className="relative z-10 w-full px-0">
         <InfiniteMovingCards
           items={companies}

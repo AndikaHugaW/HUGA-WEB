@@ -89,11 +89,11 @@ export default function RecentProjectsSection() {
   const currentProject = featuredProjects[currentIndex];
 
   return (
-    <section ref={ref} className="relative pt-32 pb-0 px-0 bg-black overflow-hidden">
+    <section ref={ref} className="relative pt-32 pb-0 px-0 bg-white overflow-hidden">
       {/* Grid Background */}
       <GridBackground 
         className="opacity-40" 
-        dotColor="rgba(0, 255, 136, 0.2)"
+        dotColor="rgba(0, 0, 0, 0.05)"
         size={20}
       />
 
@@ -111,21 +111,21 @@ export default function RecentProjectsSection() {
               initial={{ scale: 0, rotate: -180 }}
               animate={isInView ? { scale: 1, rotate: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.3, type: "spring" }}
-              className="text-[#00ff88] text-2xl font-bold"
+              className="text-emerald-700 text-2xl font-bold"
             >
               *
             </motion.div>
             <TextReveal
               text="Recent Projects"
               variant="word"
-              className="text-3xl md:text-4xl lg:text-5xl font-bold text-white uppercase"
+              className="text-3xl md:text-4xl lg:text-5xl font-bold text-black uppercase"
               delay={0.4}
             />
           </div>
 
           {/* Right: Explore Work Link */}
           <MagneticButton
-            className="flex items-center gap-2 text-[#00ff88] hover:text-[#00cc6a] font-medium text-lg transition-colors"
+            className="flex items-center gap-2 text-emerald-700 hover:text-emerald-800 font-medium text-lg transition-colors"
             magneticStrength={0.3}
           >
             <span className="font-normal font-nippo">Explore Work</span>
@@ -147,7 +147,7 @@ export default function RecentProjectsSection() {
         </motion.div>
 
         {/* Featured Project Card */}
-        <div className="relative rounded-3xl overflow-hidden border border-gray-800 hover:border-[#00ff88]/30 transition-all duration-500 min-h-[800px]">
+        <div className="relative rounded-3xl overflow-hidden border border-gray-200 hover:border-emerald-700/30 transition-all duration-500 min-h-[800px]">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentIndex}

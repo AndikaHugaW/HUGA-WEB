@@ -57,7 +57,7 @@ export default function WelcomeSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section ref={ref} className="relative py-32 px-6 md:px-12 lg:px-24 bg-black">
+    <section ref={ref} className="relative py-32 px-6 md:px-12 lg:px-24 bg-white">
       <div className="max-w-[1800px] mx-auto">
         {/* Main Welcome Text */}
         <motion.div
@@ -71,7 +71,7 @@ export default function WelcomeSection() {
               <TextReveal
                 text="WELCOME TO MY PORTFOLIO! I&apos;M"
                 variant="word"
-                className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-nippo font-bold text-white uppercase leading-tight flex justify-center flex-wrap"
+                className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-nippo font-bold text-black uppercase leading-tight flex justify-center flex-wrap"
                 delay={0.3}
               />
             </div>
@@ -80,13 +80,13 @@ export default function WelcomeSection() {
                 <TextReveal
                   text="A FULL STACK DEVELOPER &"
                   variant="word"
-                  className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-nippo font-bold text-white uppercase leading-tight flex justify-center flex-wrap"
+                  className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-nippo font-bold text-black uppercase leading-tight flex justify-center flex-wrap"
                   delay={0.4}
                 />
                 <TextReveal
                   text=" UI/UX DESIGNER,"
                   variant="word"
-                  className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-nippo font-bold text-[#00ff88] uppercase leading-tight flex justify-center flex-wrap"
+                  className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-nippo font-bold text-emerald-700 uppercase leading-tight flex justify-center flex-wrap"
                   delay={0.5}
                 />
               </div>
@@ -95,7 +95,7 @@ export default function WelcomeSection() {
               <TextReveal
                 text="CREATING MODERN,"
                 variant="word"
-                className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-nippo font-bold text-[#00ff88] uppercase leading-tight flex justify-center flex-wrap"
+                className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-nippo font-bold text-emerald-700 uppercase leading-tight flex justify-center flex-wrap"
                 delay={0.6}
               />
             </div>
@@ -103,7 +103,7 @@ export default function WelcomeSection() {
               <TextReveal
                 text="RESPONSIVE WEBSITES THAT"
                 variant="word"
-                className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-nippo font-bold text-[#00ff88] uppercase leading-tight flex justify-center flex-wrap"
+                className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-nippo font-bold text-emerald-700 uppercase leading-tight flex justify-center flex-wrap"
                 delay={0.7}
               />
             </div>
@@ -111,7 +111,7 @@ export default function WelcomeSection() {
               <TextReveal
                 text="DELIVER SEAMLESS EXPERIENCES."
                 variant="word"
-                className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-nippo font-bold text-white uppercase leading-tight flex justify-center flex-wrap"
+                className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-nippo font-bold text-black uppercase leading-tight flex justify-center flex-wrap"
                 delay={0.8}
               />
             </div>
@@ -125,7 +125,7 @@ export default function WelcomeSection() {
           transition={{ duration: 0.8, delay: 0.9 }}
           className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8"
         >
-          <div className="text-lg md:text-xl text-white font-normal font-sf-pro">
+          <div className="text-lg md:text-xl text-black/35 font-normal font-sf-pro">
             Available for Work |
           </div>
           
@@ -139,14 +139,14 @@ export default function WelcomeSection() {
                 initial={{ opacity: 0, scale: 0 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.3, delay: 1.0 + index * 0.1 }}
-                className={`w-12 h-12 rounded-full ${social.color} flex items-center justify-center text-white border-2 border-white shadow-lg transition-all duration-300`}
+                className={`w-12 h-12 rounded-full ${social.color} flex items-center justify-center text-white border-2 border-black/10 shadow-lg transition-all duration-300`}
                 style={{ perspective: "1000px" }}
                 whileHover={{ 
                   scale: 1.2,
                   rotateY: index % 2 === 0 ? 20 : -20,
                   rotateX: 15,
                   z: 50,
-                  boxShadow: "0 20px 30px rgba(0,255,136,0.3)"
+                  boxShadow: "0 20px 30px rgba(4,120,87,0.15)"
                 }}
                 whileTap={{ scale: 0.9, rotateX: 0, rotateY: 0 }}
               >

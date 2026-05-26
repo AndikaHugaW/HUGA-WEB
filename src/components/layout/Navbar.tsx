@@ -72,7 +72,7 @@ export default function Navbar() {
         transition={{ duration: 0.6 }}
         className={`mx-auto w-full transition-all duration-500 ${
           isScrolled
-            ? "max-w-[1400px] bg-[rgba(10,10,10,0.45)] backdrop-blur-[20px] border border-[rgba(255,255,255,0.06)] shadow-[0_20px_40px_rgba(0,0,0,0.4)] md:rounded-full px-[40px]"
+            ? "max-w-[1400px] bg-black/90 backdrop-blur-[20px] border border-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.3)] md:rounded-full px-[40px]"
             : "max-w-none bg-transparent px-10 lg:px-16"
         }`}
       >
@@ -139,15 +139,15 @@ export default function Navbar() {
           >
             <motion.span
               animate={isMobileMenuOpen ? { rotate: 45, y: 8 } : {}}
-              className="w-6 h-0.5 bg-[#00ff88]"
+              className="w-6 h-0.5 bg-white"
             />
             <motion.span
               animate={isMobileMenuOpen ? { opacity: 0 } : {}}
-              className="w-6 h-0.5 bg-[#00ff88]"
+              className="w-6 h-0.5 bg-white"
             />
             <motion.span
               animate={isMobileMenuOpen ? { rotate: -45, y: -8 } : {}}
-              className="w-6 h-0.5 bg-[#00ff88]"
+              className="w-6 h-0.5 bg-white"
             />
           </button>
         </div>

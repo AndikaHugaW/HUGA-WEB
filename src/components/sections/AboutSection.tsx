@@ -123,11 +123,11 @@ export default function AboutSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="about" ref={ref} className="relative py-32 bg-[#05050A] overflow-hidden">
+    <section id="about" ref={ref} className="relative py-32 bg-white overflow-hidden">
       
       {/* Section Transition & Ambient Background */}
-      <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/5 to-transparent"></div>
-      <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-black to-transparent z-10 pointer-events-none"></div>
+      <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-black/5 to-transparent"></div>
+      <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-white to-transparent z-10 pointer-events-none"></div>
       
       {/* Subtle Masked Noise Grid */}
       <div className="absolute inset-0 pointer-events-none" style={{ maskImage: "radial-gradient(circle at center, black 30%, transparent 80%)", WebkitMaskImage: "radial-gradient(circle at center, black 30%, transparent 80%)" }}>
@@ -135,17 +135,17 @@ export default function AboutSection() {
       </div>
         
       {/* Massive Ambient Gradient Fog */}
-      <div className="absolute top-[10%] left-[-10%] w-[60%] h-[800px] rounded-[100%] bg-[radial-gradient(ellipse_at_center,rgba(0,255,136,0.06),transparent_60%)] blur-[120px] pointer-events-none"></div>
-      <div className="absolute bottom-[-10%] right-[-10%] w-[70%] h-[800px] rounded-[100%] bg-[radial-gradient(ellipse_at_center,rgba(123,97,255,0.05),transparent_60%)] blur-[120px] pointer-events-none"></div>
+      <div className="absolute top-[10%] left-[-10%] w-[60%] h-[800px] rounded-[100%] bg-[radial-gradient(ellipse_at_center,rgba(4,120,87,0.03),transparent_60%)] blur-[120px] pointer-events-none"></div>
+      <div className="absolute bottom-[-10%] right-[-10%] w-[70%] h-[800px] rounded-[100%] bg-[radial-gradient(ellipse_at_center,rgba(123,97,255,0.03),transparent_60%)] blur-[120px] pointer-events-none"></div>
 
       <div className="relative z-10 max-w-[1800px] mx-auto px-6 md:px-12 lg:px-24">
         
         {/* ONE Signature Visual (Holographic Orb behind text) */}
-        <div className="absolute top-[15%] left-[-5%] w-[600px] h-[600px] opacity-[0.2] blur-[80px] pointer-events-none mix-blend-screen animate-[spin_30s_linear_infinite]" 
-             style={{ background: 'conic-gradient(from 180deg at 50% 50%, rgba(123,97,255,0) 0%, rgba(123,97,255,0.3) 20%, rgba(0,255,136,0.4) 40%, rgba(0,255,136,0.3) 60%, rgba(123,97,255,0) 80%)' }}>
+        <div className="absolute top-[15%] left-[-5%] w-[600px] h-[600px] opacity-[0.08] blur-[80px] pointer-events-none mix-blend-multiply animate-[spin_30s_linear_infinite]" 
+             style={{ background: 'conic-gradient(from 180deg at 50% 50%, rgba(123,97,255,0) 0%, rgba(123,97,255,0.3) 20%, rgba(4,120,87,0.4) 40%, rgba(4,120,87,0.3) 60%, rgba(123,97,255,0) 80%)' }}>
         </div>
-        <div className="absolute top-[20%] left-[5%] w-[400px] h-[400px] opacity-[0.15] blur-[60px] pointer-events-none mix-blend-screen animate-[spin_40s_linear_infinite_reverse]" 
-             style={{ background: 'radial-gradient(circle at 30% 30%, rgba(0,255,136,0.4), transparent 60%)' }}>
+        <div className="absolute top-[20%] left-[5%] w-[400px] h-[400px] opacity-[0.05] blur-[60px] pointer-events-none mix-blend-multiply animate-[spin_40s_linear_infinite_reverse]" 
+             style={{ background: 'radial-gradient(circle at 30% 30%, rgba(4,120,87,0.4), transparent 60%)' }}>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 lg:gap-24 relative">
@@ -160,8 +160,8 @@ export default function AboutSection() {
               {/* Label & Status Badge */}
               <div className="flex items-center gap-6 mb-10 font-sf-pro">
                 <div className="flex items-center gap-4">
-                  <span className="w-6 h-[1px] bg-white/20"></span>
-                  <span className="text-white/40 text-xs tracking-[0.25em] uppercase">Identity</span>
+                  <span className="w-6 h-[1px] bg-black/10"></span>
+                  <span className="text-black/30 text-xs tracking-[0.25em] uppercase">Identity</span>
                 </div>
                 
                 {/* Available for Work Status Badge */}
@@ -170,27 +170,27 @@ export default function AboutSection() {
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
                   </span>
-                  <span className="text-emerald-400 text-[9px] font-medium tracking-wider uppercase">Available for work</span>
+                  <span className="text-emerald-700 text-[9px] font-medium tracking-wider uppercase">Available for work</span>
                 </div>
               </div>
               
               {/* Cinematic Headline */}
-              <h2 className={`text-5xl md:text-6xl lg:text-[4rem] font-medium text-white tracking-tight leading-[1.05] mb-10 font-nippo`}>
+              <h2 className={`text-5xl md:text-6xl lg:text-[4rem] font-medium text-black tracking-tight leading-[1.05] mb-10 font-nippo`}>
                 Building Intelligent <br />
-                <span className="text-transparent italic font-light" style={{ WebkitTextStroke: "1px rgba(0, 255, 136, 0.3)" }}>Digital Systems.</span>
+                <span className="text-transparent italic font-light" style={{ WebkitTextStroke: "1px rgba(4, 120, 87, 0.4)" }}>Digital Systems.</span>
               </h2>
 
               {/* Modern Intro Paragraph (Luxury Typography) */}
-              <p className={`text-white/50 text-lg font-light leading-[1.8] tracking-[0.02em] mb-14 max-w-lg font-sf-pro`}>
-                I craft <span className="text-white font-medium">high-end digital experiences</span> by merging advanced engineering with premium design, building scalable systems that elevate brands.
+              <p className={`text-black/30 text-lg font-light leading-[1.8] tracking-[0.02em] mb-14 max-w-lg font-sf-pro`}>
+                I craft <span className="text-black font-medium">high-end digital experiences</span> by merging advanced engineering with premium design, building scalable systems that elevate brands.
               </p>
 
               {/* Metrics / Achievements */}
               <div className="flex items-center gap-12 mb-16">
                 {metrics.map((metric, i) => (
                   <div key={i} className="flex flex-col gap-2">
-                    <span className={`text-3xl font-medium text-white/90 font-nippo`}>{metric.value}</span>
-                    <span className={`text-[10px] text-white/40 uppercase tracking-[0.2em] font-sf-pro`}>{metric.label}</span>
+                    <span className={`text-3xl font-medium text-black font-nippo`}>{metric.value}</span>
+                    <span className={`text-[10px] text-black/30 uppercase tracking-[0.2em] font-sf-pro`}>{metric.label}</span>
                   </div>
                 ))}
               </div>
@@ -198,13 +198,13 @@ export default function AboutSection() {
               {/* Minimal Glass CTA */}
               <button className="group relative flex items-center justify-center gap-3 px-8 py-4 rounded-full overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] w-max">
                 {/* Animated Gradient Border */}
-                <div className="absolute inset-0 rounded-full border border-transparent [background:linear-gradient(rgba(5,5,10,1),rgba(5,5,10,1))_padding-box,linear-gradient(90deg,rgba(255,255,255,0.1),rgba(255,255,255,0.3),rgba(255,255,255,0.1))_border-box] opacity-60 group-hover:opacity-100 transition-opacity duration-700"></div>
+                <div className="absolute inset-0 rounded-full border border-transparent [background:linear-gradient(white,white)_padding-box,linear-gradient(90deg,rgba(0,0,0,0.1),rgba(0,0,0,0.2),rgba(0,0,0,0.1))_border-box] opacity-60 group-hover:opacity-100 transition-opacity duration-700"></div>
                 
                 {/* Hover Glow / Glass Reflection */}
-                <div className="absolute inset-0 bg-white/[0.01] group-hover:bg-white/[0.04] transition-colors duration-700"></div>
+                <div className="absolute inset-0 bg-black/[0.01] group-hover:bg-black/[0.04] transition-colors duration-700"></div>
                 
-                <span className={`relative z-10 text-white/70 font-light tracking-wide text-sm transition-colors duration-500 group-hover:text-white font-sf-pro`}>View Selected Projects</span>
-                <ArrowRight className="relative z-10 w-4 h-4 text-white/40 group-hover:text-white transition-all duration-500 transform group-hover:translate-x-1" strokeWidth={1.5} />
+                <span className={`relative z-10 text-black/70 font-light tracking-wide text-sm transition-colors duration-500 group-hover:text-black font-sf-pro`}>View Selected Projects</span>
+                <ArrowRight className="relative z-10 w-4 h-4 text-black/40 group-hover:text-black transition-all duration-500 transform group-hover:translate-x-1" strokeWidth={1.5} />
               </button>
             </motion.div>
           </div>
@@ -220,22 +220,22 @@ export default function AboutSection() {
                     initial={{ opacity: 0, y: 40 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 1, delay: 0.2 + (index * 0.1), ease: [0.16, 1, 0.3, 1] }}
-                    className={`group relative rounded-[2rem] overflow-hidden bg-gradient-to-b from-[#11111d] to-[#07070d] border border-white/[0.04] hover:border-[var(--border-glow)] hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05),0_0_30px_var(--glow-color),0_20px_40px_-15px_rgba(0,0,0,0.8)] transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-2 flex flex-col justify-between ${item.colSpan}`}
+                    className={`group relative rounded-[2rem] overflow-hidden bg-gradient-to-b from-[#fafafa] to-[#f4f4f5] border border-black/[0.06] hover:border-[var(--border-glow)] hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.8),0_0_30px_var(--glow-color),0_20px_40px_-15px_rgba(0,0,0,0.05)] transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-2 flex flex-col justify-between ${item.colSpan}`}
                     style={{
-                      boxShadow: "inset 0 1px 0 0 rgba(255, 255, 255, 0.05), 0 20px 40px -15px rgba(0,0,0,0.8)",
-                      "--glow-color": "rgba(0, 255, 136, 0.15)",
-                      "--border-glow": "rgba(0, 255, 136, 0.25)",
+                      boxShadow: "inset 0 1px 0 0 rgba(255, 255, 255, 0.8), 0 20px 40px -15px rgba(0,0,0,0.05)",
+                      "--glow-color": "rgba(4, 120, 87, 0.05)",
+                      "--border-glow": "rgba(4, 120, 87, 0.15)",
                     } as React.CSSProperties}
                   >
                     {/* Ambient Radial Gradient Background inside Card */}
                     <div 
-                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 ease-out pointer-events-none mix-blend-screen"
+                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 ease-out pointer-events-none mix-blend-multiply"
                       style={{ background: `radial-gradient(circle at top left, ${item.bgGlow}, transparent 70%)` }}
                     ></div>
 
                     {/* Technical Blueprints / Signature Visuals with Soft Gradient Mask */}
                     <div 
-                      className="absolute -bottom-10 -right-10 opacity-[0.03] group-hover:opacity-[0.1] transition-all duration-1000 group-hover:scale-105 pointer-events-none mix-blend-plus-lighter text-white group-hover:text-[#00FF88]"
+                      className="absolute -bottom-10 -right-10 opacity-[0.03] group-hover:opacity-[0.1] transition-all duration-1000 group-hover:scale-105 pointer-events-none mix-blend-multiply text-black group-hover:text-emerald-700"
                       style={{
                         maskImage: "radial-gradient(circle at center, black 30%, transparent 75%)",
                         WebkitMaskImage: "radial-gradient(circle at center, black 30%, transparent 75%)",
@@ -248,17 +248,17 @@ export default function AboutSection() {
                     <div className="relative z-10 p-8 flex-1 flex flex-col justify-between min-h-[280px] gap-8">
                       {/* Top Section */}
                       <div className="flex items-start justify-between">
-                        <span className={`text-white/20 text-sm font-light font-sf-pro`}>
+                        <span className={`text-black/20 text-sm font-light font-sf-pro`}>
                           {item.number}
                         </span>
-                        <div className="text-white/30 group-hover:text-[#00FF88] transition-colors duration-500">
+                        <div className="text-black/30 group-hover:text-emerald-700 transition-colors duration-500">
                           <IconComponent className="w-5 h-5" strokeWidth={1.5} />
                         </div>
                       </div>
 
                       {/* Bottom Section - Text & Pills */}
                       <div className="flex flex-col gap-5">
-                        <h3 className={`text-xl font-medium text-white/80 group-hover:text-[#00FF88] transition-colors duration-500 font-nippo`}>
+                        <h3 className={`text-xl font-medium text-black/80 group-hover:text-emerald-700 transition-colors duration-500 font-nippo`}>
                           {item.category}
                         </h3>
                         
@@ -266,8 +266,8 @@ export default function AboutSection() {
                           {item.skills.map((skill, idx) => (
                             <span
                               key={idx}
-                              className={`px-3 py-1.5 rounded-full text-[10px] text-white/45 bg-white/[0.02] border border-white/[0.04] group-hover:text-[#00FF88]/80 group-hover:border-[#00FF88]/20 hover:!text-[#00FF88] hover:!border-[#00FF88]/50 transition-all duration-500 backdrop-blur-md cursor-default font-sf-pro`}
-                              style={{ boxShadow: "inset 0 1px 0 0 rgba(255, 255, 255, 0.02)" }}
+                              className={`px-3 py-1.5 rounded-full text-[10px] text-black/45 bg-black/[0.02] border border-black/[0.06] group-hover:text-emerald-700/80 group-hover:border-emerald-700/20 hover:!text-emerald-700 hover:!border-emerald-700/50 transition-all duration-500 backdrop-blur-md cursor-default font-sf-pro`}
+                              style={{ boxShadow: "inset 0 1px 0 0 rgba(255, 255, 255, 0.8)" }}
                             >
                               {skill}
                             </span>

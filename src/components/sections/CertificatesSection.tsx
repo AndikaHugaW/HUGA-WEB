@@ -205,8 +205,8 @@ function CinematicCarousel() {
               <div
                 className={`relative w-full h-full rounded-3xl overflow-hidden transition-all duration-500
                   ${isActive
-                    ? "border border-[#00ff88]/25 shadow-[0_8px_60px_-12px_rgba(0,255,136,0.18),0_0_0_1px_rgba(0,255,136,0.08)]"
-                    : "border border-white/[0.06] shadow-none"
+                    ? "border border-emerald-500/25 shadow-[0_8px_60px_-12px_rgba(4,120,87,0.15),0_0_0_1px_rgba(4,120,87,0.08)]"
+                    : "border border-black/[0.06] shadow-none"
                   }`}
               >
                 <Image
@@ -245,7 +245,7 @@ function CinematicCarousel() {
                     transition={{ duration: 0.4 }}
                   >
                     <p className="text-white text-base font-semibold font-sf-pro leading-snug">{cert.title}</p>
-                    <p className="text-[#00ff88]/70 text-xs font-sf-pro mt-1 tracking-wide">{cert.issuer}</p>
+                    <p className="text-emerald-400 text-xs font-sf-pro mt-1 tracking-wide">{cert.issuer}</p>
                   </motion.div>
                 )}
               </div>
@@ -270,13 +270,13 @@ export default function CertificatesSection() {
   });
 
   return (
-    <section ref={ref} className="relative bg-black overflow-hidden">
+    <section ref={ref} className="relative bg-white overflow-hidden">
       {/* Subtle grid */}
-      <GridBackground className="opacity-[0.18]" dotColor="rgba(0, 255, 136, 0.18)" size={28} />
+      <GridBackground className="opacity-[0.18]" dotColor="rgba(0, 0, 0, 0.05)" size={28} />
 
       {/* Ambient glows */}
-      <div className="absolute -top-40 -left-40  w-[480px] h-[480px] bg-[#00ff88]/[0.04] rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute -bottom-40 -right-40 w-[520px] h-[520px] bg-[#00ff88]/[0.03] rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute -top-40 -left-40  w-[480px] h-[480px] bg-emerald-500/[0.01] rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute -bottom-40 -right-40 w-[520px] h-[520px] bg-emerald-500/[0.01] rounded-full blur-[120px] pointer-events-none" />
 
       <div className="relative z-10 max-w-[1800px] mx-auto px-4 sm:px-6 md:px-12 lg:px-24 pt-16 sm:pt-20 md:pt-24 pb-20 sm:pb-24 md:pb-28">
 
@@ -287,8 +287,8 @@ export default function CertificatesSection() {
             className="flex items-center gap-3 mb-5"
             {...fadeUp(0.05)}
           >
-            <div className="w-6 h-px bg-[#00ff88]/50" />
-            <span className="text-[#00ff88]/70 text-[11px] font-medium tracking-[0.22em] uppercase font-sf-pro">
+            <div className="w-6 h-px bg-emerald-700/50" />
+            <span className="text-emerald-700 text-[11px] font-medium tracking-[0.22em] uppercase font-sf-pro">
               Credentials
             </span>
           </motion.div>
@@ -299,10 +299,10 @@ export default function CertificatesSection() {
             style={{ fontSize: "clamp(1.9rem, 5vw, 3.75rem)" }}
             {...fadeUp(0.12)}
           >
-            <span className="text-white">Professional </span>
+            <span className="text-black">Professional </span>
             <span
               className="text-transparent bg-clip-text"
-              style={{ backgroundImage: "linear-gradient(120deg, rgba(0,255,136,0.85) 0%, rgba(0,255,136,0.45) 100%)" }}
+              style={{ backgroundImage: "linear-gradient(120deg, #047857 0%, #10b981 100%)" }}
             >
               Certifications
             </span>
@@ -310,7 +310,7 @@ export default function CertificatesSection() {
 
           {/* Description */}
           <motion.p
-            className="text-[15px] text-white/38 max-w-[420px] leading-[1.75] font-sf-pro"
+            className="text-[15px] text-black/30 max-w-[420px] leading-[1.75] font-sf-pro"
             {...fadeUp(0.2)}
           >
             Continuously expanding expertise through industry-recognized programs and professional certifications.

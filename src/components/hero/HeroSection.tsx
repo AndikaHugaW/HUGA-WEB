@@ -310,10 +310,10 @@ export default function HeroSection() {
               className="hidden lg:flex flex-col items-end gap-6"
             >
               <div className="text-start" style={{ width: '388px' }}>
-                <p className="text-white text-xl lg:text-2xl italic font-medium font-body leading-[1.4]" style={{ textShadow: '0 2px 10px rgba(0,0,0,0.25)' }}>
+                <p className="text-white text-xl lg:text-2xl font-medium font-body leading-[1.4]" style={{ textShadow: '0 2px 10px rgba(0,0,0,0.25)' }}>
                   I&apos;m A Full Stack Developer
                 </p>
-                <p className="text-white text-xl lg:text-2xl italic font-medium font-body leading-[1.4] whitespace-nowrap" style={{ textShadow: '0 2px 10px rgba(0,0,0,0.25)' }}>
+                <p className="text-white text-xl lg:text-2xl font-medium font-body leading-[1.4] whitespace-nowrap" style={{ textShadow: '0 2px 10px rgba(0,0,0,0.25)' }}>
                   With 3+ Years Of Experience
                 </p>
               </div>
