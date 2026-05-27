@@ -86,7 +86,7 @@ export default function WelcomeSection() {
                 <TextReveal
                   text=" UI/UX DESIGNER,"
                   variant="word"
-                  className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-nippo font-bold text-emerald-700 uppercase leading-tight flex justify-center flex-wrap"
+                  className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-nippo font-bold text-blue-600 uppercase leading-tight flex justify-center flex-wrap"
                   delay={0.5}
                 />
               </div>
@@ -95,7 +95,7 @@ export default function WelcomeSection() {
               <TextReveal
                 text="CREATING MODERN,"
                 variant="word"
-                className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-nippo font-bold text-emerald-700 uppercase leading-tight flex justify-center flex-wrap"
+                className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-nippo font-bold text-blue-600 uppercase leading-tight flex justify-center flex-wrap"
                 delay={0.6}
               />
             </div>
@@ -103,7 +103,7 @@ export default function WelcomeSection() {
               <TextReveal
                 text="RESPONSIVE WEBSITES THAT"
                 variant="word"
-                className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-nippo font-bold text-emerald-700 uppercase leading-tight flex justify-center flex-wrap"
+                className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-nippo font-bold text-blue-600 uppercase leading-tight flex justify-center flex-wrap"
                 delay={0.7}
               />
             </div>
@@ -146,7 +146,7 @@ export default function WelcomeSection() {
                   rotateY: index % 2 === 0 ? 20 : -20,
                   rotateX: 15,
                   z: 50,
-                  boxShadow: "0 20px 30px rgba(4,120,87,0.15)"
+                  boxShadow: "0 20px 30px rgba(0,102,255,0.15)"
                 }}
                 whileTap={{ scale: 0.9, rotateX: 0, rotateY: 0 }}
               >

@@ -387,14 +387,14 @@ const Shader: React.FC<ShaderProps> = ({ source, uniforms, maxFps = 60 }) => {
   if (!webglOk) {
     // CSS-only fallback when WebGL is not available
     return (
-      <div className="absolute inset-0 bg-gradient-to-br from-[#00ff88]/20 via-transparent to-[#00ff88]/10 animate-pulse" />
+      <div className="absolute inset-0 bg-gradient-to-br from-[#0066ff]/20 via-transparent to-[#0066ff]/10 animate-pulse" />
     );
   }
 
   return (
     <WebGLErrorBoundary
       fallback={
-        <div className="absolute inset-0 bg-gradient-to-br from-[#00ff88]/20 via-transparent to-[#00ff88]/10 animate-pulse" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0066ff]/20 via-transparent to-[#0066ff]/10 animate-pulse" />
       }
     >
       <Canvas 

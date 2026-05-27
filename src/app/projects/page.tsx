@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -126,7 +126,7 @@ function FeaturedCard({ project, onOpen }: { project: Project; onOpen: () => voi
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
       onClick={onOpen}
-      className="relative rounded-3xl overflow-hidden border border-gray-800 hover:border-[#00ff88]/30 transition-all duration-500 min-h-[380px] sm:min-h-[480px] md:min-h-[600px] lg:min-h-[650px] cursor-pointer group mb-16"
+      className="relative rounded-3xl overflow-hidden border border-gray-800 hover:border-[#0066ff]/40 transition-all duration-500 min-h-[380px] sm:min-h-[480px] md:min-h-[600px] lg:min-h-[650px] cursor-pointer group mb-16"
     >
       {/* Background Image */}
       <Image
@@ -163,18 +163,18 @@ function FeaturedCard({ project, onOpen }: { project: Project; onOpen: () => voi
             {project.tags.slice(0, 3).map((tag, index) => (
               <div
                 key={index}
-                className="px-3 sm:px-4 py-1.5 sm:py-2 bg-[#00ff88]/20 rounded-full text-[#00ff88] text-[10px] sm:text-xs md:text-sm font-normal border border-[#00ff88]/30 font-nippo"
+                className="px-3 sm:px-4 py-1.5 sm:py-2 bg-[#0066ff]/20 rounded-full text-[#0066ff] text-[10px] sm:text-xs md:text-sm font-normal border border-[#0066ff]/30 font-nippo"
               >
                 {formatTag(tag)}
               </div>
             ))}
-            <div className="px-3 sm:px-4 py-1.5 sm:py-2 bg-[#00ff88]/20 rounded-full text-[#00ff88] text-[10px] sm:text-xs md:text-sm font-normal border border-[#00ff88]/30 font-nippo">
+            <div className="px-3 sm:px-4 py-1.5 sm:py-2 bg-[#0066ff]/20 rounded-full text-[#0066ff] text-[10px] sm:text-xs md:text-sm font-normal border border-[#0066ff]/30 font-nippo">
               {project.date || "14 May 2026"}
             </div>
           </div>
 
           {/* Right: Brand */}
-          <div className="text-[#00ff88] text-lg sm:text-xl md:text-2xl font-normal font-nippo self-start md:self-auto">
+          <div className="text-[#0066ff] text-lg sm:text-xl md:text-2xl font-normal font-nippo self-start md:self-auto">
             {project.title}
           </div>
         </motion.div>
@@ -214,20 +214,62 @@ function GridCard({ project, index, onOpen }: { project: Project; index: number;
 
       {/* Info */}
       <div className="flex flex-col gap-2 flex-grow">
-        <p className="text-[10px] font-sf-pro uppercase tracking-[0.25em] text-[#00ff88]/70">
+        <p className="text-[10px] font-sf-pro uppercase tracking-[0.25em] text-[#0066ff]/70">
           {project.category}
         </p>
-        <h3 className="font-nippo text-xl md:text-2xl font-medium text-white/85 group-hover:text-white transition-colors duration-300 leading-tight">
+        <h3 className="font-nippo text-xl md:text-2xl font-medium text-black/85 group-hover:text-black transition-colors duration-300 leading-tight">
           {project.title}
         </h3>
-        <p className="text-white/35 font-sf-pro text-[13px] leading-[1.75] line-clamp-2 font-light mt-0.5">
+        <p className="text-black/35 font-sf-pro text-[13px] leading-[1.75] line-clamp-2 font-light mt-0.5">
           {project.description}
         </p>
-        <p className="text-white/20 font-sf-pro text-[11px] tracking-wide mt-2">
+        <p className="text-black/20 font-sf-pro text-[11px] tracking-wide mt-2">
           {project.tags.slice(0, 3).map(formatTag).join(" · ")}
         </p>
       </div>
     </motion.div>
+  );
+}
+
+// ─── Filter Dropdown ─────────────────────────────────────────────────────────────
+
+function FilterDropdown({
+  categories,
+  selectedCategory,
+  onSelect,
+  isOpen,
+  onClose,
+}: {
+  categories: string[];
+  selectedCategory: string;
+  onSelect: (cat: string) => void;
+  isOpen: boolean;
+  onClose: () => void;
+}) {
+  if (!isOpen) return null;
+
+  return (
+    <>
+      <div className="fixed inset-0 z-40" onClick={onClose} />
+      <div className="absolute right-0 top-full mt-3 w-56 bg-white border border-black/10 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] overflow-hidden z-50 p-2 font-sf-pro">
+        {categories.map((cat) => (
+          <button
+            key={cat}
+            onClick={() => {
+              onSelect(cat);
+              onClose();
+            }}
+            className={`w-full text-left px-4 py-2.5 text-sm rounded-xl transition-all duration-200 ${
+              selectedCategory === cat 
+                ? "bg-[#0066ff] text-white font-medium shadow-md shadow-[#0066ff]/20" 
+                : "text-black/60 hover:bg-black/5 hover:text-black"
+            }`}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+    </>
   );
 }
 
@@ -266,7 +308,7 @@ export default function ProjectsPage() {
     : filteredProjects;
 
   return (
-    <main className="bg-[#080809] min-h-screen flex flex-col">
+    <main className="bg-white min-h-screen flex flex-col">
       <Navbar />
 
       <section className="relative pt-32 pb-24 overflow-hidden flex-grow">
@@ -274,7 +316,7 @@ export default function ProjectsPage() {
         <div
           className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[500px] pointer-events-none"
           style={{
-            background: "radial-gradient(ellipse at top, rgba(0,255,136,0.06) 0%, transparent 65%)",
+            background: "radial-gradient(ellipse at top, rgba(0,102,255,0.08) 0%, transparent 65%)",
             filter: "blur(60px)",
           }}
         />
@@ -283,11 +325,10 @@ export default function ProjectsPage() {
 
           {/* ── Page header ── */}
           <div className="mb-16">
-            {/* Centered Breadcrumbs */}
             <div className="flex justify-center mb-6">
               <Link
                 href="/"
-                className="inline-flex items-center gap-2 text-white/30 hover:text-white/60 transition-colors duration-200 font-sf-pro text-xs uppercase tracking-[0.25em]"
+                className="inline-flex items-center gap-2 text-black/30 hover:text-black/60 transition-colors duration-200 font-sf-pro text-xs uppercase tracking-[0.25em]"
               >
                 Home &gt; Projects
               </Link>
@@ -298,7 +339,7 @@ export default function ProjectsPage() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.07, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="text-center font-nippo text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight text-white mb-10 uppercase"
+              className="text-center font-nippo text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight text-black mb-10 uppercase"
             >
               Selected Work
             </motion.h1>
@@ -308,55 +349,25 @@ export default function ProjectsPage() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.15 }}
-              className="relative max-w-3xl mx-auto mb-8 z-20"
+              className="relative max-w-3xl mx-auto mb-8 z-20 flex justify-center"
             >
-              <SearchComponent
-                value={searchQuery}
-                onChange={setSearchQuery}
-                placeholder="Search projects..."
-                onFilterClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                selectedCategory={selectedCategory}
-              />
+              <div className="relative w-full max-w-2xl">
+                <SearchComponent
+                  value={searchQuery}
+                  onChange={setSearchQuery}
+                  onFilterClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                  selectedCategory={selectedCategory}
+                />
 
-              {/* Dropdown */}
-              <AnimatePresence>
-                {isDropdownOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 8, scale: 0.98 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: 8, scale: 0.98 }}
-                    transition={{ duration: 0.18, ease: "easeOut" }}
-                    className="absolute z-50 right-0 w-[300px] mt-3 bg-[#111115] border border-white/[0.07] rounded-2xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.6)] backdrop-blur-xl"
-                  >
-                    <div className="px-4 pt-4 pb-2 border-b border-white/[0.05]">
-                      <p className="text-white/25 text-[10px] uppercase tracking-widest font-sf-pro">Filter by Category</p>
-                    </div>
-                    <div className="p-2 flex flex-col gap-0.5">
-                      {categories.map((cat) => (
-                        <button
-                          key={cat}
-                          onClick={() => { setSelectedCategory(cat); setIsDropdownOpen(false); }}
-                          className={`w-full text-left px-4 py-3 rounded-xl transition-all duration-150 font-sf-pro text-sm flex items-center justify-between ${
-                            selectedCategory === cat
-                              ? "text-[#00ff88] bg-[rgba(0,255,136,0.06)] border border-[rgba(0,255,136,0.1)]"
-                              : "text-white/45 border border-transparent hover:text-white/70 hover:bg-white/[0.03]"
-                          }`}
-                        >
-                          <span className="flex items-center gap-3">
-                            <span className={`w-1.5 h-1.5 rounded-full ${selectedCategory === cat ? "bg-[#00ff88]" : "bg-white/15"}`} />
-                            {cat}
-                          </span>
-                          {selectedCategory === cat && (
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                              <polyline points="20 6 9 17 4 12" />
-                            </svg>
-                          )}
-                        </button>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                {/* Dropdown */}
+                <FilterDropdown
+                  categories={categories}
+                  selectedCategory={selectedCategory}
+                  onSelect={setSelectedCategory}
+                  isOpen={isDropdownOpen}
+                  onClose={() => setIsDropdownOpen(false)}
+                />
+              </div>
             </motion.div>
 
             {/* Centered Category Pills */}
@@ -364,7 +375,7 @@ export default function ProjectsPage() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.22 }}
-              className="flex flex-wrap items-center justify-center gap-3 max-w-4xl mx-auto mb-16"
+              className="flex flex-wrap items-center justify-center gap-3 max-w-4xl mx-auto"
             >
               {categories.map((cat) => {
                 const isActive = selectedCategory === cat;
@@ -372,10 +383,10 @@ export default function ProjectsPage() {
                   <button
                     key={cat}
                     onClick={() => setSelectedCategory(cat)}
-                    className={`px-5 py-2.5 rounded-full text-xs font-semibold font-sf-pro tracking-wider transition-all duration-300 border ${
+                    className={`px-5 py-2.5 rounded-full text-xs font-bold font-sf-pro tracking-wider transition-all duration-300 border ${
                       isActive
-                        ? "bg-white text-black border-white"
-                        : "bg-transparent text-white/50 border-white/10 hover:border-white/30 hover:text-white"
+                        ? "bg-[#0066ff] text-white border-[#0066ff] shadow-lg shadow-[#0066ff]/20"
+                        : "bg-transparent text-black/50 border-black/[0.08] hover:border-[#0066ff]/40 hover:text-[#0066ff] hover:bg-[#0066ff]/5"
                     }`}
                   >
                     {cat}
@@ -399,13 +410,13 @@ export default function ProjectsPage() {
               {/* Divider / Section Header (Tous les projets style) */}
               {gridProjects.length > 0 && (
                 <div className="flex items-center justify-between mb-12 pt-8">
-                  <h3 className="font-nippo text-lg sm:text-2xl md:text-3xl lg:text-4xl font-normal text-white uppercase tracking-wide">
+                  <h3 className="font-nippo text-lg sm:text-2xl md:text-3xl lg:text-4xl font-normal text-black uppercase tracking-wide">
                     All Projects
                   </h3>
 
                   <div className="relative flex items-center justify-end cursor-pointer group">
                     {/* Pill */}
-                    <div className="px-5 py-2.5 bg-[#00ff88]/5 backdrop-blur-md border border-[#00ff88]/15 group-hover:border-[#00ff88]/35 rounded-full text-white/80 group-hover:text-white text-xs font-semibold font-sf-pro tracking-wider transition-all duration-300 shadow-[0_4px_20px_rgba(0,255,136,0.04)]">
+                    <div className="px-5 py-2.5 bg-[#0066ff]/5 backdrop-blur-md border border-[#0066ff]/15 group-hover:border-[#0066ff]/35 rounded-full text-black/80 group-hover:text-black text-xs font-semibold font-sf-pro tracking-wider transition-all duration-300 shadow-[0_4px_20px_rgba(0,102,255,0.04)]">
                       Gallery View
                     </div>
                   </div>
@@ -428,10 +439,10 @@ export default function ProjectsPage() {
             </>
           ) : (
             <div className="py-32 text-center border border-white/[0.05] rounded-3xl">
-              <p className="text-white/30 text-lg mb-4 font-sf-pro">No projects found.</p>
+              <p className="text-black/30 text-lg mb-4 font-sf-pro">No projects found.</p>
               <button
                 onClick={() => { setSearchQuery(""); setSelectedCategory("All Projects"); }}
-                className="text-[#00ff88] font-sf-pro text-sm hover:underline"
+                className="text-[#0066ff] font-sf-pro text-sm hover:underline"
               >
                 Clear all filters
               </button>

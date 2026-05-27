@@ -111,7 +111,7 @@ export default function RecentProjectsSection() {
               initial={{ scale: 0, rotate: -180 }}
               animate={isInView ? { scale: 1, rotate: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.3, type: "spring" }}
-              className="text-emerald-700 text-2xl font-bold"
+              className="text-blue-600 text-2xl font-bold"
             >
               *
             </motion.div>
@@ -125,7 +125,7 @@ export default function RecentProjectsSection() {
 
           {/* Right: Explore Work Link */}
           <MagneticButton
-            className="flex items-center gap-2 text-emerald-700 hover:text-emerald-800 font-medium text-lg transition-colors"
+            className="flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium text-lg transition-colors"
             magneticStrength={0.3}
           >
             <span className="font-normal font-nippo">Explore Work</span>
@@ -147,7 +147,7 @@ export default function RecentProjectsSection() {
         </motion.div>
 
         {/* Featured Project Card */}
-        <div className="relative rounded-3xl overflow-hidden border border-gray-200 hover:border-emerald-700/30 transition-all duration-500 min-h-[800px]">
+        <div className="relative rounded-3xl overflow-hidden border border-gray-200 hover:border-blue-600/30 transition-all duration-500 min-h-[800px]">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentIndex}
@@ -179,17 +179,17 @@ export default function RecentProjectsSection() {
                   {/* Left: Tags */}
                   <div className="flex flex-wrap items-center gap-4">
                     {currentProject.tags && currentProject.tags.map((tag, index) => (
-                      <div key={index} className="px-4 py-2 bg-[#00ff88]/20 rounded-full text-[#00ff88] text-sm font-normal border border-[#00ff88]/30 font-nippo">
+                      <div key={index} className="px-4 py-2 bg-white/20 rounded-full text-white text-sm font-normal border border-white/30 font-nippo">
                         {tag}
                       </div>
                     ))}
-                    <div className="px-4 py-2 bg-[#00ff88]/20 rounded-full text-[#00ff88] text-sm font-normal border border-[#00ff88]/30 font-nippo">
+                    <div className="px-4 py-2 bg-white/20 rounded-full text-white text-sm font-normal border border-white/30 font-nippo">
                       {currentProject.date}
                     </div>
                   </div>
 
                   {/* Right: Brand */}
-                  <div className="text-[#00ff88] text-xl md:text-2xl font-normal font-nippo">
+                  <div className="text-white text-xl md:text-2xl font-normal font-nippo">
                     {currentProject.brand}
                   </div>
                 </motion.div>

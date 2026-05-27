@@ -108,7 +108,7 @@ const expertise = [
     skills: ["LLMs", "RAG", "Agentic Systems"],
     colSpan: "md:col-span-2",
     color: "#00FF88",
-    bgGlow: "rgba(0, 255, 136, 0.05)",
+    bgGlow: "rgba(0, 102, 255, 0.05)",
   },
 ];
 
@@ -135,7 +135,7 @@ export default function AboutSection() {
       </div>
         
       {/* Massive Ambient Gradient Fog */}
-      <div className="absolute top-[10%] left-[-10%] w-[60%] h-[800px] rounded-[100%] bg-[radial-gradient(ellipse_at_center,rgba(4,120,87,0.03),transparent_60%)] blur-[120px] pointer-events-none"></div>
+      <div className="absolute top-[10%] left-[-10%] w-[60%] h-[800px] rounded-[100%] bg-[radial-gradient(ellipse_at_center,rgba(0,102,255,0.05),transparent_60%)] blur-[120px] pointer-events-none"></div>
       <div className="absolute bottom-[-10%] right-[-10%] w-[70%] h-[800px] rounded-[100%] bg-[radial-gradient(ellipse_at_center,rgba(123,97,255,0.03),transparent_60%)] blur-[120px] pointer-events-none"></div>
 
       <div className="relative z-10 max-w-[1800px] mx-auto px-6 md:px-12 lg:px-24">
@@ -165,19 +165,19 @@ export default function AboutSection() {
                 </div>
                 
                 {/* Available for Work Status Badge */}
-                <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20">
+                <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20">
                   <span className="relative flex h-1.5 w-1.5">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-blue-500"></span>
                   </span>
-                  <span className="text-emerald-700 text-[9px] font-medium tracking-wider uppercase">Available for work</span>
+                  <span className="text-blue-600 text-[9px] font-medium tracking-wider uppercase">Available for work</span>
                 </div>
               </div>
               
               {/* Cinematic Headline */}
               <h2 className={`text-5xl md:text-6xl lg:text-[4rem] font-medium text-black tracking-tight leading-[1.05] mb-10 font-nippo`}>
                 Building Intelligent <br />
-                <span className="text-transparent italic font-light" style={{ WebkitTextStroke: "1px rgba(4, 120, 87, 0.4)" }}>Digital Systems.</span>
+                <span className="text-transparent italic font-light" style={{ WebkitTextStroke: "1px rgba(0, 102, 255, 0.4)" }}>Digital Systems.</span>
               </h2>
 
               {/* Modern Intro Paragraph (Luxury Typography) */}
@@ -235,7 +235,7 @@ export default function AboutSection() {
 
                     {/* Technical Blueprints / Signature Visuals with Soft Gradient Mask */}
                     <div 
-                      className="absolute -bottom-10 -right-10 opacity-[0.03] group-hover:opacity-[0.1] transition-all duration-1000 group-hover:scale-105 pointer-events-none mix-blend-multiply text-black group-hover:text-emerald-700"
+                      className="absolute -bottom-10 -right-10 opacity-[0.03] group-hover:opacity-[0.1] transition-all duration-1000 group-hover:scale-105 pointer-events-none mix-blend-multiply text-black group-hover:text-blue-600"
                       style={{
                         maskImage: "radial-gradient(circle at center, black 30%, transparent 75%)",
                         WebkitMaskImage: "radial-gradient(circle at center, black 30%, transparent 75%)",
@@ -251,14 +251,14 @@ export default function AboutSection() {
                         <span className={`text-black/20 text-sm font-light font-sf-pro`}>
                           {item.number}
                         </span>
-                        <div className="text-black/30 group-hover:text-emerald-700 transition-colors duration-500">
+                        <div className="text-black/30 group-hover:text-blue-600 transition-colors duration-500">
                           <IconComponent className="w-5 h-5" strokeWidth={1.5} />
                         </div>
                       </div>
 
                       {/* Bottom Section - Text & Pills */}
                       <div className="flex flex-col gap-5">
-                        <h3 className={`text-xl font-medium text-black/80 group-hover:text-emerald-700 transition-colors duration-500 font-nippo`}>
+                        <h3 className={`text-xl font-medium text-black/80 group-hover:text-blue-600 transition-colors duration-500 font-nippo`}>
                           {item.category}
                         </h3>
                         
@@ -266,7 +266,7 @@ export default function AboutSection() {
                           {item.skills.map((skill, idx) => (
                             <span
                               key={idx}
-                              className={`px-3 py-1.5 rounded-full text-[10px] text-black/45 bg-black/[0.02] border border-black/[0.06] group-hover:text-emerald-700/80 group-hover:border-emerald-700/20 hover:!text-emerald-700 hover:!border-emerald-700/50 transition-all duration-500 backdrop-blur-md cursor-default font-sf-pro`}
+                              className={`px-3 py-1.5 rounded-full text-[10px] text-black/45 bg-black/[0.02] border border-black/[0.06] group-hover:text-blue-600/80 group-hover:border-blue-600/20 hover:!text-blue-600 hover:!border-blue-600/50 transition-all duration-500 backdrop-blur-md cursor-default font-sf-pro`}
                               style={{ boxShadow: "inset 0 1px 0 0 rgba(255, 255, 255, 0.8)" }}
                             >
                               {skill}

@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 
 export function GridBackground({
   className,
-  dotColor = "rgba(0, 255, 136, 0.1)",
+  dotColor = "rgba(0, 102, 255, 0.15)",
   size = 20,
 }: {
   className?: string;

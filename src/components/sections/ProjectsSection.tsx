@@ -189,7 +189,7 @@ function ProjectCard({ project, index, isInView, onSelect }: ProjectCardProps) {
                 style={{ transform: "translateZ(40px)" }}
               >
                 <div className="flex items-center gap-1.5 px-3 py-1.5 bg-black/50 backdrop-blur-md border border-white/10 rounded-full">
-                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-blue-500" />
                   <span className="text-[10px] font-medium text-white/80 tracking-wider uppercase">Featured</span>
                 </div>
               </motion.div>
@@ -205,7 +205,7 @@ function ProjectCard({ project, index, isInView, onSelect }: ProjectCardProps) {
               <span className="text-xs font-light text-black/30 font-mono">
                 {String(index + 1).padStart(2, "0")}
               </span>
-              <h3 className="text-xl lg:text-2xl font-medium text-black tracking-tight transition-colors duration-300 group-hover:text-emerald-700">
+              <h3 className="text-xl lg:text-2xl font-medium text-black tracking-tight transition-colors duration-300 group-hover:text-blue-600">
                 {project.title}
               </h3>
             </div>
@@ -225,7 +225,7 @@ function ProjectCard({ project, index, isInView, onSelect }: ProjectCardProps) {
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="text-black/50 group-hover:text-emerald-700 transition-colors duration-300"
+                className="text-black/50 group-hover:text-blue-600 transition-colors duration-300"
               >
                 <path d="M7 17L17 7M17 7H7M17 7V17" />
               </svg>
@@ -254,11 +254,11 @@ function ProjectCard({ project, index, isInView, onSelect }: ProjectCardProps) {
 
         {/* Bottom Accent Line */}
         <motion.div
-          className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-emerald-500 to-transparent"
+          className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-blue-500 to-transparent"
           animate={{ backgroundPosition: ["200% center", "-200% center"] }}
           transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
           style={{
-            background: "linear-gradient(90deg, transparent 0%, #047857 50%, transparent 100%)",
+            background: "linear-gradient(90deg, transparent 0%, #0066ff 50%, transparent 100%)",
             backgroundSize: "200% 100%",
             opacity: isHovered ? 1 : 0,
           }}
@@ -269,7 +269,7 @@ function ProjectCard({ project, index, isInView, onSelect }: ProjectCardProps) {
       <motion.div
         className="absolute inset-0 rounded-2xl pointer-events-none"
         style={{
-          background: "radial-gradient(circle at 50% 50%, rgba(4, 120, 87, 0.05) 0%, transparent 70%)",
+          background: "radial-gradient(circle at 50% 50%, rgba(0, 102, 255, 0.08) 0%, transparent 70%)",
           transform: "translateZ(-50px)",
           opacity: isHovered ? 1 : 0,
         }}
@@ -297,8 +297,8 @@ export default function ProjectsSection() {
               transition={{ duration: 0.6 }}
               className="flex items-center gap-3 mb-4"
             >
-              <div className="w-8 h-[1px] bg-emerald-700" />
-              <span className="text-[11px] font-medium text-emerald-700 tracking-[0.3em] uppercase">
+              <div className="w-8 h-[1px] bg-blue-600" />
+              <span className="text-[11px] font-medium text-blue-600 tracking-[0.3em] uppercase">
                 Portfolio
               </span>
             </motion.div>

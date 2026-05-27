@@ -76,7 +76,7 @@ html, body {
   }
   
   .stroke-text {
-    -webkit-text-stroke: 3px #00ff88;
+    -webkit-text-stroke: 3px #0066ff;
     -webkit-text-fill-color: transparent;
     transition: all 0.3s ease;
   }
@@ -104,14 +104,14 @@ html, body {
   
   .glitch::before {
     left: 2px;
-    text-shadow: -2px 0 #00ff88;
+    text-shadow: -2px 0 #0066ff;
     clip: rect(44px, 450px, 56px, 0);
     animation: glitch-anim 5s infinite linear alternate-reverse;
   }
-  
+
   .glitch::after {
     left: -2px;
-    text-shadow: -2px 0 #00ff88, 2px 2px #00ff88;
+    text-shadow: -2px 0 #0066ff, 2px 2px #0066ff;
     clip: rect(44px, 450px, 56px, 0);
     animation: glitch-anim-2 1s infinite linear alternate-reverse;
   }
@@ -203,3 +203,13 @@ html, body {
 .animate-fadeup {
   animation: fadeUp 0.8s ease forwards;
 }
+
+/* Scrollbar Hide Utility */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+

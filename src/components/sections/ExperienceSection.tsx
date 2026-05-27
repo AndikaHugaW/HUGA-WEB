@@ -90,13 +90,13 @@ function ExperienceRow({
         </span>
 
         {/* Left: role title — flush left, aligns with heading */}
-        <h3 className="text-xl md:text-2xl lg:text-3xl font-medium font-nippo text-black/75 group-hover:text-emerald-700 transition-colors duration-300 tracking-tight truncate min-w-0">
+        <h3 className="text-xl md:text-2xl lg:text-3xl font-medium font-nippo text-black/75 group-hover:text-blue-600 transition-colors duration-300 tracking-tight truncate min-w-0">
           {exp.role}
         </h3>
 
         {/* Right: type tag + company + period + toggle */}
         <div className="flex items-center gap-4 md:gap-8 shrink-0">
-          <span className="hidden lg:block text-[11px] font-sf-pro uppercase tracking-[0.2em] text-emerald-700/60">
+          <span className="hidden lg:block text-[11px] font-sf-pro uppercase tracking-[0.2em] text-blue-600/60">
             {exp.type}
           </span>
           <span className="hidden sm:block text-sm font-sf-pro text-black/40 font-light">
@@ -141,7 +141,7 @@ function ExperienceRow({
                 {exp.stack.map((s) => (
                   <span
                     key={s}
-                    className="px-3.5 py-1.5 text-[11px] font-sf-pro tracking-wide text-black/45 border border-black/[0.06] rounded-full bg-black/[0.02] hover:text-emerald-700 hover:border-emerald-700/30 transition-all duration-200"
+                    className="px-3.5 py-1.5 text-[11px] font-sf-pro tracking-wide text-black/45 border border-black/[0.06] rounded-full bg-black/[0.02] hover:text-blue-600 hover:border-blue-600/30 transition-all duration-200"
                   >
                     {s}
                   </span>
@@ -179,7 +179,7 @@ export default function ExperienceSection() {
       <div
         className="absolute top-0 left-0 w-[480px] h-[480px] -translate-x-1/3 -translate-y-1/3 rounded-full pointer-events-none"
         style={{
-          background: "radial-gradient(circle, rgba(4,120,87,0.02) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(0,102,255,0.05) 0%, transparent 70%)",
           filter: "blur(60px)",
         }}
       />
@@ -196,8 +196,8 @@ export default function ExperienceSection() {
               transition={{ duration: 0.6 }}
               className="flex items-center gap-3"
             >
-              <span className="w-5 h-px bg-emerald-700/30" />
-              <span className="text-[10px] font-sf-pro uppercase tracking-[0.3em] text-emerald-700">
+              <span className="w-5 h-px bg-blue-600/30" />
+              <span className="text-[10px] font-sf-pro uppercase tracking-[0.3em] text-blue-600">
                 Work History
               </span>
             </motion.div>

@@ -53,7 +53,7 @@ export default function WhatIDoSection() {
       {/* Grid Background */}
       <GridBackground 
         className="opacity-40" 
-        dotColor="rgba(0, 255, 136, 0.2)"
+        dotColor="rgba(0, 102, 255, 0.2)"
         size={20}
       />
 
@@ -144,7 +144,7 @@ export default function WhatIDoSection() {
                         key={index}
                         className={`px-4 py-2 rounded-full text-sm font-normal font-sf-pro border transition-all duration-300 ${
                           isHighlighted
-                            ? "border-[#00ff88] text-[#00ff88]"
+                            ? "border-[#0066ff] text-[#0066ff]"
                             : "border-gray-600 text-gray-400"
                         }`}
                       >

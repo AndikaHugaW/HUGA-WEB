@@ -104,7 +104,7 @@ export default function ContactSection() {
             initial={{ opacity: 0, x: -50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="h-1 w-32 bg-emerald-700 rounded-full mx-auto"
+            className="h-1 w-32 bg-blue-600 rounded-full mx-auto"
           />
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -145,7 +145,7 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <p className="text-black/30 text-sm font-normal font-sf-pro">Email</p>
-                  <a href="mailto:andikahuga34@gmail.com" className="text-black hover:text-emerald-700 transition-colors font-normal font-sf-pro">
+                  <a href="mailto:andikahuga34@gmail.com" className="text-black hover:text-blue-600 transition-colors font-normal font-sf-pro">
                     andikahuga34@gmail.com
                   </a>
                 </div>
@@ -214,7 +214,7 @@ export default function ContactSection() {
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   required
-                  className="w-full px-4 py-3 bg-black/[0.02] border border-black/10 text-black focus:outline-none focus:border-emerald-700 focus:bg-black/[0.04] transition-all duration-300"
+                  className="w-full px-4 py-3 bg-black/[0.02] border border-black/10 text-black focus:outline-none focus:border-blue-600 focus:bg-black/[0.04] transition-all duration-300"
                   placeholder="Your Name"
                 />
               </div>
@@ -229,7 +229,7 @@ export default function ContactSection() {
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   required
-                  className="w-full px-4 py-3 bg-black/[0.02] border border-black/10 text-black focus:outline-none focus:border-emerald-700 focus:bg-black/[0.04] transition-all duration-300"
+                  className="w-full px-4 py-3 bg-black/[0.02] border border-black/10 text-black focus:outline-none focus:border-blue-600 focus:bg-black/[0.04] transition-all duration-300"
                   placeholder="email@example.com"
                 />
               </div>
@@ -244,7 +244,7 @@ export default function ContactSection() {
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   required
                   rows={6}
-                  className="w-full px-4 py-3 bg-black/[0.02] border border-black/10 text-black focus:outline-none focus:border-emerald-700 focus:bg-black/[0.04] transition-all duration-300 resize-none"
+                  className="w-full px-4 py-3 bg-black/[0.02] border border-black/10 text-black focus:outline-none focus:border-blue-600 focus:bg-black/[0.04] transition-all duration-300 resize-none"
                   placeholder="Write your message here..."
                 />
               </div>
@@ -252,7 +252,7 @@ export default function ContactSection() {
               <MagneticButton
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full px-8 py-4 bg-emerald-700 text-white font-semibold font-sf-pro rounded-lg shadow-lg shadow-emerald-700/10 hover:bg-emerald-800 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full px-8 py-4 bg-blue-600 text-white font-semibold font-sf-pro rounded-lg shadow-lg shadow-blue-600/10 hover:bg-blue-700 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 magneticStrength={0.3}
               >
                 {isSubmitting ? "Sending..." : "Send Message"}

@@ -134,7 +134,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
               {/* ── STICKY TOP BAR ── */}
               <div className="sticky top-0 z-50 w-full bg-[#0a0a0a]/80 backdrop-blur-md border-b border-white/[0.06] px-6 md:px-10 py-4 flex items-center justify-between">
                 <div className="flex items-center gap-2 md:gap-3">
-                  <div className="w-9 h-9 md:w-10 md:h-10 rounded-full overflow-hidden bg-gradient-to-br from-[#00ff88] to-[#00cc6a] p-0.5">
+                  <div className="w-9 h-9 md:w-10 md:h-10 rounded-full overflow-hidden bg-gradient-to-br from-[#0066ff] to-[#0055cc] p-0.5">
                     <div className="w-full h-full rounded-full overflow-hidden bg-black flex items-center justify-center">
                       <Image 
                         src="/images/hero/foto-huga.jpg" 
@@ -147,7 +147,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                   </div>
                   <div>
                     <h4 className="text-white font-bold text-[13px] md:text-sm leading-tight">Andika Huga W.</h4>
-                    <p className="hidden md:block text-[#00ff88] text-[10px] font-normal uppercase tracking-widest font-sf-pro">Available for work</p>
+                    <p className="hidden md:block text-[#0066ff] text-[10px] font-normal uppercase tracking-widest font-sf-pro">Available for work</p>
                   </div>
                 </div>
 
@@ -272,7 +272,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                     href={project.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center w-full py-4 bg-white text-black font-black rounded-xl hover:bg-[#00ff88] transition-colors duration-300"
+                    className="flex items-center justify-center w-full py-4 bg-white text-black font-black rounded-xl hover:bg-[#0066ff] hover:text-white transition-colors duration-300"
                   >
                     View Live Site
                   </a>
@@ -317,7 +317,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                 <div className="flex items-center justify-between mb-10">
                   <h3 className="text-2xl md:text-3xl font-black text-white">More Projects</h3>
                   <div className="h-px flex-1 mx-8 bg-white/[0.06] hidden md:block" />
-                  <p className="text-[#00ff88] text-[11px] font-normal uppercase tracking-widest font-sf-pro">Recommended for you</p>
+                  <p className="text-[#0066ff] text-[11px] font-normal uppercase tracking-widest font-sf-pro">Recommended for you</p>
                 </div>
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
@@ -342,7 +342,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                           <span className="px-6 py-2 bg-white text-black font-bold rounded-full text-sm">View Work</span>
                         </div>
                       </div>
-                      <h4 className="text-lg font-bold text-white group-hover:text-[#00ff88] transition-colors">{rec.title}</h4>
+                      <h4 className="text-lg font-bold text-white group-hover:text-[#0066ff] transition-colors">{rec.title}</h4>
                       <p className="text-white/40 text-sm mt-1 font-normal font-sf-pro">{rec.tags[0]} • {rec.tags[1]}</p>
                     </div>
                   ))}

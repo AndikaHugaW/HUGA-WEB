@@ -78,7 +78,7 @@ export default function Footer() {
   return (
     <footer className="relative bg-[#fafafa] border-t border-black/[0.06] overflow-hidden">
       {/* Background Glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-emerald-500/[0.01] rounded-full blur-3xl -translate-y-1/2 z-0"></div>
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-blue-500/[0.01] rounded-full blur-3xl -translate-y-1/2 z-0"></div>
       
       <div className="relative z-10 w-full px-6 md:px-12 lg:px-24 py-16 md:py-20">
         <div className="max-w-[1800px] mx-auto">
@@ -97,7 +97,7 @@ export default function Footer() {
                 alt="Huga Logo"
                 width={300}
                 height={100}
-                className="h-20 w-auto object-contain invert"
+                className="h-20 w-auto object-contain"
               />
             </div>
             <p className="text-black/30 text-sm mb-6 leading-relaxed font-normal font-sf-pro">
@@ -136,7 +136,7 @@ export default function Footer() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-black/50 hover:text-emerald-700 transition-colors duration-300 text-sm font-normal font-sf-pro"
+                    className="text-black/50 hover:text-blue-600 transition-colors duration-300 text-sm font-normal font-sf-pro"
                   >
                     {link.name}
                   </Link>
@@ -160,7 +160,7 @@ export default function Footer() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-black/50 hover:text-emerald-700 transition-colors duration-300 text-sm font-normal font-sf-pro"
+                    className="text-black/50 hover:text-blue-600 transition-colors duration-300 text-sm font-normal font-sf-pro"
                   >
                     {link.name}
                   </Link>
@@ -184,7 +184,7 @@ export default function Footer() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-black/50 hover:text-emerald-700 transition-colors duration-300 text-sm font-normal font-sf-pro"
+                    className="text-black/50 hover:text-blue-600 transition-colors duration-300 text-sm font-normal font-sf-pro"
                   >
                     {link.name}
                   </Link>
@@ -208,13 +208,13 @@ export default function Footer() {
           <div className="flex gap-6 text-sm">
             <Link
               href="#"
-              className="text-black/40 hover:text-emerald-700 transition-colors duration-300 font-normal font-sf-pro"
+              className="text-black/40 hover:text-blue-600 transition-colors duration-300 font-normal font-sf-pro"
             >
               Privacy Policy
             </Link>
             <Link
               href="#"
-              className="text-black/40 hover:text-emerald-700 transition-colors duration-300 font-normal font-sf-pro"
+              className="text-black/40 hover:text-blue-600 transition-colors duration-300 font-normal font-sf-pro"
             >
               Terms of Service
             </Link>

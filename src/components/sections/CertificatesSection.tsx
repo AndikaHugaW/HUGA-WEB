@@ -179,8 +179,6 @@ function CinematicCarousel() {
           const scale     = isActive ? 1 : Math.max(0.80, 1 - absDiff * 0.09);
           const rotY      = Math.sign(diff) * Math.min(absDiff * 8, 22);
           const opacity   = isActive ? 1 : Math.max(0.55, 1 - absDiff * 0.22);
-          // Soft-cover intensity: 0 for active, increases for neighbors
-          const coverOpacity = isActive ? 0 : Math.min(0.55, absDiff * 0.28);
 
           return (
             <motion.div
@@ -190,25 +188,8 @@ function CinematicCarousel() {
               animate={{ scale, rotateY: rotY, opacity }}
               transition={{ type: "spring", stiffness: 180, damping: 26, mass: 0.9 }}
             >
-              {/* Active glow — contained tightly so it doesn't bleed onto neighbors */}
-              {isActive && (
-                <motion.div
-                  className="absolute -inset-2 rounded-3xl pointer-events-none"
-                  style={{
-                    boxShadow: "0 0 40px 6px rgba(0,255,136,0.10)",
-                  }}
-                  initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}
-                />
-              )}
-
               {/* Card shell */}
-              <div
-                className={`relative w-full h-full rounded-3xl overflow-hidden transition-all duration-500
-                  ${isActive
-                    ? "border border-emerald-500/25 shadow-[0_8px_60px_-12px_rgba(4,120,87,0.15),0_0_0_1px_rgba(4,120,87,0.08)]"
-                    : "border border-black/[0.06] shadow-none"
-                  }`}
-              >
+              <div className="relative w-full h-full rounded-3xl overflow-hidden border border-black/[0.06] shadow-none">
                 <Image
                   src={cert.image}
                   alt={cert.title}
@@ -218,36 +199,6 @@ function CinematicCarousel() {
                   draggable={false}
                   priority={absDiff <= 1}
                 />
-
-                {/* Soft white frosted cover on non-active cards */}
-                {!isActive && (
-                  <motion.div
-                    className="absolute inset-0 pointer-events-none rounded-3xl"
-                    animate={{ opacity: coverOpacity }}
-                    transition={{ type: "spring", stiffness: 180, damping: 26, mass: 0.9 }}
-                    style={{
-                      background: [
-                        "radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.18) 0%, transparent 65%)",
-                        "linear-gradient(160deg, rgba(255,255,255,0.10) 0%, rgba(200,210,220,0.08) 40%, transparent 70%)",
-                      ].join(", "),
-                      backdropFilter: "blur(0.5px)",
-                    }}
-                  />
-                )}
-
-                {/* Active bottom label */}
-                {isActive && (
-                  <motion.div
-                    className="absolute bottom-0 inset-x-0 px-6 py-5"
-                    style={{ background: "linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 60%, transparent 100%)" }}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4 }}
-                  >
-                    <p className="text-white text-base font-semibold font-sf-pro leading-snug">{cert.title}</p>
-                    <p className="text-emerald-400 text-xs font-sf-pro mt-1 tracking-wide">{cert.issuer}</p>
-                  </motion.div>
-                )}
               </div>
             </motion.div>
           );
@@ -275,8 +226,8 @@ export default function CertificatesSection() {
       <GridBackground className="opacity-[0.18]" dotColor="rgba(0, 0, 0, 0.05)" size={28} />
 
       {/* Ambient glows */}
-      <div className="absolute -top-40 -left-40  w-[480px] h-[480px] bg-emerald-500/[0.01] rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute -bottom-40 -right-40 w-[520px] h-[520px] bg-emerald-500/[0.01] rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute -top-40 -left-40  w-[480px] h-[480px] bg-blue-500/[0.01] rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute -bottom-40 -right-40 w-[520px] h-[520px] bg-blue-500/[0.01] rounded-full blur-[120px] pointer-events-none" />
 
       <div className="relative z-10 max-w-[1800px] mx-auto px-4 sm:px-6 md:px-12 lg:px-24 pt-16 sm:pt-20 md:pt-24 pb-20 sm:pb-24 md:pb-28">
 
@@ -287,8 +238,8 @@ export default function CertificatesSection() {
             className="flex items-center gap-3 mb-5"
             {...fadeUp(0.05)}
           >
-            <div className="w-6 h-px bg-emerald-700/50" />
-            <span className="text-emerald-700 text-[11px] font-medium tracking-[0.22em] uppercase font-sf-pro">
+            <div className="w-6 h-px bg-blue-600/50" />
+            <span className="text-blue-600 text-[11px] font-medium tracking-[0.22em] uppercase font-sf-pro">
               Credentials
             </span>
           </motion.div>
@@ -300,10 +251,7 @@ export default function CertificatesSection() {
             {...fadeUp(0.12)}
           >
             <span className="text-black">Professional </span>
-            <span
-              className="text-transparent bg-clip-text"
-              style={{ backgroundImage: "linear-gradient(120deg, #047857 0%, #10b981 100%)" }}
-            >
+            <span className="text-[#0066ff]">
               Certifications
             </span>
           </motion.h2>
