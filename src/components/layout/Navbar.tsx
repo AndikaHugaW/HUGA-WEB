@@ -127,8 +127,10 @@ export default function Navbar() {
           <div className="hidden md:block z-10">
             <MagneticButton
               onClick={() => handleNavClick("#contact")}
-              className={`px-6 bg-white text-[#0066ff] font-semibold font-sf-pro rounded-full shadow-[0_4px_20px_rgba(255,255,255,0.15)] hover:bg-white/90 hover:shadow-[0_4px_30px_rgba(255,255,255,0.25)] active:scale-95 transition-all duration-300 ${
-                isScrolled ? "py-2 text-xs" : "py-2.5 text-sm"
+              className={`px-6 font-semibold font-sf-pro rounded-full active:scale-95 transition-all duration-500 ${
+                isScrolled
+                  ? "py-2 text-xs bg-white text-[#0066ff] shadow-[0_4px_20px_rgba(255,255,255,0.15)] hover:bg-white/90 hover:shadow-[0_4px_30px_rgba(255,255,255,0.25)]"
+                  : "py-2.5 text-sm text-white bg-white/[0.08] backdrop-blur-[20px] border border-white/[0.25] shadow-[0_8px_32px_rgba(255,255,255,0.06),inset_0_1px_0_rgba(255,255,255,0.15)] hover:bg-white/[0.18] hover:border-white/[0.4] hover:shadow-[0_8px_40px_rgba(255,255,255,0.12),inset_0_1px_0_rgba(255,255,255,0.25)]"
               }`}
               magneticStrength={0.3}
             >

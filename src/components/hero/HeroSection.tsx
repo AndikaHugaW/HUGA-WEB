@@ -113,8 +113,8 @@ export default function HeroSection() {
         style={{ opacity }}
         className="relative z-10 w-full h-full flex flex-col"
       >
-        {/* ========== TOP SECTION: Typography ========== */}
-        <div className="absolute inset-0 w-full flex flex-col items-center justify-start pt-[12vh] sm:pt-[14vh] lg:pt-[18vh] px-4 z-10 pointer-events-none">
+        {/* ========== TOP SECTION: Typography (behind photo on mobile) ========== */}
+        <div className="absolute inset-0 w-full flex flex-col items-center justify-start pt-[25vh] sm:pt-[25vh] lg:pt-[18vh] px-4 z-[5] lg:z-10 pointer-events-none">
           {/* Line 1: HI I'M HUGA */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -137,13 +137,13 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col sm:flex-row mt-2 sm:mt-8 lg:mt-12 gap-y-0 sm:gap-x-2 lg:gap-x-3 relative items-center pointer-events-auto"
+            className="flex flex-row mt-2 sm:mt-8 lg:mt-12 gap-x-1 sm:gap-x-2 lg:gap-x-3 relative items-center pointer-events-auto"
           >
-            <span className="text-[clamp(3.5rem,15vw,115px)] sm:text-[clamp(20px,7vw,115px)] font-black uppercase leading-[0.85] lg:leading-[0.9] tracking-[-0.02em] font-display shiny-text select-none">
+            <span className="text-[clamp(2rem,10vw,115px)] sm:text-[clamp(20px,7vw,115px)] font-black uppercase leading-[0.85] lg:leading-[0.9] tracking-[-0.02em] font-display shiny-text select-none">
               FULL
             </span>
             <span
-              className="text-[clamp(3.5rem,15vw,115px)] sm:text-[clamp(20px,7vw,115px)] font-black uppercase leading-[0.85] lg:leading-[0.9] tracking-[-0.02em] font-display hover-fill-stack cursor-pointer select-none"
+              className="text-[clamp(2rem,10vw,115px)] sm:text-[clamp(20px,7vw,115px)] font-black uppercase leading-[0.85] lg:leading-[0.9] tracking-[-0.02em] font-display hover-fill-stack cursor-pointer select-none"
               style={{
                 background: "linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.03) 100%)",
                 WebkitBackgroundClip: "text",
@@ -153,7 +153,7 @@ export default function HeroSection() {
             >
               STACK
             </span>
-            <span className="text-[clamp(3.5rem,15vw,115px)] sm:text-[clamp(20px,7vw,115px)] font-black uppercase leading-[0.85] lg:leading-[0.9] tracking-[-0.02em] font-display shiny-text select-none">
+            <span className="text-[clamp(2rem,10vw,115px)] sm:text-[clamp(20px,7vw,115px)] font-black uppercase leading-[0.85] lg:leading-[0.9] tracking-[-0.02em] font-display shiny-text select-none">
               DEV
             </span>
           </motion.div>
