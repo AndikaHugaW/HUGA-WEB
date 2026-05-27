@@ -105,63 +105,30 @@ function ProjectCard({ project, index, isInView, onSelect }: ProjectCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
 
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const rotateX = useSpring(mouseY, { stiffness: 150, damping: 20 });
-  const rotateY = useSpring(mouseX, { stiffness: 150, damping: 20 });
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    mouseX.set((x - centerX) / 10);
-    mouseY.set((y - centerY) / -10);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-    mouseX.set(0);
-    mouseY.set(0);
-  };
-
   return (
     <motion.div
       ref={cardRef}
-      initial={{ opacity: 0, y: 50, scale: 0.95 }}
-      animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+      initial={{ opacity: 0, y: 60 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{
-        duration: 0.7,
-        delay: 0.1 + index * 0.1,
-        ease: [0.25, 0.1, 0.25, 1],
+        duration: 1,
+        delay: index * 0.15,
+        ease: [0.16, 1, 0.3, 1],
       }}
-      style={{
-        rotateX,
-        rotateY,
-        transformStyle: "preserve-3d",
-        perspective: 1000,
-      }}
-      onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={handleMouseLeave}
+      onMouseLeave={() => setIsHovered(false)}
       onClick={onSelect}
-      className="group relative cursor-pointer"
+      className="group relative cursor-pointer flex flex-col w-full"
     >
-      {/* Main Card */}
-      <div className="relative bg-[#fafafa] border border-black/[0.06] rounded-2xl overflow-hidden transition-all duration-500 group-hover:border-black/[0.12] group-hover:bg-[#f4f4f5]">
-
-        {/* Image Container with 3D transform */}
-        <div
-          className="relative aspect-[4/3] overflow-hidden"
-          style={{ transform: "translateZ(30px)" }}
-        >
+      {/* Main Card Container (Old Size/Box style) */}
+      <div className="relative bg-white rounded-2xl overflow-hidden transition-all duration-500 group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.04)] flex flex-col w-full">
+        
+        {/* Image Container */}
+        <div className="relative w-full aspect-[4/3] overflow-hidden bg-[#f4f4f5]">
           <motion.div
-            className="absolute inset-0"
-            animate={{ scale: isHovered ? 1.08 : 1 }}
-            transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+            className="absolute inset-0 origin-center"
+            animate={{ scale: isHovered ? 1.05 : 1 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
             <Image
               src={project.image}
@@ -169,113 +136,86 @@ function ProjectCard({ project, index, isInView, onSelect }: ProjectCardProps) {
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover"
-              loading="lazy"
-              quality={90}
+              priority={index < 2}
+              quality={95}
             />
           </motion.div>
+          
+          {/* Soft elegant overlay */}
+          <div className="absolute inset-0 bg-black/[0.03] group-hover:bg-transparent transition-colors duration-500" />
 
-          {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
-
-          {/* Featured Badge */}
-          <AnimatePresence>
-            {project.featured && (
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ delay: 0.3, duration: 0.4 }}
-                className="absolute top-4 left-4"
-                style={{ transform: "translateZ(40px)" }}
-              >
-                <div className="flex items-center gap-1.5 px-3 py-1.5 bg-black/50 backdrop-blur-md border border-white/10 rounded-full">
-                  <div className="w-1.5 h-1.5 rounded-full bg-blue-500" />
-                  <span className="text-[10px] font-medium text-white/80 tracking-wider uppercase">Featured</span>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+          {/* View Project Badge */}
+          <motion.div
+            className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: isHovered ? 1 : 0, scale: isHovered ? 1 : 0.9 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div className="bg-white/90 backdrop-blur-xl text-black font-nippo px-7 py-3.5 rounded-full uppercase tracking-[0.15em] text-[11px] shadow-[0_10px_40px_rgba(0,0,0,0.1)] font-medium border border-white/50">
+              View Project
+            </div>
+          </motion.div>
         </div>
 
-        {/* Content with 3D transform */}
-        <div className="relative p-6 lg:p-8" style={{ transform: "translateZ(20px)" }}>
-          {/* Header Row */}
-          <div className="flex items-start justify-between gap-4 mb-4">
-            <div className="flex items-center gap-3">
-              <span className="text-xs font-light text-black/30 font-mono">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              <h3 className="text-xl lg:text-2xl font-medium text-black tracking-tight transition-colors duration-300 group-hover:text-blue-600">
+        {/* Meta Content */}
+        <div className="flex flex-col p-6 lg:p-8">
+          {/* Top Row: Index + Tags */}
+          <div className="flex items-center gap-4 mb-4">
+            <span className="text-blue-600 font-mono text-[10px] tracking-widest font-medium">
+              (0{index + 1})
+            </span>
+            <div className="h-px bg-black/10 flex-grow" />
+            <div className="flex flex-wrap items-center gap-2 text-[10px] font-mono text-black/40 uppercase tracking-widest">
+              {project.tags.slice(0, 3).map((tag, i) => (
+                <span key={i} className="flex items-center gap-2 group-hover:text-black/60 transition-colors duration-300">
+                  {tag}
+                  {i < Math.min(project.tags.length, 3) - 1 && <span className="w-1 h-1 rounded-full bg-black/20" />}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Bottom Row: Title & Arrow */}
+          <div className="flex justify-between items-end gap-4 relative">
+            <div className="flex flex-col gap-2">
+              <h3 className="font-nippo text-2xl lg:text-3xl text-black tracking-tight leading-none group-hover:text-blue-600 transition-colors duration-500">
                 {project.title}
               </h3>
+              <p className="text-black/40 text-sm font-sf-pro font-light mt-2 max-w-sm leading-relaxed opacity-0 group-hover:opacity-100 h-0 group-hover:h-auto overflow-hidden transition-all duration-500 transform translate-y-2 group-hover:translate-y-0">
+                {project.description}
+              </p>
             </div>
-
-            {/* Arrow Icon */}
+            
             <motion.div
-              animate={{ rotate: isHovered ? 45 : 0, x: isHovered ? 2 : 0 }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
-              className="w-9 h-9 rounded-full bg-black/[0.03] border border-black/[0.08] flex items-center justify-center group-hover:bg-black/[0.06] group-hover:border-black/[0.12] transition-all duration-300"
+              animate={{ rotate: isHovered ? 45 : 0, x: isHovered ? 5 : 0, y: isHovered ? -5 : 0 }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="w-12 h-12 shrink-0 rounded-full bg-[#f4f4f5] flex items-center justify-center group-hover:bg-blue-600 transition-colors duration-500"
             >
               <svg
-                width="14"
-                height="14"
+                width="16"
+                height="16"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="text-black/50 group-hover:text-blue-600 transition-colors duration-300"
+                strokeWidth="1.5"
+                className="text-black group-hover:text-white transition-colors duration-500"
               >
-                <path d="M7 17L17 7M17 7H7M17 7V17" />
+                <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </motion.div>
           </div>
-
-          {/* Description */}
-          <p className="text-sm text-black/30 leading-relaxed mb-5 line-clamp-2 group-hover:text-black/40 transition-colors duration-300">
-            {project.description}
-          </p>
-
-          {/* Tags */}
-          <div className="flex flex-wrap gap-2">
-            {project.tags.slice(0, 3).map((tag, i) => (
-              <motion.span
-                key={i}
-                className="px-3 py-1.5 text-[11px] font-medium text-black/40 tracking-wide border border-black/[0.06] rounded-full bg-black/[0.02] group-hover:border-black/[0.1] group-hover:bg-black/[0.03] group-hover:text-black/50 transition-all duration-300"
-                animate={isHovered ? { y: -2 } : { y: 0 }}
-                transition={{ duration: 0.2 }}
-              >
-                {tag}
-              </motion.span>
-            ))}
+          
+          {/* Hover Animated Bottom Line */}
+          <div className="w-full h-px bg-transparent mt-6 relative overflow-hidden">
+            <motion.div 
+              className="absolute inset-0 bg-blue-600 origin-left"
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: isHovered ? 1 : 0 }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            />
           </div>
         </div>
-
-        {/* Bottom Accent Line */}
-        <motion.div
-          className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-blue-500 to-transparent"
-          animate={{ backgroundPosition: ["200% center", "-200% center"] }}
-          transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-          style={{
-            background: "linear-gradient(90deg, transparent 0%, #0066ff 50%, transparent 100%)",
-            backgroundSize: "200% 100%",
-            opacity: isHovered ? 1 : 0,
-          }}
-        />
       </div>
-
-      {/* 3D Glow Effect */}
-      <motion.div
-        className="absolute inset-0 rounded-2xl pointer-events-none"
-        style={{
-          background: "radial-gradient(circle at 50% 50%, rgba(0, 102, 255, 0.08) 0%, transparent 70%)",
-          transform: "translateZ(-50px)",
-          opacity: isHovered ? 1 : 0,
-        }}
-        animate={{ scale: isHovered ? 1.02 : 1 }}
-        transition={{ duration: 0.4 }}
-      />
     </motion.div>
   );
 }
@@ -287,7 +227,7 @@ export default function ProjectsSection() {
 
   return (
     <section id="projects" ref={ref} className="relative py-24 lg:py-32 bg-white overflow-hidden">
-      <div className="relative max-w-[1400px] mx-auto px-6 lg:px-16">
+      <div className="relative z-10 max-w-[1800px] mx-auto px-6 md:px-12 lg:px-24">
         {/* Header */}
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-16 lg:mb-24">
           <div>
