@@ -139,13 +139,13 @@ function FeaturedCard({ project, onOpen }: { project: Project; onOpen: () => voi
       />
 
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-500" />
+      <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-500" />
 
       {/* Gradient to darken bottom for readability */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: "linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.65) 100%)",
+          background: "linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.3) 100%)",
         }}
       />
 
@@ -163,18 +163,18 @@ function FeaturedCard({ project, onOpen }: { project: Project; onOpen: () => voi
             {project.tags.slice(0, 3).map((tag, index) => (
               <div
                 key={index}
-                className="px-3 sm:px-4 py-1.5 sm:py-2 bg-[#0066ff]/20 rounded-full text-[#0066ff] text-[10px] sm:text-xs md:text-sm font-normal border border-[#0066ff]/30 font-nippo"
+                className="px-3 sm:px-4 py-1.5 sm:py-2 bg-white/20 rounded-full text-white text-[10px] sm:text-xs md:text-sm font-normal border border-white/30 font-nippo backdrop-blur-sm shadow-sm"
               >
                 {formatTag(tag)}
               </div>
             ))}
-            <div className="px-3 sm:px-4 py-1.5 sm:py-2 bg-[#0066ff]/20 rounded-full text-[#0066ff] text-[10px] sm:text-xs md:text-sm font-normal border border-[#0066ff]/30 font-nippo">
+            <div className="px-3 sm:px-4 py-1.5 sm:py-2 bg-white/20 rounded-full text-white text-[10px] sm:text-xs md:text-sm font-normal border border-white/30 font-nippo backdrop-blur-sm shadow-sm">
               {project.date || "14 May 2026"}
             </div>
           </div>
 
           {/* Right: Brand */}
-          <div className="text-[#0066ff] text-lg sm:text-xl md:text-2xl font-normal font-nippo self-start md:self-auto">
+          <div className="text-white text-lg sm:text-xl md:text-2xl font-normal font-nippo self-start md:self-auto drop-shadow-md">
             {project.title}
           </div>
         </motion.div>

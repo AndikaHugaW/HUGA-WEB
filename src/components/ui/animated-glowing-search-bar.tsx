@@ -11,31 +11,58 @@ interface SearchComponentProps {
 const SearchComponent = ({ value, onChange, placeholder = "Search...", onFilterClick, selectedCategory = "All" }: SearchComponentProps) => {
   return (
     <div className="relative flex items-center justify-center w-full">
+      <style dangerouslySetInnerHTML={{__html: `
+        @keyframes spin {
+          0% { transform: translate(-50%, -50%) rotate(0deg); }
+          100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        .animate-orb-cw::before {
+          animation: spin 3s linear infinite;
+        }
+        .group:hover .animate-orb-cw::before {
+          animation-duration: 1.5s;
+        }
+        .group:focus-within .animate-orb-cw::before {
+          animation-duration: 1s;
+        }
+      `}} />
       <div className="absolute z-[-1] w-full h-min-screen"></div>
       <div id="poda" className="relative flex items-center justify-center group w-full">
-        {/* Orb Glow Effect - Blue */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[-1] overflow-hidden h-[calc(100%+8px)] w-[calc(100%+12px)] rounded-full blur-[6px] opacity-30
+        {/* Orb 1 (Blue, Top, Moving Right/CW) - Halo */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[-1] overflow-hidden h-[calc(100%+8px)] w-[calc(100%+12px)] rounded-full blur-[6px] opacity-30 animate-orb-cw
                         before:absolute before:content-[''] before:z-[-2] before:w-[2500px] before:h-[2500px] before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2
                         before:bg-[conic-gradient(from_0deg,transparent_0deg,transparent_270deg,rgba(0,102,255,0.05)_310deg,rgba(0,102,255,0.2)_350deg,rgba(0,102,255,0.6)_360deg)]">
         </div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[-1] overflow-hidden h-[calc(100%+2px)] w-[calc(100%+2px)] rounded-full blur-[1px] opacity-60
+        {/* Orb 1 (Blue, Top, Moving Right/CW) - Core */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[-1] overflow-hidden h-[calc(100%+2px)] w-[calc(100%+2px)] rounded-full blur-[1px] opacity-60 animate-orb-cw
                         before:absolute before:content-[''] before:z-[-2] before:w-[2500px] before:h-[2500px] before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2
                         before:bg-[conic-gradient(from_0deg,transparent_0deg,transparent_270deg,rgba(0,102,255,0.1)_310deg,rgba(0,102,255,0.3)_350deg,rgba(0,102,255,0.9)_360deg)]">
         </div>
 
+        {/* Orb 2 (Blue, Bottom, Moving Left/CW) - Halo */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[-1] overflow-hidden h-[calc(100%+8px)] w-[calc(100%+12px)] rounded-full blur-[6px] opacity-30 animate-orb-cw
+                        before:absolute before:content-[''] before:z-[-2] before:w-[2500px] before:h-[2500px] before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 
+                        before:bg-[conic-gradient(from_0deg,transparent_0deg,transparent_90deg,rgba(0,102,255,0.05)_130deg,rgba(0,102,255,0.2)_170deg,rgba(0,102,255,0.6)_180deg,transparent_185deg,transparent_360deg)]">
+        </div>
+        {/* Orb 2 (Blue, Bottom, Moving Left/CW) - Core */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[-1] overflow-hidden h-[calc(100%+2px)] w-[calc(100%+2px)] rounded-full blur-[1px] opacity-60 animate-orb-cw
+                        before:absolute before:content-[''] before:z-[-2] before:w-[2500px] before:h-[2500px] before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 
+                        before:bg-[conic-gradient(from_0deg,transparent_0deg,transparent_90deg,rgba(0,102,255,0.1)_130deg,rgba(0,102,255,0.3)_170deg,rgba(0,102,255,0.9)_180deg,transparent_185deg,transparent_360deg)]">
+        </div>
+
         <div id="main" className="relative group w-full flex items-center">
-          <input
-            placeholder={placeholder}
-            type="text"
-            name="text"
+          <input 
+            placeholder={placeholder} 
+            type="text" 
+            name="text" 
             value={value}
             onChange={(e) => onChange && onChange(e.target.value)}
             className="bg-white border-2 border-black/[0.08] focus:border-[#0066ff] w-full h-[64px] rounded-full text-black pl-6 pr-[115px] sm:pr-[135px] md:pr-[185px] text-sm md:text-lg focus:outline-none placeholder-black/30 transition-all duration-300 font-sf-pro shadow-sm"
           />
 
           <div className="absolute right-2 flex items-center gap-1">
-            {/* Filter Text Button */}
-            <button
+            {/* Filter Text Button (Matches 'Shots ⌄') */}
+            <button 
               type="button"
               onClick={onFilterClick}
               className="flex items-center gap-1 px-2.5 sm:px-4 h-12 rounded-full text-black/50 hover:text-[#0066ff] hover:bg-[#0066ff]/5 transition-all duration-300 text-xs sm:text-[15px] font-medium border border-transparent hover:border-[#0066ff]/20"
@@ -47,7 +74,7 @@ const SearchComponent = ({ value, onChange, placeholder = "Search...", onFilterC
               </svg>
             </button>
 
-            {/* Search Icon Button */}
+            {/* Search Icon Button (Big round neon button on far right) */}
             <button
               type="button"
               className="h-11 w-11 sm:h-12 sm:w-12 flex items-center justify-center rounded-full bg-[#0066ff] text-white shadow-lg shadow-[#0066ff]/25 hover:shadow-xl hover:shadow-[#0066ff]/35 hover:bg-[#0055dd] active:scale-95 transition-all duration-300"
