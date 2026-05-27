@@ -109,7 +109,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="absolute inset-0 bg-black/90 backdrop-blur-sm"
+            className="absolute inset-0 bg-black/40 backdrop-blur-md"
           />
 
           {/* Scrollable Overlay Container */}
@@ -128,14 +128,14 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 30 }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="relative w-full max-w-[1440px] mx-auto bg-[#0a0a0a] min-h-screen md:min-h-0 md:rounded-3xl overflow-hidden shadow-2xl border border-white/[0.06]"
+              className="relative w-full max-w-[1440px] mx-auto bg-white min-h-screen md:min-h-0 md:rounded-3xl overflow-hidden shadow-2xl border border-black/[0.06]"
               onClick={(e) => e.stopPropagation()}
             >
               {/* ── STICKY TOP BAR ── */}
-              <div className="sticky top-0 z-50 w-full bg-[#0a0a0a]/80 backdrop-blur-md border-b border-white/[0.06] px-6 md:px-10 py-4 flex items-center justify-between">
+              <div className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-black/[0.06] px-6 md:px-10 py-4 flex items-center justify-between">
                 <div className="flex items-center gap-2 md:gap-3">
                   <div className="w-9 h-9 md:w-10 md:h-10 rounded-full overflow-hidden bg-gradient-to-br from-[#0066ff] to-[#0055cc] p-0.5">
-                    <div className="w-full h-full rounded-full overflow-hidden bg-black flex items-center justify-center">
+                    <div className="w-full h-full rounded-full overflow-hidden bg-white flex items-center justify-center">
                       <Image 
                         src="/images/hero/foto-huga.jpg" 
                         alt="Author" 
@@ -146,7 +146,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                     </div>
                   </div>
                   <div>
-                    <h4 className="text-white font-bold text-[13px] md:text-sm leading-tight">Andika Huga W.</h4>
+                    <h4 className="text-black font-bold text-[13px] md:text-sm leading-tight">Andika Huga W.</h4>
                     <p className="hidden md:block text-[#0066ff] text-[10px] font-normal uppercase tracking-widest font-sf-pro">Available for work</p>
                   </div>
                 </div>
@@ -157,8 +157,8 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                     onClick={() => setIsSaved(!isSaved)}
                     className={`h-9 md:h-10 px-3 md:px-5 rounded-xl text-[13px] md:text-sm font-bold transition-all duration-200 border ${
                       isSaved 
-                        ? "bg-white text-black border-white" 
-                        : "bg-white/5 text-white border-white/10 hover:bg-white/10"
+                        ? "bg-black text-white border-black" 
+                        : "bg-black/5 text-black border-black/10 hover:bg-black/10"
                     }`}
                   >
                     {isSaved ? "Saved" : "Save"}
@@ -170,7 +170,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                     className={`h-9 md:h-10 px-3 md:px-5 rounded-xl text-[13px] md:text-sm font-bold flex items-center gap-2 transition-all duration-300 ${
                       isLiked 
                         ? "bg-[#ea4c89] text-white shadow-[0_0_20px_rgba(234,76,137,0.4)]" 
-                        : "bg-white/5 text-white hover:bg-white/10 border border-white/10"
+                        : "bg-black/5 text-black hover:bg-black/10 border border-black/10"
                     }`}
                   >
                     <motion.svg 
@@ -186,7 +186,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
 
                   <button
                     onClick={onClose}
-                    className="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-white/5 flex items-center justify-center text-white/40 hover:text-white hover:bg-white/10 transition-all md:ml-2"
+                    className="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-black/5 flex items-center justify-center text-black/40 hover:text-black hover:bg-black/10 transition-all md:ml-2"
                   >
                     <svg className="w-[18px] h-[18px] md:w-5 md:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12" /></svg>
                   </button>
@@ -195,7 +195,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
 
               {/* ── HERO IMAGE ── */}
               <div className="w-full px-6 md:px-10 pt-8">
-                <div className="w-full overflow-hidden rounded-2xl bg-[#111] ring-1 ring-white/[0.06]">
+                <div className="w-full overflow-hidden rounded-2xl bg-[#f4f4f5] ring-1 ring-black/[0.06]">
                   <Image
                     src={project.image}
                     alt={project.title}
@@ -209,12 +209,12 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
 
               {/* ── PROJECT TITLE ── */}
               <div className="px-6 md:px-10 pt-12 pb-8">
-                <h1 className="text-3xl md:text-5xl font-black text-white mb-6 leading-tight">
+                <h1 className="text-3xl md:text-5xl font-black text-black mb-6 leading-tight">
                   {project.title}
                 </h1>
                 <div className="flex flex-wrap gap-2">
                   {project.tags.map((tag, i) => (
-                    <span key={i} className="px-3.5 py-1.5 bg-white/[0.03] border border-white/[0.06] rounded-md text-xs font-normal text-white/70 font-sf-pro transition-colors duration-300 hover:bg-white/[0.06]">
+                    <span key={i} className="px-3.5 py-1.5 bg-black/[0.03] border border-black/[0.06] rounded-md text-xs font-normal text-black/70 font-sf-pro transition-colors duration-300 hover:bg-black/[0.06]">
                       {formatTag(tag)}
                     </span>
                   ))}
@@ -222,12 +222,12 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
               </div>
 
               {/* ── TWO COLUMN BODY ── */}
-              <div className="px-6 md:px-10 pb-20 grid lg:grid-cols-12 gap-12 lg:gap-20 border-t border-white/[0.06] pt-12">
+              <div className="px-6 md:px-10 pb-20 grid lg:grid-cols-12 gap-12 lg:gap-20 border-t border-black/[0.06] pt-12">
                 <div className="lg:col-span-8 space-y-6">
-                  <p className="text-xl text-white/80 leading-relaxed font-normal font-sf-pro">
+                  <p className="text-xl text-black/80 leading-relaxed font-normal font-sf-pro">
                     {project.description}
                   </p>
-                  <div className="pt-8 space-y-8 text-white/60 leading-relaxed font-normal font-sf-pro">
+                  <div className="pt-8 space-y-8 text-black/60 leading-relaxed font-normal font-sf-pro">
                     <p>
                       This project represents a deep dive into modern user experience patterns, 
                       blending high-performance technology with an uncompromising aesthetic. 
@@ -245,22 +245,22 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                 <div className="lg:col-span-4 space-y-10">
                   <div className="space-y-6">
                     <div className="space-y-1">
-                      <span className="text-[10px] font-normal uppercase tracking-[0.2em] text-white/30 font-sf-pro">Client</span>
-                      <p className="text-white font-normal font-sf-pro">Huga Studio Inc.</p>
+                      <span className="text-[10px] font-normal uppercase tracking-[0.2em] text-black/40 font-sf-pro">Client</span>
+                      <p className="text-black font-normal font-sf-pro">Huga Studio Inc.</p>
                     </div>
                     <div className="space-y-1">
-                      <span className="text-[10px] font-normal uppercase tracking-[0.2em] text-white/30 font-sf-pro">Role</span>
-                      <p className="text-white font-normal font-sf-pro">Full Stack Developer & UI Designer</p>
+                      <span className="text-[10px] font-normal uppercase tracking-[0.2em] text-black/40 font-sf-pro">Role</span>
+                      <p className="text-black font-normal font-sf-pro">Full Stack Developer & UI Designer</p>
                     </div>
                     <div className="space-y-1">
-                      <span className="text-[10px] font-normal uppercase tracking-[0.2em] text-white/30 font-sf-pro">Year</span>
-                      <p className="text-white font-normal font-sf-pro">2024</p>
+                      <span className="text-[10px] font-normal uppercase tracking-[0.2em] text-black/40 font-sf-pro">Year</span>
+                      <p className="text-black font-normal font-sf-pro">2024</p>
                     </div>
                     <div className="space-y-1">
-                      <span className="text-[10px] font-normal uppercase tracking-[0.2em] text-white/30 font-sf-pro">Tools</span>
+                      <span className="text-[10px] font-normal uppercase tracking-[0.2em] text-black/40 font-sf-pro">Tools</span>
                       <div className="flex flex-wrap gap-2 pt-2">
                         {["React", "Next.js", "Framer", "Tailwind"].map(tool => (
-                          <span key={tool} className="text-[11px] font-normal text-white/60 bg-white/5 px-2.5 py-1 rounded-md border border-white/5 font-sf-pro">
+                          <span key={tool} className="text-[11px] font-normal text-black/60 bg-black/5 px-2.5 py-1 rounded-md border border-black/[0.06] font-sf-pro">
                             {tool}
                           </span>
                         ))}
@@ -272,7 +272,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                     href={project.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center w-full py-4 bg-white text-black font-black rounded-xl hover:bg-[#0066ff] hover:text-white transition-colors duration-300"
+                    className="flex items-center justify-center w-full py-4 bg-black text-white font-black rounded-xl hover:bg-[#0066ff] transition-colors duration-300"
                   >
                     View Live Site
                   </a>
@@ -281,7 +281,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
 
               {/* ── PREVIEW IMAGES ── */}
               {project.previewImages && project.previewImages.length > 0 && (
-                <div className="px-6 md:px-10 py-16 border-t border-white/[0.06]">
+                <div className="px-6 md:px-10 py-16 border-t border-black/[0.06]">
                   <div className="flex flex-col gap-10 md:gap-16">
                     {project.previewImages.map((img: any, idx) => {
                       const src = typeof img === 'string' ? img : img.src;
@@ -290,7 +290,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                       
                       return (
                         <div key={idx} className="flex flex-col gap-6">
-                          <div className="w-full overflow-hidden rounded-2xl bg-[#111] ring-1 ring-white/[0.06] group">
+                          <div className="w-full overflow-hidden rounded-2xl bg-[#f4f4f5] ring-1 ring-black/[0.06] group">
                             <Image
                               src={src}
                               alt={title || `${project.title} Preview ${idx + 1}`}
@@ -301,8 +301,8 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                           </div>
                           {(title || description) && (
                             <div className="w-full text-left space-y-3 md:space-y-5 px-1 md:px-2 mt-2">
-                              {title && <h4 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white tracking-tight">{title}</h4>}
-                              {description && <p className="text-white/70 text-base md:text-lg lg:text-xl leading-[1.8] font-normal w-full font-sf-pro">{description}</p>}
+                              {title && <h4 className="text-2xl md:text-3xl lg:text-4xl font-bold text-black tracking-tight">{title}</h4>}
+                              {description && <p className="text-black/70 text-base md:text-lg lg:text-xl leading-[1.8] font-normal w-full font-sf-pro">{description}</p>}
                             </div>
                           )}
                         </div>
@@ -313,10 +313,10 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
               )}
 
               {/* ── RECOMMENDATIONS SECTION ── */}
-              <div className="px-6 md:px-10 py-20 bg-white/[0.02] border-t border-white/[0.06]">
+              <div className="px-6 md:px-10 py-20 bg-[#fafafa] border-t border-black/[0.06]">
                 <div className="flex items-center justify-between mb-10">
-                  <h3 className="text-2xl md:text-3xl font-black text-white">More Projects</h3>
-                  <div className="h-px flex-1 mx-8 bg-white/[0.06] hidden md:block" />
+                  <h3 className="text-2xl md:text-3xl font-black text-black">More Projects</h3>
+                  <div className="h-px flex-1 mx-8 bg-black/[0.06] hidden md:block" />
                   <p className="text-[#0066ff] text-[11px] font-normal uppercase tracking-widest font-sf-pro">Recommended for you</p>
                 </div>
                 
@@ -331,19 +331,19 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                         // the parent should handle this. For now, we scroll to top.
                       }}
                     >
-                      <div className="relative aspect-[4/3] overflow-hidden rounded-2xl mb-4 bg-[#111]">
+                      <div className="relative aspect-[4/3] overflow-hidden rounded-2xl mb-4 bg-[#f4f4f5]">
                         <Image
                           src={rec.image}
                           alt={rec.title}
                           fill
                           className="object-cover group-hover:scale-105 transition-transform duration-500"
                         />
-                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                          <span className="px-6 py-2 bg-white text-black font-bold rounded-full text-sm">View Work</span>
+                        <div className="absolute inset-0 bg-white/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                          <span className="px-6 py-2 bg-black text-white font-bold rounded-full text-sm shadow-xl">View Work</span>
                         </div>
                       </div>
-                      <h4 className="text-lg font-bold text-white group-hover:text-[#0066ff] transition-colors">{rec.title}</h4>
-                      <p className="text-white/40 text-sm mt-1 font-normal font-sf-pro">{rec.tags[0]} • {rec.tags[1]}</p>
+                      <h4 className="text-lg font-bold text-black group-hover:text-[#0066ff] transition-colors">{rec.title}</h4>
+                      <p className="text-black/40 text-sm mt-1 font-normal font-sf-pro">{rec.tags[0]} • {rec.tags[1]}</p>
                     </div>
                   ))}
                 </div>
