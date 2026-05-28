@@ -228,19 +228,21 @@ export default function Navbar() {
               />
             </motion.div>
 
-            {/* Hamburger Button (Restored original style without text) */}
+            {/* Custom Premium 3-Line Menu Icon (Awwwards Professional Standard) */}
             <button
               onClick={() => setIsMobileMenuOpen(true)}
-              className={`w-10 h-10 rounded-full flex flex-col justify-center items-center gap-[4.5px] relative focus:outline-none transition-all duration-300 active:scale-95 border
+              className={`w-10 h-10 rounded-full flex items-center justify-center relative focus:outline-none transition-all duration-300 active:scale-95 border
                 ${isScrolled 
-                  ? "bg-white/10 border-white/10" 
-                  : "bg-white/5 border-white/10"
+                  ? "bg-white/10 border-white/15 hover:bg-white/20" 
+                  : "bg-white/5 border-white/10 hover:bg-white/10"
                 }`}
               aria-label="Open menu"
             >
-              <span className="w-4.5 h-[1.5px] rounded-full bg-white transition-colors duration-300" />
-              <span className="w-3.5 h-[1.5px] rounded-full bg-white transition-colors duration-300" />
-              <span className="w-4.5 h-[1.5px] rounded-full bg-white transition-colors duration-300" />
+              <div className="flex flex-col gap-[3.5px] items-end justify-center">
+                <span className="w-[18px] h-[1.5px] bg-white rounded-full transition-all duration-300" />
+                <span className="w-[12px] h-[1.5px] bg-white rounded-full transition-all duration-300" />
+                <span className="w-[16px] h-[1.5px] bg-white rounded-full transition-all duration-300" />
+              </div>
             </button>
           </div>
         </motion.nav>
