@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import MagneticButton from "@/components/ui/MagneticButton";
@@ -16,7 +16,6 @@ const navItems = [
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const pathname = usePathname();
   const router = useRouter();
@@ -24,8 +23,6 @@ export default function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
-
-      // Track active section only on home page
       if (pathname === "/") {
         const sections = navItems.map(item => item.href.substring(1));
         let current = "";
@@ -33,7 +30,6 @@ export default function Navbar() {
           const element = document.getElementById(section);
           if (element) {
             const rect = element.getBoundingClientRect();
-            // Check if element is in the upper part of the viewport
             if (rect.top <= 150 && rect.bottom >= 150) {
               current = section;
               break;
@@ -43,44 +39,62 @@ export default function Navbar() {
         if (current) setActiveSection(current);
       }
     };
-
     window.addEventListener("scroll", handleScroll);
-    // Initial check
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, [pathname]);
 
   const handleNavClick = (href: string) => {
-    setIsMobileMenuOpen(false);
-    
     if (pathname === "/") {
       const element = document.querySelector(href);
       if (element) {
         element.scrollIntoView({ behavior: "smooth" });
       }
     } else {
-      // If we are on another page (e.g. /projects), redirect to homepage with the hash
       router.push(`/${href}`);
     }
   };
 
+  // Blue liquid glass bar (scrolled state)
+  const liquidGlassBar: React.CSSProperties = {
+    background: "linear-gradient(135deg, rgba(0,102,255,0.92) 0%, rgba(0,80,220,0.88) 50%, rgba(0,102,255,0.92) 100%)",
+    backdropFilter: "blur(20px) saturate(180%)",
+    WebkitBackdropFilter: "blur(20px) saturate(180%)",
+    border: "1px solid rgba(255,255,255,0.2)",
+    boxShadow: "inset 0 1px 0 rgba(255,255,255,0.2), inset 0 -0.5px 0 rgba(255,255,255,0.05), 0 12px 40px rgba(0,102,255,0.35), 0 4px 12px rgba(0,0,0,0.15)",
+  };
+
+  // Liquid glass pill (active / hover)
+  const liquidGlassPill: React.CSSProperties = {
+    background: "linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%)",
+    border: "1px solid rgba(255,255,255,0.2)",
+    boxShadow: "inset 0 1px 0 rgba(255,255,255,0.25), 0 2px 8px rgba(0,0,0,0.1)",
+    backdropFilter: "blur(12px)",
+  };
+
   return (
-    <div className={`fixed left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'top-0 md:top-6 px-0 md:px-6' : 'top-0 px-0'}`}>
+    <div className={`fixed left-0 right-0 z-50 transition-all duration-500 ${
+      isScrolled ? 'top-4 md:top-6 px-4 md:px-6' : 'top-0 px-0'
+    }`}>
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6 }}
         className={`mx-auto w-full transition-all duration-500 ${
           isScrolled
-            ? "max-w-[1400px] bg-[#0066ff]/90 backdrop-blur-[20px] border border-white/20 shadow-[0_20px_40px_rgba(0,102,255,0.3)] md:rounded-full px-[40px]"
-            : "max-w-none bg-transparent px-10 lg:px-16"
+            ? "max-w-[1400px] rounded-full px-4 md:px-[40px]"
+            : "max-w-none bg-transparent px-4 md:px-10 lg:px-16"
         }`}
+        style={isScrolled ? liquidGlassBar : undefined}
       >
-        <div className={`relative flex items-center justify-between transition-all duration-500 ${isScrolled ? 'h-[64px]' : 'h-28'}`}>
-          {/* Logo */}
+        <div className={`relative flex items-center justify-between transition-all duration-500 ${
+          isScrolled ? 'h-[52px] md:h-[64px]' : 'h-14 md:h-28'
+        }`}>
+
+          {/* Logo - Left */}
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="z-10 -ml-2 cursor-pointer"
+            className="z-10 cursor-pointer shrink-0"
             onClick={() => handleNavClick("#home")}
           >
             <Image
@@ -88,126 +102,70 @@ export default function Navbar() {
               alt="Huga Logo"
               width={300}
               height={100}
-              className={`w-auto object-contain transition-all duration-500 ${isScrolled ? 'h-10 md:h-12' : 'h-20 md:h-24'}`}
+              className={`w-auto object-contain transition-all duration-500 ${
+                isScrolled ? 'h-6 md:h-12' : 'h-9 md:h-24'
+              }`}
               priority
             />
           </motion.div>
 
-          {/* Desktop Navigation - Centered */}
-          <div className="hidden md:flex items-center gap-2 absolute left-1/2 transform -translate-x-1/2">
+          {/* Navigation - Absolute Centered (same layout as desktop) */}
+          <div className="flex items-center gap-0 md:gap-2 absolute left-1/2 transform -translate-x-1/2">
             {navItems.map((item, index) => {
               const isActive = activeSection === item.href.substring(1);
               return (
-                <MagneticButton
+                <button
                   key={index}
                   onClick={() => handleNavClick(item.href)}
-                  className={`relative px-5 py-2 rounded-full text-sm font-medium font-sf-pro transition-all duration-300 ${
-                    isActive
+                  className={`group relative rounded-full font-medium font-sf-pro transition-all duration-300
+                    px-[7px] py-1 text-[11px]
+                    md:px-5 md:py-2 md:text-sm
+                    ${isActive
                       ? "text-white"
                       : isScrolled
                         ? "text-white/80 hover:text-white"
-                        : "text-gray-400 hover:text-white"
-                  }`}
-                  magneticStrength={0.2}
+                        : "text-white/50 hover:text-white"
+                    }`}
                 >
-                  <span className="relative z-10">{item.name}</span>
+                  <span className="relative z-10 whitespace-nowrap">{item.name}</span>
+                  {/* Active: liquid glass pill */}
                   {isActive && (
                     <motion.div
                       layoutId="navbar-active"
-                      className="absolute inset-0 bg-white/[0.25] backdrop-blur-xl border border-white/40 rounded-full z-0 shadow-[0_4px_15px_rgba(255,255,255,0.1)]"
+                      className="absolute inset-0 rounded-full z-0"
+                      style={liquidGlassPill}
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
                   )}
-                </MagneticButton>
+                  {/* Hover: liquid glass pill */}
+                  {!isActive && (
+                    <div
+                      className="absolute inset-0 rounded-full z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      style={liquidGlassPill}
+                    />
+                  )}
+                </button>
               );
             })}
           </div>
 
-          {/* Contact Me Button - Right Side */}
-          <div className="hidden md:block z-10">
-            <MagneticButton
+          {/* Contact Me Button - Right */}
+          <div className="z-10 shrink-0">
+            <button
               onClick={() => handleNavClick("#contact")}
-              className={`px-6 font-semibold font-sf-pro rounded-full active:scale-95 transition-all duration-500 ${
-                isScrolled
-                  ? "py-2 text-xs bg-white text-[#0066ff] shadow-[0_4px_20px_rgba(255,255,255,0.15)] hover:bg-white/90 hover:shadow-[0_4px_30px_rgba(255,255,255,0.25)]"
-                  : "py-2.5 text-sm text-white bg-white/[0.08] backdrop-blur-[20px] border border-white/[0.25] shadow-[0_8px_32px_rgba(255,255,255,0.06),inset_0_1px_0_rgba(255,255,255,0.15)] hover:bg-white/[0.18] hover:border-white/[0.4] hover:shadow-[0_8px_40px_rgba(255,255,255,0.12),inset_0_1px_0_rgba(255,255,255,0.25)]"
-              }`}
-              magneticStrength={0.3}
+              className={`font-semibold font-sf-pro rounded-full active:scale-95 transition-all duration-500
+                px-3 py-1 text-[10px]
+                md:px-6 md:py-2 md:text-xs
+                ${isScrolled
+                  ? "bg-white text-[#0066ff] shadow-[0_4px_20px_rgba(255,255,255,0.15)] hover:bg-white/90"
+                  : "text-white bg-white/[0.08] backdrop-blur-[20px] border border-white/[0.15] shadow-[inset_0_1px_0_rgba(255,255,255,0.15),0_8px_32px_rgba(0,0,0,0.2)] hover:bg-white/[0.15] hover:border-white/[0.25]"
+                }`}
             >
               Contact Me
-            </MagneticButton>
+            </button>
           </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden w-10 h-10 flex flex-col justify-center items-center gap-1.5 z-10"
-          >
-            <motion.span
-              animate={isMobileMenuOpen ? { rotate: 45, y: 8 } : {}}
-              className="w-6 h-0.5 bg-white"
-            />
-            <motion.span
-              animate={isMobileMenuOpen ? { opacity: 0 } : {}}
-              className="w-6 h-0.5 bg-white"
-            />
-            <motion.span
-              animate={isMobileMenuOpen ? { rotate: -45, y: -8 } : {}}
-              className="w-6 h-0.5 bg-white"
-            />
-          </button>
         </div>
-
-        {/* Mobile Menu */}
-        <AnimatePresence>
-          {isMobileMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              className="md:hidden overflow-hidden border-t border-white/20"
-              style={{
-                background: isScrolled
-                  ? "rgba(0, 102, 255, 0.95)"
-                  : "rgba(0, 0, 0, 0.95)",
-                backdropFilter: "blur(20px)"
-              }}
-            >
-              <div className="py-6 space-y-2">
-                {navItems.map((item, index) => {
-                  const isActive = activeSection === item.href.substring(1);
-                  return (
-                    <motion.button
-                      key={index}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                      onClick={() => handleNavClick(item.href)}
-                      className={`block w-full text-left px-4 py-3 rounded-xl transition-all duration-300 font-medium font-sf-pro ${
-                        isActive
-                          ? "text-white bg-white/[0.25] backdrop-blur-xl border border-white/40"
-                          : "text-white/80 hover:text-white hover:bg-white/10"
-                      }`}
-                    >
-                      {item.name}
-                    </motion.button>
-                  );
-                })}
-                <motion.button
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: navItems.length * 0.1 }}
-                  onClick={() => handleNavClick("#contact")}
-                  className="w-full mt-6 px-6 py-3.5 bg-white text-[#0066ff] font-semibold font-sf-pro rounded-xl shadow-[0_4px_15px_rgba(255,255,255,0.15)] hover:bg-white/90 active:scale-95 transition-all duration-300"
-                >
-                  Contact Me
-                </motion.button>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </motion.nav>
     </div>
   );
 }
-
