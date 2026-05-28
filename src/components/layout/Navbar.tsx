@@ -246,16 +246,22 @@ export default function Navbar() {
         </motion.nav>
       </div>
 
-      {/* Awwwards Premium Mobile Floating Menu Overlay */}
+      {/* Awwwards Premium Mobile Floating Menu Overlay (Perfectly Centered & Highly Responsive) */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <div className="fixed inset-0 z-[60] md:hidden bg-black/70 backdrop-blur-md">
+          <div className="fixed inset-0 z-[60] md:hidden bg-black/70 backdrop-blur-md flex items-center justify-center p-4">
+            {/* Clickable backdrop overlay to close menu */}
+            <div 
+              className="absolute inset-0 w-full h-full" 
+              onClick={() => setIsMobileMenuOpen(false)}
+            />
+            
             <motion.div
-              initial={{ opacity: 0, y: -25, scale: 0.96, filter: "blur(10px)" }}
-              animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
-              exit={{ opacity: 0, y: -25, scale: 0.96, filter: "blur(10px)" }}
+              initial={{ opacity: 0, scale: 0.95, filter: "blur(10px)" }}
+              animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+              exit={{ opacity: 0, scale: 0.95, filter: "blur(10px)" }}
               transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute top-4 left-4 right-4 rounded-[28px] p-6 flex flex-col relative overflow-hidden"
+              className="w-full max-w-[360px] xs:max-w-[400px] rounded-[28px] p-6 flex flex-col relative overflow-hidden z-10"
               style={mobileMenuBg}
             >
               {/* Atmospheric Ambient Glow Circles */}
@@ -292,7 +298,7 @@ export default function Navbar() {
               <div className="w-full h-[1px] bg-white/[0.08] my-4 relative z-10" />
 
               {/* Navigation Items - Staggered Vertical Entrance (White text on blue bg) */}
-              <div className="flex flex-col gap-1.5 relative z-10">
+              <div className="flex flex-col gap-1.5 w-full relative z-10">
                 {navItems.map((item, index) => {
                   const isActive = activeSection === item.href.substring(1);
                   return (
