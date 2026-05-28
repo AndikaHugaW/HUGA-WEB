@@ -72,7 +72,7 @@ export default function Navbar() {
     }
   };
 
-  // Determine whether to use the Blue theme
+  // Determine whether to use the Blue theme (scrolled or on non-home pages)
   const useBlueStyle = isScrolled || pathname !== "/";
 
   // White liquid glass style (when mobile menu is opened in the Hero section)
@@ -124,7 +124,7 @@ export default function Navbar() {
     backdropFilter: "blur(12px)",
   };
 
-  // Determine active visual theme
+  // Determine active visual theme for the navbar
   const getNavbarStyle = () => {
     if (useBlueStyle) return blueLiquidGlassBar;
     if (isMobileMenuOpen) return whiteLiquidGlassBar;
