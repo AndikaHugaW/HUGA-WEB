@@ -72,10 +72,10 @@ export default function Navbar() {
     }
   };
 
-  // Determine whether to use the Blue theme or White theme
+  // Determine whether to use the Blue theme
   const useBlueStyle = isScrolled || pathname !== "/";
 
-  // White liquid glass style (for Hero section, before scrolling)
+  // White liquid glass style (when mobile menu is opened in the Hero section)
   const whiteLiquidGlassBar: React.CSSProperties = {
     background: "linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(245, 247, 250, 0.75) 100%)",
     backdropFilter: "blur(20px) saturate(180%)",
@@ -93,7 +93,14 @@ export default function Navbar() {
     boxShadow: "0 12px 40px rgba(0, 102, 255, 0.25), 0 4px 12px rgba(0, 0, 0, 0.1)",
   };
 
-  // White glass pill for blue background (active / hover)
+  // Transparent style for default hero section
+  const transparentBar: React.CSSProperties = {
+    background: "transparent",
+    borderBottom: "none",
+    boxShadow: "none",
+  };
+
+  // White glass pill for blue background
   const whiteGlassPill: React.CSSProperties = {
     background: "linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%)",
     border: "1px solid rgba(255, 255, 255, 0.2)",
@@ -101,13 +108,30 @@ export default function Navbar() {
     backdropFilter: "blur(12px)",
   };
 
-  // Light blue glass pill for white background (active / hover)
+  // Light blue glass pill for white background
   const lightBlueGlassPill: React.CSSProperties = {
     background: "linear-gradient(135deg, rgba(0, 102, 255, 0.12) 0%, rgba(0, 102, 255, 0.04) 100%)",
     border: "1px solid rgba(0, 102, 255, 0.18)",
     boxShadow: "inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 2px 6px rgba(0, 102, 255, 0.05)",
     backdropFilter: "blur(12px)",
   };
+
+  // Darker glass pill for default transparent hero section
+  const darkGlassPill: React.CSSProperties = {
+    background: "linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%)",
+    border: "1px solid rgba(255, 255, 255, 0.12)",
+    boxShadow: "inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 2px 8px rgba(0, 0, 0, 0.08)",
+    backdropFilter: "blur(12px)",
+  };
+
+  // Determine active visual theme
+  const getNavbarStyle = () => {
+    if (useBlueStyle) return blueLiquidGlassBar;
+    if (isMobileMenuOpen) return whiteLiquidGlassBar;
+    return transparentBar;
+  };
+
+  const isTextBlue = !useBlueStyle && isMobileMenuOpen;
 
   return (
     <div ref={menuRef} className="fixed top-0 left-0 right-0 w-full z-50 transition-all duration-500">
@@ -117,7 +141,7 @@ export default function Navbar() {
         animate={{ y: 0 }}
         transition={{ duration: 0.6 }}
         className="w-full transition-all duration-500 relative px-4 md:px-10 lg:px-16"
-        style={useBlueStyle ? blueLiquidGlassBar : whiteLiquidGlassBar}
+        style={getNavbarStyle()}
       >
         <div className="relative flex items-center justify-between h-[60px] md:h-[72px] transition-all duration-500">
 
@@ -150,9 +174,13 @@ export default function Navbar() {
                       ? isActive
                         ? "text-white"
                         : "text-white/70 hover:text-white"
-                      : isActive
-                        ? "text-[#0066ff]"
-                        : "text-[#0066ff]/70 hover:text-[#0066ff]"
+                      : isTextBlue
+                        ? isActive
+                          ? "text-[#0066ff]"
+                          : "text-[#0066ff]/70 hover:text-[#0066ff]"
+                        : isActive
+                          ? "text-white"
+                          : "text-white/50 hover:text-white"
                     }`}
                 >
                   <span className="relative z-10 whitespace-nowrap">{item.name}</span>
@@ -160,14 +188,14 @@ export default function Navbar() {
                     <motion.div
                       layoutId="navbar-active"
                       className="absolute inset-0 rounded-full z-0"
-                      style={useBlueStyle ? whiteGlassPill : lightBlueGlassPill}
+                      style={useBlueStyle ? whiteGlassPill : isTextBlue ? lightBlueGlassPill : darkGlassPill}
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
                   )}
                   {!isActive && (
                     <div
                       className="absolute inset-0 rounded-full z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                      style={useBlueStyle ? whiteGlassPill : lightBlueGlassPill}
+                      style={useBlueStyle ? whiteGlassPill : isTextBlue ? lightBlueGlassPill : darkGlassPill}
                     />
                   )}
                 </button>
@@ -182,7 +210,9 @@ export default function Navbar() {
               className={`font-bold font-sf-pro rounded-full active:scale-95 transition-all duration-500 px-6 py-2.5 text-xs tracking-wider uppercase
                 ${useBlueStyle
                   ? "bg-white text-[#0066ff] shadow-[0_4px_20px_rgba(255,255,255,0.15)] hover:bg-white/90"
-                  : "bg-[#0066ff] text-white shadow-[0_4px_15px_rgba(0,102,255,0.2)] hover:bg-[#0052cc]"
+                  : isTextBlue
+                    ? "bg-[#0066ff] text-white shadow-[0_4px_15px_rgba(0,102,255,0.2)] hover:bg-[#0052cc]"
+                    : "text-white bg-white/[0.08] backdrop-blur-[20px] border border-white/[0.15] shadow-[inset_0_1px_0_rgba(255,255,255,0.15),0_8px_32px_rgba(0,0,0,0.2)] hover:bg-white/[0.15] hover:border-white/[0.25]"
                 }`}
             >
               Contact Me
@@ -199,17 +229,17 @@ export default function Navbar() {
               <motion.span
                 animate={isMobileMenuOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
                 transition={{ duration: 0.2 }}
-                className={`w-5 h-[2px] rounded-full origin-center ${useBlueStyle ? "bg-white" : "bg-[#0066ff]"}`}
+                className={`w-5 h-[2px] rounded-full origin-center ${useBlueStyle ? "bg-white" : isTextBlue ? "bg-[#0066ff]" : "bg-white"}`}
               />
               <motion.span
                 animate={isMobileMenuOpen ? { opacity: 0 } : { opacity: 1 }}
                 transition={{ duration: 0.1 }}
-                className={`w-5 h-[2px] rounded-full ${useBlueStyle ? "bg-white" : "bg-[#0066ff]"}`}
+                className={`w-5 h-[2px] rounded-full ${useBlueStyle ? "bg-white" : isTextBlue ? "bg-[#0066ff]" : "bg-white"}`}
               />
               <motion.span
                 animate={isMobileMenuOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
                 transition={{ duration: 0.2 }}
-                className={`w-5 h-[2px] rounded-full origin-center ${useBlueStyle ? "bg-white" : "bg-[#0066ff]"}`}
+                className={`w-5 h-[2px] rounded-full origin-center ${useBlueStyle ? "bg-white" : isTextBlue ? "bg-[#0066ff]" : "bg-white"}`}
               />
             </button>
           </div>
@@ -239,30 +269,34 @@ export default function Navbar() {
                       ? isActive
                         ? "text-white"
                         : "text-white/70 hover:text-white"
-                      : isActive
-                        ? "text-[#0066ff]"
-                        : "text-[#0066ff]/70 hover:text-[#0066ff]"
+                      : isTextBlue
+                        ? isActive
+                          ? "text-[#0066ff]"
+                          : "text-[#0066ff]/70 hover:text-[#0066ff]"
+                        : isActive
+                          ? "text-white"
+                          : "text-white/50 hover:text-white"
                     }`}
                 >
                   <span className="relative z-10">{item.name}</span>
                   {isActive && (
                     <motion.div
                       layoutId="mobile-active-indicator"
-                      className={`w-1.5 h-1.5 rounded-full ${useBlueStyle ? "bg-white" : "bg-[#0066ff]"}`}
+                      className={`w-1.5 h-1.5 rounded-full ${useBlueStyle ? "bg-white" : isTextBlue ? "bg-[#0066ff]" : "bg-white"}`}
                     />
                   )}
                   {isActive && (
                     <motion.div
                       layoutId="mobile-navbar-active"
                       className="absolute inset-0 rounded-xl z-0"
-                      style={useBlueStyle ? whiteGlassPill : lightBlueGlassPill}
+                      style={useBlueStyle ? whiteGlassPill : isTextBlue ? lightBlueGlassPill : darkGlassPill}
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
                   )}
                   {!isActive && (
                     <div
                       className="absolute inset-0 rounded-xl z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                      style={useBlueStyle ? whiteGlassPill : lightBlueGlassPill}
+                      style={useBlueStyle ? whiteGlassPill : isTextBlue ? lightBlueGlassPill : darkGlassPill}
                     />
                   )}
                 </button>
