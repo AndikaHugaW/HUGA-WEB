@@ -79,30 +79,37 @@ export default function Navbar() {
     }
   };
 
-  // Mobile Floating Menu Theme & Styles (Premium Awwwards visual standard)
+  // Mobile Floating Menu Styles (Awwwards visual standard)
   const mobileMenuBg: React.CSSProperties = {
-    background: "linear-gradient(180deg, rgba(15, 15, 22, 0.95) 0%, rgba(10, 10, 15, 0.98) 100%)",
+    background: "linear-gradient(180deg, rgba(15, 15, 25, 0.95) 0%, rgba(10, 10, 15, 0.98) 100%)",
     backdropFilter: "blur(24px)",
     WebkitBackdropFilter: "blur(24px)",
     border: "1px solid rgba(255, 255, 255, 0.08)",
     boxShadow: "0 30px 80px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
   };
 
-  // Active item glow effect
+  // Premium active item glow style
   const activeGlowPill: React.CSSProperties = {
-    background: "linear-gradient(90deg, rgba(255, 255, 255, 0.08) 0%, rgba(0, 102, 255, 0.15) 100%)",
+    background: "linear-gradient(90deg, rgba(255, 255, 255, 0.08) 0%, rgba(124, 140, 255, 0.25) 100%)",
     border: "1px solid rgba(255, 255, 255, 0.12)",
-    boxShadow: "0 0 20px rgba(0, 102, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
+    boxShadow: "0 0 30px rgba(124, 140, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
     backdropFilter: "blur(12px)",
   };
 
-  // Scrolled mobile top bar background style
+  // Mobile Top Bar Default State (Floating glass capsule with soft blue accents)
+  const mobileDefaultBg: React.CSSProperties = {
+    background: "rgba(10, 10, 20, 0.35)",
+    backdropFilter: "blur(24px)",
+    WebkitBackdropFilter: "blur(24px)",
+    border: "1px solid rgba(255, 255, 255, 0.08)",
+    boxShadow: "inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 4px 20px rgba(0, 0, 0, 0.15)",
+  };
+
+  // Mobile Top Bar Scrolled State (Solid elegant blue)
   const mobileScrolledBg: React.CSSProperties = {
-    background: "linear-gradient(135deg, rgba(0, 102, 255, 0.95) 0%, rgba(0, 80, 220, 0.9) 100%)",
-    backdropFilter: "blur(20px) saturate(180%)",
-    WebkitBackdropFilter: "blur(20px) saturate(180%)",
-    borderBottom: "1px solid rgba(255, 255, 255, 0.2)",
-    boxShadow: "0 12px 40px rgba(0, 102, 255, 0.25), 0 4px 12px rgba(0, 0, 0, 0.1)",
+    background: "#1A34FF",
+    border: "1px solid rgba(255, 255, 255, 0.15)",
+    boxShadow: "0 20px 40px rgba(26, 52, 255, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
   };
 
   return (
@@ -189,18 +196,19 @@ export default function Navbar() {
         </motion.nav>
       </div>
 
-      {/* 2. MOBILE VERSION OF NAVBAR (RE-DESIGNED FOR AWWWARDS STANDARD) */}
-      <div className="fixed top-0 left-0 right-0 z-50 md:hidden w-full transition-all duration-500">
+      {/* 2. MOBILE VERSION OF NAVBAR (FLOATING PREMIUM PANEL PORTFOLIO STANDARD) */}
+      <div className="fixed top-4 left-4 right-4 z-50 md:hidden transition-all duration-500">
         <motion.nav
-          initial={{ y: -100 }}
-          animate={{ y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="w-full transition-all duration-500 relative px-4"
-          style={isScrolled ? mobileScrolledBg : { background: "transparent" }}
+          initial={{ y: -100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="w-full relative px-4 py-2.5 rounded-[24px] overflow-hidden transition-all duration-500"
+          style={isScrolled ? mobileScrolledBg : mobileDefaultBg}
         >
-          <div className={`relative flex items-center justify-between transition-all duration-500 ${
-            isScrolled ? 'h-14' : 'h-[72px]'
-          }`}>
+          {/* Subtle noise texture or gradient shine effect */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent pointer-events-none" />
+          
+          <div className="relative flex items-center justify-between h-[46px] transition-all duration-500">
             {/* Logo */}
             <motion.div
               whileHover={{ scale: 1.03 }}
@@ -212,22 +220,24 @@ export default function Navbar() {
                 alt="Huga Logo"
                 width={300}
                 height={100}
-                className={`w-auto object-contain transition-all duration-500 ${
-                  isScrolled ? 'h-7' : 'h-9'
-                }`}
+                className="w-auto h-7 object-contain transition-all duration-500"
                 priority
               />
             </motion.div>
 
-            {/* Hamburger circular button */}
+            {/* Hamburger Button (Soft Glow Accent) */}
             <button
               onClick={() => setIsMobileMenuOpen(true)}
-              className="w-10 h-10 rounded-full flex flex-col justify-center items-center gap-[4px] relative focus:outline-none bg-white/5 border border-white/10 active:scale-95 transition-all duration-300"
+              className={`w-10 h-10 rounded-full flex flex-col justify-center items-center gap-[4.5px] relative focus:outline-none transition-all duration-300 active:scale-95 border
+                ${isScrolled 
+                  ? "bg-white/10 border-white/10" 
+                  : "bg-white/5 border-white/10"
+                }`}
               aria-label="Open menu"
             >
-              <span className="w-4 h-[1.5px] bg-white rounded-full" />
-              <span className="w-4 h-[1.5px] bg-white rounded-full" />
-              <span className="w-4 h-[1.5px] bg-white rounded-full" />
+              <span className={`w-4.5 h-[1.5px] rounded-full transition-colors duration-300 ${isScrolled ? "bg-white" : "bg-[#8EA2FF]"}`} />
+              <span className={`w-3.5 h-[1.5px] rounded-full transition-colors duration-300 ${isScrolled ? "bg-white" : "bg-[#8EA2FF]"}`} />
+              <span className={`w-4.5 h-[1.5px] rounded-full transition-colors duration-300 ${isScrolled ? "bg-white" : "bg-[#8EA2FF]"}`} />
             </button>
           </div>
         </motion.nav>
@@ -236,17 +246,17 @@ export default function Navbar() {
       {/* Awwwards Premium Mobile Floating Menu Overlay */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <div className="fixed inset-0 z-[60] md:hidden bg-black/60 backdrop-blur-sm">
+          <div className="fixed inset-0 z-[60] md:hidden bg-black/70 backdrop-blur-md">
             <motion.div
-              initial={{ opacity: 0, y: -20, scale: 0.95, filter: "blur(8px)" }}
+              initial={{ opacity: 0, y: -25, scale: 0.96, filter: "blur(10px)" }}
               animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
-              exit={{ opacity: 0, y: -20, scale: 0.95, filter: "blur(8px)" }}
-              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              exit={{ opacity: 0, y: -25, scale: 0.96, filter: "blur(10px)" }}
+              transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
               className="absolute top-4 left-4 right-4 rounded-[28px] p-6 flex flex-col relative overflow-hidden"
               style={mobileMenuBg}
             >
               {/* Atmospheric Ambient Glow Circles */}
-              <div className="absolute -top-16 -right-16 w-48 h-48 bg-[#0066ff]/15 rounded-full blur-[70px] pointer-events-none" />
+              <div className="absolute -top-16 -right-16 w-48 h-48 bg-[#1A34FF]/15 rounded-full blur-[70px] pointer-events-none" />
               <div className="absolute -bottom-20 -left-10 w-40 h-40 bg-purple-500/10 rounded-full blur-[60px] pointer-events-none" />
 
               {/* Floating Menu Header */}
@@ -260,24 +270,26 @@ export default function Navbar() {
                   priority
                 />
 
-                {/* Circle Glass Close Button */}
-                <button
+                {/* Circle Glass Close Button with Rotation */}
+                <motion.button
+                  whileHover={{ scale: 1.05, rotate: 90 }}
+                  whileTap={{ scale: 0.95 }}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center relative focus:outline-none hover:bg-white/10 hover:scale-105 active:scale-95 transition-all duration-300"
+                  className="w-10 h-10 rounded-full bg-white/10 border border-white/10 flex items-center justify-center relative focus:outline-none transition-all duration-300"
                   aria-label="Close menu"
                 >
                   <div className="relative w-4 h-4 flex items-center justify-center">
                     <span className="absolute w-4 h-[1.5px] bg-white rounded-full rotate-45" />
                     <span className="absolute w-4 h-[1.5px] bg-white rounded-full -rotate-45" />
                   </div>
-                </button>
+                </motion.button>
               </div>
 
               {/* Thin Premium Line Divider */}
               <div className="w-full h-[1px] bg-white/[0.08] my-4 relative z-10" />
 
               {/* Navigation Items - Staggered Vertical Entrance */}
-              <div className="flex flex-col gap-2 relative z-10">
+              <div className="flex flex-col gap-1.5 relative z-10">
                 {navItems.map((item, index) => {
                   const isActive = activeSection === item.href.substring(1);
                   return (
@@ -285,13 +297,16 @@ export default function Navbar() {
                       key={index}
                       initial={{ opacity: 0, x: -16, filter: "blur(3px)" }}
                       animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-                      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1], delay: index * 0.06 + 0.1 }}
+                      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1], delay: index * 0.05 + 0.08 }}
                       onClick={() => handleNavClick(item.href)}
-                      className={`group relative rounded-xl w-full py-2.5 px-4 text-left transition-all duration-300 flex items-center`}
+                      className="group relative rounded-xl w-full py-2.5 px-4 text-left transition-all duration-300 flex items-center"
                     >
                       <span className="text-[10px] font-mono text-white/35 mr-4 tracking-wider">0{index + 1}</span>
-                      <span className={`text-[14px] font-semibold tracking-tight transition-colors duration-300 ${
-                        isActive ? "text-white" : "text-white/60 group-hover:text-white"
+                      
+                      <span className={`text-[14px] font-medium tracking-tight transition-colors duration-300 ${
+                        isActive 
+                          ? "text-[#8EA2FF]" 
+                          : "text-white/60 group-hover:text-white"
                       }`}>
                         {item.name}
                       </span>
