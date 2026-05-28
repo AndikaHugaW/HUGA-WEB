@@ -228,19 +228,21 @@ export default function Navbar() {
               />
             </motion.div>
 
-            {/* Hamburger Button */}
+            {/* Premium Pill-Shaped Menu Button (Very legible and aesthetic) */}
             <button
               onClick={() => setIsMobileMenuOpen(true)}
-              className={`w-10 h-10 rounded-full flex flex-col justify-center items-center gap-[4.5px] relative focus:outline-none transition-all duration-300 active:scale-95 border
+              className={`h-9 px-4 rounded-full flex items-center justify-center gap-2 relative focus:outline-none transition-all duration-300 active:scale-95 border
                 ${isScrolled 
-                  ? "bg-white/10 border-white/10" 
-                  : "bg-white/5 border-white/10"
+                  ? "bg-white/10 border-white/15 hover:bg-white/20" 
+                  : "bg-white/5 border-white/10 hover:bg-white/10"
                 }`}
               aria-label="Open menu"
             >
-              <span className="w-4.5 h-[1.5px] rounded-full bg-white transition-colors duration-300" />
-              <span className="w-3.5 h-[1.5px] rounded-full bg-white transition-colors duration-300" />
-              <span className="w-4.5 h-[1.5px] rounded-full bg-white transition-colors duration-300" />
+              <span className="text-[10px] font-mono tracking-widest text-white/80 font-semibold">MENU</span>
+              <div className="flex flex-col gap-[3px] items-end justify-center">
+                <span className="w-3.5 h-[1.2px] rounded-full bg-white transition-colors duration-300" />
+                <span className="w-2.5 h-[1.2px] rounded-full bg-white transition-colors duration-300" />
+              </div>
             </button>
           </div>
         </motion.nav>
