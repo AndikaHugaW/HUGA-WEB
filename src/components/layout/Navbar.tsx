@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
+import MagneticButton from "@/components/ui/MagneticButton";
 
 const navItems = [
   { name: "Home", href: "#home" },
@@ -24,6 +25,8 @@ export default function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
+
+      // Track active section only on home page
       if (pathname === "/") {
         const sections = navItems.map(item => item.href.substring(1));
         let current = "";
@@ -31,6 +34,7 @@ export default function Navbar() {
           const element = document.getElementById(section);
           if (element) {
             const rect = element.getBoundingClientRect();
+            // Check if element is in the upper part of the viewport
             if (rect.top <= 150 && rect.bottom >= 150) {
               current = section;
               break;
@@ -40,7 +44,9 @@ export default function Navbar() {
         if (current) setActiveSection(current);
       }
     };
+
     window.addEventListener("scroll", handleScroll);
+    // Initial check
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, [pathname]);
@@ -62,6 +68,7 @@ export default function Navbar() {
 
   const handleNavClick = (href: string) => {
     setIsMobileMenuOpen(false);
+    
     if (pathname === "/") {
       const element = document.querySelector(href);
       if (element) {
@@ -72,20 +79,23 @@ export default function Navbar() {
     }
   };
 
-  // Determine whether to use the Blue theme (scrolled or on non-home pages)
+  // Mobile theme logic:
+  // - useBlueStyle: scrolled state OR not on the home page (e.g. projects page)
   const useBlueStyle = isScrolled || pathname !== "/";
+  // - isTextBlue: on home page, not scrolled, but mobile menu is clicked/opened (White theme active)
+  const isTextBlue = !useBlueStyle && isMobileMenuOpen;
 
-  // White liquid glass style (when mobile menu is opened in the Hero section)
+  // Liquid glass white background style (active when mobile menu is opened in Hero section)
   const whiteLiquidGlassBar: React.CSSProperties = {
-    background: "linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(245, 247, 250, 0.75) 100%)",
+    background: "linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(245, 247, 250, 0.8) 100%)",
     backdropFilter: "blur(20px) saturate(180%)",
     WebkitBackdropFilter: "blur(20px) saturate(180%)",
     borderBottom: "1px solid rgba(0, 102, 255, 0.15)",
     boxShadow: "0 4px 20px rgba(0, 0, 0, 0.05)",
   };
 
-  // Blue liquid glass style (for after scroll and other pages like /projects)
-  const blueLiquidGlassBar: React.CSSProperties = {
+  // Liquid glass blue background style (active on mobile scrolled state or projects page dropdown)
+  const blueLiquidGlassBarMobile: React.CSSProperties = {
     background: "linear-gradient(135deg, rgba(0, 102, 255, 0.95) 0%, rgba(0, 80, 220, 0.9) 100%)",
     backdropFilter: "blur(20px) saturate(180%)",
     WebkitBackdropFilter: "blur(20px) saturate(180%)",
@@ -93,22 +103,14 @@ export default function Navbar() {
     boxShadow: "0 12px 40px rgba(0, 102, 255, 0.25), 0 4px 12px rgba(0, 0, 0, 0.1)",
   };
 
-  // Transparent style for default hero section
-  const transparentBar: React.CSSProperties = {
-    background: "transparent",
-    borderBottom: "none",
-    boxShadow: "none",
+  // Determine navbar background styling for mobile viewport specifically
+  const getMobileNavbarStyle = () => {
+    if (useBlueStyle) return blueLiquidGlassBarMobile;
+    if (isMobileMenuOpen) return whiteLiquidGlassBar;
+    return { background: "transparent" };
   };
 
-  // White glass pill for blue background
-  const whiteGlassPill: React.CSSProperties = {
-    background: "linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%)",
-    border: "1px solid rgba(255, 255, 255, 0.2)",
-    boxShadow: "inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 2px 8px rgba(0, 0, 0, 0.1)",
-    backdropFilter: "blur(12px)",
-  };
-
-  // Light blue glass pill for white background
+  // Active / hover item styling indicators for mobile dropdown menu list
   const lightBlueGlassPill: React.CSSProperties = {
     background: "linear-gradient(135deg, rgba(0, 102, 255, 0.12) 0%, rgba(0, 102, 255, 0.04) 100%)",
     border: "1px solid rgba(0, 102, 255, 0.18)",
@@ -116,35 +118,105 @@ export default function Navbar() {
     backdropFilter: "blur(12px)",
   };
 
-  // Darker glass pill for default transparent hero section
-  const darkGlassPill: React.CSSProperties = {
-    background: "linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%)",
-    border: "1px solid rgba(255, 255, 255, 0.12)",
-    boxShadow: "inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 2px 8px rgba(0, 0, 0, 0.08)",
+  const whiteGlassPill: React.CSSProperties = {
+    background: "linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%)",
+    border: "1px solid rgba(255, 255, 255, 0.2)",
+    boxShadow: "inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 2px 8px rgba(0, 0, 0, 0.1)",
     backdropFilter: "blur(12px)",
   };
 
-  // Determine active visual theme for the navbar
-  const getNavbarStyle = () => {
-    if (useBlueStyle) return blueLiquidGlassBar;
-    if (isMobileMenuOpen) return whiteLiquidGlassBar;
-    return transparentBar;
-  };
-
-  const isTextBlue = !useBlueStyle && isMobileMenuOpen;
-
   return (
-    <div ref={menuRef} className="fixed top-0 left-0 right-0 w-full z-50 transition-all duration-500">
-      {/* Outer Nav container - Full screen width */}
+    <div ref={menuRef} className={`fixed left-0 right-0 z-50 transition-all duration-500 ${
+      isScrolled ? 'top-0 md:top-6 px-0 md:px-6' : 'top-0 px-0'
+    }`}>
+      {/* 1. DESKTOP VERSION OF NAVBAR */}
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6 }}
-        className="w-full transition-all duration-500 relative px-4 md:px-10 lg:px-16"
-        style={getNavbarStyle()}
+        className={`hidden md:block mx-auto w-full transition-all duration-500 ${
+          isScrolled
+            ? "max-w-[1400px] bg-[#0066ff]/90 backdrop-blur-[20px] border border-white/20 shadow-[0_20px_40px_rgba(0,102,255,0.3)] rounded-full px-[40px]"
+            : "max-w-none bg-transparent px-10 lg:px-16"
+        }`}
       >
-        <div className="relative flex items-center justify-between h-[60px] md:h-[72px] transition-all duration-500">
+        <div className={`relative flex items-center justify-between transition-all duration-500 ${
+          isScrolled ? 'h-[64px]' : 'h-28'
+        }`}>
+          {/* Logo */}
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="z-10 -ml-2 cursor-pointer"
+            onClick={() => handleNavClick("#home")}
+          >
+            <Image
+              src="/images/logo/logo-huga.png"
+              alt="Huga Logo"
+              width={300}
+              height={100}
+              className={`w-auto object-contain transition-all duration-500 ${
+                isScrolled ? 'h-10 md:h-12' : 'h-20 md:h-24'
+              }`}
+              priority
+            />
+          </motion.div>
 
+          {/* Desktop Navigation - Centered */}
+          <div className="flex items-center gap-2 absolute left-1/2 transform -translate-x-1/2">
+            {navItems.map((item, index) => {
+              const isActive = activeSection === item.href.substring(1);
+              return (
+                <MagneticButton
+                  key={index}
+                  onClick={() => handleNavClick(item.href)}
+                  className={`relative px-5 py-2 rounded-full text-sm font-medium font-sf-pro transition-all duration-300 ${
+                    isActive
+                      ? "text-white"
+                      : isScrolled
+                        ? "text-white/80 hover:text-white"
+                        : "text-gray-400 hover:text-white"
+                  }`}
+                  magneticStrength={0.2}
+                >
+                  <span className="relative z-10">{item.name}</span>
+                  {isActive && (
+                    <motion.div
+                      layoutId="navbar-active"
+                      className="absolute inset-0 bg-white/[0.25] backdrop-blur-xl border border-white/40 rounded-full z-0 shadow-[0_4px_15px_rgba(255,255,255,0.1)]"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                </MagneticButton>
+              );
+            })}
+          </div>
+
+          {/* Contact Me Button - Right Side */}
+          <div className="z-10">
+            <MagneticButton
+              onClick={() => handleNavClick("#contact")}
+              className={`px-6 bg-white text-[#0066ff] font-semibold font-sf-pro rounded-full shadow-[0_4px_20px_rgba(255,255,255,0.15)] hover:bg-white/90 hover:shadow-[0_4px_30px_rgba(255,255,255,0.25)] active:scale-95 transition-all duration-300 ${
+                isScrolled ? "py-2 text-xs" : "py-2.5 text-sm"
+              }`}
+              magneticStrength={0.3}
+            >
+              Contact Me
+            </MagneticButton>
+          </div>
+        </div>
+      </motion.nav>
+
+      {/* 2. MOBILE VERSION OF NAVBAR */}
+      <motion.nav
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="md:hidden w-full transition-all duration-500 relative px-4"
+        style={getMobileNavbarStyle()}
+      >
+        <div className={`relative flex items-center justify-between transition-all duration-500 ${
+          isScrolled ? 'h-14' : 'h-[72px]'
+        }`}>
           {/* Logo - Left */}
           <motion.div
             whileHover={{ scale: 1.03 }}
@@ -156,71 +228,15 @@ export default function Navbar() {
               alt="Huga Logo"
               width={300}
               height={100}
-              className="w-auto h-7 md:h-10 object-contain transition-all duration-500"
+              className={`w-auto object-contain transition-all duration-500 ${
+                isScrolled ? 'h-7' : 'h-9'
+              }`}
               priority
             />
           </motion.div>
 
-          {/* Navigation - Desktop Only */}
-          <div className="hidden md:flex items-center gap-1.5 absolute left-1/2 transform -translate-x-1/2">
-            {navItems.map((item, index) => {
-              const isActive = activeSection === item.href.substring(1);
-              return (
-                <button
-                  key={index}
-                  onClick={() => handleNavClick(item.href)}
-                  className={`group relative rounded-full font-semibold font-sf-pro transition-all duration-300 px-5 py-2.5 text-[13px] tracking-wide
-                    ${useBlueStyle
-                      ? isActive
-                        ? "text-white"
-                        : "text-white/70 hover:text-white"
-                      : isTextBlue
-                        ? isActive
-                          ? "text-[#0066ff]"
-                          : "text-[#0066ff]/70 hover:text-[#0066ff]"
-                        : isActive
-                          ? "text-white"
-                          : "text-white/50 hover:text-white"
-                    }`}
-                >
-                  <span className="relative z-10 whitespace-nowrap">{item.name}</span>
-                  {isActive && (
-                    <motion.div
-                      layoutId="navbar-active"
-                      className="absolute inset-0 rounded-full z-0"
-                      style={useBlueStyle ? whiteGlassPill : isTextBlue ? lightBlueGlassPill : darkGlassPill}
-                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                    />
-                  )}
-                  {!isActive && (
-                    <div
-                      className="absolute inset-0 rounded-full z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                      style={useBlueStyle ? whiteGlassPill : isTextBlue ? lightBlueGlassPill : darkGlassPill}
-                    />
-                  )}
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Contact Me Button - Desktop Only */}
-          <div className="hidden md:block z-10 shrink-0">
-            <button
-              onClick={() => handleNavClick("#contact")}
-              className={`font-bold font-sf-pro rounded-full active:scale-95 transition-all duration-500 px-6 py-2.5 text-xs tracking-wider uppercase
-                ${useBlueStyle
-                  ? "bg-white text-[#0066ff] shadow-[0_4px_20px_rgba(255,255,255,0.15)] hover:bg-white/90"
-                  : isTextBlue
-                    ? "bg-[#0066ff] text-white shadow-[0_4px_15px_rgba(0,102,255,0.2)] hover:bg-[#0052cc]"
-                    : "text-white bg-white/[0.08] backdrop-blur-[20px] border border-white/[0.15] shadow-[inset_0_1px_0_rgba(255,255,255,0.15),0_8px_32px_rgba(0,0,0,0.2)] hover:bg-white/[0.15] hover:border-white/[0.25]"
-                }`}
-            >
-              Contact Me
-            </button>
-          </div>
-
-          {/* Hamburger Menu Toggle - Mobile Only */}
-          <div className="md:hidden z-10 shrink-0 flex items-center">
+          {/* Hamburger Menu Toggle - Right */}
+          <div className="z-10 shrink-0 flex items-center">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="w-10 h-10 flex flex-col justify-center items-center gap-[4px] relative focus:outline-none"
@@ -243,7 +259,6 @@ export default function Navbar() {
               />
             </button>
           </div>
-
         </div>
       </motion.nav>
 
@@ -256,7 +271,7 @@ export default function Navbar() {
             exit={{ opacity: 0, y: -15 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
             className="md:hidden w-full border-b flex flex-col gap-1 px-4 py-3 relative z-40"
-            style={useBlueStyle ? blueLiquidGlassBar : whiteLiquidGlassBar}
+            style={useBlueStyle ? blueLiquidGlassBarMobile : whiteLiquidGlassBar}
           >
             {navItems.map((item, index) => {
               const isActive = activeSection === item.href.substring(1);
@@ -289,14 +304,14 @@ export default function Navbar() {
                     <motion.div
                       layoutId="mobile-navbar-active"
                       className="absolute inset-0 rounded-xl z-0"
-                      style={useBlueStyle ? whiteGlassPill : isTextBlue ? lightBlueGlassPill : darkGlassPill}
+                      style={useBlueStyle ? whiteGlassPill : lightBlueGlassPill}
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
                   )}
                   {!isActive && (
                     <div
                       className="absolute inset-0 rounded-xl z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                      style={useBlueStyle ? whiteGlassPill : isTextBlue ? lightBlueGlassPill : darkGlassPill}
+                      style={useBlueStyle ? whiteGlassPill : lightBlueGlassPill}
                     />
                   )}
                 </button>
