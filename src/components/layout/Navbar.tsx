@@ -79,37 +79,37 @@ export default function Navbar() {
     }
   };
 
-  // Mobile Floating Menu Styles (Awwwards visual standard)
+  // Mobile Menu Blue Card Style (when active/pressed)
   const mobileMenuBg: React.CSSProperties = {
-    background: "linear-gradient(180deg, rgba(15, 15, 25, 0.95) 0%, rgba(10, 10, 15, 0.98) 100%)",
+    background: "linear-gradient(135deg, rgba(26, 52, 255, 0.98) 0%, rgba(15, 30, 200, 0.98) 100%)",
     backdropFilter: "blur(24px)",
     WebkitBackdropFilter: "blur(24px)",
-    border: "1px solid rgba(255, 255, 255, 0.08)",
-    boxShadow: "0 30px 80px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
+    border: "1px solid rgba(255, 255, 255, 0.18)",
+    boxShadow: "0 30px 80px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
   };
 
-  // Premium active item glow style
-  const activeGlowPill: React.CSSProperties = {
-    background: "linear-gradient(90deg, rgba(255, 255, 255, 0.08) 0%, rgba(124, 140, 255, 0.25) 100%)",
-    border: "1px solid rgba(255, 255, 255, 0.12)",
-    boxShadow: "0 0 30px rgba(124, 140, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
-    backdropFilter: "blur(12px)",
-  };
-
-  // Mobile Top Bar Default State (Floating glass capsule with soft blue accents)
+  // Mobile Top Bar Default State: Liquid Glass Transparent White
   const mobileDefaultBg: React.CSSProperties = {
-    background: "rgba(10, 10, 20, 0.35)",
-    backdropFilter: "blur(24px)",
-    WebkitBackdropFilter: "blur(24px)",
-    border: "1px solid rgba(255, 255, 255, 0.08)",
-    boxShadow: "inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 4px 20px rgba(0, 0, 0, 0.15)",
+    background: "rgba(255, 255, 255, 0.08)",
+    backdropFilter: "blur(20px)",
+    WebkitBackdropFilter: "blur(20px)",
+    border: "1px solid rgba(255, 255, 255, 0.15)",
+    boxShadow: "inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 8px 32px rgba(0, 0, 0, 0.2)",
   };
 
-  // Mobile Top Bar Scrolled State (Solid elegant blue)
+  // Mobile Top Bar Scrolled State: Elegant Solid Blue
   const mobileScrolledBg: React.CSSProperties = {
     background: "#1A34FF",
     border: "1px solid rgba(255, 255, 255, 0.15)",
     boxShadow: "0 20px 40px rgba(26, 52, 255, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
+  };
+
+  // Active / Hover item glow style in mobile dropdown
+  const mobileActiveGlow: React.CSSProperties = {
+    background: "linear-gradient(90deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.04) 100%)",
+    border: "1px solid rgba(255, 255, 255, 0.15)",
+    boxShadow: "0 0 25px rgba(255, 255, 255, 0.1)",
+    backdropFilter: "blur(12px)",
   };
 
   return (
@@ -196,7 +196,7 @@ export default function Navbar() {
         </motion.nav>
       </div>
 
-      {/* 2. MOBILE VERSION OF NAVBAR (FLOATING PREMIUM PANEL PORTFOLIO STANDARD) */}
+      {/* 2. MOBILE VERSION OF NAVBAR */}
       <div className="fixed top-4 left-4 right-4 z-50 md:hidden transition-all duration-500">
         <motion.nav
           initial={{ y: -100, opacity: 0 }}
@@ -205,7 +205,7 @@ export default function Navbar() {
           className="w-full relative px-4 py-2.5 rounded-[24px] overflow-hidden transition-all duration-500"
           style={isScrolled ? mobileScrolledBg : mobileDefaultBg}
         >
-          {/* Subtle noise texture or gradient shine effect */}
+          {/* Subtle shine layout reflection */}
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent pointer-events-none" />
           
           <div className="relative flex items-center justify-between h-[46px] transition-all duration-500">
@@ -225,7 +225,7 @@ export default function Navbar() {
               />
             </motion.div>
 
-            {/* Hamburger Button (Soft Glow Accent) */}
+            {/* Hamburger Button (White Accent) */}
             <button
               onClick={() => setIsMobileMenuOpen(true)}
               className={`w-10 h-10 rounded-full flex flex-col justify-center items-center gap-[4.5px] relative focus:outline-none transition-all duration-300 active:scale-95 border
@@ -235,9 +235,9 @@ export default function Navbar() {
                 }`}
               aria-label="Open menu"
             >
-              <span className={`w-4.5 h-[1.5px] rounded-full transition-colors duration-300 ${isScrolled ? "bg-white" : "bg-[#8EA2FF]"}`} />
-              <span className={`w-3.5 h-[1.5px] rounded-full transition-colors duration-300 ${isScrolled ? "bg-white" : "bg-[#8EA2FF]"}`} />
-              <span className={`w-4.5 h-[1.5px] rounded-full transition-colors duration-300 ${isScrolled ? "bg-white" : "bg-[#8EA2FF]"}`} />
+              <span className="w-4.5 h-[1.5px] rounded-full bg-white transition-colors duration-300" />
+              <span className="w-3.5 h-[1.5px] rounded-full bg-white transition-colors duration-300" />
+              <span className="w-4.5 h-[1.5px] rounded-full bg-white transition-colors duration-300" />
             </button>
           </div>
         </motion.nav>
@@ -256,8 +256,8 @@ export default function Navbar() {
               style={mobileMenuBg}
             >
               {/* Atmospheric Ambient Glow Circles */}
-              <div className="absolute -top-16 -right-16 w-48 h-48 bg-[#1A34FF]/15 rounded-full blur-[70px] pointer-events-none" />
-              <div className="absolute -bottom-20 -left-10 w-40 h-40 bg-purple-500/10 rounded-full blur-[60px] pointer-events-none" />
+              <div className="absolute -top-16 -right-16 w-48 h-48 bg-white/10 rounded-full blur-[70px] pointer-events-none" />
+              <div className="absolute -bottom-20 -left-10 w-40 h-40 bg-white/5 rounded-full blur-[60px] pointer-events-none" />
 
               {/* Floating Menu Header */}
               <div className="flex items-center justify-between w-full relative z-10">
@@ -288,7 +288,7 @@ export default function Navbar() {
               {/* Thin Premium Line Divider */}
               <div className="w-full h-[1px] bg-white/[0.08] my-4 relative z-10" />
 
-              {/* Navigation Items - Staggered Vertical Entrance */}
+              {/* Navigation Items - Staggered Vertical Entrance (White text on blue bg) */}
               <div className="flex flex-col gap-1.5 relative z-10">
                 {navItems.map((item, index) => {
                   const isActive = activeSection === item.href.substring(1);
@@ -305,7 +305,7 @@ export default function Navbar() {
                       
                       <span className={`text-[14px] font-medium tracking-tight transition-colors duration-300 ${
                         isActive 
-                          ? "text-[#8EA2FF]" 
+                          ? "text-white" 
                           : "text-white/60 group-hover:text-white"
                       }`}>
                         {item.name}
@@ -316,7 +316,7 @@ export default function Navbar() {
                         <motion.div
                           layoutId="mobile-glow-active"
                           className="absolute inset-0 rounded-xl z-[-1]"
-                          style={activeGlowPill}
+                          style={mobileActiveGlow}
                           transition={{ type: "spring", stiffness: 380, damping: 30 }}
                         />
                       )}
@@ -325,7 +325,7 @@ export default function Navbar() {
                       {!isActive && (
                         <div
                           className="absolute inset-0 rounded-xl z-[-1] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                          style={activeGlowPill}
+                          style={mobileActiveGlow}
                         />
                       )}
                     </motion.button>
