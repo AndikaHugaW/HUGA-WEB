@@ -88,16 +88,7 @@ export default function Navbar() {
     boxShadow: "0 30px 80px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
   };
 
-  // Mobile Top Bar Default State: Liquid Glass Transparent White
-  const mobileDefaultBg: React.CSSProperties = {
-    background: "rgba(255, 255, 255, 0.08)",
-    backdropFilter: "blur(20px)",
-    WebkitBackdropFilter: "blur(20px)",
-    border: "1px solid rgba(255, 255, 255, 0.15)",
-    boxShadow: "inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 8px 32px rgba(0, 0, 0, 0.2)",
-  };
-
-  // Mobile Top Bar Scrolled State: Elegant Solid Blue
+  // Mobile Top Bar Scrolled State: Elegant Solid Blue Floating Capsule
   const mobileScrolledBg: React.CSSProperties = {
     background: "#1A34FF",
     border: "1px solid rgba(255, 255, 255, 0.15)",
@@ -197,18 +188,30 @@ export default function Navbar() {
       </div>
 
       {/* 2. MOBILE VERSION OF NAVBAR */}
-      <div className="fixed top-4 left-4 right-4 z-50 md:hidden transition-all duration-500">
+      <div className={`md:hidden z-50 transition-all duration-500 ${
+        isScrolled 
+          ? "fixed top-4 left-4 right-4" 
+          : "fixed top-0 left-0 right-0 w-full"
+      }`}>
         <motion.nav
           initial={{ y: -100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="w-full relative px-4 py-2.5 rounded-[24px] overflow-hidden transition-all duration-500"
-          style={isScrolled ? mobileScrolledBg : mobileDefaultBg}
+          className={`relative overflow-hidden transition-all duration-500 ${
+            isScrolled 
+              ? "px-4 py-2.5 rounded-[24px]" 
+              : "px-4 bg-transparent border-none shadow-none"
+          }`}
+          style={isScrolled ? mobileScrolledBg : undefined}
         >
-          {/* Subtle shine layout reflection */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent pointer-events-none" />
+          {isScrolled && (
+            /* Subtle shine layout reflection when scrolled */
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent pointer-events-none" />
+          )}
           
-          <div className="relative flex items-center justify-between h-[46px] transition-all duration-500">
+          <div className={`relative flex items-center justify-between transition-all duration-500 ${
+            isScrolled ? 'h-[46px]' : 'h-[72px]'
+          }`}>
             {/* Logo */}
             <motion.div
               whileHover={{ scale: 1.03 }}
@@ -225,7 +228,7 @@ export default function Navbar() {
               />
             </motion.div>
 
-            {/* Hamburger Button (White Accent) */}
+            {/* Hamburger Button */}
             <button
               onClick={() => setIsMobileMenuOpen(true)}
               className={`w-10 h-10 rounded-full flex flex-col justify-center items-center gap-[4.5px] relative focus:outline-none transition-all duration-300 active:scale-95 border
