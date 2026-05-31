@@ -43,6 +43,13 @@ export default function HeroSection() {
   const y = useTransform(scrollYProgress, [0, 1], [0, 150]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
+  const handleScrollToContact = () => {
+    const element = document.getElementById("contact");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <section
       ref={containerRef}
@@ -319,10 +326,15 @@ export default function HeroSection() {
 
               {/* Get Started button + arrow */}
               <div className="relative" style={{ width: '388px', height: '85px' }}>
-                <button className="w-full h-full rounded-full border border-white/25 bg-white/[0.15] backdrop-blur-xl text-white text-xl lg:text-2xl font-medium tracking-[0.04em] font-body hover:bg-white/[0.25] hover:border-white/40 transition-all duration-300 cursor-pointer shadow-[0_4px_30px_rgba(255,255,255,0.06)] text-left pl-10" style={{ textShadow: '0 2px 10px rgba(0,0,0,0.25)' }}>
+                <button 
+                  onClick={handleScrollToContact}
+                  className="w-full h-full rounded-full border border-white/25 bg-white/[0.15] backdrop-blur-xl text-white text-xl lg:text-2xl font-medium tracking-[0.04em] font-body hover:bg-white/[0.25] hover:border-white/40 transition-all duration-300 cursor-pointer shadow-[0_4px_30px_rgba(255,255,255,0.06)] text-left pl-10" 
+                  style={{ textShadow: '0 2px 10px rgba(0,0,0,0.25)' }}
+                >
                   Get Started
                 </button>
                 <div
+                  onClick={handleScrollToContact}
                   className="absolute rounded-full bg-white flex items-center justify-center hover:bg-white/90 transition-all duration-300 cursor-pointer shadow-[0_4px_20px_rgba(0,0,0,0.1)]"
                   style={{
                     width: '70px',
@@ -347,10 +359,15 @@ export default function HeroSection() {
               className="lg:hidden w-full flex justify-center"
             >
               <div className="relative w-full max-w-[280px] sm:max-w-[320px] h-[60px] sm:h-[64px]">
-                <button className="w-full h-full rounded-full border border-white/25 bg-white/[0.15] backdrop-blur-xl text-white text-base sm:text-lg font-medium tracking-[0.04em] font-body hover:bg-white/[0.25] hover:border-white/40 transition-all duration-300 cursor-pointer shadow-[0_4px_30px_rgba(255,255,255,0.06)] text-left pl-6 sm:pl-8" style={{ textShadow: '0 2px 10px rgba(0,0,0,0.25)' }}>
+                <button 
+                  onClick={handleScrollToContact}
+                  className="w-full h-full rounded-full border border-white/25 bg-white/[0.15] backdrop-blur-xl text-white text-base sm:text-lg font-medium tracking-[0.04em] font-body hover:bg-white/[0.25] hover:border-white/40 transition-all duration-300 cursor-pointer shadow-[0_4px_30px_rgba(255,255,255,0.06)] text-left pl-6 sm:pl-8" 
+                  style={{ textShadow: '0 2px 10px rgba(0,0,0,0.25)' }}
+                >
                   Get Started
                 </button>
                 <div
+                  onClick={handleScrollToContact}
                   className="absolute rounded-full bg-white flex items-center justify-center hover:bg-white/90 transition-all duration-300 cursor-pointer shadow-[0_4px_20px_rgba(0,0,0,0.1)]"
                   style={{
                     width: '46px',

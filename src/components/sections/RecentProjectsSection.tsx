@@ -2,6 +2,7 @@
 
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import TextReveal from "@/components/ui/TextReveal";
 import MagneticButton from "@/components/ui/MagneticButton";
 import { GridBackground } from "@/components/ui/GridBackground";
@@ -147,7 +148,7 @@ export default function RecentProjectsSection() {
         </motion.div>
 
         {/* Featured Project Card */}
-        <div className="relative rounded-3xl overflow-hidden border border-gray-200 hover:border-blue-600/30 transition-all duration-500 min-h-[800px]">
+        <div className="relative rounded-3xl overflow-hidden border border-gray-200 hover:border-blue-600/30 transition-all duration-500 min-h-[380px] sm:min-h-[480px] md:min-h-[600px] lg:min-h-[650px]">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentIndex}
@@ -155,41 +156,50 @@ export default function RecentProjectsSection() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.8 }}
-              className="absolute inset-0 min-h-[800px]"
+              className="absolute inset-0 min-h-[380px] sm:min-h-[480px] md:min-h-[600px] lg:min-h-[650px]"
             >
               {/* Background Image */}
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src={currentProject.image}
                 alt={currentProject.title}
-                className="absolute inset-0 w-full h-full object-cover"
+                fill
+                className="object-cover transition-transform duration-700 ease-out"
+                quality={90}
+                priority
               />
               {/* Overlay */}
-              <div className="absolute inset-0 bg-black/20"></div>
+              <div className="absolute inset-0 bg-black/5"></div>
+              {/* Gradient for readability */}
+              <div
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  background: "linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.3) 100%)",
+                }}
+              />
               {/* Content */}
-              <div className="absolute inset-0 h-full min-h-[800px] p-8 md:p-12 lg:p-16 flex flex-col justify-end z-10">
+              <div className="absolute inset-0 h-full min-h-[380px] sm:min-h-[480px] md:min-h-[600px] lg:min-h-[650px] p-6 sm:p-10 md:p-12 lg:p-16 flex flex-col justify-end z-10">
                 {/* Project Details */}
                 <motion.div
                   key={`details-${currentIndex}`}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
-                  className="flex flex-col md:flex-row items-start md:items-end justify-between gap-6"
+                  className="flex flex-col md:flex-row items-start md:items-end justify-between gap-4 sm:gap-6 w-full"
                 >
                   {/* Left: Tags */}
-                  <div className="flex flex-wrap items-center gap-4">
+                  <div className="flex flex-wrap items-center gap-2 sm:gap-3">
                     {currentProject.tags && currentProject.tags.map((tag, index) => (
-                      <div key={index} className="px-4 py-2 bg-white/20 rounded-full text-white text-sm font-normal border border-white/30 font-nippo">
+                      <div key={index} className="px-3 sm:px-4 py-1.5 sm:py-2 bg-white/20 rounded-full text-white text-[10px] sm:text-xs md:text-sm font-normal border border-white/30 font-nippo backdrop-blur-sm">
                         {tag}
                       </div>
                     ))}
-                    <div className="px-4 py-2 bg-white/20 rounded-full text-white text-sm font-normal border border-white/30 font-nippo">
+                    <div className="px-3 sm:px-4 py-1.5 sm:py-2 bg-white/20 rounded-full text-white text-[10px] sm:text-xs md:text-sm font-normal border border-white/30 font-nippo backdrop-blur-sm">
                       {currentProject.date}
                     </div>
                   </div>
 
                   {/* Right: Brand */}
-                  <div className="text-white text-xl md:text-2xl font-normal font-nippo">
+                  <div className="text-white text-lg sm:text-xl md:text-2xl font-normal font-nippo self-start md:self-auto drop-shadow-md">
                     {currentProject.brand}
                   </div>
                 </motion.div>

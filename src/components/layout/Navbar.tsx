@@ -130,12 +130,12 @@ export default function Navbar() {
               onClick={() => handleNavClick("#home")}
             >
               <Image
-                src="/images/logo/logo-huga.png"
+                src="/images/logo/Logo.png"
                 alt="Huga Logo"
                 width={300}
                 height={100}
                 className={`w-auto object-contain transition-all duration-500 ${
-                  isScrolled ? 'h-10 md:h-12' : 'h-20 md:h-24'
+                  isScrolled ? 'h-8 md:h-9' : 'h-12 md:h-14'
                 }`}
                 priority
               />
@@ -171,16 +171,20 @@ export default function Navbar() {
               })}
             </div>
 
-            {/* Contact Me Button - Right Side */}
+            {/* Contact Me Button - Right Side (Liquid Glass Style) */}
             <div className="z-10">
               <MagneticButton
                 onClick={() => handleNavClick("#contact")}
-                className={`px-6 bg-white text-[#0066ff] font-semibold font-sf-pro rounded-full shadow-[0_4px_20px_rgba(255,255,255,0.15)] hover:bg-white/90 hover:shadow-[0_4px_30px_rgba(255,255,255,0.25)] active:scale-95 transition-all duration-300 ${
-                  isScrolled ? "py-2 text-xs" : "py-2.5 text-sm"
+                className={`relative px-6 py-2.5 font-semibold font-sf-pro rounded-full overflow-hidden transition-all duration-300 active:scale-95 ${
+                  isScrolled
+                    ? "text-xs bg-white/[0.15] backdrop-blur-xl border border-white/40 shadow-[0_8px_32px_rgba(255,255,255,0.1),inset_0_1px_0_rgba(255,255,255,0.2)] hover:bg-white/[0.25]"
+                    : "text-sm text-white bg-white/[0.1] backdrop-blur-xl border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.1)] hover:bg-white/[0.2] hover:border-white/30"
                 }`}
                 magneticStrength={0.3}
               >
-                Contact Me
+                {/* Liquid Glass Shine Effect */}
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-white/20 via-transparent to-transparent pointer-events-none" />
+                <span className="relative z-10">Contact Me</span>
               </MagneticButton>
             </div>
           </div>
@@ -219,11 +223,13 @@ export default function Navbar() {
               onClick={() => handleNavClick("#home")}
             >
               <Image
-                src="/images/logo/logo-huga.png"
+                src="/images/logo/Logo.png"
                 alt="Huga Logo"
                 width={300}
                 height={100}
-                className="w-auto h-7 object-contain transition-all duration-500"
+                className={`w-auto object-contain transition-all duration-500 ${
+                  isScrolled ? 'h-7' : 'h-9'
+                }`}
                 priority
               />
             </motion.div>
@@ -273,11 +279,11 @@ export default function Navbar() {
               {/* Floating Menu Header */}
               <div className="flex items-center justify-between w-full relative z-10">
                 <Image
-                  src="/images/logo/logo-huga.png"
+                  src="/images/logo/Logo.png"
                   alt="Huga Logo"
                   width={300}
                   height={100}
-                  className="w-auto h-7 object-contain"
+                  className="w-auto h-8 object-contain"
                   priority
                 />
 

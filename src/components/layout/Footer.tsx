@@ -91,13 +91,13 @@ export default function Footer() {
             transition={{ duration: 0.6 }}
             className="lg:col-span-1"
           >
-            <div className="mb-6 -ml-4">
+            <div className="mb-6 -ml-2">
               <Image
-                src="/images/logo/logo-huga.png"
+                src="/images/logo/Logo.png"
                 alt="Huga Logo"
                 width={300}
                 height={100}
-                className="h-20 w-auto object-contain"
+                className="h-12 w-auto object-contain"
               />
             </div>
             <p className="text-black/30 text-sm mb-6 leading-relaxed font-normal font-sf-pro">
