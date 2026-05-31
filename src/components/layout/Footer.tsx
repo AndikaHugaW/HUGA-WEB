@@ -93,7 +93,7 @@ export default function Footer() {
           >
             <div className="mb-6 -ml-2">
               <Image
-                src="/images/logo/Logo.png"
+                src="/images/logo/Logo2.png"
                 alt="Huga Logo"
                 width={300}
                 height={100}
