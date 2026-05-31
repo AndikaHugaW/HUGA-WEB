@@ -1,16 +1,38 @@
+import dynamic from "next/dynamic";
 import HeroSection from "@/components/hero/HeroSection";
 import CompaniesSection from "@/components/sections/CompaniesSection";
-import WelcomeSection from "@/components/sections/WelcomeSection";
-import RecentProjectsSection from "@/components/sections/RecentProjectsSection";
-import AboutSection from "@/components/sections/AboutSection";
-import CertificatesSection from "@/components/sections/CertificatesSection";
-import ProjectsSection from "@/components/sections/ProjectsSection";
-import TestimonialsSection from "@/components/sections/TestimonialsSection";
-import ExperienceSection from "@/components/sections/ExperienceSection";
-import FAQSection from "@/components/sections/FAQSection";
-import ContactSection from "@/components/sections/ContactSection";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+
+// OPTIMASI: Dynamic imports untuk section yang tidak terlihat saat pertama kali load
+// Ini mengurangi initial JS bundle secara signifikan
+const WelcomeSection = dynamic(() => import("@/components/sections/WelcomeSection"), {
+  loading: () => <div className="min-h-[400px]" />,
+});
+const RecentProjectsSection = dynamic(() => import("@/components/sections/RecentProjectsSection"), {
+  loading: () => <div className="min-h-[600px]" />,
+});
+const AboutSection = dynamic(() => import("@/components/sections/AboutSection"), {
+  loading: () => <div className="min-h-[400px]" />,
+});
+const CertificatesSection = dynamic(() => import("@/components/sections/CertificatesSection"), {
+  loading: () => <div className="min-h-[400px]" />,
+});
+const ProjectsSection = dynamic(() => import("@/components/sections/ProjectsSection"), {
+  loading: () => <div className="min-h-[600px]" />,
+});
+const TestimonialsSection = dynamic(() => import("@/components/sections/TestimonialsSection"), {
+  loading: () => <div className="min-h-[400px]" />,
+});
+const ExperienceSection = dynamic(() => import("@/components/sections/ExperienceSection"), {
+  loading: () => <div className="min-h-[400px]" />,
+});
+const FAQSection = dynamic(() => import("@/components/sections/FAQSection"), {
+  loading: () => <div className="min-h-[400px]" />,
+});
+const ContactSection = dynamic(() => import("@/components/sections/ContactSection"), {
+  loading: () => <div className="min-h-[400px]" />,
+});
 
 export default function Home() {
   return (

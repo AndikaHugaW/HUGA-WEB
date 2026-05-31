@@ -100,8 +100,11 @@ export default function Footer() {
                 className="h-12 w-auto object-contain"
               />
             </div>
+            <h3 className="text-black font-semibold text-lg font-nippo tracking-tight mb-2">
+              Huga Studio
+            </h3>
             <p className="text-black/30 text-sm mb-6 leading-relaxed font-normal font-sf-pro">
-              Full Stack Developer dengan passion untuk menciptakan solusi digital yang inovatif dan user-friendly.
+              We craft stunning websites, intuitive UI/UX, and powerful mobile apps that elevate brands and drive real results.
             </p>
             {/* Social Links */}
             <div className="flex gap-4">

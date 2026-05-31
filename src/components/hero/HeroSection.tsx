@@ -107,7 +107,8 @@ export default function HeroSection() {
           alt="Hero Background"
           fill
           priority
-          quality={95}
+          quality={80}
+          sizes="100vw"
           className="object-cover object-center"
         />
       </motion.div>
@@ -197,8 +198,9 @@ export default function HeroSection() {
                   src={modelImages[currentImageIndex]}
                   alt="Andika Huga - Full Stack Developer"
                   fill
-                  priority
-                  quality={95}
+                  priority={currentImageIndex === 0}
+                  quality={85}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 80vw, 520px"
                   className="object-contain object-bottom"
                   style={{
                     filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.4))",

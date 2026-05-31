@@ -134,7 +134,8 @@ function FeaturedCard({ project, onOpen }: { project: Project; onOpen: () => voi
         alt={project.title}
         fill
         className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-        quality={90}
+        quality={80}
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1800px"
         priority
       />
 
@@ -202,7 +203,9 @@ function GridCard({ project, index, onOpen }: { project: Project; index: number;
           alt={project.title}
           fill
           className="object-cover group-hover:scale-[1.04] transition-transform duration-600 ease-out opacity-90 group-hover:opacity-100"
-          quality={80}
+          quality={75}
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          loading="lazy"
         />
         {/* Hover overlay */}
         <div className="absolute inset-0 bg-black/55 opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex items-center justify-center backdrop-blur-[2px]">

@@ -45,7 +45,7 @@ export default function MagneticButton({
       ref={ref}
       type={type}
       disabled={disabled}
-      className={`relative overflow-hidden ${className}`}
+      className={`group relative overflow-hidden ${className}`}
       style={style}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}

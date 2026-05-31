@@ -22,6 +22,9 @@ export default function Navbar() {
   const router = useRouter();
   const menuRef = useRef<HTMLDivElement>(null);
 
+  // Detect if we're on a subpage (not landing page)
+  const isSubPage = pathname !== "/";
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -44,6 +47,11 @@ export default function Navbar() {
         if (current) setActiveSection(current);
       }
     };
+
+    // Set active section based on current route for subpages
+    if (pathname.startsWith("/projects")) {
+      setActiveSection("projects");
+    }
 
     window.addEventListener("scroll", handleScroll);
     // Initial check
@@ -95,6 +103,15 @@ export default function Navbar() {
     boxShadow: "0 20px 40px rgba(26, 52, 255, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
   };
 
+  // Mobile Top Bar Scrolled State for Sub Pages: Light floating capsule
+  const mobileScrolledBgLight: React.CSSProperties = {
+    background: "rgba(255, 255, 255, 0.85)",
+    border: "1px solid rgba(0, 0, 0, 0.08)",
+    boxShadow: "0 8px 32px rgba(0, 0, 0, 0.08)",
+    backdropFilter: "blur(20px)",
+    WebkitBackdropFilter: "blur(20px)",
+  };
+
   // Active / Hover item glow style in mobile dropdown
   const mobileActiveGlow: React.CSSProperties = {
     background: "linear-gradient(90deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.04) 100%)",
@@ -108,7 +125,7 @@ export default function Navbar() {
       
       {/* 1. DESKTOP VERSION OF NAVBAR (UNTOUCHED / RESTORED TO ORIGINAL STATE) */}
       <div className={`fixed left-0 right-0 z-50 transition-all duration-500 hidden md:block ${
-        isScrolled ? 'top-0 md:top-6 px-0 md:px-6' : 'top-0 px-0'
+        isScrolled ? 'top-0 md:top-4 px-0 md:px-6' : 'top-0 px-0'
       }`}>
         <motion.nav
           initial={{ y: -100 }}
@@ -116,12 +133,16 @@ export default function Navbar() {
           transition={{ duration: 0.6 }}
           className={`mx-auto w-full transition-all duration-500 ${
             isScrolled
-              ? "max-w-[1400px] bg-[#0066ff]/90 backdrop-blur-[20px] border border-white/20 shadow-[0_20px_40px_rgba(0,102,255,0.3)] rounded-full px-[40px]"
-              : "max-w-none bg-transparent px-10 lg:px-16"
+              ? isSubPage
+                ? "max-w-[1300px] bg-white/75 backdrop-blur-[20px] border border-black/[0.08] shadow-[0_8px_24px_rgba(0,0,0,0.06)] rounded-full px-[36px]"
+                : "max-w-[1300px] bg-[#0066ff]/80 backdrop-blur-[20px] border border-white/15 shadow-[0_12px_24px_rgba(0,102,255,0.18)] rounded-full px-[36px]"
+              : isSubPage
+                ? "max-w-none bg-transparent px-10 lg:px-16"
+                : "max-w-none bg-transparent px-10 lg:px-16"
           }`}
         >
           <div className={`relative flex items-center justify-between transition-all duration-500 ${
-            isScrolled ? 'h-[64px]' : 'h-28'
+            isScrolled ? 'h-[56px]' : 'h-20'
           }`}>
             {/* Logo */}
             <motion.div
@@ -130,12 +151,12 @@ export default function Navbar() {
               onClick={() => handleNavClick("#home")}
             >
               <Image
-                src="/images/logo/Logo.png"
+                src={isSubPage ? "/images/logo/Logo2.png" : "/images/logo/Logo.png"}
                 alt="Huga Logo"
                 width={300}
                 height={100}
                 className={`w-auto object-contain transition-all duration-500 ${
-                  isScrolled ? 'h-8 md:h-9' : 'h-12 md:h-14'
+                  isScrolled ? 'h-6 md:h-7' : 'h-10 md:h-12'
                 }`}
                 priority
               />
@@ -150,21 +171,44 @@ export default function Navbar() {
                     key={index}
                     onClick={() => handleNavClick(item.href)}
                     className={`relative px-5 py-2 rounded-full text-sm font-medium font-sf-pro transition-all duration-300 ${
-                      isActive
-                        ? "text-white"
-                        : isScrolled
-                          ? "text-white/80 hover:text-white"
-                          : "text-gray-400 hover:text-white"
+                      isSubPage
+                        ? isActive
+                          ? ""
+                          : isScrolled
+                            ? ""
+                            : ""
+                        : isActive
+                          ? "text-white"
+                          : isScrolled
+                            ? "text-white/80 hover:text-white"
+                            : "text-gray-400 hover:text-white"
                     }`}
                     magneticStrength={0.2}
                   >
-                    <span className="relative z-10">{item.name}</span>
+                    <span className={`relative z-10 transition-colors duration-300 ${
+                      isSubPage
+                        ? isActive
+                          ? "text-white"
+                          : isScrolled
+                            ? "text-black/60 group-hover:text-white"
+                            : "text-black/50 group-hover:text-white"
+                        : ""
+                    }`}>{item.name}</span>
+                    {/* Active pill */}
                     {isActive && (
                       <motion.div
                         layoutId="navbar-active"
-                        className="absolute inset-0 bg-white/[0.25] backdrop-blur-xl border border-white/40 rounded-full z-0 shadow-[0_4px_15px_rgba(255,255,255,0.1)]"
+                        className={`absolute inset-0 backdrop-blur-xl rounded-full z-0 ${
+                          isSubPage
+                            ? "bg-[#0066ff]/80 border border-[#0066ff]/30 shadow-[0_4px_20px_rgba(0,102,255,0.35)]"
+                            : "bg-white/[0.25] border border-white/40 shadow-[0_4px_15px_rgba(255,255,255,0.1)]"
+                        }`}
                         transition={{ type: "spring", stiffness: 380, damping: 30 }}
                       />
+                    )}
+                    {/* Hover liquid glass pill (subpage only, non-active) */}
+                    {isSubPage && !isActive && (
+                      <div className="absolute inset-0 rounded-full z-0 opacity-0 group-hover:opacity-100 transition-all duration-300 bg-[#0066ff]/70 backdrop-blur-xl border border-[#0066ff]/25 shadow-[0_4px_20px_rgba(0,102,255,0.3),inset_0_1px_0_rgba(255,255,255,0.15)]" />
                     )}
                   </MagneticButton>
                 );
@@ -177,13 +221,19 @@ export default function Navbar() {
                 onClick={() => handleNavClick("#contact")}
                 className={`relative px-6 py-2.5 font-semibold font-sf-pro rounded-full overflow-hidden transition-all duration-300 active:scale-95 ${
                   isScrolled
-                    ? "text-xs bg-white/[0.15] backdrop-blur-xl border border-white/40 shadow-[0_8px_32px_rgba(255,255,255,0.1),inset_0_1px_0_rgba(255,255,255,0.2)] hover:bg-white/[0.25]"
-                    : "text-sm text-white bg-white/[0.1] backdrop-blur-xl border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.1)] hover:bg-white/[0.2] hover:border-white/30"
+                    ? isSubPage
+                      ? "text-xs text-[#0066ff] bg-white/90 backdrop-blur-md border border-neutral-200/80 shadow-[0_4px_12px_rgba(0,0,0,0.05)] hover:bg-white hover:border-[#0066ff]/30"
+                      : "text-xs text-[#0066ff] bg-white/90 backdrop-blur-md border border-white shadow-[0_8px_20px_rgba(255,255,255,0.2)] hover:bg-white"
+                    : isSubPage
+                      ? "text-sm text-white bg-[#0066ff] border border-[#0066ff] shadow-[0_8px_24px_rgba(0,102,255,0.2)] hover:bg-[#0055dd] hover:shadow-[0_8px_32px_rgba(0,102,255,0.3)]"
+                      : "text-sm text-white bg-white/[0.1] backdrop-blur-xl border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.1)] hover:bg-white/[0.2] hover:border-white/30"
                 }`}
                 magneticStrength={0.3}
               >
                 {/* Liquid Glass Shine Effect */}
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-white/20 via-transparent to-transparent pointer-events-none" />
+                {!isSubPage && (
+                  <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-white/20 via-transparent to-transparent pointer-events-none" />
+                )}
                 <span className="relative z-10">Contact Me</span>
               </MagneticButton>
             </div>
@@ -206,9 +256,9 @@ export default function Navbar() {
               ? "px-4 py-2.5 rounded-[24px]" 
               : "px-4 bg-transparent border-none shadow-none"
           }`}
-          style={isScrolled ? mobileScrolledBg : undefined}
+          style={isScrolled ? (isSubPage ? mobileScrolledBgLight : mobileScrolledBg) : undefined}
         >
-          {isScrolled && (
+          {isScrolled && !isSubPage && (
             /* Subtle shine layout reflection when scrolled */
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent pointer-events-none" />
           )}
@@ -223,7 +273,7 @@ export default function Navbar() {
               onClick={() => handleNavClick("#home")}
             >
               <Image
-                src="/images/logo/Logo.png"
+                src={isSubPage ? "/images/logo/Logo2.png" : "/images/logo/Logo.png"}
                 alt="Huga Logo"
                 width={300}
                 height={100}
@@ -234,20 +284,24 @@ export default function Navbar() {
               />
             </motion.div>
 
-            {/* Custom Premium 3-Line Menu Icon (Awwwards Professional Standard) */}
+            {/* Custom Premium 3-Line Menu Icon */}
             <button
               onClick={() => setIsMobileMenuOpen(true)}
               className={`w-10 h-10 rounded-full flex items-center justify-center relative focus:outline-none transition-all duration-300 active:scale-95 border
-                ${isScrolled 
-                  ? "bg-white/10 border-white/15 hover:bg-white/20" 
-                  : "bg-white/5 border-white/10 hover:bg-white/10"
+                ${isSubPage
+                  ? isScrolled
+                    ? "bg-black/5 border-black/10 hover:bg-black/10"
+                    : "bg-black/5 border-black/10 hover:bg-black/10"
+                  : isScrolled 
+                    ? "bg-white/10 border-white/15 hover:bg-white/20" 
+                    : "bg-white/5 border-white/10 hover:bg-white/10"
                 }`}
               aria-label="Open menu"
             >
               <div className="flex flex-col gap-[3.5px] items-end justify-center">
-                <span className="w-[18px] h-[1.5px] bg-white rounded-full transition-all duration-300" />
-                <span className="w-[12px] h-[1.5px] bg-white rounded-full transition-all duration-300" />
-                <span className="w-[16px] h-[1.5px] bg-white rounded-full transition-all duration-300" />
+                <span className={`w-[18px] h-[1.5px] rounded-full transition-all duration-300 ${isSubPage ? 'bg-black' : 'bg-white'}`} />
+                <span className={`w-[12px] h-[1.5px] rounded-full transition-all duration-300 ${isSubPage ? 'bg-black' : 'bg-white'}`} />
+                <span className={`w-[16px] h-[1.5px] rounded-full transition-all duration-300 ${isSubPage ? 'bg-black' : 'bg-white'}`} />
               </div>
             </button>
           </div>
