@@ -1,10 +1,9 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { motion, useInView, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import TextReveal from "@/components/ui/TextReveal";
 import ProjectModal from "@/components/ui/ProjectModal";
 import { type Project } from "@/constants/projects";
 
@@ -94,209 +93,168 @@ const projects = [
   },
 ];
 
-interface ProjectCardProps {
-  project: (typeof projects)[number];
-  index: number;
-  isInView: boolean;
-  onSelect: () => void;
-}
-
-function ProjectCard({ project, index, isInView, onSelect }: ProjectCardProps) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [isHovered, setIsHovered] = useState(false);
-
-  return (
-    <motion.div
-      ref={cardRef}
-      initial={{ opacity: 0, y: 60 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{
-        duration: 1,
-        delay: index * 0.15,
-        ease: [0.16, 1, 0.3, 1],
-      }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      onClick={onSelect}
-      className="group relative cursor-pointer flex flex-col w-full"
-    >
-      {/* Main Card Container (Old Size/Box style) */}
-      <div className="relative bg-white rounded-2xl overflow-hidden transition-all duration-500 group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.04)] flex flex-col w-full">
-        
-        {/* Image Container */}
-        <div className="relative w-full aspect-[4/3] overflow-hidden bg-[#f4f4f5]">
-          <motion.div
-            className="absolute inset-0 origin-center"
-            animate={{ scale: isHovered ? 1.05 : 1 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <Image
-              src={project.image}
-              alt={project.title}
-              fill
-              sizes="(max-width: 768px) 100vw, 50vw"
-              className="object-cover"
-              priority={index < 2}
-              quality={95}
-            />
-          </motion.div>
-          
-          {/* Soft elegant overlay */}
-          <div className="absolute inset-0 bg-black/[0.03] group-hover:bg-transparent transition-colors duration-500" />
-
-          {/* View Project Badge */}
-          <motion.div
-            className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: isHovered ? 1 : 0, scale: isHovered ? 1 : 0.9 }}
-            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <div className="bg-white/90 backdrop-blur-xl text-black font-nippo px-7 py-3.5 rounded-full uppercase tracking-[0.15em] text-[11px] shadow-[0_10px_40px_rgba(0,0,0,0.1)] font-medium border border-white/50">
-              View Project
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Meta Content */}
-        <div className="flex flex-col p-6 lg:p-8">
-          {/* Top Row: Index + Tags */}
-          <div className="flex items-center gap-4 mb-4">
-            <span className="text-blue-600 font-mono text-[10px] tracking-widest font-medium">
-              (0{index + 1})
-            </span>
-            <div className="h-px bg-black/10 flex-grow" />
-            <div className="flex flex-wrap items-center gap-2 text-[10px] font-mono text-black/40 uppercase tracking-widest">
-              {project.tags.slice(0, 3).map((tag, i) => (
-                <span key={i} className="flex items-center gap-2 group-hover:text-black/60 transition-colors duration-300">
-                  {tag}
-                  {i < Math.min(project.tags.length, 3) - 1 && <span className="w-1 h-1 rounded-full bg-black/20" />}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          {/* Bottom Row: Title & Arrow */}
-          <div className="flex justify-between items-end gap-4 relative">
-            <div className="flex flex-col gap-2">
-              <h3 className="font-nippo text-2xl lg:text-3xl text-black tracking-tight leading-none group-hover:text-blue-600 transition-colors duration-500">
-                {project.title}
-              </h3>
-              <p className="text-black/40 text-sm font-sf-pro font-light mt-2 max-w-sm leading-relaxed opacity-0 group-hover:opacity-100 h-0 group-hover:h-auto overflow-hidden transition-all duration-500 transform translate-y-2 group-hover:translate-y-0">
-                {project.description}
-              </p>
-            </div>
-            
-            <motion.div
-              animate={{ rotate: isHovered ? 45 : 0, x: isHovered ? 5 : 0, y: isHovered ? -5 : 0 }}
-              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="w-12 h-12 shrink-0 rounded-full bg-[#f4f4f5] flex items-center justify-center group-hover:bg-blue-600 transition-colors duration-500"
-            >
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                className="text-black group-hover:text-white transition-colors duration-500"
-              >
-                <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </motion.div>
-          </div>
-          
-          {/* Hover Animated Bottom Line */}
-          <div className="w-full h-px bg-transparent mt-6 relative overflow-hidden">
-            <motion.div 
-              className="absolute inset-0 bg-blue-600 origin-left"
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: isHovered ? 1 : 0 }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            />
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  );
-}
+const featuredLayout = [
+  {
+    projectIndex: 0, // Vivet
+    category: "Logo Design",
+    date: "● SEPTEMBER 18, 2025",
+    aspectRatio: "aspect-[1.5]",
+    title: "Vivet Streetwear",
+    subtitle: "Unapologetic streetwear brand fusing urban grit with premium aesthetics.",
+  },
+  {
+    projectIndex: 5, // Luxe Cafe App
+    category: "Ui UX Design",
+    date: "● SEPTEMBER 18, 2025",
+    aspectRatio: "aspect-square",
+    title: "Luxe Cafe App",
+    subtitle: "Clean ordering and rewards application for a premium cafe experience.",
+  },
+  {
+    projectIndex: 3, // HYPEBEAST App
+    category: "Mobile Developer",
+    date: "● AUGUST 6, 2025",
+    aspectRatio: "aspect-[3/4]",
+    title: "HYPEBEAST App",
+    subtitle: "Streetwear discovery, reimagined. Swipe, save, and shop the latest drops.",
+  },
+  {
+    projectIndex: 2, // Oxen AI Platform
+    category: "Website Developer",
+    date: "● SEPTEMBER 3, 2025",
+    aspectRatio: "aspect-[16/9]",
+    title: "Oxen AI Platform",
+    subtitle: "Next-gen SaaS platform engineered to democratize machine learning.",
+  },
+];
 
 export default function ProjectsSection() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const containerRef = useRef(null);
+  const isInView = useInView(containerRef, { once: true, margin: "-100px" });
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   return (
-    <section id="projects" ref={ref} className="relative py-24 lg:py-32 bg-white overflow-hidden">
-      <div className="relative z-10 max-w-[1800px] mx-auto px-6 md:px-12 lg:px-24">
-        {/* Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-16 lg:mb-24">
-          <div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6 }}
-              className="flex items-center gap-3 mb-4"
-            >
-              <div className="w-8 h-[1px] bg-blue-600" />
-              <span className="text-[11px] font-medium text-blue-600 tracking-[0.3em] uppercase">
-                Portfolio
-              </span>
-            </motion.div>
-
-            <TextReveal
-              text="Selected Projects"
-              variant="word"
-              className="text-4xl md:text-5xl lg:text-6xl font-medium text-black leading-[1.1] tracking-tight"
-              delay={0.1}
+    <section id="projects" ref={containerRef} className="relative min-h-screen bg-white text-black border-t border-b border-neutral-200 font-sf-pro select-none flex flex-col justify-between">
+      
+      {/* 1. Main Grid: Horizontal and vertical lines are created by 1px gaps. Spans full width of the screen. */}
+      <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 bg-neutral-200 gap-[1px] flex-grow min-h-screen">
+        
+        {/* ==========================================
+            DESKTOP HEADER ROW (lg:grid)
+           ========================================== */}
+        {/* Col 1 Header: Brand logo aligned left */}
+        <div className="hidden lg:flex bg-white items-start justify-start pt-8 pb-6 px-6 md:px-8 xl:px-10 min-h-[160px]">
+          <div className="flex items-center gap-1.5">
+            <Image
+              src="/images/logo/Logo2.png"
+              alt="Huga Logo"
+              width={72}
+              height={24}
+              className="h-6 w-auto object-contain"
+              priority
             />
+            <span className="text-sm font-bold tracking-tight text-black font-nippo">
+              Huga Studio
+            </span>
           </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex items-center gap-6"
+        </div>
+        
+        {/* Col 2 Header: Top label and PROJECTS title */}
+        <div className="hidden lg:flex flex-col bg-white items-start justify-between pt-8 pb-6 px-6 md:px-8 xl:px-10 min-h-[160px]">
+          <div className="text-[9px] font-bold text-neutral-400 uppercase tracking-widest font-mono">
+            ● 04 SELECTED PROJECTS
+          </div>
+          <h2 className="text-[3.8vw] font-bold tracking-tighter text-black select-none uppercase leading-none font-nippo mt-auto">
+            PROJECTS
+          </h2>
+        </div>
+        
+        {/* Col 3 Header: Top menu/label */}
+        <div className="hidden lg:flex bg-white items-start justify-start pt-8 pb-6 px-6 md:px-8 xl:px-10 min-h-[160px]">
+          <div className="text-[9px] font-bold text-neutral-400 uppercase tracking-widest font-mono">
+            + DESIGN & CODE
+          </div>
+        </div>
+        
+        {/* Col 4 Header: Top right See all link */}
+        <div className="hidden lg:flex bg-white items-start justify-end pt-8 pb-6 px-6 md:px-8 xl:px-10 min-h-[160px]">
+          <Link 
+            href="/projects"
+            className="text-[9px] font-bold uppercase tracking-widest text-neutral-800 hover:text-black transition-colors flex items-center gap-1 font-mono"
           >
-            <p className="text-sm text-black/30 max-w-[240px] leading-relaxed">
-              End-to-end product development from concept to launch.
-            </p>
+            All projects <span className="text-[9px]">↗</span>
+          </Link>
+        </div>
 
-            <Link
-              href="/projects"
-              className="group flex items-center gap-2 text-sm text-black/70 hover:text-black font-medium transition-colors duration-300"
+        {/* ==========================================
+            MOBILE / TABLET HEADER (lg:hidden)
+           ========================================== */}
+        <div className="lg:hidden col-span-full bg-white p-6 flex justify-between items-end border-b border-neutral-200">
+          <div className="flex flex-col gap-1.5">
+            <div className="text-[9px] font-bold text-neutral-450 uppercase tracking-widest font-mono">
+              ● 04 SELECTED PROJECTS
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tighter text-black font-nippo uppercase">
+              PROJECTS
+            </h2>
+          </div>
+          <Link 
+            href="/projects"
+            className="text-[10px] font-bold uppercase tracking-wider text-neutral-800 hover:text-black flex items-center gap-1 font-mono"
+          >
+            See all ↗
+          </Link>
+        </div>
+
+        {/* ==========================================
+            BODY ROW (Col 1, 2, 3, 4) 
+            Images stretch edge-to-edge horizontally (px-0 on wrapper container)
+            Text elements have px-6 md:px-8 xl:px-10 for breathing room from grid lines
+           ========================================== */}
+        {featuredLayout.map((layout, idx) => {
+          const projectData = projects[layout.projectIndex];
+          return (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: idx * 0.12, ease: [0.16, 1, 0.3, 1] }}
+              onClick={() => setSelectedProject(projectData as Project)}
+              className="bg-white px-0 pt-6 sm:pt-8 pb-12 sm:pb-16 flex flex-col justify-start gap-6 sm:gap-8 min-h-[550px] lg:min-h-[75vh] xl:min-h-[80vh] group cursor-pointer"
             >
-              See all
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </Link>
-          </motion.div>
-        </div>
+              {/* 1. Date at the top */}
+              <div className="px-6 md:px-8 xl:px-10 text-[9px] sm:text-[10px] font-semibold text-neutral-450 uppercase tracking-wider font-mono">
+                {layout.date}
+              </div>
 
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6">
-          {projects.map((project, index) => (
-            <ProjectCard
-              key={project.id}
-              project={project}
-              index={index}
-              isInView={isInView}
-              onSelect={() => setSelectedProject(project as Project)}
-            />
-          ))}
-        </div>
+              {/* 2. Image (w-[calc(100%+2px)], -ml-[1px], stretches edge-to-edge covering subpixel gaps) */}
+              <div className={`relative w-[calc(100%+2px)] -ml-[1px] ${layout.aspectRatio} overflow-hidden bg-transparent`}>
+                <Image
+                  src={projectData.image}
+                  alt={layout.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  className="object-cover rounded-none transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                  quality={90}
+                />
+              </div>
+
+              {/* 3. Text content underneath */}
+              <div className="px-6 md:px-8 xl:px-10 flex flex-col gap-2.5 mt-1">
+                <span className="text-[10px] font-bold text-neutral-450 uppercase tracking-widest font-nippo group-hover:text-blue-600 transition-colors duration-300">
+                  {layout.category}
+                </span>
+                <h3 className="text-sm sm:text-base lg:text-lg font-bold leading-[1.4] tracking-tight text-neutral-900 font-sf-pro">
+                  {layout.title} — {layout.subtitle}
+                </h3>
+              </div>
+            </motion.div>
+          );
+        })}
+
       </div>
 
-      {/* Modal */}
+      {/* Detail Project Modal */}
       <ProjectModal
         project={selectedProject}
         isOpen={selectedProject !== null}
