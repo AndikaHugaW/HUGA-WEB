@@ -12,6 +12,7 @@ const config: Config = {
       fontFamily: {
         nippo: ["var(--font-nippo)"],
         "sf-pro": ["var(--font-sf-pro)"],
+        satoshi: ["Satoshi", "sans-serif"],
         display: ["var(--font-orbitron)", "Orbitron", "sans-serif"],
         body: ["var(--font-dm-sans)", "DM Sans", "sans-serif"],
       },

@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import ProjectModal from "@/components/ui/ProjectModal";
@@ -128,6 +128,87 @@ const featuredLayout = [
   },
 ];
 
+interface ProjectCardProps {
+  layout: typeof featuredLayout[0];
+  projectData: typeof projects[0];
+  onClick: () => void;
+  isInView: boolean;
+  idx: number;
+}
+
+function ProjectCard({
+  layout,
+  projectData,
+  onClick,
+  isInView,
+  idx,
+}: ProjectCardProps) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  // Track the scroll progress of the card relative to the viewport
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ["start end", "end start"],
+  });
+
+  // Parallax transformations based on scroll position
+  // Image moves slightly vertically within its container
+  const yImage = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+  // Text floats slightly at a different speed for layered depth
+  const yText = useTransform(scrollYProgress, [0, 1], ["10px", "-10px"]);
+
+  return (
+    <motion.div
+      ref={cardRef}
+      initial={{ opacity: 0, y: 30 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.8, delay: idx * 0.12, ease: [0.16, 1, 0.3, 1] }}
+      onClick={onClick}
+      className="bg-white px-0 pt-6 sm:pt-8 pb-12 sm:pb-16 flex flex-col justify-start gap-6 sm:gap-8 min-h-[550px] lg:min-h-[75vh] xl:min-h-[80vh] group cursor-pointer"
+    >
+      {/* 1. Date at the top */}
+      <div className="px-6 md:px-8 xl:px-10 text-[9px] sm:text-[10px] font-semibold text-neutral-450 uppercase tracking-wider font-mono">
+        {layout.date}
+      </div>
+
+      {/* 2. Image (with parallax translation inside an overflow-hidden wrapper, overlapping margins to prevent subpixel gaps) */}
+      <div className={`relative w-[calc(100%+4px)] -ml-[2px] ${layout.aspectRatio} overflow-hidden bg-transparent`}>
+        <motion.div
+          style={{ y: yImage }}
+          className="absolute -top-[12%] -bottom-[12%] -left-[2px] -right-[2px]"
+        >
+          <Image
+            src={projectData.image}
+            alt={layout.title}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+            onLoad={() => setImageLoaded(true)}
+            style={{
+              filter: imageLoaded ? "blur(0px)" : "blur(20px)",
+            }}
+            className="object-cover rounded-none transition-[filter] duration-[1000ms] ease-out group-hover:scale-[1.04] transition-transform duration-700 ease-out z-0 scale-[1.01]"
+            quality={90}
+          />
+        </motion.div>
+      </div>
+
+      {/* 3. Text content underneath with vertical scroll-linked parallax */}
+      <motion.div 
+        style={{ y: yText }}
+        className="px-6 md:px-8 xl:px-10 flex flex-col gap-2.5 mt-1"
+      >
+        <span className="text-[10px] font-bold text-neutral-450 uppercase tracking-widest font-nippo group-hover:text-blue-600 transition-colors duration-300">
+          {layout.category}
+        </span>
+        <h3 className="text-sm sm:text-base lg:text-lg font-normal leading-[1.4] tracking-tight text-neutral-900 font-satoshi">
+          {layout.title} — {layout.subtitle}
+        </h3>
+      </motion.div>
+    </motion.div>
+  );
+}
+
 export default function ProjectsSection() {
   const containerRef = useRef(null);
   const isInView = useInView(containerRef, { once: true, margin: "-100px" });
@@ -136,14 +217,30 @@ export default function ProjectsSection() {
   return (
     <section id="projects" ref={containerRef} className="relative min-h-screen bg-white text-black border-t border-b border-neutral-200 font-sf-pro select-none flex flex-col justify-between">
       
-      {/* 1. Main Grid: Horizontal and vertical lines are created by 1px gaps. Spans full width of the screen. */}
-      <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 bg-neutral-200 gap-[1px] flex-grow min-h-screen">
+      {/* 1. Main Grid: Horizontal and vertical lines are created by 1px gaps. Constrained by max-width and centered. */}
+      <div className="max-w-[1800px] mx-auto w-full border-x border-neutral-200 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 bg-neutral-200 gap-[1px] flex-grow min-h-screen relative">
         
+        {/* Desktop Header Row Background grid at z-0 to preserve cell gaps */}
+        <div className="absolute top-0 left-0 right-0 h-[160px] grid grid-cols-4 gap-[1px] bg-neutral-200 z-0 hidden lg:grid">
+          <div className="bg-white h-full w-full" />
+          <div className="bg-white h-full w-full" />
+          <div className="bg-white h-full w-full" />
+          <div className="bg-white h-full w-full" />
+        </div>
+
+        {/* Desktop Marquee Background layer (animasi teks slide) at z-10 */}
+        <div className="absolute top-0 left-0 right-0 h-[160px] pointer-events-none overflow-hidden flex items-center z-10 bg-transparent hidden lg:flex">
+          <div className="whitespace-nowrap flex text-[6vw] font-extrabold text-black/[0.04] tracking-widest font-nippo select-none uppercase animate-marquee-slow">
+            <span>DESIGN • DEVELOPMENT • BRANDING • UIUX • PROJECTS •&nbsp;</span>
+            <span>DESIGN • DEVELOPMENT • BRANDING • UIUX • PROJECTS •&nbsp;</span>
+          </div>
+        </div>
+
         {/* ==========================================
             DESKTOP HEADER ROW (lg:grid)
            ========================================== */}
         {/* Col 1 Header: Brand logo aligned left */}
-        <div className="hidden lg:flex bg-white items-start justify-start pt-8 pb-6 px-6 md:px-8 xl:px-10 min-h-[160px]">
+        <div className="hidden lg:flex bg-transparent items-start justify-start pt-8 pb-6 px-6 md:px-8 xl:px-10 min-h-[160px] relative z-20">
           <div className="flex items-center gap-1.5">
             <Image
               src="/images/logo/Logo2.png"
@@ -160,8 +257,8 @@ export default function ProjectsSection() {
         </div>
         
         {/* Col 2 Header: Top label and PROJECTS title */}
-        <div className="hidden lg:flex flex-col bg-white items-start justify-between pt-8 pb-6 px-6 md:px-8 xl:px-10 min-h-[160px]">
-          <div className="text-[9px] font-bold text-neutral-400 uppercase tracking-widest font-mono">
+        <div className="hidden lg:flex flex-col bg-transparent items-start justify-between pt-8 pb-6 px-6 md:px-8 xl:px-10 min-h-[160px] relative z-20">
+          <div className="text-[9px] font-bold text-neutral-450 uppercase tracking-widest font-mono">
             ● 04 SELECTED PROJECTS
           </div>
           <h2 className="text-[3.8vw] font-bold tracking-tighter text-black select-none uppercase leading-none font-nippo mt-auto">
@@ -170,14 +267,14 @@ export default function ProjectsSection() {
         </div>
         
         {/* Col 3 Header: Top menu/label */}
-        <div className="hidden lg:flex bg-white items-start justify-start pt-8 pb-6 px-6 md:px-8 xl:px-10 min-h-[160px]">
-          <div className="text-[9px] font-bold text-neutral-400 uppercase tracking-widest font-mono">
+        <div className="hidden lg:flex bg-transparent items-start justify-start pt-8 pb-6 px-6 md:px-8 xl:px-10 min-h-[160px] relative z-20">
+          <div className="text-[9px] font-bold text-neutral-450 uppercase tracking-widest font-mono">
             + DESIGN & CODE
           </div>
         </div>
         
         {/* Col 4 Header: Top right See all link */}
-        <div className="hidden lg:flex bg-white items-start justify-end pt-8 pb-6 px-6 md:px-8 xl:px-10 min-h-[160px]">
+        <div className="hidden lg:flex bg-transparent items-start justify-end pt-8 pb-6 px-6 md:px-8 xl:px-10 min-h-[160px] relative z-20">
           <Link 
             href="/projects"
             className="text-[9px] font-bold uppercase tracking-widest text-neutral-800 hover:text-black transition-colors flex items-center gap-1 font-mono"
@@ -189,8 +286,19 @@ export default function ProjectsSection() {
         {/* ==========================================
             MOBILE / TABLET HEADER (lg:hidden)
            ========================================== */}
-        <div className="lg:hidden col-span-full bg-white p-6 flex justify-between items-end border-b border-neutral-200">
-          <div className="flex flex-col gap-1.5">
+        <div className="lg:hidden col-span-full bg-transparent p-6 flex justify-between items-end border-b border-neutral-200 relative overflow-hidden min-h-[120px]">
+          {/* Mobile Header Background */}
+          <div className="absolute inset-0 bg-white z-0" />
+          
+          {/* Marquee for mobile background (animasi teks slide) */}
+          <div className="absolute inset-0 pointer-events-none overflow-hidden flex items-center z-10 bg-transparent">
+            <div className="whitespace-nowrap flex text-[10vw] font-extrabold text-black/[0.03] tracking-widest font-nippo select-none uppercase animate-marquee-slow">
+              <span>DESIGN • DEVELOPMENT • BRANDING • UIUX • PROJECTS •&nbsp;</span>
+              <span>DESIGN • DEVELOPMENT • BRANDING • UIUX • PROJECTS •&nbsp;</span>
+            </div>
+          </div>
+          
+          <div className="relative z-20 flex flex-col gap-1.5">
             <div className="text-[9px] font-bold text-neutral-450 uppercase tracking-widest font-mono">
               ● 04 SELECTED PROJECTS
             </div>
@@ -200,7 +308,7 @@ export default function ProjectsSection() {
           </div>
           <Link 
             href="/projects"
-            className="text-[10px] font-bold uppercase tracking-wider text-neutral-800 hover:text-black flex items-center gap-1 font-mono"
+            className="relative z-20 text-[10px] font-bold uppercase tracking-wider text-neutral-800 hover:text-black flex items-center gap-1 font-mono"
           >
             See all ↗
           </Link>
@@ -208,47 +316,18 @@ export default function ProjectsSection() {
 
         {/* ==========================================
             BODY ROW (Col 1, 2, 3, 4) 
-            Images stretch edge-to-edge horizontally (px-0 on wrapper container)
-            Text elements have px-6 md:px-8 xl:px-10 for breathing room from grid lines
            ========================================== */}
         {featuredLayout.map((layout, idx) => {
           const projectData = projects[layout.projectIndex];
           return (
-            <motion.div
+            <ProjectCard
               key={idx}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: idx * 0.12, ease: [0.16, 1, 0.3, 1] }}
+              idx={idx}
+              layout={layout}
+              projectData={projectData}
               onClick={() => setSelectedProject(projectData as Project)}
-              className="bg-white px-0 pt-6 sm:pt-8 pb-12 sm:pb-16 flex flex-col justify-start gap-6 sm:gap-8 min-h-[550px] lg:min-h-[75vh] xl:min-h-[80vh] group cursor-pointer"
-            >
-              {/* 1. Date at the top */}
-              <div className="px-6 md:px-8 xl:px-10 text-[9px] sm:text-[10px] font-semibold text-neutral-450 uppercase tracking-wider font-mono">
-                {layout.date}
-              </div>
-
-              {/* 2. Image (w-[calc(100%+2px)], -ml-[1px], stretches edge-to-edge covering subpixel gaps) */}
-              <div className={`relative w-[calc(100%+2px)] -ml-[1px] ${layout.aspectRatio} overflow-hidden bg-transparent`}>
-                <Image
-                  src={projectData.image}
-                  alt={layout.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                  className="object-cover rounded-none transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-                  quality={90}
-                />
-              </div>
-
-              {/* 3. Text content underneath */}
-              <div className="px-6 md:px-8 xl:px-10 flex flex-col gap-2.5 mt-1">
-                <span className="text-[10px] font-bold text-neutral-450 uppercase tracking-widest font-nippo group-hover:text-blue-600 transition-colors duration-300">
-                  {layout.category}
-                </span>
-                <h3 className="text-sm sm:text-base lg:text-lg font-bold leading-[1.4] tracking-tight text-neutral-900 font-sf-pro">
-                  {layout.title} — {layout.subtitle}
-                </h3>
-              </div>
-            </motion.div>
+              isInView={isInView}
+            />
           );
         })}
 

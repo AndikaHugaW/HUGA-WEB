@@ -1,251 +1,301 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { useInView } from "framer-motion";
 import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
 
 export default function ContactSection() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-  
-  // Selection state for client onboarding project types
-  const [selectedProjectType, setSelectedProjectType] = useState("Web App");
-  const projectTypes = ["Web Design", "Web App", "Mobile App", "AI System"];
+  useInView(ref, { once: true, margin: "-100px" });
 
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+  const [formData, setFormData] = useState({ name: "", email: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-
     try {
-      const response = await fetch('/api/send-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          ...formData,
-          projectType: selectedProjectType, // include onboarding details
+          name: formData.name,
+          email: formData.email,
+          message: "Inquiry from contact form.",
+          projectType: "General Inquiry",
         }),
       });
-
       const data = await response.json();
-
       if (response.ok) {
-        alert("Message sent successfully! Thank you.");
-        setFormData({ name: "", email: "", message: "" });
+        alert("Sent! Thank you.");
+        setFormData({ name: "", email: "" });
       } else {
-        alert(data.error || "Failed to send message. Please try again.");
+        alert(data.error || "Failed to send. Please try again.");
       }
-    } catch (error) {
-      console.error("Error sending message:", error);
-      alert("Something went wrong. Please try again later.");
+    } catch {
+      alert("Something went wrong. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const socialLinks = [
-    { name: "Github", url: "https://github.com/andikahuga" },
-    { name: "LinkedIn", url: "https://www.linkedin.com/in/andika-huga-widyatama-737413246" },
-    { name: "Instagram", url: "https://www.instagram.com/huga_studio/" },
-    { name: "WhatsApp", url: "https://wa.me/6287821930072?text=Hi%20Huga!%20I%20found%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project." }
-  ];
-
   return (
-    <section id="contact" ref={ref} className="relative py-32 bg-white overflow-hidden text-neutral-900">
-      {/* Top Divider Line */}
-      <div className="max-w-[1800px] mx-auto px-6 md:px-12 lg:px-24">
-        <div className="w-full h-[1px] bg-neutral-200 mb-20" />
-      </div>
+    <section
+      id="contact"
+      ref={ref}
+      className="relative min-h-screen bg-white text-black border-t border-b border-neutral-200 font-mono select-none flex flex-col"
+    >
+      <form
+        onSubmit={handleSubmit}
+        className="max-w-[1800px] mx-auto w-full border-x border-neutral-200 flex-grow flex flex-col"
+      >
+        {/* ═══════════════════════════════════════════════
+            MAIN CONTENT GRID — 4 cols × 4 rows (fills viewport)
+            Row proportions: header 2.5fr | name 1.2fr | email 1.2fr | cta 0.8fr
+        ════════════════════════════════════════════════ */}
+        <div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 bg-neutral-200 gap-[1px] flex-grow"
+          style={{
+            gridTemplateRows: "2.5fr 1.2fr 1.2fr 0.8fr",
+          }}
+        >
+          {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+              ROW 1  —  Badge  ·  GET IN TOUCH (×2)  ·  Nav
+          ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
 
-      <div className="relative z-10 max-w-[1800px] mx-auto px-6 md:px-12 lg:px-24">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
-          
-          {/* LEFT SIDE (40%): Editorial Contact Info */}
-          <div className="lg:col-span-5 flex flex-col justify-start">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="space-y-8"
-            >
-              {/* Category Label */}
-              <div className="flex items-center gap-3">
-                <span className="text-xs font-semibold tracking-[0.2em] uppercase text-neutral-400">Contact Me</span>
-                <span className="w-1.5 h-1.5 rounded-full bg-[#0066ff]" />
-              </div>
-
-              {/* Sophisticated Editorial Headline */}
-              <h2 className="text-4xl md:text-5xl lg:text-[3.25rem] font-bold text-neutral-900 tracking-tight leading-[1.1] font-sf-pro">
-                Turning ambitious ideas into polished products.
-              </h2>
-
-              {/* Short Narrative */}
-              <p className="text-neutral-500 font-sf-pro text-base leading-relaxed max-w-[480px]">
-                Have an idea, project blueprint, or partnership inquiry? Feel free to reach out. I’m currently accepting select freelance assignments and remote product design engineering roles.
-              </p>
-
-              {/* Designer Avatar & Details (Premium Signature Style) */}
-              <div className="flex items-center gap-4 py-4 border-t border-neutral-100 max-w-[480px]">
-                <div className="relative w-12 h-12 rounded-full overflow-hidden grayscale border border-neutral-200 bg-neutral-100 flex-shrink-0">
-                  <Image 
-                    src="/images/hero/Huga.webp" 
-                    alt="Andika Huga" 
-                    fill 
-                    className="object-cover" 
-                    sizes="48px"
-                  />
-                </div>
-                <div>
-                  <p className="text-sm font-bold text-neutral-900 font-sf-pro">Andika Huga</p>
-                  <p className="text-xs text-neutral-400 font-medium font-sf-pro">Full-stack Designer & Developer</p>
-                </div>
-              </div>
-
-              {/* Structured Metadata Row with Micro-details */}
-              <div className="grid grid-cols-2 gap-y-6 gap-x-8 py-6 border-y border-neutral-100 max-w-[480px] font-sf-pro text-sm">
-                <div>
-                  <span className="text-[9px] uppercase font-bold tracking-wider text-neutral-400 block mb-1">Direct Email</span>
-                  <a href="mailto:andikahuga34@gmail.com" className="font-semibold text-neutral-800 hover:text-[#0066ff] transition-colors">
-                    andikahuga34@gmail.com
-                  </a>
-                </div>
-                <div>
-                  <span className="text-[9px] uppercase font-bold tracking-wider text-neutral-400 block mb-1">Response Time</span>
-                  <span className="font-semibold text-neutral-800">Within 24 hours</span>
-                </div>
-                <div>
-                  <span className="text-[9px] uppercase font-bold tracking-wider text-neutral-400 block mb-1">Location</span>
-                  <span className="font-semibold text-neutral-800">Solo, Indonesia</span>
-                </div>
-                <div>
-                  <span className="text-[9px] uppercase font-bold tracking-wider text-neutral-400 block mb-1">Availability</span>
-                  <span className="font-semibold text-neutral-800">Booking Q3 2026</span>
-                </div>
-              </div>
-
-              {/* Clean Text-based Social Links with Underline Animations */}
-              <div className="space-y-3 max-w-[480px] font-sf-pro">
-                <span className="text-[9px] uppercase font-bold tracking-wider text-neutral-400 block font-sf-pro">Follow Me</span>
-                <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm font-semibold text-neutral-800">
-                  {socialLinks.map((social) => (
-                    <a 
-                      key={social.name} 
-                      href={social.url} 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="group relative hover:text-[#0066ff] transition-colors duration-300 pb-1"
-                    >
-                      <span>{social.name} ↗</span>
-                      <span className="absolute bottom-0 left-0 w-0 h-[1.5px] bg-[#0066ff] transition-all duration-300 group-hover:w-full" />
-                    </a>
-                  ))}
-                </div>
-              </div>
-
-            </motion.div>
+          {/* [R1·C1] Badge */}
+          <div className="bg-white px-6 xl:px-10 pt-10 pb-6 flex flex-col justify-start relative">
+            <span className="text-[9px] font-bold text-neutral-500 uppercase tracking-widest flex items-center gap-1.5">
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-neutral-900" />
+              13&nbsp;&nbsp;Ready to start?
+            </span>
+            {/* "+" at top-left corner of grid */}
+            <span className="absolute top-[-1px] left-[-1px] text-neutral-400 text-[11px] leading-none select-none z-10">+</span>
           </div>
 
-          {/* RIGHT SIDE (60%): Onboarding Contact Card */}
-          <div className="lg:col-span-7">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="bg-neutral-50 rounded-[20px] border border-neutral-200/80 p-8 md:p-10 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.02)]"
-            >
-              {/* Card Header */}
-              <div className="mb-8 border-b border-neutral-200/50 pb-6">
-                <h3 className="text-xl font-bold text-neutral-950 font-sf-pro">Start a Project</h3>
-                <p className="text-xs text-neutral-400 mt-1 font-sf-pro">Tell me about your idea. I&apos;ll get back within 24 hours.</p>
-              </div>
-
-              {/* Minimalist Form */}
-              <form onSubmit={handleSubmit} className="space-y-8 font-sf-pro">
-                
-                {/* Onboarding Chips: Project Type */}
-                <div className="space-y-3">
-                  <span className="text-[10px] uppercase font-bold tracking-wider text-neutral-400 block font-sf-pro">Project Type</span>
-                  <div className="flex flex-wrap gap-2">
-                    {projectTypes.map((type) => {
-                      const isSelected = selectedProjectType === type;
-                      return (
-                        <button
-                          key={type}
-                          type="button"
-                          onClick={() => setSelectedProjectType(type)}
-                          className={`px-4 py-2 rounded-full text-xs font-semibold border transition-all duration-300 cursor-pointer ${
-                            isSelected 
-                              ? "bg-[#0066ff] border-[#0066ff] text-white shadow-[0_8px_16px_rgba(0,102,255,0.2)]" 
-                              : "bg-white border-neutral-200 text-neutral-600 hover:border-neutral-400"
-                          }`}
-                        >
-                          {type}
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                <div className="relative">
-                  <input
-                    type="text"
-                    id="name"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    required
-                    className="w-full bg-transparent border-b border-neutral-200 focus:border-[#0066ff] text-neutral-900 pb-3 pt-2 text-sm outline-none transition-colors duration-300 placeholder:text-neutral-400"
-                    placeholder="Your Name"
-                  />
-                </div>
-
-                <div className="relative">
-                  <input
-                    type="email"
-                    id="email"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    required
-                    className="w-full bg-transparent border-b border-neutral-200 focus:border-[#0066ff] text-neutral-900 pb-3 pt-2 text-sm outline-none transition-colors duration-300 placeholder:text-neutral-400"
-                    placeholder="Email Address"
-                  />
-                </div>
-
-                <div className="relative">
-                  <textarea
-                    id="message"
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    required
-                    rows={4}
-                    className="w-full bg-transparent border-b border-neutral-200 focus:border-[#0066ff] text-neutral-900 pb-3 pt-2 text-sm outline-none transition-colors duration-300 placeholder:text-neutral-400 resize-none"
-                    placeholder="Tell me about your project objectives..."
-                  />
-                </div>
-
-                {/* Unified Premium Brand Blue CTA Button */}
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="group relative flex items-center justify-center gap-2 px-8 py-4 rounded-full transition-all duration-300 bg-[#0066ff] hover:bg-[#0055dd] text-white cursor-pointer w-full md:w-auto font-sf-pro text-xs font-semibold disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_8px_24px_rgba(0,102,255,0.2)]"
-                >
-                  <span>{isSubmitting ? "Sending Project Details..." : "Send Inquiry"}</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 text-blue-200 group-hover:text-white transition-colors duration-300" />
-                </button>
-              </form>
-            </motion.div>
+          {/* [R1·C2+C3] Headline + description (col-span-2) */}
+          <div className="bg-white lg:col-span-2 px-6 xl:px-10 pt-10 pb-6 flex flex-col justify-start gap-6 relative">
+            <h2 className="font-nippo text-[clamp(2.8rem,6.5vw,5.5rem)] font-extrabold leading-[0.88] tracking-tighter text-black uppercase mt-8">
+              Contact Me
+            </h2>
+            <p className="font-satoshi text-[13px] text-neutral-500 leading-relaxed max-w-[320px]">
+              Whether you have questions or just want
+              to explore options, we&apos;re here.
+            </p>
           </div>
 
+          {/* [R1·C4] Stacked navigation */}
+          <div className="bg-white px-6 xl:px-10 pt-10 pb-6 flex flex-col items-end gap-[6px]">
+            {[
+              { label: "HOME", href: "#home" },
+              { label: "ABOUT", href: "#about" },
+              { label: "PROJECTS", href: "#projects" },
+              { label: "EXPERIENCE", href: "#experience" },
+              { label: "CAREERS", href: "#" },
+              { label: "CONTACT", href: "#contact" },
+            ].map((item) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                className={`text-[9px] tracking-widest uppercase transition-colors duration-200 ${
+                  item.label === "CONTACT"
+                    ? "text-black font-black"
+                    : "text-neutral-500 hover:text-black font-bold"
+                }`}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
+
+          {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+              ROW 2  —  ∅  ·  NAME field  ·  ∅  ·  ∅
+              (input is in col 2 only — diagonal stagger step 1)
+          ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+
+          {/* [R2·C1] Negative space */}
+          <div className="bg-white relative hidden lg:block" />
+
+          {/* [R2·C2] NAME input */}
+          <div className="bg-white px-6 xl:px-10 pt-6 pb-8 flex flex-col justify-end relative">
+            <div className="flex flex-col gap-1.5">
+              <label className="text-[8px] font-black tracking-[0.18em] uppercase text-neutral-500">
+                Name
+              </label>
+              <input
+                type="text"
+                required
+                value={formData.name}
+                onChange={(e) =>
+                  setFormData({ ...formData, name: e.target.value })
+                }
+                placeholder="YOUR NAME"
+                className="bg-transparent outline-none border-none text-neutral-900 font-satoshi text-[15px] font-medium placeholder:text-neutral-350 uppercase tracking-wide w-full"
+              />
+            </div>
+            {/* intersection markers */}
+            <span className="absolute bottom-[-1px] left-[-1px] text-neutral-400 text-[11px] leading-none select-none z-10">
+              +
+            </span>
+            <span className="absolute bottom-5 right-5 text-neutral-350 text-[10px] select-none">
+              ::
+            </span>
+          </div>
+
+          {/* [R2·C3] Negative space */}
+          <div className="bg-white relative hidden lg:block" />
+
+          {/* [R2·C4] Negative space */}
+          <div className="bg-white relative hidden lg:block" />
+
+          {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+              ROW 3  —  ∅  ·  ∅  ·  EMAIL field  ·  ∅
+              (input is in col 3 only — diagonal stagger step 2)
+          ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+
+          {/* [R3·C1] Negative space */}
+          <div className="bg-white relative hidden lg:block" />
+
+          {/* [R3·C2] Negative space */}
+          <div className="bg-white relative hidden lg:block">
+            <span className="absolute bottom-[-1px] left-[-1px] text-neutral-400 text-[11px] leading-none select-none z-10">
+              +
+            </span>
+          </div>
+
+          {/* [R3·C3] EMAIL input */}
+          <div className="bg-white px-6 xl:px-10 pt-6 pb-8 flex flex-col justify-start relative">
+            <div className="flex flex-col gap-1.5">
+              <label className="text-[8px] font-black tracking-[0.18em] uppercase text-neutral-500">
+                Email Address
+              </label>
+              <input
+                type="email"
+                required
+                value={formData.email}
+                onChange={(e) =>
+                  setFormData({ ...formData, email: e.target.value })
+                }
+                placeholder="EMAIL@ADDRESS.COM"
+                className="bg-transparent outline-none border-none text-neutral-900 font-satoshi text-[15px] font-medium placeholder:text-neutral-350 uppercase tracking-wide w-full"
+              />
+            </div>
+            <span className="absolute bottom-[-1px] left-[-1px] text-neutral-400 text-[11px] leading-none select-none z-10">
+              +
+            </span>
+            <span className="absolute bottom-5 right-5 text-neutral-350 text-[10px] select-none">
+              ::
+            </span>
+          </div>
+
+          {/* [R3·C4] Negative space */}
+          <div className="bg-white relative hidden lg:block" />
+
+          {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+              ROW 4  —  ∅  ·  ∅  ·  Terms+Location  ·  LET'S TALK
+          ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+
+          {/* [R4·C1] Negative space */}
+          <div className="bg-white relative hidden lg:block" />
+
+          {/* [R4·C2] Negative space */}
+          <div className="bg-white relative hidden lg:block" />
+
+          {/* [R4·C3] Terms left + Location right */}
+          <div className="bg-white px-6 xl:px-10 py-5 flex items-start justify-between gap-4 relative">
+            <p className="text-[8px] leading-[1.6] text-neutral-500 uppercase tracking-wider max-w-[160px]">
+              By submitting, you agree to our{" "}
+              <span className="text-neutral-800 font-black">Terms</span> and{" "}
+              <span className="text-neutral-800 font-black">
+                Privacy Policy
+              </span>
+              .
+            </p>
+            <p className="text-[8px] text-neutral-500 uppercase tracking-wider text-right whitespace-nowrap">
+              We are based
+              <br />
+              in{" "}
+              <span className="text-neutral-800 font-black">
+                Solo, Indonesia
+              </span>
+            </p>
+          </div>
+
+          {/* [R4·C4] LET'S TALK CTA button — full height of cell */}
+          <div className="bg-white p-0 flex relative">
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="group w-full h-full flex items-center justify-between px-6 xl:px-10 border-none bg-transparent hover:bg-neutral-50 transition-colors duration-300 cursor-pointer"
+            >
+              <span className="text-[11px] font-black tracking-[0.18em] uppercase text-black">
+                {isSubmitting ? "Sending…" : "Let's Talk"}
+              </span>
+              <span className="text-lg font-light text-neutral-400 group-hover:translate-x-1 transition-transform duration-300">
+                →
+              </span>
+            </button>
+          </div>
         </div>
-      </div>
+        {/* end main grid */}
+
+        {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+            FOOTER BAR  —  Logo · Phone+Email · Socials · ©
+        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 bg-neutral-200 gap-[1px] border-t border-neutral-200">
+          {/* Logo */}
+          <div className="bg-white px-6 xl:px-10 py-5 flex items-center">
+            <Image
+              src="/images/logo/Logo2.png"
+              alt="Huga Studio"
+              width={72}
+              height={24}
+              className="h-5 w-auto object-contain"
+            />
+          </div>
+
+          {/* Phone + Email (2 lines) */}
+          <div className="bg-white px-6 xl:px-10 py-5 flex flex-col items-center justify-center gap-1">
+            <span className="text-[10px] font-bold tracking-widest text-neutral-700">
+              (62) 878-2193-0072
+            </span>
+            <a
+              href="mailto:andikahuga34@gmail.com"
+              className="text-[10px] font-bold tracking-widest text-neutral-900 uppercase hover:text-blue-600 transition-colors"
+            >
+              andikahuga34@gmail.com
+            </a>
+          </div>
+
+          {/* Social Links */}
+          <div className="bg-white px-6 xl:px-10 py-5 flex items-center justify-center gap-5">
+            {[
+              { label: "GH", url: "https://github.com/andikahuga" },
+              { label: "LI", url: "https://www.linkedin.com/in/andika-huga-widyatama-737413246" },
+              { label: "IG", url: "https://www.instagram.com/huga_studio/" },
+              { label: "WA", url: "https://wa.me/6287821930072" },
+            ].map((s) => (
+              <a
+                key={s.label}
+                href={s.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[10px] font-bold tracking-widest text-neutral-700 hover:text-black transition-colors"
+              >
+                {s.label}
+              </a>
+            ))}
+          </div>
+
+          {/* Copyright */}
+          <div className="bg-white px-6 xl:px-10 py-5 flex items-center justify-end">
+            <span className="text-[10px] font-bold tracking-widest text-neutral-400">
+              &copy; 2026 HUGA STUDIO
+            </span>
+          </div>
+        </div>
+      </form>
     </section>
   );
 }
