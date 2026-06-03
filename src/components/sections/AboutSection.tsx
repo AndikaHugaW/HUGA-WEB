@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import Image from "next/image";
+import { CountUp } from "@/components/ui/CountUp";
 
 export default function AboutSection() {
   const containerRef = useRef(null);
@@ -73,7 +74,7 @@ export default function AboutSection() {
               <div className="flex flex-col gap-3">
                 <div className="flex items-start">
                   <span className="text-[56px] md:text-[68px] font-light leading-none tracking-tighter text-neutral-950 select-none">
-                    4
+                    <CountUp>4</CountUp>
                   </span>
                   <span className="text-xl font-light text-neutral-950 mt-1 select-none">+</span>
                 </div>
@@ -86,7 +87,7 @@ export default function AboutSection() {
               <div className="flex flex-col gap-3">
                 <div className="flex items-start">
                   <span className="text-[56px] md:text-[68px] font-light leading-none tracking-tighter text-neutral-950 select-none">
-                    40
+                    <CountUp>40</CountUp>
                   </span>
                   <span className="text-xl font-light text-neutral-950 mt-1 select-none">+</span>
                 </div>
@@ -99,7 +100,7 @@ export default function AboutSection() {
               <div className="flex flex-col gap-3">
                 <div className="flex items-start">
                   <span className="text-[56px] md:text-[68px] font-light leading-none tracking-tighter text-neutral-950 select-none">
-                    95
+                    <CountUp>95</CountUp>
                   </span>
                   <span className="text-xl font-light text-neutral-950 mt-1 select-none">%</span>
                 </div>

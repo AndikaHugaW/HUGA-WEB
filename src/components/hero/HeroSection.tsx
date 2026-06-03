@@ -3,6 +3,7 @@
 import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { CountUp } from "@/components/ui/CountUp";
 
 const modelImages = [
   "/images/hero/Huga.webp",
@@ -287,23 +288,43 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.3 }}
-              className="hidden lg:grid grid-cols-2 gap-x-12 lg:gap-x-16 gap-y-6 lg:gap-y-8"
+              className="hidden lg:grid grid-cols-2 gap-x-12 lg:gap-x-16 gap-y-6 lg:gap-y-8 relative"
             >
+              {/* Vertical Divider Line */}
+              <motion.div
+                initial={{ scaleY: 0 }}
+                animate={{ scaleY: 1 }}
+                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 1.5 }}
+                className="absolute left-1/2 top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-white/10 to-transparent origin-top -translate-x-1/2 pointer-events-none"
+              />
+
+              {/* Horizontal Divider Line */}
+              <motion.div
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 1.5 }}
+                className="absolute top-1/2 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent origin-left -translate-y-1/2 pointer-events-none"
+              />
+
               {stats.map((stat, idx) => (
                 <motion.div
                   key={idx}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 1.4 + idx * 0.1 }}
-                  className="flex flex-col"
+                  whileHover={{ y: -8, scale: 1.05 }}
+                  className="flex flex-col p-4 relative group cursor-pointer rounded-xl overflow-hidden"
                 >
+                  {/* Subtle hover background radial blue glow */}
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.08)_0%,transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
                   <span
-                    className="text-5xl lg:text-[68px] font-medium text-white font-display leading-none select-none"
+                    className="text-5xl lg:text-[68px] font-medium text-white/90 group-hover:text-white font-display leading-none select-none transition-all duration-300 group-hover:drop-shadow-[0_0_25px_rgba(59,130,246,0.45)]"
                     style={{ textShadow: '0 2px 10px rgba(0,0,0,0.25)' }}
                   >
-                    {stat.num}
+                    <CountUp startOnMount={true} delay={1400 + idx * 100}>{stat.num}</CountUp>
                   </span>
-                  <span className="text-white/70 text-sm lg:text-[14px] tracking-[0.06em] font-body font-medium mt-2">
+                  <span className="text-white/70 group-hover:text-white/95 text-sm lg:text-[14px] tracking-[0.06em] font-body font-medium mt-2 transition-all duration-300 group-hover:translate-x-1">
                     {stat.label}
                   </span>
                 </motion.div>

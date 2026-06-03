@@ -243,7 +243,7 @@ export default function CertificatesSection() {
       <div className="absolute -top-40 -left-40 w-[480px] h-[480px] bg-blue-500/[0.01] rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute -bottom-40 -right-40 w-[520px] h-[520px] bg-blue-500/[0.01] rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="relative z-10 w-full pt-16 sm:pt-20 md:pt-24 pb-20 sm:pb-24 md:pb-28">
+      <div className="relative z-10 w-full pt-16 sm:pt-20 md:pt-24 pb-56 sm:pb-72 md:pb-96">
 
         {/* ── Header (stays aligned with page layout grids) ── */}
         <div className="mb-14 max-w-[1800px] mx-auto px-4 sm:px-6 md:px-12 lg:px-24">
