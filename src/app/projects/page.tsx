@@ -322,6 +322,11 @@ export default function ProjectsPage() {
     if (luxeCafe) {
       featuredProject = luxeCafe;
     }
+  } else if (selectedCategory === "Website") {
+    const hypebeastWeb = filteredProjects.find((p) => p.title === "HYPEBEAST Website");
+    if (hypebeastWeb) {
+      featuredProject = hypebeastWeb;
+    }
   }
 
   // The rest of the projects go into the grid
