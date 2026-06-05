@@ -92,7 +92,8 @@ const allProjectsData: Project[] = Array.from({ length: 20 }, (_, i) => {
   let image = original.image;
   if (i === 6) image = "/images/projects/oxen-ai.webp";
   else if (i === 7) image = "/images/projects/vivet-v2.webp";
-  else if (i >= 8) image = "https://placehold.co/800x500/111111/111111/png";
+  else if (i === 8) image = "/images/projects/islamy-web.webp";
+  else if (i >= 9) image = "https://placehold.co/800x500/111111/111111/png";
 
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   const year = 2024 + (i % 3);
@@ -295,7 +296,7 @@ export default function ProjectsPage() {
       (selectedCategory === "Website" && project.category.toLowerCase().includes("web")) ||
       (selectedCategory === "Mobile App" && (project.category.toLowerCase().includes("mobile") || project.category.toLowerCase().includes("app"))) ||
       (selectedCategory === "Machine Learning" && project.tags.some((t) => t.toLowerCase().includes("scikit-learn"))) ||
-      (selectedCategory === "AI" && (project.title.includes("AI") || project.description.includes("AI"))) ||
+      (selectedCategory === "AI" && (project.title.toLowerCase().includes("ai") || project.description.toLowerCase().includes("ai") || project.category.toLowerCase() === "ai")) ||
       (selectedCategory === "Logo Design" && project.category.toLowerCase().includes("logo")) ||
       (selectedCategory === "UI / UX Design" && (project.category.includes("Design") || project.tags.some((t) => t.toLowerCase().includes("ui"))));
 
@@ -303,7 +304,25 @@ export default function ProjectsPage() {
   });
 
   // Find the featured project for the currently selected category
-  const featuredProject = filteredProjects.find((p) => p.featured) || filteredProjects[0] || null;
+  let featuredProject = filteredProjects.find((p) => p.featured) || filteredProjects[0] || null;
+
+  // Custom featured project overrides based on selected category
+  if (selectedCategory === "UI / UX Design") {
+    const hypebeastApp = filteredProjects.find((p) => p.title === "HYPEBEAST Design App");
+    if (hypebeastApp) {
+      featuredProject = hypebeastApp;
+    }
+  } else if (selectedCategory === "AI") {
+    const oxenAi = filteredProjects.find((p) => p.title === "Oxen Ai");
+    if (oxenAi) {
+      featuredProject = oxenAi;
+    }
+  } else if (selectedCategory === "Mobile App") {
+    const luxeCafe = filteredProjects.find((p) => p.title === "Luxe Cafe");
+    if (luxeCafe) {
+      featuredProject = luxeCafe;
+    }
+  }
 
   // The rest of the projects go into the grid
   const gridProjects = featuredProject

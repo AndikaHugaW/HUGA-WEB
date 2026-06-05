@@ -21,7 +21,7 @@ const featuredProjects = [
     category: "Artificial Intelligence",
     date: "15 Aug. 2025",
     brand: "Islamy Academy AI",
-    image: "/images/projects/revive-dasboard-min-v2.webp",
+    image: "/images/projects/islamy-web.webp",
     tags: ["Next.js", "Scikit-learn", "Figma"],
   },
   {
