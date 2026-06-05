@@ -87,11 +87,17 @@ export function CountUp({
     };
   }, [isTriggered, targetNumber, duration, delay, hasNumber, decimalPlaces]);
 
+  const formatNumber = (val: string) => {
+    const parts = val.split('.');
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return parts.join('.');
+  };
+
   return (
     <span ref={containerRef} className={`inline-flex items-baseline ${className}`}>
       {hasNumber ? (
         <>
-          <span>{displayValue}</span>
+          <span>{formatNumber(displayValue)}</span>
           {suffix && <span className="select-none leading-none">{suffix}</span>}
         </>
       ) : (

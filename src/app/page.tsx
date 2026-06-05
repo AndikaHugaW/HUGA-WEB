@@ -9,6 +9,9 @@ import Footer from "@/components/layout/Footer";
 const WelcomeSection = dynamic(() => import("@/components/sections/WelcomeSection"), {
   loading: () => <div className="min-h-[400px]" />,
 });
+const PricingSection = dynamic(() => import("@/components/sections/PricingSection"), {
+  loading: () => <div className="min-h-[400px]" />,
+});
 const AboutSection = dynamic(() => import("@/components/sections/AboutSection"), {
   loading: () => <div className="min-h-[400px]" />,
 });
@@ -40,6 +43,7 @@ export default function Home() {
       </div>
       <CompaniesSection />
       <WelcomeSection />
+      <PricingSection />
       <AboutSection />
       <CertificatesSection />
       <ProjectsSection />
