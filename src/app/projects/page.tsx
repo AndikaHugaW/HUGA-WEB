@@ -127,7 +127,7 @@ function FeaturedCard({ project, onOpen }: { project: Project; onOpen: () => voi
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
       onClick={onOpen}
-      className="relative rounded-3xl overflow-hidden border border-gray-800 hover:border-[#0066ff]/40 transition-all duration-500 min-h-[380px] sm:min-h-[480px] md:min-h-[600px] lg:min-h-[650px] cursor-pointer group mb-16"
+      className="relative rounded-3xl overflow-hidden transition-all duration-500 min-h-[500px] sm:min-h-[650px] md:min-h-[800px] lg:min-h-[900px] cursor-pointer group mb-16"
     >
       {/* Background Image */}
       <Image
