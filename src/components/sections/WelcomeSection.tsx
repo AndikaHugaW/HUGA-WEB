@@ -406,7 +406,7 @@ export default function WelcomeSection() {
             <div className="absolute bottom-[10%] sm:bottom-[3.5%] lg:bottom-[2.5%] left-1/2 -translate-x-1/2 w-[165px] sm:w-[245px] lg:w-[295px] bg-[#1b3a57] rounded-[16px] p-2 sm:p-2.5 shadow-[0_12px_40px_rgba(27,58,87,0.18)] font-sf-pro z-30">
 
               {/* Header: icon + Oxen label */}
-              <div className="flex items-center justify-center gap-1.5 sm:gap-2 pt-1 pb-2 sm:pb-2.5 text-white">
+              <div className="flex items-center justify-center gap-1.5 sm:gap-2 pt-1 pb-1.5 sm:pb-2 text-white">
                 <Image
                   src="/images/logo/welcome/Oxen1.svg"
                   alt="Oxen Logo"
@@ -425,45 +425,61 @@ export default function WelcomeSection() {
               </div>
 
               {/* White inset card */}
-              <div className="bg-white rounded-[10px] sm:rounded-[12px] p-2.5 sm:p-4 flex flex-col gap-2 sm:gap-3.5">
+              <div className="bg-white rounded-[10px] sm:rounded-[12px] p-2 sm:p-3 flex flex-col gap-1.5 sm:gap-2.5">
 
                 {/* Row 1: Lightning chip + label */}
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-1.5 sm:gap-2">
-                    {/* Lightning icon chip */}
-                    <div className="w-[15px] h-[15px] sm:w-5 sm:h-5 rounded-[4px] bg-[#f0f2f5] flex items-center justify-center shrink-0">
-                      <svg className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 text-[#1b3a57]" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-                      </svg>
-                    </div>
-                    <span className="text-[7.5px] sm:text-[12px] font-medium text-neutral-700">Workflow runs</span>
+                <div className="flex items-center gap-1.5 sm:gap-2.5">
+                  {/* Lightning icon chip */}
+                  <div className="w-[20px] h-[20px] sm:w-8 sm:h-8 rounded-[6px] sm:rounded-[8px] bg-[#f0f2f5] flex items-center justify-center shrink-0">
+                    <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#1b3a57]" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                    </svg>
                   </div>
-                  <span className="text-[7.5px] sm:text-[12px] font-medium text-neutral-500"><CountUp trigger={activeState === "B"}>1262</CountUp>/<CountUp trigger={activeState === "B"}>2000</CountUp></span>
+                  <span className="text-[8px] sm:text-[12px] font-medium text-neutral-600 leading-tight">Workflow runs this month</span>
                 </div>
 
-                {/* Progress bar track */}
-                <div className="w-full h-2 sm:h-4 relative flex items-center mt-1">
-                  <div className="absolute inset-0 bg-[#f1f5f9] rounded-full overflow-hidden">
-                    {/* Filled portion */}
-                    <div className="absolute left-0 top-0 h-full w-[60%] bg-[#1b3a57]" />
+                {/* Divider */}
+                <div className="h-px w-full bg-neutral-100" />
 
-                    {/* Diagonal stripes portion (60% to 80%) */}
-                    <div 
-                      className="absolute top-0 h-full" 
-                      style={{
-                        left: "60%",
-                        width: "20%",
-                        background: "repeating-linear-gradient(-45deg, rgba(27,58,87,0.15), rgba(27,58,87,0.15) 2px, transparent 2px, transparent 6px)"
-                      }}
-                    />
+                {/* Row 2: Number + Active badge */}
+                <div className="flex items-center justify-between">
+                  <span className="text-[14px] sm:text-[22px] lg:text-[26px] font-light text-neutral-800 leading-none tracking-tight">
+                    <CountUp trigger={activeState === "B"}>1262</CountUp>/<CountUp trigger={activeState === "B"}>2000</CountUp>
+                  </span>
+                  <span className="text-[7.5px] sm:text-[10px] font-medium bg-neutral-100 text-neutral-500 px-2 sm:px-3 py-0.5 sm:py-1 rounded-[6px] sm:rounded-[8px] shrink-0">
+                    Active
+                  </span>
+                </div>
+
+                {/* Progress bar */}
+                <div className="w-full relative h-1.5 sm:h-3">
+                  {/* Track background */}
+                  <div className="absolute inset-0 bg-[#f0f2f5] rounded-full" />
+
+                  {/* Filled navy portion */}
+                  <div className="absolute left-0 top-0 h-full rounded-full bg-[#1b3a57]" style={{ width: "60%" }} />
+
+                  {/* Dot trail in empty section (right side of knob) */}
+                  <div
+                    className="absolute top-0 h-full flex items-center"
+                    style={{ left: "calc(60% + 5px)", right: "4px" }}
+                  >
+                    <div className="w-full flex justify-between items-center gap-0.5">
+                      {[...Array(6)].map((_, i) => (
+                        <div key={i} className="w-[1.5px] h-[1.5px] sm:w-[3px] sm:h-[3px] rounded-full bg-[#c8d0d8]" />
+                      ))}
+                    </div>
                   </div>
 
-                  {/* Slider Handle (White circle with dark blue outline) */}
-                  <div 
-                    className="absolute h-2.5 w-2.5 sm:h-[15px] sm:w-[15px] bg-white rounded-full border-[2px] sm:border-[3px] border-[#1b3a57] shadow-sm z-10"
-                    style={{ left: "calc(60% - 5px)" }}
+                  {/* Knob (handle) */}
+                  <div
+                    className="absolute top-1/2 -translate-y-1/2 bg-white rounded-full border-[1.5px] sm:border-[2.5px] border-[#1b3a57] shadow-md z-10 w-[8px] h-[8px] sm:w-[14px] sm:h-[14px]"
+                    style={{
+                      left: "calc(60% - 4px)"
+                    }}
                   />
                 </div>
+
               </div>
             </div>
           </motion.div>
