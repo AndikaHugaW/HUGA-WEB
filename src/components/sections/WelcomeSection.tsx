@@ -305,7 +305,7 @@ export default function WelcomeSection() {
             className="absolute inset-0 z-20 pointer-events-none origin-center"
           >
             {/* Top-Left: Two men looking at laptop */}
-            <div className="absolute top-[18%] left-[8%] sm:top-[18%] sm:left-[8%] lg:top-[6%] lg:left-[8%] w-[135px] h-[95px] sm:w-[150px] sm:h-[110px] lg:w-[200px] lg:h-[145px] rounded-2xl lg:rounded-[20px] overflow-hidden shadow-md border border-neutral-100/50 bg-neutral-100">
+            <div className="absolute top-[23%] left-[11%] sm:top-[19%] sm:left-[5%] lg:top-[8%] lg:left-[10%] w-[135px] h-[95px] sm:w-[150px] sm:h-[110px] lg:w-[200px] lg:h-[145px] rounded-2xl lg:rounded-[20px] overflow-hidden shadow-md border border-neutral-100/50 bg-neutral-100">
               <Image
                 src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=400&h=300&fit=crop&q=80"
                 alt="Two developers working together"
@@ -317,7 +317,7 @@ export default function WelcomeSection() {
 
             {/* Top-Right: 847 Tasks Completed Card */}
             <div
-              className="absolute top-[12%] right-[8%] sm:right-[6%] lg:top-[4%] lg:right-[6%] w-[130px] sm:w-[190px] lg:w-[255px] rounded-xl sm:rounded-2xl lg:rounded-[22px] p-2.5 sm:p-4 lg:p-[22px] shadow-xl border border-white/[0.06] flex flex-col justify-between h-[105px] sm:h-[140px] lg:h-[175px] font-sf-pro text-white"
+              className="absolute top-[17%] right-[11%] sm:right-[4%] lg:top-[6%] lg:right-[7%] w-[130px] sm:w-[190px] lg:w-[255px] rounded-xl sm:rounded-2xl lg:rounded-[22px] p-2.5 sm:p-4 lg:p-[22px] shadow-xl border border-white/[0.06] flex flex-col justify-between h-[105px] sm:h-[140px] lg:h-[175px] font-sf-pro text-white"
               style={{ background: "linear-gradient(135deg, #1f2125 0%, #141618 50%, #101214 100%)" }}
             >
               <div className="flex items-start gap-1">
@@ -347,7 +347,7 @@ export default function WelcomeSection() {
             </div>
 
             {/* Bottom-Left: Oxen App Review Card */}
-            <div className="absolute bottom-[21%] left-[8%] sm:left-[5%] lg:bottom-[4%] lg:left-[5%] bg-white border border-neutral-200/60 rounded-[16px] sm:rounded-[18px] p-2.5 sm:p-4 flex items-center gap-2.5 sm:gap-4 shadow-[0_4px_20px_rgba(0,0,0,0.06)] font-sf-pro w-[135px] sm:w-[205px] lg:w-[230px]">
+            <div className="absolute bottom-[26%] left-[14%] sm:left-[5%] lg:bottom-[6%] lg:left-[7%] bg-white border border-neutral-200/60 rounded-[16px] sm:rounded-[18px] p-2.5 sm:p-4 flex items-center gap-2.5 sm:gap-4 shadow-[0_4px_20px_rgba(0,0,0,0.06)] font-sf-pro w-[135px] sm:w-[205px] lg:w-[230px]">
               {/* Icon box — navy, Oxen icon */}
               <div className="w-8 h-8 sm:w-12 sm:h-12 rounded-[10px] sm:rounded-[12px] bg-[#1b3a57] flex items-center justify-center shrink-0 shadow-sm">
                 <Image
@@ -388,7 +388,7 @@ export default function WelcomeSection() {
             </div>
 
             {/* Bottom-Right: Action Card */}
-            <div className="absolute bottom-[21%] right-[8%] sm:right-[6%] lg:bottom-[4%] lg:right-[6%] w-[130px] sm:w-[220px] lg:w-[270px] bg-white rounded-xl sm:rounded-2xl p-2 sm:p-4 flex flex-col gap-1 sm:gap-2 font-sf-pro shadow-[0_4px_20px_rgba(0,0,0,0.03)]" style={{ border: "1.5px dashed #93c5fd" }}>
+            <div className="absolute bottom-[26%] right-[14%] sm:right-[5%] lg:bottom-[6%] lg:right-[8%] w-[130px] sm:w-[220px] lg:w-[270px] bg-white rounded-xl sm:rounded-2xl p-2 sm:p-4 flex flex-col gap-1 sm:gap-2 font-sf-pro shadow-[0_4px_20px_rgba(0,0,0,0.03)]" style={{ border: "1.5px dashed #93c5fd" }}>
               <div className="flex items-center gap-1 sm:gap-2">
                 <div className="w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-blue-500 flex items-center justify-center shrink-0">
                   <svg className="w-2 h-2 sm:w-2.5 sm:h-2.5 text-white" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
@@ -403,21 +403,18 @@ export default function WelcomeSection() {
             </div>
 
             {/* Bottom-Center: Oxen Workflow Runs Card */}
-            <div className="absolute bottom-[3%] sm:bottom-[1.5%] lg:bottom-[1%] left-1/2 -translate-x-1/2 w-[190px] sm:w-[290px] lg:w-[340px] bg-[#1b3a57] rounded-[18px] sm:rounded-[20px] p-2 sm:p-2.5 shadow-[0_12px_40px_rgba(27,58,87,0.18)] font-sf-pro z-30">
+            <div className="absolute bottom-[10%] sm:bottom-[3.5%] lg:bottom-[2.5%] left-1/2 -translate-x-1/2 w-[165px] sm:w-[245px] lg:w-[295px] bg-[#1b3a57] rounded-[16px] p-2 sm:p-2.5 shadow-[0_12px_40px_rgba(27,58,87,0.18)] font-sf-pro z-30">
 
               {/* Header: icon + Oxen label */}
-              <div className="flex items-center justify-center gap-2 sm:gap-2.5 pt-1.5 sm:pt-2 pb-2 sm:pb-2.5">
-                {/* Oxen icon — bold, white */}
-                <div className="w-[22px] h-[22px] sm:w-[26px] sm:h-[26px] rounded-[6px] bg-white/[0.15] flex items-center justify-center shrink-0">
-                  <Image
-                    src="/images/logo/welcome/Oxen1.svg"
-                    alt="Oxen Logo"
-                    width={14}
-                    height={14}
-                    className="w-3 h-3 sm:w-3.5 sm:h-3.5 object-contain"
-                  />
-                </div>
-                <div className="relative h-[12px] w-[24px] sm:h-[14px] sm:w-[28px] flex items-center">
+              <div className="flex items-center justify-center gap-1.5 sm:gap-2 pt-1 pb-2 sm:pb-2.5 text-white">
+                <Image
+                  src="/images/logo/welcome/Oxen1.svg"
+                  alt="Oxen Logo"
+                  width={16}
+                  height={16}
+                  className="w-3 h-3 sm:w-4 sm:h-4 object-contain"
+                />
+                <div className="relative h-[11px] w-[22px] sm:h-[14px] sm:w-[28px] flex items-center">
                   <Image
                     src="/images/logo/welcome/Oxen2.svg"
                     alt="Oxen"
@@ -428,61 +425,45 @@ export default function WelcomeSection() {
               </div>
 
               {/* White inset card */}
-              <div className="bg-white rounded-[12px] sm:rounded-[14px] px-3 sm:px-4 py-2.5 sm:py-3 flex flex-col gap-2 sm:gap-2.5">
+              <div className="bg-white rounded-[10px] sm:rounded-[12px] p-2.5 sm:p-4 flex flex-col gap-2 sm:gap-3.5">
 
                 {/* Row 1: Lightning chip + label */}
-                <div className="flex items-center gap-2.5">
-                  {/* Lightning icon chip */}
-                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-[8px] bg-[#f0f2f5] flex items-center justify-center shrink-0">
-                    <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#1b3a57]" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-                    </svg>
-                  </div>
-                  <span className="text-[10px] sm:text-[12px] font-medium text-neutral-600 leading-tight">Workflow runs this month</span>
-                </div>
-
-                {/* Divider */}
-                <div className="h-px w-full bg-neutral-100" />
-
-                {/* Row 2: Number + Active badge */}
                 <div className="flex items-center justify-between">
-                  <span className="text-[22px] sm:text-[26px] lg:text-[30px] font-light text-neutral-800 leading-none tracking-tight"><CountUp trigger={activeState === "B"}>1262</CountUp>/<CountUp trigger={activeState === "B"}>2000</CountUp></span>
-                  <span className="text-[9px] sm:text-[10px] font-medium bg-neutral-100 text-neutral-500 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-[8px] shrink-0">
-                    Active
-                  </span>
+                  <div className="flex items-center gap-1.5 sm:gap-2">
+                    {/* Lightning icon chip */}
+                    <div className="w-[15px] h-[15px] sm:w-5 sm:h-5 rounded-[4px] bg-[#f0f2f5] flex items-center justify-center shrink-0">
+                      <svg className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 text-[#1b3a57]" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                      </svg>
+                    </div>
+                    <span className="text-[7.5px] sm:text-[12px] font-medium text-neutral-700">Workflow runs</span>
+                  </div>
+                  <span className="text-[7.5px] sm:text-[12px] font-medium text-neutral-500"><CountUp trigger={activeState === "B"}>1262</CountUp>/<CountUp trigger={activeState === "B"}>2000</CountUp></span>
                 </div>
 
-                {/* Progress bar */}
-                <div className="w-full relative" style={{ height: "12px" }}>
-                  {/* Track background */}
-                  <div className="absolute inset-0 bg-[#f0f2f5] rounded-full" />
+                {/* Progress bar track */}
+                <div className="w-full h-2 sm:h-4 relative flex items-center mt-1">
+                  <div className="absolute inset-0 bg-[#f1f5f9] rounded-full overflow-hidden">
+                    {/* Filled portion */}
+                    <div className="absolute left-0 top-0 h-full w-[60%] bg-[#1b3a57]" />
 
-                  {/* Filled navy portion */}
-                  <div className="absolute left-0 top-0 h-full rounded-full bg-[#1b3a57]" style={{ width: "60%" }} />
-
-                  {/* Dot trail in empty section (right side of knob) */}
-                  <div
-                    className="absolute top-0 h-full flex items-center"
-                    style={{ left: "calc(60% + 10px)", right: "6px" }}
-                  >
-                    <div className="w-full flex justify-between items-center">
-                      {[...Array(6)].map((_, i) => (
-                        <div key={i} className="w-[3.5px] h-[3.5px] rounded-full bg-[#c8d0d8]" />
-                      ))}
-                    </div>
+                    {/* Diagonal stripes portion (60% to 80%) */}
+                    <div 
+                      className="absolute top-0 h-full" 
+                      style={{
+                        left: "60%",
+                        width: "20%",
+                        background: "repeating-linear-gradient(-45deg, rgba(27,58,87,0.15), rgba(27,58,87,0.15) 2px, transparent 2px, transparent 6px)"
+                      }}
+                    />
                   </div>
 
-                  {/* Knob — white circle, navy border, at 60% */}
-                  <div
-                    className="absolute top-1/2 -translate-y-1/2 bg-white rounded-full border-[2.5px] border-[#1b3a57] shadow-[0_1px_4px_rgba(0,0,0,0.15)] z-10"
-                    style={{
-                      width: "20px",
-                      height: "20px",
-                      left: "calc(60% - 10px)"
-                    }}
+                  {/* Slider Handle (White circle with dark blue outline) */}
+                  <div 
+                    className="absolute h-2.5 w-2.5 sm:h-[15px] sm:w-[15px] bg-white rounded-full border-[2px] sm:border-[3px] border-[#1b3a57] shadow-sm z-10"
+                    style={{ left: "calc(60% - 5px)" }}
                   />
                 </div>
-
               </div>
             </div>
           </motion.div>

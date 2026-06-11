@@ -27,7 +27,7 @@ export function CountUp({
 }: CountUpProps) {
   const containerRef = useRef<HTMLSpanElement>(null);
   // once: false allows the viewport animation to re-trigger when scrolled back in
-  const isInView = useInView(containerRef, { once: false, margin: "-50px" });
+  const isInView = useInView(containerRef, { once: false, margin: "-50px 0px" });
 
   const originalStr = String(children);
   const match = originalStr.match(/^(\d+(?:\.\d+)?)(.*)$/);
