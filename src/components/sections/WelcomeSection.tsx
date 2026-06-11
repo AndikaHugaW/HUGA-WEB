@@ -137,7 +137,7 @@ export default function WelcomeSection() {
             {/* Top-Left: Coworker Workspace Image */}
             <div className="absolute top-[18%] left-[8%] sm:top-[18%] sm:left-[4%] lg:top-[6%] lg:left-[8%] w-[135px] h-[95px] sm:w-[170px] sm:h-[120px] lg:w-[230px] lg:h-[160px] rounded-2xl lg:rounded-3xl overflow-hidden shadow-md border border-neutral-200/50 bg-neutral-100">
               <Image
-                src="/images/hero/foto-huga.jpg"
+                src="/images/hero/tech-office-worker.png"
                 alt="Workspace preview 1"
                 fill
                 className="object-cover grayscale"
@@ -163,7 +163,7 @@ export default function WelcomeSection() {
                   </div>
                   <div className="flex flex-col gap-0.5">
                     <span className="text-[11px] sm:text-[13px] font-semibold text-neutral-900 leading-none">Sarah Miller</span>
-                    <span className="text-[9px] sm:text-[11px] text-neutral-400 font-normal leading-none">sarahm@ordina.com</span>
+                    <span className="text-[9px] sm:text-[11px] text-neutral-400 font-normal leading-none">sarahm@oxen.ai</span>
                   </div>
                 </div>
                 {/* Member badge */}
@@ -175,22 +175,22 @@ export default function WelcomeSection() {
               {/* Divider */}
               <div className="h-px bg-neutral-100 mx-3.5 sm:mx-5" />
 
-              {/* Row 2: Jane Hudson */}
+              {/* Row 2: Andika Huga W */}
               <div className="flex items-center justify-between px-2.5 sm:px-5 py-2 sm:py-4">
                 <div className="flex items-center gap-2.5 sm:gap-3">
                   {/* Avatar */}
                   <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-neutral-200 relative overflow-hidden shrink-0 ring-[1.5px] ring-neutral-100">
                     <Image
                       src="/images/hero/Huga 3.webp"
-                      alt="Jane Hudson"
+                      alt="Andika Huga W"
                       fill
                       className="object-cover object-top"
                       sizes="40px"
                     />
                   </div>
                   <div className="flex flex-col gap-0.5">
-                    <span className="text-[11px] sm:text-[13px] font-semibold text-neutral-900 leading-none">Jane Hudson</span>
-                    <span className="text-[9px] sm:text-[11px] text-neutral-400 font-normal leading-none">janeh@ordina.com</span>
+                    <span className="text-[11px] sm:text-[13px] font-semibold text-neutral-900 leading-none">Andika Huga W</span>
+                    <span className="text-[9px] sm:text-[11px] text-neutral-400 font-normal leading-none">huga@oxen.ai</span>
                   </div>
                 </div>
                 {/* Admin badge */}
@@ -277,10 +277,10 @@ export default function WelcomeSection() {
               </div>
             </div>
 
-            {/* Bottom-Center: Create with Ordina Pill */}
+            {/* Bottom-Center: Create with Oxen Pill */}
             <div className="absolute bottom-[4%] sm:bottom-[2%] lg:bottom-[1.5%] left-1/2 -translate-x-1/2 w-[160px] sm:w-[220px] lg:w-[250px] bg-white border border-neutral-200/80 rounded-[20px] sm:rounded-[24px] py-2 sm:py-2.5 pl-4 sm:pl-6 pr-2 sm:pr-2.5 flex items-center justify-between shadow-[0_4px_16px_rgba(0,0,0,0.03)] cursor-pointer z-30">
               <span className="text-[10px] sm:text-[11.5px] lg:text-[13px] font-normal font-sf-pro text-neutral-800 tracking-tight">
-                Create with Ordina
+                Create with Oxen
               </span>
               <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-[#1b3a57] flex items-center justify-center text-white shrink-0">
                 <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-white" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
@@ -346,17 +346,27 @@ export default function WelcomeSection() {
               </div>
             </div>
 
-            {/* Bottom-Left: Ordina AI App Review Card */}
+            {/* Bottom-Left: Oxen App Review Card */}
             <div className="absolute bottom-[21%] left-[8%] sm:left-[5%] lg:bottom-[4%] lg:left-[5%] bg-white border border-neutral-200/60 rounded-[16px] sm:rounded-[18px] p-2.5 sm:p-4 flex items-center gap-2.5 sm:gap-4 shadow-[0_4px_20px_rgba(0,0,0,0.06)] font-sf-pro w-[135px] sm:w-[205px] lg:w-[230px]">
-              {/* Icon box — navy, arrow icon */}
+              {/* Icon box — navy, Oxen icon */}
               <div className="w-8 h-8 sm:w-12 sm:h-12 rounded-[10px] sm:rounded-[12px] bg-[#1b3a57] flex items-center justify-center shrink-0 shadow-sm">
-                <svg className="w-4 h-4 sm:w-6 sm:h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M7 17L17 7" />
-                  <path d="M7 7h10v10" />
-                </svg>
+                <Image
+                  src="/images/logo/welcome/Oxen1.svg"
+                  alt="Oxen Logo"
+                  width={24}
+                  height={24}
+                  className="w-4 h-4 sm:w-6 sm:h-6 object-contain"
+                />
               </div>
               <div className="flex flex-col gap-1 sm:gap-2">
-                <span className="text-[10px] sm:text-[14px] font-semibold text-neutral-900 leading-none">Ordina AI</span>
+                <div className="relative h-[11px] w-[22px] sm:h-[15px] sm:w-[30px] flex items-center">
+                  <Image
+                    src="/images/logo/welcome/Oxen2.svg"
+                    alt="Oxen"
+                    fill
+                    className="object-contain brightness-0"
+                  />
+                </div>
                 <div className="flex items-center gap-1">
                   {/* 5 empty stars */}
                   <div className="flex gap-[1px] sm:gap-[3px]">
@@ -392,19 +402,29 @@ export default function WelcomeSection() {
               </p>
             </div>
 
-            {/* Bottom-Center: Ordina AI Workflow Runs Card */}
+            {/* Bottom-Center: Oxen Workflow Runs Card */}
             <div className="absolute bottom-[3%] sm:bottom-[1.5%] lg:bottom-[1%] left-1/2 -translate-x-1/2 w-[190px] sm:w-[290px] lg:w-[340px] bg-[#1b3a57] rounded-[18px] sm:rounded-[20px] p-2 sm:p-2.5 shadow-[0_12px_40px_rgba(27,58,87,0.18)] font-sf-pro z-30">
 
-              {/* Header: icon + Ordina AI label */}
+              {/* Header: icon + Oxen label */}
               <div className="flex items-center justify-center gap-2 sm:gap-2.5 pt-1.5 sm:pt-2 pb-2 sm:pb-2.5">
-                {/* Arrow icon — bold, white */}
+                {/* Oxen icon — bold, white */}
                 <div className="w-[22px] h-[22px] sm:w-[26px] sm:h-[26px] rounded-[6px] bg-white/[0.15] flex items-center justify-center shrink-0">
-                  <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M7 17L17 7" />
-                    <path d="M7 7h10v10" />
-                  </svg>
+                  <Image
+                    src="/images/logo/welcome/Oxen1.svg"
+                    alt="Oxen Logo"
+                    width={14}
+                    height={14}
+                    className="w-3 h-3 sm:w-3.5 sm:h-3.5 object-contain"
+                  />
                 </div>
-                <span className="text-[11px] sm:text-[13px] font-semibold text-white tracking-[0.01em]">Ordina AI</span>
+                <div className="relative h-[12px] w-[24px] sm:h-[14px] sm:w-[28px] flex items-center">
+                  <Image
+                    src="/images/logo/welcome/Oxen2.svg"
+                    alt="Oxen"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
               </div>
 
               {/* White inset card */}
@@ -491,13 +511,17 @@ export default function WelcomeSection() {
               />
             </div>
 
-            {/* Top-Right: Ordina AI Workflows toggle pill */}
+            {/* Top-Right: Oxen Workflows toggle pill */}
             <div className="absolute top-[20%] right-[8%] sm:right-[4%] lg:top-[8%] lg:right-[5%] bg-white border border-neutral-200/60 rounded-full shadow-[0_4px_24px_rgba(0,0,0,0.07)] flex items-center gap-2 sm:gap-4 font-sf-pro px-3 sm:px-6 py-2 sm:py-3.5">
-              {/* Sparkle / asterisk icon */}
-              <svg className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-[#1b3a57] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6 5.6 18.4" />
-              </svg>
-              <span className="text-[10px] sm:text-[13px] font-medium text-neutral-800 leading-none whitespace-nowrap">Ordina AI Workflows</span>
+              {/* Oxen Logo */}
+              <Image
+                src="/images/logo/welcome/Oxen1.svg"
+                alt="Oxen Logo"
+                width={20}
+                height={20}
+                className="w-3.5 h-3.5 sm:w-5 sm:h-5 object-contain brightness-0"
+              />
+              <span className="text-[10px] sm:text-[13px] font-medium text-neutral-800 leading-none whitespace-nowrap">Oxen Workflows</span>
               {/* Toggle switch — ON state (green, knob on right) */}
               <div className="relative shrink-0 w-[32px] h-[18px] sm:w-[52px] sm:h-[29px] bg-emerald-500 rounded-full shadow-inner cursor-pointer">
                 {/* White knob — right side (ON) */}
@@ -564,27 +588,38 @@ export default function WelcomeSection() {
               </div>
             </div>
 
-            {/* Bottom-Right: Ordina AI — Setting up automation */}
+            {/* Bottom-Right: Oxen — Setting up automation */}
             <div className="absolute bottom-[21%] right-[8%] sm:right-[6%] lg:bottom-[4%] lg:right-[6%] w-[165px] sm:w-[245px] lg:w-[295px] bg-[#1b3a57] rounded-[16px] p-2 sm:p-2.5 shadow-[0_8px_30px_rgba(27,58,87,0.12)] font-sf-pro z-30">
               <div className="flex items-center justify-center gap-1.5 sm:gap-2 pt-1 pb-2 sm:pb-2.5 text-white">
-                <svg className="w-3 h-3 sm:w-4 sm:h-4 text-white shrink-0" viewBox="0 0 24 24" fill="currentColor">
-                  {/* Left vertical with top hook */}
-                  <path d="M5 21V3h7v4H9v14H5z" />
-                  {/* Right diagonal block */}
-                  <path d="M12 9l5-5h5v5l-5 5h-5z" />
-                </svg>
-                <span className="text-[10px] sm:text-[13px] font-semibold text-white tracking-[0.01em]">Ordina AI</span>
+                <Image
+                  src="/images/logo/welcome/Oxen1.svg"
+                  alt="Oxen Logo"
+                  width={16}
+                  height={16}
+                  className="w-3 h-3 sm:w-4 sm:h-4 object-contain"
+                />
+                <div className="relative h-[11px] w-[22px] sm:h-[14px] sm:w-[28px] flex items-center">
+                  <Image
+                    src="/images/logo/welcome/Oxen2.svg"
+                    alt="Oxen"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
               </div>
 
               <div className="bg-white rounded-[10px] sm:rounded-[12px] p-2.5 sm:p-4 flex flex-col gap-2 sm:gap-3.5">
                 {/* Row: Icon + Label + Percent */}
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-1.5 sm:gap-2">
-                    {/* Magic wand icon */}
-                    <svg className="w-3 h-3 sm:w-4 sm:h-4 text-neutral-700 shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72Z" />
-                      <path d="m14 7 3 3M5 6v1M19 17v1M20 12h1M3 12h1M19 8l.5.5M5 15l.5.5" />
-                    </svg>
+                    {/* Automation Icon from welcome folder */}
+                    <Image
+                      src="/images/logo/welcome/icon2.svg"
+                      alt="Automation Icon"
+                      width={18}
+                      height={18}
+                      className="w-3.5 h-3.5 sm:w-4.5 sm:h-4.5 object-contain"
+                    />
                     <span className="text-[7.5px] sm:text-[12px] font-medium text-neutral-700">Setting up automation</span>
                   </div>
                   <span className="text-[7.5px] sm:text-[12px] font-medium text-neutral-500"><CountUp trigger={activeState === "C"}>60%</CountUp></span>
@@ -618,15 +653,14 @@ export default function WelcomeSection() {
 
             {/* Bottom-Center: "Send Message to Channel" pill */}
             <div className="absolute bottom-[3%] sm:bottom-[2%] lg:bottom-[1.5%] left-1/2 -translate-x-1/2 bg-white border border-neutral-200/80 rounded-full py-2 px-3 sm:py-3 sm:pl-4 sm:pr-3 flex items-center gap-2 shadow-[0_6px_25px_rgba(0,0,0,0.04)] cursor-pointer z-30 whitespace-nowrap">
-              {/* Colorful Slack-like dots icon */}
-              <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-lg bg-neutral-50 border border-neutral-200/60 flex items-center justify-center shrink-0">
-                <div className="grid grid-cols-2 gap-[2px]">
-                  <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-sm bg-amber-400" />
-                  <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-sm bg-emerald-500" />
-                  <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-sm bg-blue-500" />
-                  <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-sm bg-red-400" />
-                </div>
-              </div>
+              {/* WhatsApp Icon */}
+              <Image
+                src="/images/logo/welcome/whatsapp.svg"
+                alt="WhatsApp Logo"
+                width={24}
+                height={24}
+                className="w-5 h-5 sm:w-6 sm:h-6 object-contain shrink-0"
+              />
               <span className="text-[10px] sm:text-[11px] font-medium text-neutral-600 font-sf-pro">Send Message to Channel</span>
               <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-[#1b3a57] flex items-center justify-center text-white shrink-0 ml-1">
                 <span className="text-[10px] sm:text-[12px] font-bold leading-none">+</span>
